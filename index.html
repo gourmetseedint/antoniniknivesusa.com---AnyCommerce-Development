@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>QuickStart</title>
+<title>Antonini</title>
 
 
 
@@ -46,14 +46,11 @@ app.u.loadScript(app.vars.baseURL+"init.js");
 </script>
 
 
+
 </head>
 
 <body>
-<!-- DELETE THIS WHEN YOU GET STARTED -->
-<h1>WELCOME TO QUICKSTART</h1>
-This file is intended to go along with the 10-step tutorial at: 
-<a href="https://github.com/zoovy/AnyCommerce-Development/wiki/quickstart">https://github.com/zoovy/AnyCommerce-Development/wiki/quickstart</a>
-<!-- /DELETE THIS WHEN YOU GET STARTED -->
+
 
 
 
@@ -84,6 +81,69 @@ This file is intended to go along with the 10-step tutorial at:
 <!-- VIEW CONTENT -->
 <!-- leave the appView div, put your your html here ...  -->
 
+
+<div id="header">
+<div id="logo"> logo </div>
+<div id="nav"> 
+<ul>
+<li> About Antonini
+</li> 
+/
+<li> Contact us
+</li>
+/
+
+<li> My Account
+</li>
+/
+<li> View Cart
+</li>
+
+</ul>
+<div id="social-box">
+	fb, tw box
+</div>
+ </div>
+
+<div id="slideshowContainer" class='clearfix'>
+    <div id="slideshowNav"></div>
+       <ul id="wideSlideshow" class="pics slideshow" style="margin-top:0;">
+           <img src='img/p1.png'/>
+           <img src='img/p2.png'/>
+           <img src='img/p3.png'/>
+    </ul>
+</div>
+
+
+</div>
+<div id="left-menu">
+
+<div id="left-logo">
+
+</div>
+left menu
+<br>
+<b>Products</b>
+<ul>
+<li>Menu1
+</li>
+<li>Menu2
+</li>
+<li>Menu3
+</li>
+<li>Menu4
+</li>
+<li>Menu5
+</li>
+</ul>
+
+
+<div id="search-box">
+
+</div>
+</div>
+
+
 	<!-- 
 	** REMINDER : DO NOT PUT ANY GRAPHICS/CONTENT THAT SHOULD NOT APPEAR ON EVERY PAGE IN THE VIEW (HERE)
 	**				  INSTEAD PUT THEM INTO <div id="homepageTemplate"></div>
@@ -91,8 +151,23 @@ This file is intended to go along with the 10-step tutorial at:
 <div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
 <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
 
-
 <!-- ... your html ends -->
+<div id="footer">
+<div class="footer-box">
+
+</div>
+
+<div class="footer-box">
+</div>
+
+<div class="footer-box">
+</div>
+
+<div id="last-footer">
+</div>
+
+</div>
+
 <!-- /VIEW CONTENT -->
 </div>
 
@@ -1488,6 +1563,27 @@ The 'data-action' attribute is used to assign an onclick.
 
 </div>
 
+<script type="text/javascript" src="cycle.js"></script>
+<script type="text/javascript">
+
+
+var $target = $('#wideSlideshow');
+
+if($target.children().length > 1) {
+				
+	   $('#wideSlideshow').cycle({
+		fx:'fade',
+		speed:'slow',
+		timeout: 5000,
+		pager:'#slideshowNav',
+		pagerAnchorBuilder: function(index,el){
+			return '<a href="#"></a>';
+		}
+	   });
+			   
+};
+			
+</script>
 
 </body>
 </html>

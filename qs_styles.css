@@ -1,3 +1,122 @@
+#appView{
+width:1200px;
+margin:0 auto;
+border: solid blue 1px;
+}
+
+#mainContentArea{
+position:relative;
+margin-left:300px;
+width:900px;
+z-index:99999;
+border: 1px green solid;
+min-height:700px;
+}
+
+
+#header{
+width:1200px;
+height:200px;
+border: solid red 1px;
+}
+
+#logo{
+position:absolute;
+margin-left:70px;
+margin-top:20px;
+display:block;
+background:red;
+z-index:1002;
+width:300px;
+height: 100px;
+border: 2px solid silver;
+}
+
+
+#nav{
+position:absolute;
+margin-left:700px;
+width:500px;
+height:100px;
+border: solid green 1px;
+display:block;
+background:white;
+z-index:1002;
+}
+
+
+
+#nav ul {
+	padding-left:0;
+	float:left;
+	list-style-type:none;
+}
+#nav ul li{
+display:inline;
+}
+#social-box{
+background: silver;
+display:block;
+width:100px;
+height:50px;
+float:right;
+}
+#slideshowContainer{
+width:1200px;
+height:200px;
+}
+#wideSlideshow{
+margin:0;
+padding:0;
+}
+
+#wideSlideshow img{
+}
+
+#left-menu{
+position:absolute;
+background:green;
+width:200px;
+margin-left:50px;
+height:600px;
+z-index:120;
+border:1px red solid;
+
+}
+
+#left-logo{
+width:100px;
+height:100px;
+display:block;
+background:white;
+position:relative;
+left:50px;
+top:-50px;
+}
+
+#footer{
+width:1100px;
+margin:0 auto;
+height:150px;
+border:1px orange solid;
+}
+
+.footer-box{
+margin:10px;
+width:200px;
+background:black;
+height:120px;
+float:left;
+}
+
+#last-footer{
+width:300px;
+margin:10px;
+background:purple;
+height:120px;
+float:right;
+}
+
 body,html	{font-size:100%;}
 
 #appTemplates {display:none;} /* container for all templates. should be hidden */

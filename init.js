@@ -57,6 +57,13 @@ app.vars.scripts.push({
 app.vars.scripts.push({'pass':1,'location':app.vars.baseURL+'model.js','validator':function(){return (typeof zoovyModel == 'function') ? true : false;}})
 app.vars.scripts.push({'pass':1,'location':app.vars.baseURL+'includes.js','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
 
+//cycle
+/*
+app.vars.scripts.push({'pass':1,'location':app.vars.baseURL+'cycle.js','validator':function(){
+ app.u.dump("typeof jQuery.cycle:"+typeof jQuery.cycle);
+ return (typeof jQuery().cycle == 'undefined') ? false : true;}
+ })
+*/
 
 
 //used for making text editable (customer address). non-essential. loaded late.
