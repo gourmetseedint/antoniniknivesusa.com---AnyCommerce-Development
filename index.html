@@ -83,30 +83,34 @@ app.u.loadScript(app.vars.baseURL+"_antonino_init.js");
 
   <div class='container'>
     <header>
-      <div id="slideshowContainer" class='slideshowContainer clearfix'>
-        <span class="logoTop"><a href="#category?navcat=." title='Antonini Knives USA'></a></span>
-        <nav class='navTop'>
-          <span class='navTopWrapper'>
-            <ul><!-- TODO: add links -->
-              <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a><span class='navSeparator'></span></li>
-              <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a><span class='navSeparator'></span></li>
-              <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a><span class='navSeparator'></span></li>
-              <li><a href="#customer?show=cart" class='bindByAnchor' title='View Cart'>View Cart (4)</a><!-- TODO: add cart item num --><!-- TODO: get right href --></span></li>
-            </ul>
-            <span id="socialBox">
-              <span class='socialIcon'><a href="http://www.facebook.com"></a></span><!-- TODO: get facebook name -->
-              <span class='socialIcon'><a href="http://www.twitter.com"></a></span><!-- TODO: get twitter name -->
-            </span>
+      <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA"></a></span>
+      <nav class='navTop'>
+        <span class='navTopWrapper'>
+          <ul>
+            <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a><span class='navSeparator'></span></li>
+            <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a><span class='navSeparator'></span></li>
+            <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a><span class='navSeparator'></span></li>
+            <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (4)</a><!-- TODO: add cart item num --><!-- TODO: get right href --></span></li>
+          </ul>
+          <span class="socialBox">
+            <span class='socialIcon'><a href="http://www.facebook.com"><img src="images/icon_facebook.png" alt="Facebook" /></a></span><!-- TODO: get facebook name -->
+            <span class='socialIcon'><a href="http://www.twitter.com"><img src="images/icon_twitter.png" alt="Twitter" /></a></span><!-- TODO: get twitter name -->
           </span>
-        </nav>
+        </span>
+      </nav>
+      <!-- TODO: move slideshow to homepage template -->
+      <!-- <div id="slideshowContainer" class='slideshowContainer clearfix'>
         <div id="slideshowNav"></div>
         <ul id="wideSlideshow" class="pics slideshow" style="margin-top:0;">
-          <img src='img/p1.png'/>
-          <img src='img/p2.png'/>
-          <img src='img/p3.png'/>
+          <img src='images/p1.png'/>
+          <img src='images/p2.png'/>
+          <img src='images/p3.png'/>
         </ul>
-      </div>
+      </div> -->
     </header>
+    <aside>
+      <ul id="tier1categories"></ul>
+    </aside>
     <div id="left-menu">
       <div id="left-logo"></div>
       left menu

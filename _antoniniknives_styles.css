@@ -161,7 +161,7 @@ a:active {
 /* General */
 
 .container {
-  width: 1200px; /* TODO: Find correct width */
+  width: 1121px; /* TODO: Find correct width */
   margin: 0 auto;
   position: relative;
 }
@@ -184,9 +184,11 @@ a:active {
 /* Header */
 
 header {
+  height: 374px;
+  background: url("images/banner_bg_product.png") no-repeat;
   /*border-bottom: 4px solid #D22D7A;*/
   /*TODO: get right color and size; */
-  border: solid blue 1px; /*temp*/
+  /*border: solid blue 1px; /*temp*\/*/
 }
 
 /*#slideshowContainer {
@@ -218,14 +220,15 @@ nav ul, nav li {
   /*text-align: right;*/
   position: absolute;
   top: 0;
-  right: 0;
+  right: 50px;
   z-index: 5;
   /*display: block;*/
   /*background-color: black;*/
+  /*TODO: maybe add width/height instead of let elements make dims;*/
 }
 
 .navTopWrapper {
-  padding: 0 10px;
+  padding: 0 7px;
   display: inline-block;
   background: #cdcccc; 
 }
@@ -265,20 +268,30 @@ nav ul, nav li {
   text-decoration: none;
 }
 
+.socialBox {
+  margin-left: 5px;
+}
+
 .socialIcon {
-  margin: 0 5px;
-  /*width: 25px;
-  height: 25px;*/
-  /*display: inline-block;*/
-  background: black; /*temp*/
+  margin: 0;
   vertical-align: middle;
+  display: inline-block;
+  /*z-index: 10;*/
 }
 
 .socialIcon a {
-  width: 25px;
-  height: 25px;
-  display: inline-block;
+  /*width: 32px;
+  height: 28px;*/
+  /*display: inline-block;*/
 }
+
+/*.socialIconFacebook{
+  background: url('images/icon_facebook.png') no-repeat;
+}
+
+.socialIconTwitter{
+  background: url('images/icon_twitter.png') no-repeat;
+}*/
 
 /* Menu navigation */
 
@@ -346,28 +359,20 @@ nav ul, nav li {
 .logoTop {
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 50px;
   z-index: 6;
+  display: inline-block;
   /*width: 200px;
   height: 150px;*/
-  background-color: gray; /* TODO: add image bg; */
+  /*background-color: gray;  TODO: add image bg; */
   /*float: left;*/
 }
 
-.logoTop a {
+/*.logoTop a {
   width: 300px;
   height: 125px;
   display: inline-block;
-}
-
-.phoneNumber {
-  margin: 20px 0 20px;
-  padding: 0;
-  text-align: right;
-  font-size: 1.8em;
-  color: #444;
-  /* TODO: Add right font and color; */
-}
+}*/
 
 /* Content */
 
