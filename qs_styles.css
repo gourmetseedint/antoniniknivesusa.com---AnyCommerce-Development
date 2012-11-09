@@ -1,4 +1,4 @@
-#appView{
+/*#appView{
 width:1200px;
 margin:0 auto;
 border: solid blue 1px;
@@ -119,10 +119,10 @@ float:right;
 
 body,html	{font-size:100%;}
 
-#appTemplates {display:none;} /* container for all templates. should be hidden */
+#appTemplates {display:none;} /* container for all templates. should be hidden *\/
 
 #appPreView	{width:550px; margin:0 auto;}
-
+*/
 
 /*
 loading class. add class to your templates if you want a loading graphic to appear while data is requested. add only to the parent element. 
