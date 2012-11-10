@@ -52,6 +52,7 @@ html {
 
 body {
   font-size: 62.5%; /* 10px */
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -398,4 +399,71 @@ nav ul, nav li {
 .viewContainer {
   width: 760px;
   display: inline-block;
+}
+
+/* Footer */
+
+.footerBoxesWrapper {
+  padding: 1.2em 3.6em;
+  background: #dddddd;
+}
+
+.footerBox {
+  margin: 0;
+  padding: 0;
+  margin: 0 1.2em;
+  padding: 0 1.2em;
+  width: 11em;
+  height: 12em; /*TODO: maybe add something more fluid;*/
+  vertical-align: top;
+  display: inline-block;
+  background: #f0f0f0;
+  color: #454545;
+  border-radius: 0.4em;
+  /*text-align: center;*/
+}
+
+.footerBox h3, 
+.footerBox h4 {
+  margin: 0.2em 0 0.5em;
+  padding: 0;
+  font-size: 1.5em;
+  line-height: 1em;
+  text-align: left;
+}
+
+.footerBox li {
+  margin: 0 0 0.9em;
+  padding: 0;
+  font-size: 1em; /* 10px */
+  line-height: 1em;
+  list-style: square inside url("images/arrow_list.png");
+  text-align: left;
+}
+
+.footerBox a:link {
+  text-decoration: none;
+  color: #454545;
+  /*color:;*/
+}
+
+.footerBox a:visited {
+  text-decoration: none;
+  color: #454545;
+}
+
+.footerBox a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.footerBox a:active {
+  text-decoration: none;
+  color: black;
+}
+
+.copyright {
+  text-align: center;
+  color: #545454;
+  font-size: 0.9em;
 }

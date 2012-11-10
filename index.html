@@ -43,7 +43,7 @@ css files should be included before any .js file to ensure they are downloaded i
 <script type="text/javascript" src="loadscript.js"></script>
 
 <script type="text/javascript">
-app.u.loadScript(app.vars.baseURL+"_antonino_init.js");
+app.u.loadScript(app.vars.baseURL+"_antoninoknives_init.js");
 </script>
 
 
@@ -109,41 +109,37 @@ app.u.loadScript(app.vars.baseURL+"_antonino_init.js");
       </div> -->
     </header>
     <aside>
+      <h3>Categories</h3>
       <ul id="tier1categories"></ul>
+      <span class="search_box"></span>
     </aside>
-    <div id="left-menu">
-      <div id="left-logo"></div>
-      left menu
-      <br>
-      <b>Products</b>
-      <nav>
-        <ul>
-          <li>Menu1</li>
-          <li>Menu2</li>
-          <li>Menu3</li>
-          <li>Menu4</li>
-          <li>Menu5</li>
-        </ul>
-      </nav>
-      <span id="search-box"></span>
-    </div>
     <div class='content'>
       <div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
       <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
     </div>
     <footer>
-      <div class="footer-box">
+      <div class="footerBoxesWrapper">
+        <ul class="footerBox"><h3>About</h3>
+          <li><a href="#category?navcat=." class='bindByAnchor' title='Home'>Home</a></li>
+          <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
+          <li><a href="#company?show=testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a><!-- TODO: add right link --></li>
+          <li><a href="#company?show=about" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a><!-- TODO: add right link --></li>
+        </ul>
+        <ul class="footerBox"><h3>Customer Care</h3>
+          <li><a href="#company?show=contact" class='bindByAnchor' title='Contact Us'>Contact Us</a></li>
+          <li><a href="#company?show=payment" class='bindByAnchor' title='Payment Methods'>Payment Methods</a></li>
+          <li><a href="#company?show=return" class='bindByAnchor' title='Return Policy'>Return Policy</a></li>
+          <li><a href="#company?show=shipping" class='bindByAnchor' title='Shipping'>Shipping</a></li>
+          <li><a href="#company?show=privacy" class='bindByAnchor' title='Privacy Policy'>Privacy Policy</a></li>
+        </ul>
+        <ul class="footerBox"><h3>My Account</h3>
+          <li><a href="#customer?show=newsletter" class='bindByAnchor' title='Register'>Register</a></li>
+          <li><a href="#customer?show=login" class='bindByAnchor' title='Login'>Login</a><!-- TODO: add right link --></li>
+          <li><a href="#customer?show=orders" class='bindByAnchor' title='Track Order'>Track Order</a></li>
+          <li><a href="#customer?show=myaccount" class='bindByAnchor' title='Recover Password'>Recover Password</a></li>
+        </ul>
       </div>
-
-      <div class="footer-box">
-      </div>
-
-      <div class="footer-box">
-      </div>
-
-      <div id="last-footer">
-      </div>
-
+      <p class='copyright'>&copy; 2012 A.E. Coltellerie snc - all rights reserved</p>
     </footer>
   </div>
   <!-- /VIEW CONTENT -->
