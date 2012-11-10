@@ -82,40 +82,51 @@ app.u.loadScript(app.vars.baseURL+"_antoninoknives_init.js");
 
 
   <div class='container'>
-    <header>
-      <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA"></a></span>
-      <nav class='navTop'>
-        <span class='navTopWrapper'>
-          <ul>
-            <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a><span class='navSeparator'></span></li>
-            <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a><span class='navSeparator'></span></li>
-            <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a><span class='navSeparator'></span></li>
-            <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (4)</a><!-- TODO: add cart item num --><!-- TODO: get right href --></span></li>
-          </ul>
-          <span class="socialBox">
-            <span class='socialIcon'><a href="http://www.facebook.com"><img src="images/icon_facebook.png" alt="Facebook" /></a></span><!-- TODO: get facebook name -->
-            <span class='socialIcon'><a href="http://www.twitter.com"><img src="images/icon_twitter.png" alt="Twitter" /></a></span><!-- TODO: get twitter name -->
+    <div>
+      <header>
+        <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA"></a></span>
+        <nav class='navTop'>
+          <span class='navTopWrapper'>
+            <ul>
+              <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a><span class='navSeparator'></span></li>
+              <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a><span class='navSeparator'></span></li>
+              <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a><span class='navSeparator'></span></li>
+              <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (4)</a><!-- TODO: add cart item num --><!-- TODO: get right href --></span></li>
+            </ul>
+            <span class="socialBox">
+              <span class='socialIcon'><a href="http://www.facebook.com" target="_blank"><img src="images/icon_facebook.png" alt="Facebook" /></a></span><!-- TODO: get facebook name -->
+              <span class='socialIcon'><a href="http://www.twitter.com" target="_blank"><img src="images/icon_twitter.png" alt="Twitter" /></a></span><!-- TODO: get twitter name -->
+            </span>
           </span>
-        </span>
-      </nav>
-      <!-- TODO: move slideshow to homepage template -->
-      <!-- <div id="slideshowContainer" class='slideshowContainer clearfix'>
-        <div id="slideshowNav"></div>
-        <ul id="wideSlideshow" class="pics slideshow" style="margin-top:0;">
-          <img src='images/p1.png'/>
-          <img src='images/p2.png'/>
-          <img src='images/p3.png'/>
-        </ul>
-      </div> -->
-    </header>
-    <aside>
-      <h3>Categories</h3>
-      <ul id="tier1categories"></ul>
-      <span class="search_box"></span>
-    </aside>
-    <div class='content'>
-      <div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
-      <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
+        </nav>
+        <!-- TODO: move slideshow to homepage template -->
+        <!-- <div id="slideshowContainer" class='slideshowContainer clearfix'>
+          <div id="slideshowNav"></div>
+          <ul id="wideSlideshow" class="pics slideshow" style="margin-top:0;">
+            <img src='images/p1.png'/>
+            <img src='images/p2.png'/>
+            <img src='images/p3.png'/>
+          </ul>
+        </div> -->
+      </header>
+      <aside class="sidebar">
+        <nav class="navMenu">
+          <h2>Products</h2>
+          <ul id="tier1categories"></ul>
+          <ul>
+            <li class="subMenu">Pattda</li>
+            <li class="subMenu">Siciliano</li>
+            <li class="subMenu">Caltagirone</li>
+            <li class="subMenu">Maniaghese</li>
+          </ul>
+        </nav>
+        <span class="search_box"></span>
+      </aside>
+      <div class='content'>
+        <div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
+        <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
+      </div>
+      <br class="clearfix">
     </div>
     <footer>
       <div class="footerBoxesWrapper">
