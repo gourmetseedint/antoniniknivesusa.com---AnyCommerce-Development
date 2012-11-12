@@ -15,8 +15,8 @@ var myCreole;
 var app = {vars:{
   "release":"20120912074300",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
-  "httpsURL":"https://ssl.zoovy.com/s=www.sporks.zoovy.com/",
-  "httpURL":"http://www.sporks.zoovy.com/"
+  "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
+  "httpURL":"http://www.antoniniknivesusa.com/"
   },u:{}};
 
 //set base url so images, css, js, etc all load from appropriate location once deployed.
@@ -58,21 +58,23 @@ app.u.loadScript(app.vars.baseURL+"_antoninoknives_init.js");
 
 <!-- what is displayed onLoad until the view is loaded -->
 <div id='appPreView'>
-<table>
-<tr>
-  <td><!-- TODO: put logo here --></td>
-  <td>
-  <h3>One moment please.</h3>
-  
-  <div class='alignCenter'>
-  <progress id="appPreViewProgressBar" max="100" value="0" /><br />
+  <div class='container'>
+    <table>
+    <tr>
+      <td><!-- TODO: put logo here --></td>
+      <td>
+      <h3>One moment please.</h3>
+      
+      <div class='alignCenter'>
+      <progress id="appPreViewProgressBar" max="100" value="0" /><br />
+      </div>
+      <div id='appPreViewProgressText'>0% Complete</div>
+      
+      <div class='appMessaging'></div>
+      </td>
+    </tr>
+    </table>
   </div>
-  <div id='appPreViewProgressText'>0% Complete</div>
-  
-  <div class='appMessaging'></div>
-  </td>
-</tr>
-</table>
 </div>
 
 
@@ -111,6 +113,8 @@ app.u.loadScript(app.vars.baseURL+"_antoninoknives_init.js");
       </header>
       <aside class="sidebar">
         <nav class="navMenu">
+          <div class='catIcon'>
+
           <h2>Products</h2>
           <ul id="tier1categories"></ul>
           <ul>

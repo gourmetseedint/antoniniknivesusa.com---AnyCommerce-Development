@@ -175,3 +175,10 @@ pip-log.txt
 #############
 
 client_files/*
+# *.backup
+
+#############
+## Sass
+#############
+
+.sass-cache/*
