@@ -141,21 +141,19 @@ small {
   /*color: ;*/
 }
 
+a {
+  &:link {
 
-a:link {
-  text-decoration: none;
-}
+  }
+  &:visited {
 
-a:visited {
-  text-decoration: none;
-}
+  }
+  &:hover {
 
-a:hover {
-  text-decoration: none;
-}
+  }
+  &:active {
 
-a:active {
-  text-decoration: none;
+  }
 }
 
 /* General */
@@ -170,7 +168,7 @@ a:active {
 }
 
 
-/*TODO: make compatible with ie; http://css-tricks.com/snippets/css/css-box-shadow/ */
+// TODO: make compatible with ie; http://css-tricks.com/snippets/css/css-box-shadow/
 
 /*.shadowBottomOuter {
   -webkit-box-shadow: 0 3px 3px 2px #999;
@@ -188,29 +186,10 @@ a:active {
 
 header {
   height: 374px;
-  background: url("images/banner_bg_product.png") no-repeat;
-  /*border-bottom: 4px solid #D22D7A;*/
-  /*TODO: get right color and size; */
-  /*border: solid blue 1px; /*temp*\/*/
+  background: url("images/banner_bg_product.png") no-repeat; // TODO: change per category
 }
-
-/*#slideshowContainer {
-
-}*/
 
 /* Navigation */
-
-/*nav {
-  display: inline-block;
-}*/
-
-nav ul, nav li {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  /*float: left;*/
-  display: inline-block;
-}
 
 /* Top navigation */
 
@@ -297,55 +276,95 @@ nav ul, nav li {
 
 /* Menu navigation */
 
+$menuOffset: -35px;
+
 .sidebar {
   // display: inline-block
   float: left;
+  position: relative;
+  top: $menuOffset;
+  margin-bottom: $menuOffset;
   margin-right: 10px;
   padding-left: 50px;
-  position: relative;
   display: inline-block;
-  top: -35px;
   // top: 340px;
   // left: 30px;
+  a {
+    &:link, &:visited {
+      color: white;
+      text-decoration: none;
+    }
+    &:hover, &:active {
+      color: gray;
+      text-decoration: none;
+    }
+  }
 }
 
 .navMenu {
   width: 200px;
-  padding: 150px 10px 10px;
+  padding: 10px 10px;
   background: #101010;
   color: white;
-  list-style: circle inside none; /*TODO: add diamond;*/
+  h2 {
+    margin: 0 0 1em;
+    padding: 0;
+    /*margin: 0;
+    padding: 0.8em 0.8em;*/
+    font-size: 1.6em;
+    line-height: 1em;
+    font-weight: bold;
+  }
+  ul, li {
+    list-style: disc inside; /*TODO: add diamond;*/
+    // display: block;
+    margin: 0;
+    padding: 0;
+  }
+  ul {
+    display: block;
+    div {
+      display: inline-block;
+    }
+    a {
+      &:link {
+        text-decoration: none;
+      }
+      &:visited {
+        color: #333; /*TODO: get right colors*/
+        text-decoration: none;
+      }
+      &:hover {
+        color: #111; /*TODO: get right colors*/
+        text-decoration: none;
+      }
+      &:active {
+        text-decoration: none;
+      }
+    }
+  }
+  li {
+    margin-bottom: 1em;
+    padding: 0.3em;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    // display: 
+  }
 }
 
-.navMenu li {
-  /*width: 180px;*/
-  /*height: 40px;*/
-  /*margin: 0;
-  padding: 1em 1em;*/
-  /*height: 60px;*/
-  /*display: inline-block;*/
-  /*font-size: 1em;*/
-  /*text-align: center;*/
-  display: block;
-  text-transform: uppercase;
-  /*vertical-align: bottom;*/
-}
+$logoCategoryOffset: -40px;
 
-/*.navMenu li span {
-  background: gray;
-  color: black;
-}*/
+.logoCategory {
+  width: 123px;
+  height: 123px;
+  position: relative;
+  top: $logoCategoryOffset;
+  margin: 0 auto ($logoCategoryOffset + 10px);
+  background: #7d3f0c;
+  text-align: center;
+}
 
 /*TODO: fix submenu */
-.navMenu h2 {
-  margin: 0;
-  padding: 0;
-  /*margin: 0;
-  padding: 0.8em 0.8em;*/
-  font-size: 1.6em;
-  line-height: 1em;
-  font-weight: bold;
-}
 
 .subMenu {
   background: #565555;
@@ -354,22 +373,59 @@ nav ul, nav li {
   padding: 0.2em 0.3em;
 }
 
-.navMenu a:link {
-  text-decoration: none;
+.searchForm {
+  // TODO: edit after adding form
+  margin-bottom: 20px;
+  width: 150px;
+  height: 20px;
+  background: white;
+  color: black;
 }
 
-.navMenu a:visited {
-  color: #333; /*TODO: get right colors*/
-  text-decoration: none;
+
+$pdfIconSize: 20px;
+.pdfLink {
+  // width: 30px;
+  height: $pdfIconSize;
+  // margin: 10px 0 0;
+  padding-left: $pdfIconSize + 5px;
+  display: inline-block;
+  background: url('images/icon_pdf.png') no-repeat;
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: $pdfIconSize;
+  // line-height: 1em;
+  vertical-align: middle;
 }
 
-.navMenu a:hover {
-  color: #111; /*TODO: get right colors*/
-  text-decoration: none;
+.wholesaleInfo {
+  margin: 10px auto 0;
+  background: url('images/wholesale_bg.png') no-repeat;
+  font-size: 14px;
+  // line-height: 1.2em;
+  text-align: center;
+  a {
+    width: 214px;
+    height: 125px;
+    display: inline-block;
+  }
 }
 
-.navMenu a:active {
-  text-decoration: none;
+$wholesalePadtop: 10px;
+
+.wholesaleInfoTop {
+  height: 85px - $wholesalePadtop;
+  padding-top: $wholesalePadtop;
+  font-size: 18px;
+  font-weight: bold;
+  strong {
+    font-size: 24px;
+  }
+}
+
+.wholesaleInfoBottom {
+  // height: 60px;
+  // font-size: 30px;
 }
 
 /* Logo */
@@ -402,6 +458,10 @@ nav ul, nav li {
 }
 
 /* Footer */
+
+footer {
+  margin-top: 20px;
+}
 
 .footerBoxesWrapper {
   padding: 1.2em 3.6em;

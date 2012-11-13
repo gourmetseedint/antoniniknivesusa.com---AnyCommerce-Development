@@ -13,7 +13,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REMOVE BEFORE DEPLO
 var myCreole;
 
 var app = {vars:{
-  "release":"20120912074300",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20120912074300",  // TODO: increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -87,18 +87,18 @@ app.u.loadScript(app.vars.baseURL+"_antoninoknives_init.js");
     <div>
       <header>
         <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA"></a></span>
-        <nav class='navTop'>
+        <nav class='navTop'><!-- TODO: add cut out in bg -->
           <span class='navTopWrapper'>
             <ul>
               <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a><span class='navSeparator'></span></li>
               <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a><span class='navSeparator'></span></li>
               <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a><span class='navSeparator'></span></li>
-              <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (4)</a><!-- TODO: add cart item num --><!-- TODO: get right href --></span></li>
+              <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (4)</a><!-- TODO: add cart item num --></span></li>
             </ul>
             <span class="socialBox">
               <span class='socialIcon'><a href="http://www.facebook.com" target="_blank"><img src="images/icon_facebook.png" alt="Facebook" /></a></span><!-- TODO: get facebook name -->
               <span class='socialIcon'><a href="http://www.twitter.com" target="_blank"><img src="images/icon_twitter.png" alt="Twitter" /></a></span><!-- TODO: get twitter name -->
-            </span>
+            </span><!-- TODO: move img to bg -->
           </span>
         </nav>
         <!-- TODO: move slideshow to homepage template -->
@@ -113,18 +113,26 @@ app.u.loadScript(app.vars.baseURL+"_antoninoknives_init.js");
       </header>
       <aside class="sidebar">
         <nav class="navMenu">
-          <div class='catIcon'>
-
+          <div class='logoCategory'>
+          </div>
           <h2>Products</h2>
           <ul id="tier1categories"></ul>
-          <ul>
+          <!-- <ul data-bind="var: category(@subcategoryDetail); format: subcategoryList; extension: myRIA; loadsTemplate: categoryListTemplateRootCatsWithProductSublist;"></ul> -->
+          <!-- <ul>
             <li class="subMenu">Pattda</li>
             <li class="subMenu">Siciliano</li>
             <li class="subMenu">Caltagirone</li>
             <li class="subMenu">Maniaghese</li>
-          </ul>
+          </ul> -->
+          <div class="searchForm">Search</div><!-- TODO: add search form -->
+          <span class="pdfLink"><a href="#pageType?attribute=value" class='bindByAnchor' title='PDF Catalogs'>PDF Catalogs</a></span><!-- TODO: add real link -->
         </nav>
-        <span class="search_box"></span>
+        <div class='wholesaleInfo'>
+          <a href="#company?show=wholesale" class='bindByAnchor' title='Wholesale Info'>
+            <div class='wholesaleInfoTop'><strong>Retailer?</strong><br/>Wholesale Available</div>
+            <div class='wholesaleInfoBottom'>for Pricing and Availability<br/><strong>Click here &gt;&gt;</strong></div>
+          </a>
+        </div><!-- TODO: maybe move to homepage template -->
       </aside>
       <div class='content'>
         <div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
@@ -137,7 +145,7 @@ app.u.loadScript(app.vars.baseURL+"_antoninoknives_init.js");
         <ul class="footerBox"><h3>About</h3>
           <li><a href="#category?navcat=." class='bindByAnchor' title='Home'>Home</a></li>
           <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
-          <li><a href="#company?show=testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a><!-- TODO: add right link --></li>
+          <li><a href="#company?show=testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
           <li><a href="#company?show=about" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a><!-- TODO: add right link --></li>
         </ul>
         <ul class="footerBox"><h3>Customer Care</h3>
@@ -149,7 +157,7 @@ app.u.loadScript(app.vars.baseURL+"_antoninoknives_init.js");
         </ul>
         <ul class="footerBox"><h3>My Account</h3>
           <li><a href="#customer?show=newsletter" class='bindByAnchor' title='Register'>Register</a></li>
-          <li><a href="#customer?show=login" class='bindByAnchor' title='Login'>Login</a><!-- TODO: add right link --></li>
+          <li><a href="#customer?show=login" class='bindByAnchor' title='Login'>Login</a></li>
           <li><a href="#customer?show=orders" class='bindByAnchor' title='Track Order'>Track Order</a></li>
           <li><a href="#customer?show=myaccount" class='bindByAnchor' title='Recover Password'>Recover Password</a></li>
         </ul>
@@ -249,6 +257,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
 
 
+
 <!-- used to display a category within a 'list', usually in the body of a category or the homepage. -->
 <ul>
 <li id='categoryListTemplate'>
@@ -259,17 +268,39 @@ don't modify the 'data-templateid' unless you are changing template names and up
 </li>
 
 
+<!-- TODO: copy and add products ul's -->
+<!-- Category list with sublist of products -->
 <li id='categoryListTemplateRootCats'>
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
-    <div class='thumbContainer'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /></div>
+    <!-- <div class='thumbContainer'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /></div> -->
     <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
   </div>
+  <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; hide_multipage:true; items_per_page:200;"></ul>
 </li>
+
 
 </ul>
 
-
-
+<!-- Product list -->
+<ul>
+  <li id='productListNoImagesTemplate' class='loadingBG  ' onMouseOver="$('.quickView',$(this)).show();" onMouseOut="$('.quickView').hide();" >
+    
+    <button class='floatRight pointer quickView displayNone' onClick="quickView({'templateID':'productTemplateQuickView','pid':$(this).closest('[data-pid]').attr('data-pid'),'pageType':'product'});">Quickview</button>
+    
+    <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
+      <div class='prodThumbContainer' data-bind='var:product(pid); format:addPicSlider; extension:myRIA;'>
+      <img src='blank.gif' class='prodThumb' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='120' height='120' />
+      </div>
+      
+      <h5 data-bind='var: product(zoovy:prod_name); format:text;'></h5>
+    
+      <h6 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6>
+      
+      
+      <span data-bind='var: reviews(average); format:addClass; className:review_;' class='reviewSprite'></span>
+  <!--  <span data-bind='var: reviews(total); format:text; posttext: from ;posttext: reviews; className:numReviews;'></span> -->
+    </div>
+  </li>
 <ul>
 <!--
 Used for the product in a product list (prodlist), usually in the body of a category or the homepage.
