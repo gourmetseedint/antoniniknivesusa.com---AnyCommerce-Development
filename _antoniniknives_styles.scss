@@ -351,8 +351,9 @@ $menuOffset: -35px;
     li {
       margin: 0.5em 0 0.4em 1em;
       padding: 0.2em 0.3em;
-      width: auto; // to clear qs_styles
+      // width: auto; // to clear qs_styles
       height: auto; // to clear qs_styles
+      display: block;
       background: #565555;
       color: white;
       font-size: 1.1em;
@@ -372,8 +373,28 @@ $logoCategoryOffset: -40px;
   position: relative;
   top: $logoCategoryOffset;
   margin: 0 auto ($logoCategoryOffset + 10px);
-  background: #7d3f0c;
+  background: white;
   text-align: center;
+}
+
+.logoCategoryBoat {
+  background: url('images/logo_cat_boat.png') no-repeat;
+}
+
+.logoCategoryCable {
+  background: url('images/logo_cat_cable.png') no-repeat;
+}
+
+.logoCategoryPocket {
+  background: url('images/logo_cat_pocket.png') no-repeat;
+}
+
+.logoCategoryPromo {
+  background: url('images/logo_cat_promo.png') no-repeat;
+}
+
+.logoCategorySos {
+  background: url('images/logo_cat_sos.png') no-repeat;
 }
 
 .searchForm {

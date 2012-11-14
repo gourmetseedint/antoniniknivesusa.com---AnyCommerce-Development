@@ -261,8 +261,8 @@ header {
   .navMenu ul li ul li {
     margin: 0.5em 0 0.4em 1em;
     padding: 0.2em 0.3em;
-    width: auto;
     height: auto;
+    display: block;
     background: #565555;
     color: white;
     font-size: 1.1em;
@@ -276,8 +276,23 @@ header {
   position: relative;
   top: -40px;
   margin: 0 auto -30px;
-  background: #7d3f0c;
+  background: white;
   text-align: center; }
+
+.logoCategoryBoat {
+  background: url("images/logo_cat_boat.png") no-repeat; }
+
+.logoCategoryCable {
+  background: url("images/logo_cat_cable.png") no-repeat; }
+
+.logoCategoryPocket {
+  background: url("images/logo_cat_pocket.png") no-repeat; }
+
+.logoCategoryPromo {
+  background: url("images/logo_cat_promo.png") no-repeat; }
+
+.logoCategorySos {
+  background: url("images/logo_cat_sos.png") no-repeat; }
 
 .searchForm {
   margin-bottom: 20px;

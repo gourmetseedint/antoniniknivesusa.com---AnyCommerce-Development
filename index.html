@@ -19,7 +19,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121113185529",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121113202106",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -39,8 +39,8 @@ all css includes need to be after the js that changes the base url.
 css files should be included before any .js file to ensure they are downloaded in parallel
 -->
 <link rel="stylesheet" type="text/css" href="qs_styles.css" />
-<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles.css" />
+<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css" />
 <!-- IE Shim for HTML5 -->
 <!--[if lt IE 9]><script src="dist/html5shiv.js"></script><![endif]-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -57,7 +57,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 <div id='appPreView'>
   <table>
     <tr>
-      <td><!-- TODO: put logo here --></td>
+      <td><img src="images/logo.png" /></td>
       <td>
         <h3>One moment please.</h3>
       
@@ -78,7 +78,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
   <!-- VIEW CONTENT -->
   <div class='container'>
     <header>
-      <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA"></a></span>
+      <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA" /></a></span>
       <nav class='navTop'><!-- TODO: add cut out in bg -->
         <!-- <span class='navTopWrapper'> -->
           <ul>

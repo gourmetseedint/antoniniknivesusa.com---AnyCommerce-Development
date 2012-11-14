@@ -25,7 +25,23 @@ app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','
 //add tabs to product data.
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   $( ".tabbedProductContent",$('#productTemplate_'+app.u.makeSafeHTMLId(P.pid))).tabs();
-  }]);
+}]);
+app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
+  $(".logoCategory").addClass("displayNone");
+}]);
+app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
+  $(".logoCategory").removeClass("displayNone");
+}]);
+app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
+  $(".logoCategory").addClass("logoCategoryBoat");
+}]);
+// app.rq.push(['templateFunction','categoryTemplate','onDeparts',function(P) {
+//   $(".logoCategory").removeClass("logoCategoryBoat");
+// }]);
+// TODO: figure out how to select a specific template
+// TODO: remove old logo when entering new cat
+// TODO: when product completes = add category logo
+
 
 app.rq.push(['script',0,(document.location.protocol == 'file:') ? app.vars.httpURL+'jquery/config.js' : app.vars.baseURL+'jquery/config.js']); //The config.js is dynamically generated.
 app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){return (typeof zoovyModel == 'function') ? true : false;}}
