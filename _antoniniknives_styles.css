@@ -126,6 +126,9 @@ small {
   .container table {
     margin: 0 auto; }
 
+.displayBlock {
+  display: block; }
+
 /*.shadowBottomOuter {
   -webkit-box-shadow: 0 3px 3px 2px #999;
      -moz-box-shadow: 0 3px 3px 2px #999;
@@ -139,8 +142,28 @@ small {
 }*/
 /* Header */
 header {
-  height: 374px;
-  background: url("images/banner_bg_product.png") no-repeat; }
+  height: 374px; }
+
+.bannerHome {
+  background: url("images/banner_bg_home.png") no-repeat; }
+
+.bannerCategoryBoat {
+  background: url("images/banner_bg_boat.png") no-repeat; }
+
+.bannerCategoryCable {
+  background: url("images/banner_bg_cable.png") no-repeat; }
+
+.bannerCategoryFarm {
+  background: url("images/banner_bg_farm.png") no-repeat; }
+
+.bannerCategoryPocket {
+  background: url("images/banner_bg_pocket.png") no-repeat; }
+
+.bannerCategoryPromo {
+  background: url("images/banner_bg_promo.png") no-repeat; }
+
+.bannerCategorySos {
+  background: url("images/banner_bg_sos.png") no-repeat; }
 
 /* Navigation */
 /* Top navigation */
@@ -210,8 +233,7 @@ header {
   top: -35px;
   margin-bottom: -35px;
   margin-right: 10px;
-  padding-left: 50px;
-  display: inline-block; }
+  padding-left: 50px; }
   .sidebar a:link, .sidebar a:visited {
     color: white;
     text-decoration: none; }
@@ -258,25 +280,26 @@ header {
     padding: 0.3em;
     font-size: 1.2em;
     text-transform: uppercase; }
-  .navMenu ul li ul li {
-    margin: 0.5em 0 0.4em 1em;
-    padding: 0.2em 0.3em;
-    height: auto;
-    display: block;
-    background: #565555;
-    color: white;
-    font-size: 1.1em;
-    text-transform: none; }
-    .navMenu ul li ul li .appMessage {
-      display: none; }
+  .navMenu ul li ul {
+    display: none; }
+    .navMenu ul li ul li {
+      margin: 0.5em 0 0.4em 1em;
+      padding: 0.2em 0.3em;
+      height: auto;
+      display: block;
+      background: #565555;
+      color: white;
+      font-size: 1.1em;
+      text-transform: none; }
+      .navMenu ul li ul li .appMessage {
+        display: none; }
 
-.logoCategory {
+#logoCategory {
   width: 123px;
   height: 123px;
   position: relative;
   top: -40px;
   margin: 0 auto -30px;
-  background: white;
   text-align: center; }
 
 .logoCategoryBoat {
@@ -284,6 +307,9 @@ header {
 
 .logoCategoryCable {
   background: url("images/logo_cat_cable.png") no-repeat; }
+
+.logoCategoryFarm {
+  background: url("images/logo_cat_farm.png") no-repeat; }
 
 .logoCategoryPocket {
   background: url("images/logo_cat_pocket.png") no-repeat; }

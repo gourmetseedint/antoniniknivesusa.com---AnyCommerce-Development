@@ -22,19 +22,124 @@ app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','
 
 
 
-//add tabs to product data.
+// add tabs to product data.
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   $( ".tabbedProductContent",$('#productTemplate_'+app.u.makeSafeHTMLId(P.pid))).tabs();
 }]);
+
+///// variables \\\\\
+navcatBoat   = ".boat_-_fishing";
+navcatCable  = ".cable_-_electrical";
+navcatFarm   = ".farm_-_garden";
+navcatPocket = ".pocket_-_traditional";
+navcatPromo  = ".promo_-_customizing";
+navcatSos    = ".sos_-_rescue";
+
+banner                    = 'header';
+classBannerHome           = 'bannerHome';
+classBannerCategoryBoat   = 'bannerCategoryBoat';
+classBannerCategoryCable  = 'bannerCategoryCable';
+classBannerCategoryFarm   = 'bannerCategoryFarm';
+classBannerCategoryPocket = 'bannerCategoryPocket';
+classBannerCategoryPromo  = 'bannerCategoryPromo';
+classBannerCategorySos    = 'bannerCategorySos';
+
+logoCategory            = '#logoCategory';
+classLogoCategoryBoat   = 'logoCategoryBoat';
+classLogoCategoryCable  = 'logoCategoryCable';
+classLogoCategoryFarm   = 'logoCategoryFarm';
+classLogoCategoryPocket = 'logoCategoryPocket';
+classLogoCategoryPromo  = 'logoCategoryPromo';
+classLogoCategorySos    = 'logoCategorySos';
+
+wholesaleInfo = '.wholesaleInfo';
+
+
+classBlock = 'classBlock';
+
+// app.u.dump([P]);
+
+function resetBanner () {
+  $(banner).removeClass();
+}
+
+function resetCategoryLogo () {
+  $(logoCategory).removeClass();
+}
+
+///// homepage \\\\\
 app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
-  $(".logoCategory").addClass("displayNone");
+  resetBanner();
+  $(banner).addClass(classBannerHome);
+  $(logoCategory).addClass("displayNone");
+  $(wholesaleInfo).removeClass("displayNone");
 }]);
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
-  $(".logoCategory").removeClass("displayNone");
+  $(logoCategory).removeClass("displayNone");
+  $(wholesaleInfo).addClass("displayNone");
 }]);
+
+///// categories \\\\\
 app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
-  $(".logoCategory").addClass("logoCategoryBoat");
+  app.u.dump([P]);
+
+  // Boat
+  if (P.navcat == navcatBoat) {
+    resetBanner();
+    resetCategoryLogo();
+    $(banner).addClass(classBannerCategoryBoat);
+    $(logoCategory).addClass(classLogoCategoryBoat);
+  }
+
+  // Cable
+  if (P.navcat == navcatCable) {
+    resetBanner();
+    resetCategoryLogo();
+    $(banner).addClass(classBannerCategoryCable);
+    $(logoCategory).addClass(classLogoCategoryCable);
+  }
+
+  // Farm
+  if (P.navcat == navcatFarm) {
+    resetBanner();
+    resetCategoryLogo();
+    $(banner).addClass(classBannerCategoryFarm);
+    $(logoCategory).addClass(classLogoCategoryFarm);
+  }
+
+  // Pocket
+  if (P.navcat == navcatPocket) {
+    resetBanner();
+    resetCategoryLogo();
+    $(banner).addClass(classBannerCategoryPocket);
+    $(logoCategory).addClass(classLogoCategoryPocket);
+  }
+
+  // Promo
+  if (P.navcat == navcatPromo) {
+    resetBanner();
+    resetCategoryLogo();
+    $(banner).addClass(classBannerCategoryPromo);
+    $(logoCategory).addClass(classLogoCategoryPromo);
+  }
+
+  // Sos
+  if (P.navcat == navcatSos) {
+    resetBanner();
+    resetCategoryLogo();
+    $(banner).addClass(classBannerCategorySos);
+    $(logoCategory).addClass(classLogoCategorySos);
+  }
 }]);
+
+///// products \\\\\
+app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
+  app.u.dump([P]);
+}]);
+
+// app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
+//   $(".logoCategory").addClass("logoCategoryBoat");
+// }]);
 // app.rq.push(['templateFunction','categoryTemplate','onDeparts',function(P) {
 //   $(".logoCategory").removeClass("logoCategoryBoat");
 // }]);

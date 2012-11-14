@@ -167,6 +167,10 @@ a {
   }
 }
 
+.displayBlock {
+  display: block;
+}
+
 
 // TODO: make compatible with ie; http://css-tricks.com/snippets/css/css-box-shadow/
 
@@ -186,7 +190,35 @@ a {
 
 header {
   height: 374px;
-  background: url("images/banner_bg_product.png") no-repeat; // TODO: change per category
+  // background: url("images/banner_bg_product.png") no-repeat; // TODO: change per category
+}
+
+.bannerHome {
+  background: url('images/banner_bg_home.png') no-repeat;
+}
+
+.bannerCategoryBoat {
+  background: url('images/banner_bg_boat.png') no-repeat;
+}
+
+.bannerCategoryCable {
+  background: url('images/banner_bg_cable.png') no-repeat;
+}
+
+.bannerCategoryFarm {
+  background: url('images/banner_bg_farm.png') no-repeat;
+}
+
+.bannerCategoryPocket {
+  background: url('images/banner_bg_pocket.png') no-repeat;
+}
+
+.bannerCategoryPromo {
+  background: url('images/banner_bg_promo.png') no-repeat;
+}
+
+.bannerCategorySos {
+  background: url('images/banner_bg_sos.png') no-repeat;
 }
 
 /* Navigation */
@@ -284,7 +316,7 @@ $menuOffset: -35px;
   margin-bottom: $menuOffset;
   margin-right: 10px;
   padding-left: 50px;
-  display: inline-block;
+  // display: inline-block;
   // top: 340px;
   // left: 30px;
   a {
@@ -348,6 +380,7 @@ $menuOffset: -35px;
     text-transform: uppercase;
   }
   ul li ul { // product list
+    display: none;
     li {
       margin: 0.5em 0 0.4em 1em;
       padding: 0.2em 0.3em;
@@ -367,13 +400,13 @@ $menuOffset: -35px;
 
 $logoCategoryOffset: -40px;
 
-.logoCategory {
+#logoCategory {
   width: 123px;
   height: 123px;
   position: relative;
   top: $logoCategoryOffset;
   margin: 0 auto ($logoCategoryOffset + 10px);
-  background: white;
+  // background: white;
   text-align: center;
 }
 
@@ -383,6 +416,10 @@ $logoCategoryOffset: -40px;
 
 .logoCategoryCable {
   background: url('images/logo_cat_cable.png') no-repeat;
+}
+
+.logoCategoryFarm {
+  background: url('images/logo_cat_farm.png') no-repeat;
 }
 
 .logoCategoryPocket {
