@@ -7,7 +7,7 @@
 .metadata
 bin/
 tmp/
-_notes/
+*_notes/
 *.tmp
 *.bak
 *.swp
@@ -163,22 +163,11 @@ pip-log.txt
 # Mac crap
 .DS_Store
 
-
-#############
-## Sublime
-#############
-
+# Sublime Text
 *.sublime-*
 
-#############
-## Custom
-#############
-
-client_files/*
-# *.backup
-
-#############
-## Sass
-#############
-
+# Sass
 .sass-cache/*
+
+# Custom
+client_files/*

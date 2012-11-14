@@ -198,8 +198,15 @@ header {
   content: '/';
 }
 
+// .navTopWrapper {
+//   padding: 0 7px;
+//   display: inline-block;
+//   background: #cdcccc; 
+// }
+
 .navTop {
-  /*text-align: right;*/
+  margin: 0;
+  padding: 0 7px;
   position: absolute;
   top: 0;
   right: 50px;
@@ -207,16 +214,11 @@ header {
   /*display: block;*/
   /*background-color: black;*/
   /*TODO: maybe add width/height instead of let elements make dims;*/
-}
-
-.navTopWrapper {
-  padding: 0 7px;
   display: inline-block;
   background: #cdcccc; 
-}
-
-.navTop {
   ul {
+    margin: 0;
+    padding: 0;
     display: inline-block;
   }
   li  {
@@ -255,24 +257,20 @@ header {
 
 .socialIcon {
   margin: 0;
+  width: 32px;
+  height: 28px;
   vertical-align: middle;
   display: inline-block;
   /*z-index: 10;*/
 }
 
-.socialIcon a {
-  /*width: 32px;
-  height: 28px;*/
-  /*display: inline-block;*/
-}
-
-/*.socialIconFacebook{
+.socialIconFacebook{
   background: url('images/icon_facebook.png') no-repeat;
 }
 
 .socialIconTwitter{
   background: url('images/icon_twitter.png') no-repeat;
-}*/
+}
 
 /* Menu navigation */
 

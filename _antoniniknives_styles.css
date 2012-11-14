@@ -149,65 +149,60 @@ header {
   content: '/'; }
 
 .navTop {
-  /*text-align: right;*/
+  margin: 0;
+  padding: 0 7px;
   position: absolute;
   top: 0;
   right: 50px;
   z-index: 5;
   /*display: block;*/
   /*background-color: black;*/
-  /*TODO: maybe add width/height instead of let elements make dims;*/ }
-
-.navTopWrapper {
-  padding: 0 7px;
+  /*TODO: maybe add width/height instead of let elements make dims;*/
   display: inline-block;
   background: #cdcccc; }
-
-.navTop ul {
-  display: inline-block; }
-.navTop li {
-  /* BUG: space inbetween li's */
-  /*float:left;*/
-  margin: 0;
-  padding: 1em 0.8em;
-  display: inline-block;
-  /*background-color: blue;*/
-  font-size: 1.1em;
-  color: black; }
-.navTop a:link {
-  /*TODO: edit colors*/
-  color: black;
-  text-decoration: none; }
-.navTop a:visited {
-  color: black;
-  text-decoration: none; }
-.navTop a:hover {
-  color: blue;
-  text-decoration: none; }
-.navTop a:active {
-  text-decoration: none; }
+  .navTop ul {
+    margin: 0;
+    padding: 0;
+    display: inline-block; }
+  .navTop li {
+    /* BUG: space inbetween li's */
+    /*float:left;*/
+    margin: 0;
+    padding: 1em 0.8em;
+    display: inline-block;
+    /*background-color: blue;*/
+    font-size: 1.1em;
+    color: black; }
+  .navTop a:link {
+    /*TODO: edit colors*/
+    color: black;
+    text-decoration: none; }
+  .navTop a:visited {
+    color: black;
+    text-decoration: none; }
+  .navTop a:hover {
+    color: blue;
+    text-decoration: none; }
+  .navTop a:active {
+    text-decoration: none; }
 
 .socialBox {
   margin-left: 5px; }
 
 .socialIcon {
   margin: 0;
+  width: 32px;
+  height: 28px;
   vertical-align: middle;
   display: inline-block;
   /*z-index: 10;*/ }
 
-.socialIcon a {
-  /*width: 32px;
-  height: 28px;*/
-  /*display: inline-block;*/ }
+.socialIconFacebook {
+  background: url("images/icon_facebook.png") no-repeat; }
 
-/*.socialIconFacebook{
-  background: url('images/icon_facebook.png') no-repeat;
-}
+.socialIconTwitter {
+  background: url("images/icon_twitter.png") no-repeat; }
 
-.socialIconTwitter{
-  background: url('images/icon_twitter.png') no-repeat;
-}*/
 /* Menu navigation */
 .sidebar {
   float: left;
