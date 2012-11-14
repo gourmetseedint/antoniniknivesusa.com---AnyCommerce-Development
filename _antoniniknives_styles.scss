@@ -346,7 +346,21 @@ $menuOffset: -35px;
     padding: 0.3em;
     font-size: 1.2em;
     text-transform: uppercase;
-    // display: 
+  }
+  ul li ul { // product list
+    li {
+      margin: 0.5em 0 0.4em 1em;
+      padding: 0.2em 0.3em;
+      width: auto; // to clear qs_styles
+      height: auto; // to clear qs_styles
+      background: #565555;
+      color: white;
+      font-size: 1.1em;
+      text-transform: none;
+      .appMessage { // hide missing products TODO: find better way to hide errors/missing products
+        display: none;
+      }
+    }
   }
 }
 
@@ -360,15 +374,6 @@ $logoCategoryOffset: -40px;
   margin: 0 auto ($logoCategoryOffset + 10px);
   background: #7d3f0c;
   text-align: center;
-}
-
-/*TODO: fix submenu */
-
-.subMenu {
-  background: #565555;
-  color: white;
-  margin: 0.5em 0 0.4em 1em;
-  padding: 0.2em 0.3em;
 }
 
 .searchForm {
@@ -402,10 +407,13 @@ $pdfIconSize: 20px;
   font-size: 14px;
   // line-height: 1.2em;
   text-align: center;
-  a {
-    width: 214px;
+  width: 214px;
     height: 125px;
-    display: inline-block;
+  span {
+    display: block;
+  }
+  a {
+    display: block;
   }
 }
 
@@ -421,10 +429,10 @@ $wholesalePadtop: 10px;
   }
 }
 
-.wholesaleInfoBottom {
-  // height: 60px;
-  // font-size: 30px;
-}
+// .wholesaleInfoBottom {
+//   // height: 60px;
+//   // font-size: 30px;
+// }
 
 /* Logo */
 

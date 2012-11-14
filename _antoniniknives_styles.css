@@ -258,6 +258,17 @@ header {
     padding: 0.3em;
     font-size: 1.2em;
     text-transform: uppercase; }
+  .navMenu ul li ul li {
+    margin: 0.5em 0 0.4em 1em;
+    padding: 0.2em 0.3em;
+    width: auto;
+    height: auto;
+    background: #565555;
+    color: white;
+    font-size: 1.1em;
+    text-transform: none; }
+    .navMenu ul li ul li .appMessage {
+      display: none; }
 
 .logoCategory {
   width: 123px;
@@ -267,13 +278,6 @@ header {
   margin: 0 auto -30px;
   background: #7d3f0c;
   text-align: center; }
-
-/*TODO: fix submenu */
-.subMenu {
-  background: #565555;
-  color: white;
-  margin: 0.5em 0 0.4em 1em;
-  padding: 0.2em 0.3em; }
 
 .searchForm {
   margin-bottom: 20px;
@@ -296,11 +300,13 @@ header {
   margin: 10px auto 0;
   background: url("images/wholesale_bg.png") no-repeat;
   font-size: 14px;
-  text-align: center; }
+  text-align: center;
+  width: 214px;
+  height: 125px; }
+  .wholesaleInfo span {
+    display: block; }
   .wholesaleInfo a {
-    width: 214px;
-    height: 125px;
-    display: inline-block; }
+    display: block; }
 
 .wholesaleInfoTop {
   height: 75px;
