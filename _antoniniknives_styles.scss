@@ -352,7 +352,7 @@ $menuOffset: -35px;
     padding: 0;
   }
   ul {
-    display: block;
+    // display: block; // breaks onCompletes
     div {
       display: inline-block;
     }
@@ -380,7 +380,7 @@ $menuOffset: -35px;
     text-transform: uppercase;
   }
   ul li ul { // product list
-    display: none;
+    // display: none;
     li {
       margin: 0.5em 0 0.4em 1em;
       padding: 0.2em 0.3em;
@@ -466,7 +466,7 @@ $pdfIconSize: 20px;
   // line-height: 1.2em;
   text-align: center;
   width: 214px;
-    height: 125px;
+  height: 125px;
   span {
     display: block;
   }

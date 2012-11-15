@@ -259,40 +259,36 @@ header {
     /*TODO: add diamond;*/
     margin: 0;
     padding: 0; }
-  .navMenu ul {
-    display: block; }
-    .navMenu ul div {
-      display: inline-block; }
-    .navMenu ul a:link {
-      text-decoration: none; }
-    .navMenu ul a:visited {
-      color: #333;
-      /*TODO: get right colors*/
-      text-decoration: none; }
-    .navMenu ul a:hover {
-      color: #111;
-      /*TODO: get right colors*/
-      text-decoration: none; }
-    .navMenu ul a:active {
-      text-decoration: none; }
+  .navMenu ul div {
+    display: inline-block; }
+  .navMenu ul a:link {
+    text-decoration: none; }
+  .navMenu ul a:visited {
+    color: #333;
+    /*TODO: get right colors*/
+    text-decoration: none; }
+  .navMenu ul a:hover {
+    color: #111;
+    /*TODO: get right colors*/
+    text-decoration: none; }
+  .navMenu ul a:active {
+    text-decoration: none; }
   .navMenu li {
     margin-bottom: 1em;
     padding: 0.3em;
     font-size: 1.2em;
     text-transform: uppercase; }
-  .navMenu ul li ul {
-    display: none; }
-    .navMenu ul li ul li {
-      margin: 0.5em 0 0.4em 1em;
-      padding: 0.2em 0.3em;
-      height: auto;
-      display: block;
-      background: #565555;
-      color: white;
-      font-size: 1.1em;
-      text-transform: none; }
-      .navMenu ul li ul li .appMessage {
-        display: none; }
+  .navMenu ul li ul li {
+    margin: 0.5em 0 0.4em 1em;
+    padding: 0.2em 0.3em;
+    height: auto;
+    display: block;
+    background: #565555;
+    color: white;
+    font-size: 1.1em;
+    text-transform: none; }
+    .navMenu ul li ul li .appMessage {
+      display: none; }
 
 #logoCategory {
   width: 123px;

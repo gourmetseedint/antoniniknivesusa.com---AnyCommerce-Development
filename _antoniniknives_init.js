@@ -26,6 +26,18 @@ app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   $( ".tabbedProductContent",$('#productTemplate_'+app.u.makeSafeHTMLId(P.pid))).tabs();
 }]);
+app.rq.push(['script',0,(document.location.protocol == 'file:') ? app.vars.httpURL+'jquery/config.js' : app.vars.baseURL+'jquery/config.js']); //The config.js is dynamically generated.
+app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){return (typeof zoovyModel == 'function') ? true : false;}}
+app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
+app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
+app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
+
+//sample of an onDeparts. executed any time a user leaves this page/template type.
+// app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
+
+///// custom \\\\\
+
+// TODO: maybe add all backgrounds/logos then remove them while loading, so each cat loads faster
 
 ///// variables \\\\\
 navcatBoat   = ".boat_-_fishing";
@@ -54,6 +66,13 @@ classLogoCategorySos    = 'logoCategorySos';
 
 wholesaleInfo = '.wholesaleInfo';
 
+menuProducts       = '.menuProductList';
+menuProductsBoat   = '#tier1categories_boat__fishing ul';
+menuProductsCable  = '#tier1categories_cable__electrical ul';
+menuProductsFarm   = '#tier1categories_farm__garden ul';
+menuProductsPocket = '#tier1categories_pocket__traditional ul';
+menuProductsPromo  = '#tier1categories_promo__customizing ul';
+menuProductsSos    = '#tier1categories_sos__rescue ul';
 
 classBlock = 'classBlock';
 
@@ -67,9 +86,14 @@ function resetCategoryLogo () {
   $(logoCategory).removeClass();
 }
 
+function resetAllMenuProducts (argument) {
+  $(menuProducts).addClass('displayNone');
+}
+
 ///// homepage \\\\\
 app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   resetBanner();
+  resetAllMenuProducts();
   $(banner).addClass(classBannerHome);
   $(logoCategory).addClass("displayNone");
   $(wholesaleInfo).removeClass("displayNone");
@@ -87,76 +111,70 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   if (P.navcat == navcatBoat) {
     resetBanner();
     resetCategoryLogo();
+    resetAllMenuProducts();
     $(banner).addClass(classBannerCategoryBoat);
     $(logoCategory).addClass(classLogoCategoryBoat);
+    $(menuProductsBoat).removeClass('displayNone');
   }
 
   // Cable
   if (P.navcat == navcatCable) {
     resetBanner();
     resetCategoryLogo();
+    resetAllMenuProducts();
     $(banner).addClass(classBannerCategoryCable);
     $(logoCategory).addClass(classLogoCategoryCable);
+    $(menuProductsCable).removeClass('displayNone');
   }
 
   // Farm
   if (P.navcat == navcatFarm) {
     resetBanner();
     resetCategoryLogo();
+    resetAllMenuProducts();
     $(banner).addClass(classBannerCategoryFarm);
     $(logoCategory).addClass(classLogoCategoryFarm);
+    $(menuProductsFarm).removeClass('displayNone');
   }
 
   // Pocket
   if (P.navcat == navcatPocket) {
     resetBanner();
     resetCategoryLogo();
+    resetAllMenuProducts();
     $(banner).addClass(classBannerCategoryPocket);
     $(logoCategory).addClass(classLogoCategoryPocket);
+    $(menuProductsPocket).removeClass('displayNone');
   }
 
   // Promo
   if (P.navcat == navcatPromo) {
     resetBanner();
     resetCategoryLogo();
+    resetAllMenuProducts();
     $(banner).addClass(classBannerCategoryPromo);
     $(logoCategory).addClass(classLogoCategoryPromo);
+    $(menuProductsPromo).removeClass('displayNone');
   }
 
   // Sos
   if (P.navcat == navcatSos) {
     resetBanner();
     resetCategoryLogo();
+    resetAllMenuProducts();
     $(banner).addClass(classBannerCategorySos);
     $(logoCategory).addClass(classLogoCategorySos);
+    $(menuProductsSos).removeClass('displayNone');
   }
 }]);
 
 ///// products \\\\\
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
-  app.u.dump([P]);
+  // app.u.dump([P]);
+  // TODO: add product's category bg and logo
 }]);
 
-// app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
-//   $(".logoCategory").addClass("logoCategoryBoat");
-// }]);
-// app.rq.push(['templateFunction','categoryTemplate','onDeparts',function(P) {
-//   $(".logoCategory").removeClass("logoCategoryBoat");
-// }]);
-// TODO: figure out how to select a specific template
-// TODO: remove old logo when entering new cat
-// TODO: when product completes = add category logo
-
-
-app.rq.push(['script',0,(document.location.protocol == 'file:') ? app.vars.httpURL+'jquery/config.js' : app.vars.baseURL+'jquery/config.js']); //The config.js is dynamically generated.
-app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){return (typeof zoovyModel == 'function') ? true : false;}}
-app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
-app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
-app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
-
-//sample of an onDeparts. executed any time a user leaves this page/template type.
-app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
-
+///// end custom \\\\\
 
 //group any third party files together (regardless of pass) to make troubleshooting easier.
 app.rq.push(['script',0,(document.location.protocol == 'https:' ? 'https:' : 'http:')+'//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.js']);
