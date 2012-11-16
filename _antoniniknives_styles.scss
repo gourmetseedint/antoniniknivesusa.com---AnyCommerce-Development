@@ -1,5 +1,14 @@
 /* # Project Styles */
 
+$width_page: 1121px;
+$width_menu: 200px;
+$width_menu_left_margin: 50px;
+$width_menu_right_margin: 10px;
+$width_content: $width_page - ($width_menu + $width_menu_left_margin + $width_menu_right_margin + 20px);
+
+
+$height_header: 374px;
+
 /* Blue Collar Depot - CSS */
 
 /* universal */
@@ -159,7 +168,7 @@ a {
 /* General */
 
 .container {
-  width: 1121px; /* TODO: Find correct width */
+  width: $width_page; /* TODO: Find correct width */
   margin: 0 auto;
   position: relative;
   table {
@@ -189,12 +198,16 @@ a {
 /* Header */
 
 header {
-  height: 374px;
+  height: $height_header;
   // background: url("images/banner_bg_product.png") no-repeat; // TODO: change per category
 }
 
 .bannerHome {
   background: url('images/banner_bg_home.png') no-repeat;
+}
+
+.bannerCategoryDefault { /* used when on product template and category skipped */
+  background: url('images/banner_bg_default.png') no-repeat;
 }
 
 .bannerCategoryBoat {
@@ -221,6 +234,11 @@ header {
   background: url('images/banner_bg_sos.png') no-repeat;
 }
 
+#slideshowContainer {
+  position: absolute;
+  top: 0;
+}
+
 /* Navigation */
 
 /* Top navigation */
@@ -242,7 +260,7 @@ header {
   position: absolute;
   top: 0;
   right: 50px;
-  z-index: 5;
+  z-index: 55;
   /*display: block;*/
   /*background-color: black;*/
   /*TODO: maybe add width/height instead of let elements make dims;*/
@@ -314,8 +332,8 @@ $menuOffset: -35px;
   position: relative;
   top: $menuOffset;
   margin-bottom: $menuOffset;
-  margin-right: 10px;
-  padding-left: 50px;
+  margin-right: $width_menu_right_margin;
+  padding-left: $width_menu_left_margin;
   // display: inline-block;
   // top: 340px;
   // left: 30px;
@@ -332,7 +350,7 @@ $menuOffset: -35px;
 }
 
 .navMenu {
-  width: 200px;
+  width: $width_menu;
   padding: 10px 10px;
   background: #101010;
   color: white;
@@ -410,6 +428,10 @@ $logoCategoryOffset: -40px;
   text-align: center;
 }
 
+.logoCategoryDefault { /* used when on product template and category skipped */
+  background: url('images/logo_cat_default.png') no-repeat;
+}
+
 .logoCategoryBoat {
   background: url('images/logo_cat_boat.png') no-repeat;
 }
@@ -436,11 +458,11 @@ $logoCategoryOffset: -40px;
 
 .searchForm {
   // TODO: edit after adding form
-  margin-bottom: 20px;
-  width: 150px;
-  height: 20px;
-  background: white;
-  color: black;
+  // margin-bottom: 20px;
+  // width: 150px;
+  // height: 20px;
+  // background: white;
+  // color: black;
 }
 
 
@@ -516,7 +538,8 @@ $wholesalePadtop: 10px;
 
 .content {
   /*vertical-align: top;*/
-  width: 800px;
+  // width: 800px;
+  width: $width_content;
   display: inline-block;
   /*padding-left: 10px;*/
 }
@@ -589,3 +612,58 @@ footer {
   color: #545454;
   font-size: 0.9em;
 }
+
+/*slideshow*/
+
+/* setting height/width and overflow hidden eliminates popping (all banners showing then hiding) */
+#slideshowContainer {
+  // position:relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index:10;
+  height:300px;
+  // min-width:720px;
+  // max-width:$width_page;
+  width: $width_page;
+  margin:0 auto;
+  overflow:hidden;
+  z-index:5;
+}
+/* the slides */
+#slideshowContainer ul, 
+.slideshow li {
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:inline;
+  float:left;
+  } 
+
+#slideshowNav {
+  z-index: 50;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width:100%;
+  text-align:left;
+}
+
+#slideshowNav a {
+margin: 0 8px; font-size:.01em;
+text-decoration: none;
+display:inline-block;
+padding: 6px 8px;
+border: 1px solid #c0b3ad;
+color:#ffffff;
+background: #ffffff;
+cursor:pointer;
+-webkit-border-radius: 8px;
+border-radius: 8px;
+}
+
+#slideshowNav a:hover, #slideshowNav a.activeSlide {
+color:#bfd255;
+background: #ea5051;
+}
+#slideshowNav a:focus { outline: none; }

@@ -147,6 +147,10 @@ header {
 .bannerHome {
   background: url("images/banner_bg_home.png") no-repeat; }
 
+.bannerCategoryDefault {
+  /* used when on product template and category skipped */
+  background: url("images/banner_bg_default.png") no-repeat; }
+
 .bannerCategoryBoat {
   background: url("images/banner_bg_boat.png") no-repeat; }
 
@@ -165,6 +169,10 @@ header {
 .bannerCategorySos {
   background: url("images/banner_bg_sos.png") no-repeat; }
 
+#slideshowContainer {
+  position: absolute;
+  top: 0; }
+
 /* Navigation */
 /* Top navigation */
 .navSeparator:after {
@@ -177,7 +185,7 @@ header {
   position: absolute;
   top: 0;
   right: 50px;
-  z-index: 5;
+  z-index: 55;
   /*display: block;*/
   /*background-color: black;*/
   /*TODO: maybe add width/height instead of let elements make dims;*/
@@ -298,6 +306,10 @@ header {
   margin: 0 auto -30px;
   text-align: center; }
 
+.logoCategoryDefault {
+  /* used when on product template and category skipped */
+  background: url("images/logo_cat_default.png") no-repeat; }
+
 .logoCategoryBoat {
   background: url("images/logo_cat_boat.png") no-repeat; }
 
@@ -315,13 +327,6 @@ header {
 
 .logoCategorySos {
   background: url("images/logo_cat_sos.png") no-repeat; }
-
-.searchForm {
-  margin-bottom: 20px;
-  width: 150px;
-  height: 20px;
-  background: white;
-  color: black; }
 
 .pdfLink {
   height: 20px;
@@ -373,7 +378,7 @@ header {
 /* Content */
 .content {
   /*vertical-align: top;*/
-  width: 800px;
+  width: 841px;
   display: inline-block;
   /*padding-left: 10px;*/ }
 
@@ -436,3 +441,53 @@ footer {
   text-align: center;
   color: #545454;
   font-size: 0.9em; }
+
+/*slideshow*/
+/* setting height/width and overflow hidden eliminates popping (all banners showing then hiding) */
+#slideshowContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  height: 300px;
+  width: 1121px;
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 5; }
+
+/* the slides */
+#slideshowContainer ul,
+.slideshow li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline;
+  float: left; }
+
+#slideshowNav {
+  z-index: 50;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 100%;
+  text-align: left; }
+
+#slideshowNav a {
+  margin: 0 8px;
+  font-size: .01em;
+  text-decoration: none;
+  display: inline-block;
+  padding: 6px 8px;
+  border: 1px solid #c0b3ad;
+  color: #ffffff;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-border-radius: 8px;
+  border-radius: 8px; }
+
+#slideshowNav a:hover, #slideshowNav a.activeSlide {
+  color: #bfd255;
+  background: #ea5051; }
+
+#slideshowNav a:focus {
+  outline: none; }

@@ -37,6 +37,25 @@ app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
 
 ///// custom \\\\\
 
+///// homepage slideshow \\\\\
+
+//cycle used for slideshow
+app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
+
+//add slideshow to homepage.
+app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
+  var $target = $('#wideSlideshow');
+  if($target.children().length > 1) {
+    $('#wideSlideshow').cycle({
+      fx:'fade',
+      speed:'slow',
+      timeout: 5000,
+      pager:'#slideshowNav',
+      slideExpr: 'li'
+    });
+  }
+}]);
+
 // TODO: maybe add all backgrounds/logos then remove them while loading, so each cat loads faster
 
 ///// variables \\\\\
@@ -103,9 +122,10 @@ app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   $(wholesaleInfo).addClass("displayNone");
 }]);
 
+
 ///// categories \\\\\
 app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
-  app.u.dump([P]);
+  // app.u.dump([P]);
 
   // Boat
   if (P.navcat == navcatBoat) {
@@ -171,7 +191,10 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
 ///// products \\\\\
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
+  resetAllMenuProducts();
   // TODO: add product's category bg and logo
+  // TODO: show category's product list in menu
+  // BUG: when cat skipped, breadcrumb missing
 }]);
 
 ///// end custom \\\\\
@@ -181,12 +204,12 @@ app.rq.push(['script',0,(document.location.protocol == 'https:' ? 'https:' : 'ht
 
 
 /*
-This function is overwritten once the controller is instantiated. 
+This function is overwritten once the controller is instantiated.
 Having a placeholder allows us to always reference the same messaging function, but not impede load time with a bulky error function.
 */
 app.u.throwMessage = function(m)  {
-  alert(m); 
-  }
+  alert(m);
+  };
 
 app.u.howManyPassZeroResourcesAreLoaded = function(debug) {
   var L = app.vars.rq.length;
