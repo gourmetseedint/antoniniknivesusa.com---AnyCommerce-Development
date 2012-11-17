@@ -109,17 +109,19 @@ function resetAllMenuProducts (argument) {
   $(menuProducts).addClass('displayNone');
 }
 
+// resetAllMenuProducts();
+
 ///// homepage \\\\\
 app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   resetBanner();
   resetAllMenuProducts();
   $(banner).addClass(classBannerHome);
   $(logoCategory).addClass("displayNone");
-  $(wholesaleInfo).removeClass("displayNone");
+  // $(wholesaleInfo).removeClass("displayNone");
 }]);
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   $(logoCategory).removeClass("displayNone");
-  $(wholesaleInfo).addClass("displayNone");
+  // $(wholesaleInfo).addClass("displayNone");
 }]);
 
 

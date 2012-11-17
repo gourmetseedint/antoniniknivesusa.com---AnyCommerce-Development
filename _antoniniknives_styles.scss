@@ -4,10 +4,15 @@ $width_page: 1121px;
 $width_menu: 200px;
 $width_menu_left_margin: 50px;
 $width_menu_right_margin: 10px;
-$width_content: $width_page - ($width_menu + $width_menu_left_margin + $width_menu_right_margin + 20px);
+$width_menu_padding: 12px;
+$width_content: $width_page - ($width_menu + $width_menu_left_margin + $width_menu_right_margin + 2 * $width_menu_padding);
 
+$width_search_form: $width_menu - ($width_menu_padding);
 
 $height_header: 374px;
+
+$color_navTop_bg: #cdcccc;
+$color_search_text: #555;
 
 /* Blue Collar Depot - CSS */
 
@@ -176,9 +181,9 @@ a {
   }
 }
 
-.displayBlock {
-  display: block;
-}
+// .displayBlock {
+//   display: block;
+// }
 
 
 // TODO: make compatible with ie; http://css-tricks.com/snippets/css/css-box-shadow/
@@ -244,7 +249,7 @@ header {
 /* Top navigation */
 
 .navSeparator:after {
-  margin: 0 0 0 1.6em;
+  margin: 0 1em 0 1.1em;
   content: '/';
 }
 
@@ -256,7 +261,9 @@ header {
 
 .navTop {
   margin: 0;
-  padding: 0 7px;
+  padding: 0;
+  // margin-left: 21px;
+  // height: 50px;
   position: absolute;
   top: 0;
   right: 50px;
@@ -265,7 +272,18 @@ header {
   /*background-color: black;*/
   /*TODO: maybe add width/height instead of let elements make dims;*/
   display: inline-block;
-  background: #cdcccc; 
+  // background: blue url('images/nav_top_bg_left.png') no-repeat;
+  // vertical-align: center;
+  div { // ul & social wrapper
+    padding: 0 7px;
+    // margin: auto;
+    background: $color_navTop_bg;
+    // height: 100%;
+    display: inline-block;
+  }
+  ul, li {
+    list-style: none;
+  }
   ul {
     margin: 0;
     padding: 0;
@@ -273,13 +291,19 @@ header {
   }
   li  {
     /* BUG: space inbetween li's */
-    /*float:left;*/
+    // float: left;
     margin: 0;
-    padding: 1em 0.8em;
+    padding: 0;
+    // width: auto;
     display:inline-block;
     /*background-color: blue;*/
-    font-size: 1.1em;
     color: black;
+    a {
+      padding: 1em 0.8em;
+      font-size: 1.1em;
+      line-height: 1em;
+      display: inline-block;
+    }
   }
   a {
     &:link {
@@ -300,6 +324,21 @@ header {
     }
   }
 }
+
+.navTopLeft {
+  margin: 0;
+  padding: 0;
+  background: url('images/nav_top_bg_left.png') no-repeat scroll right bottom;
+  background-size: contain;
+  width: 30px;
+  height: 1.1em + 2 * 1em + 0.2em;
+  // margin-left: -21px;
+  // display: inline-block;
+  vertical-align: bottom;
+  float: left;
+}
+
+// li{float:left; width:auto;}
 
 .socialBox {
   margin-left: 5px;
@@ -351,7 +390,7 @@ $menuOffset: -35px;
 
 .navMenu {
   width: $width_menu;
-  padding: 10px 10px;
+  padding: $width_menu_padding;
   background: #101010;
   color: white;
   h2 {
@@ -456,13 +495,42 @@ $logoCategoryOffset: -40px;
   background: url('images/logo_cat_sos.png') no-repeat;
 }
 
-.searchForm {
+$width_search_icon: 20px;
+$width_search_icon_margin: $width_search_icon + 5px;
+.productSearchForm {
   // TODO: edit after adding form
   // margin-bottom: 20px;
   // width: 150px;
   // height: 20px;
   // background: white;
   // color: black;
+  font-size: 1.1em;
+  fieldset, input {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+  }
+  fieldset {
+    display: inline-block;
+  }
+  input {
+    margin: 0 auto;
+    display: inline-block;
+    &[type="search"] {
+      padding: 0.4em;
+      width: $width_search_form;
+      color: $color_search_text;
+    }
+    &[type="submit"] {
+      margin-left: -$width_search_icon_margin;
+      // padding: 0.4em;
+      width: $width_search_icon;
+      // vertical-align: center;
+      // line-height: 1.1em;
+      background: transparent url('images/icon_search.png') no-repeat;
+      cursor: pointer;
+    }
+  }
 }
 
 
@@ -470,7 +538,7 @@ $pdfIconSize: 20px;
 .pdfLink {
   // width: 30px;
   height: $pdfIconSize;
-  // margin: 10px 0 0;
+  margin: 14px 0 0;
   padding-left: $pdfIconSize + 5px;
   display: inline-block;
   background: url('images/icon_pdf.png') no-repeat;
