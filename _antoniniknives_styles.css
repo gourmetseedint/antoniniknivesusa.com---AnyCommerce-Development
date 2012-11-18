@@ -56,7 +56,9 @@ p {
    font-family: ;*/
   font-size: 1.2em;
   line-height: 1.5em;
-  text-rendering: optimizelegibility; }
+  text-rendering: optimizelegibility;
+  margin: 0 0 0.5em 0;
+  padding: 0 0 0.3em 0; }
 
 h1 {
   font-size: 2em;
@@ -68,12 +70,12 @@ h1 {
   font-weight: normal; }
 
 h2 {
-  font-size: 1.8em;
-  line-height: 1.8em;
+  font-size: 3em;
+  line-height: 1em;
   letter-spacing: -1px;
   /*text-align: left;*/
   font-weight: normal;
-  /*color: ;*/
+  color: #8e8e8e;
   /*display: block;*/ }
 
 h3 {
@@ -89,12 +91,6 @@ h5,
 h6 {
   font-size: 1.3em;
   line-height: 1.5em; }
-
-p {
-  margin: 0 0 0.5em 0;
-  padding: 0 0 0.3em 0;
-  /*font-size: 1.1em;*/
-  /*line-height: 1.1em;*/ }
 
 ul {
   list-style: square; }
@@ -117,9 +113,18 @@ small {
   font-size: 80%;
   /*color: ;*/ }
 
+a:link {
+  color: #111111; }
+a:visited {
+  color: purple; }
+a:hover {
+  color: blue; }
+a:active {
+  color: blue; }
+
 /* General */
 .container {
-  width: 1121px;
+  width: 1120px;
   /* TODO: Find correct width */
   margin: 0 auto;
   position: relative; }
@@ -142,7 +147,8 @@ header {
   height: 374px; }
 
 .bannerHome {
-  background: url("images/banner_bg_home.png") no-repeat; }
+  background: url("images/banner_bg_home.png") no-repeat;
+  height: 492px; }
 
 .bannerCategoryDefault {
   /* used when on product template and category skipped */
@@ -172,10 +178,6 @@ header {
 
 /* Navigation */
 /* Top navigation */
-.navSeparator:after {
-  margin: 0 1em 0 1.1em;
-  content: '/'; }
-
 .navTop {
   margin: 0;
   padding: 0;
@@ -183,6 +185,7 @@ header {
   top: 0;
   right: 50px;
   z-index: 55;
+  color: #222222;
   /*display: block;*/
   /*background-color: black;*/
   /*TODO: maybe add width/height instead of let elements make dims;*/
@@ -198,7 +201,7 @@ header {
     padding: 0;
     display: inline-block; }
   .navTop li {
-    /* BUG: space inbetween li's */
+    /* BUG: space inbetween li's because newlines turned into whitespace */
     margin: 0;
     padding: 0;
     display: inline-block;
@@ -209,6 +212,12 @@ header {
       font-size: 1.1em;
       line-height: 1em;
       display: inline-block; }
+    .navTop li:after {
+      margin: 0 1em 0 1.1em;
+      content: '/';
+      color: #222222; }
+    .navTop li:last-child:after {
+      content: ""; }
   .navTop a:link {
     /*TODO: edit colors*/
     color: black;
@@ -220,6 +229,7 @@ header {
     color: blue;
     text-decoration: none; }
   .navTop a:active {
+    color: blue;
     text-decoration: none; }
 
 .navTopLeft {
@@ -272,30 +282,17 @@ header {
   .navMenu h2 {
     margin: 0 0 1em;
     padding: 0;
-    /*margin: 0;
-    padding: 0.8em 0.8em;*/
+    color: white;
     font-size: 1.6em;
     line-height: 1em;
     font-weight: bold; }
   .navMenu ul, .navMenu li {
-    list-style: disc inside;
+    list-style: disc inside url("images/bullet.png");
     /*TODO: add diamond;*/
     margin: 0;
     padding: 0; }
   .navMenu ul div {
     display: inline-block; }
-  .navMenu ul a:link {
-    text-decoration: none; }
-  .navMenu ul a:visited {
-    color: #333;
-    /*TODO: get right colors*/
-    text-decoration: none; }
-  .navMenu ul a:hover {
-    color: #111;
-    /*TODO: get right colors*/
-    text-decoration: none; }
-  .navMenu ul a:active {
-    text-decoration: none; }
   .navMenu li {
     margin-bottom: 1em;
     padding: 0.3em;
@@ -415,7 +412,7 @@ header {
 /* Content */
 .content {
   /*vertical-align: top;*/
-  width: 837px;
+  width: 836px;
   display: inline-block;
   /*padding-left: 10px;*/ }
 
@@ -487,7 +484,7 @@ footer {
   left: 0;
   z-index: 10;
   height: 300px;
-  width: 1121px;
+  width: 1120px;
   margin: 0 auto;
   overflow: hidden;
   z-index: 5; }
@@ -528,3 +525,70 @@ footer {
 
 #slideshowNav a:focus {
   outline: none; }
+
+/* Homepage */
+#homepageTemplate {
+  color: #8e8e8e; }
+
+.logosCategoryHome {
+  margin: 0;
+  padding: 0; }
+  .logosCategoryHome ul {
+    display: inline-block; }
+  .logosCategoryHome li {
+    margin: 0;
+    padding: 0;
+    display: inline-block; }
+    .logosCategoryHome li a {
+      width: 123px;
+      height: 123px;
+      display: inline-block; }
+
+/* Category & Product */
+.breadcrumb {
+  color: #313131;
+  font-size: 1.3em;
+  margin-bottom: 12px;
+  list-style: none;
+  float: right;
+  vertical-align: bottom; }
+  .breadcrumb a:link {
+    text-decoration: none; }
+  .breadcrumb li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left; }
+    .breadcrumb li:after {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      content: ":";
+      font-size: 1em;
+      font-weight: normal;
+      color: #313131; }
+    .breadcrumb li:last-child:after {
+      content: ""; }
+    .breadcrumb li:last-child a {
+      color: inherit;
+      font-size: 2em;
+      text-decoration: none;
+      font-weight: normal;
+      cursor: text; }
+
+.breadcrumbCatBoat {
+  color: #0072b8; }
+
+.breadcrumbCatCable {
+  color: #fcc300; }
+
+.breadcrumbCatFarm {
+  color: #1b962b; }
+
+.breadcrumbCatPocket {
+  color: #7d3f0c; }
+
+.breadcrumbCatPromo {
+  color: #ff00fe; }
+
+.breadcrumbCatSos {
+  color: #e3001b; }

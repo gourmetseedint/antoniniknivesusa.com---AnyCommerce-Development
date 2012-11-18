@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121116174645",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121117210419",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -58,7 +58,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 <div id='appPreView'>
   <table>
     <tr>
-      <td><img src="images/logo_cat_default.png" /></td>
+      <td><img src="images/logo_cat_default.png" alt="Antonini Knives USA" /></td>
       <td>
         <h3>One moment please.</h3>
       
@@ -82,12 +82,11 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA" /></a></span>
       <nav class='navTop'><!-- TODO: add cut out in bg -->
         <span class='navTopLeft'></span>
-        <!-- <img src="images/nav_top_bg_left.png"> -->
         <div>
           <ul>
-            <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a><span class='navSeparator'></span></li>
-            <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a><span class='navSeparator'></span></li>
-            <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a><span class='navSeparator'></span></li>
+            <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
+            <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a></li>
+            <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a></li>
             <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (4)</a><!-- TODO: add cart item num --></li>
           </ul>
           <span class="socialBox">
@@ -96,15 +95,6 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
           </span>
         </div>
       </nav>
-      <!-- TODO: move slideshow to homepage template -->
-      <!-- <div id="slideshowContainer" class='slideshowContainer clearfix'>
-        <div id="slideshowNav"></div>
-        <ul id="wideSlideshow" class="pics slideshow">
-          <img src='images/home_slide_1.png'/>
-          <img src='images/home_slide_2.png'/>
-          <img src='images/home_slide_3.png'/>
-        </ul>
-      </div> -->
     </header>
     <aside class="sidebar">
       <nav class="navMenu">
@@ -209,23 +199,35 @@ the homepageTemplate template is loaded into mainContentArea by default when the
   <div id="slideshowContainer">
   <!-- <div id="slideshowNav"></div> -->
     <ul id="wideSlideshow" class="pics slideshow">
-     <!--  <li><img src='images/home_slide_1.png'/></li>
+      <li><img src='images/home_slide_1.png'/></li>
       <li><img src='images/home_slide_2.png'/></li>
-      <li><img src='images/home_slide_3.png'/></li> -->
-      <!-- <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow1); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
+      <li><img src='images/home_slide_3.png'/></li>
+      <!-- Use if slideshows entered into database
+      <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow1); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
       <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow2); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
       <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow3); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
       <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow4); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-      <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow5); format: banner; extension:myRIA; editor:banner; wrap:<li>;" /> -->
+      <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow5); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
+      -->
     </ul>
   </div>
 
-  <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul>
+  <div class='logosCategoryHome'>
+    <ul>
+      <li class="logoCategoryHome logoCategoryBoat"><a    href="#category?navcat=.boat_-_fishing"       class='bindByAnchor' title='Boat - Fishing'></a></li>
+      <li class="logoCategoryHome logoCategoryCable"><a   href="#category?navcat=.cable_-_electrical"   class='bindByAnchor' title='Cable - Electrical'></a></li>
+      <li class="logoCategoryHome logoCategoryFarm"><a    href="#category?navcat=.farm_-_garden"        class='bindByAnchor' title='Farm - Garden'></a></li>
+      <li class="logoCategoryHome logoCategoryPocket"><a  href="#category?navcat=.pocket_-_traditional" class='bindByAnchor' title='Pocket - Traditional'></a></li>
+      <li class="logoCategoryHome logoCategoryPromo"><a   href="#category?navcat=.promo_-_customizing"  class='bindByAnchor' title='Promo - Customizing'></a></li>
+      <li class="logoCategoryHome logoCategorySos"><a     href="#category?navcat=.sos_-_rescue"         class='bindByAnchor' title='SOS - Rescue'></a></li>
+    </ul>
+    <!-- <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul> -->
+  </div>
   
-  <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; hide_summary:1; before:<h2>Featured Items</h2>; withReviews:1;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
+  <!-- <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; hide_summary:1; before:<h2>Featured Items</h2>; withReviews:1;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul> -->
   <p data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></p>
 
-  <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"4","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListTemplateResults; before:<h2>Best Sellers</h2>;' class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
+  <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"4","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListTemplateResults; before:<h2>Our Top Blades</h2>;' class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
 
 </div>
 
@@ -245,7 +247,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
 -->
 <div id='categoryTemplate' class='loadingBG'>
 
-  <ul class='breadcrumb clearfix noPadOrMargin fluidList' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
+  <ul class='breadcrumb clearfix' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
 
   <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
 
@@ -272,8 +274,10 @@ don't modify the 'data-templateid' unless you are changing template names and up
 <ul>
 <li id='categoryListTemplate'>
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
-    <div class='thumbContainer'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='120' height='120' /></div>
-    <div class='catName white2LGray'><span data-bind='var: category(pretty); format:text;'></span></div>
+    <!-- TODO: add cat logos to meta.CAT_THUMB -->
+    <!-- TODO: add hover text of category pretty name -->
+    <div class='thumbContainer logoCategoryHome logoCategoryDefault'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div>
+    <!-- <div class='catName white2LGray'><span data-bind='var: category(pretty); format:text;'></span></div> -->
   </div>
 </li>
 
@@ -317,21 +321,8 @@ remember to NOT put the button inside the 'onclick' container or two events will
 
 <!-- Product list with no images - used in categoryListTemplateRootCats -->
 <li id='productListNoImagesTemplate' class='loadingBG' >
-  
-  <!-- <button class='floatRight pointer quickView displayNone' onClick="quickView('product',{'templateID':'productTemplateQuickView','pid':$(this).closest('[data-pid]').attr('data-pid')});">Quickview</button> -->
-  
   <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
-    <!-- <div class='prodThumbContainer' data-bind='var:product(pid); format:addPicSlider; extension:myRIA;'>
-    <img src='blank.gif' class='prodThumb' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='120' height='120' />
-    </div> -->
-    
     <span data-bind='var: product(zoovy:prod_name); format:text;'></span>
-  
-    <!-- <h6 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6> -->
-    
-    
-    <!-- <span data-bind='var: product(reviews.average); format:addClass; className:review_;' class='reviewSprite'></span> -->
-<!--  <span data-bind='var: reviews(total); format:text; pretext: from ;posttext: reviews; className:numReviews;'></span> -->
   </div>
 </li>
 
@@ -417,7 +408,8 @@ Used for the product in a product list (prodlist), usually in the body of a cate
 the loadingBG class is removed (must be that classname) when the template is translated.
 remember to NOT put the button inside the 'onclick' container or two events will occur onclick.
 -->
-<li id='productListTemplateResults' class='loadingBG  ' >
+<!-- TODO: add carousel -->
+<li id='productListTemplateResults' class='loadingBG' >
   <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
     <div class='prodThumbContainer'>
     <img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;bgcolor:ffffff;' width='120' height='120' />
@@ -712,9 +704,10 @@ adding classes is not likely to have any bad effects.
 
 
 <!--  used in breadcrumb -->
+<!-- TOOD: change homepage pretty to 'Antonini' -->
 <ul>
   <li id='breadcrumbTemplate'>
-  <a href='#' onClick="return showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" data-bind='var: category(pretty); format:text;'></a>
+    <a href='#' onClick="return showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" data-bind='var: category(pretty); format:text;'></a>
   </li>
 </ul>
 

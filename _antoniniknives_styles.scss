@@ -1,6 +1,7 @@
 /* # Project Styles */
 
-$width_page: 1121px;
+// dimensions
+$width_page: 1120px;
 $width_menu: 200px;
 $width_menu_left_margin: 50px;
 $width_menu_right_margin: 10px;
@@ -10,9 +11,43 @@ $width_content: $width_page - ($width_menu + $width_menu_left_margin + $width_me
 $width_search_form: $width_menu - ($width_menu_padding);
 
 $height_header: 374px;
+$height_header_home: 492px;
 
+// colors
+
+// backgrounds
+$color_bg: #fdfdfd;
 $color_navTop_bg: #cdcccc;
+
+// text
+$color_text: #101010;
+$color_h2: #8e8e8e;
+
+$color_a: #111;
+$color_a_hover: blue;
+$color_a_visited: purple;
+
+$color_navTop_text: #222;
+$color_navTop_a: black;
+$color_navTop_a_hover: blue;
+
+$color_menu_a: white;
+$color_menu_a_hover: #999;
+
 $color_search_text: #555;
+$color_home_h2: #8e8e8e;
+$color_home_text: #a6a6a6;
+
+$color_breadcrumb_home: #313131;
+
+// categories
+$color_cat_boat: #0072b8;
+$color_cat_cable: #fcc300;
+$color_cat_farm: #1b962b;
+$color_cat_pocket: #7d3f0c;
+$color_cat_promo: #ff00fe;
+$color_cat_sos: #e3001b;
+
 
 /* Blue Collar Depot - CSS */
 
@@ -37,7 +72,7 @@ body {
   /*width: 100%;*/
   margin: 0;
   padding: 0;
-  background: #fdfdfd;
+  background: $color_bg;
 }
 
 section {
@@ -65,7 +100,7 @@ html {
 body {
   font-size: 62.5%; /* 10px */
   font-family: Arial, Helvetica, sans-serif;
-  color: #101010;
+  color: $color_text;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -83,6 +118,8 @@ p {
   font-size: 1.2em;
   line-height: 1.5em;
   text-rendering: optimizelegibility;
+  margin: 0 0 0.5em 0;
+  padding: 0 0 0.3em 0;
 }
 
 h1 {
@@ -95,13 +132,13 @@ h1 {
   font-weight: normal;
 }
 
-h2 {
-  font-size: 1.8em;
-  line-height: 1.8em;
+h2 { // TODO: get correct font
+  font-size: 3em;
+  line-height: 1em;
   letter-spacing: -1px;
   /*text-align: left;*/
   font-weight: normal;
-  /*color: ;*/
+  color: $color_h2;
   /*display: block;*/
 }
 
@@ -121,12 +158,9 @@ h6 {
   line-height: 1.5em;
 }
 
-p {
-  margin: 0 0 0.5em 0;
-  padding: 0 0 0.3em 0;
-  /*font-size: 1.1em;*/
-  /*line-height: 1.1em;*/
-}
+// p, li, span {
+//   color: $color_p;
+// }
 
 ul {
   list-style: square;
@@ -157,16 +191,16 @@ small {
 
 a {
   &:link {
-
+    color: $color_a;
   }
   &:visited {
-
+    color: $color_a_visited;
   }
   &:hover {
-
+    color: $color_a_hover;
   }
   &:active {
-
+    color: $color_a_hover;
   }
 }
 
@@ -209,6 +243,8 @@ header {
 
 .bannerHome {
   background: url('images/banner_bg_home.png') no-repeat;
+  height: $height_header_home;
+  // box-shadow: 5px 5px 5px black;
 }
 
 .bannerCategoryDefault { /* used when on product template and category skipped */
@@ -248,10 +284,11 @@ header {
 
 /* Top navigation */
 
-.navSeparator:after {
-  margin: 0 1em 0 1.1em;
-  content: '/';
-}
+// .navSeparator:after {
+//   margin: 0 1em 0 1.1em;
+//   content: '/';
+//   color: $color_navTop_text;
+// }
 
 // .navTopWrapper {
 //   padding: 0 7px;
@@ -268,6 +305,7 @@ header {
   top: 0;
   right: 50px;
   z-index: 55;
+  color: $color_navTop_text;
   /*display: block;*/
   /*background-color: black;*/
   /*TODO: maybe add width/height instead of let elements make dims;*/
@@ -290,7 +328,7 @@ header {
     display: inline-block;
   }
   li  {
-    /* BUG: space inbetween li's */
+    /* BUG: space inbetween li's because newlines turned into whitespace */
     // float: left;
     margin: 0;
     padding: 0;
@@ -304,22 +342,31 @@ header {
       line-height: 1em;
       display: inline-block;
     }
+    &:after {
+      margin: 0 1em 0 1.1em;
+      content: '/';
+      color: $color_navTop_text;
+    }
+    &:last-child:after {
+      content: "";
+    }
   }
   a {
     &:link {
       /*TODO: edit colors*/
-      color: black;
+      color: $color_navTop_a;
       text-decoration: none;
     }
     &:visited {
-      color: black;
+      color: $color_navTop_a;
       text-decoration: none;
     }
     &:hover {
-      color: blue;
+      color: $color_navTop_a_hover;
       text-decoration: none;
     }
     &:active {
+      color: $color_navTop_a_hover;
       text-decoration: none;
     }
   }
@@ -396,14 +443,13 @@ $menuOffset: -35px;
   h2 {
     margin: 0 0 1em;
     padding: 0;
-    /*margin: 0;
-    padding: 0.8em 0.8em;*/
+    color: white;
     font-size: 1.6em;
     line-height: 1em;
     font-weight: bold;
   }
   ul, li {
-    list-style: disc inside; /*TODO: add diamond;*/
+    list-style: disc inside url('images/bullet.png'); /*TODO: add diamond;*/
     // display: block;
     margin: 0;
     padding: 0;
@@ -413,22 +459,22 @@ $menuOffset: -35px;
     div {
       display: inline-block;
     }
-    a {
-      &:link {
-        text-decoration: none;
-      }
-      &:visited {
-        color: #333; /*TODO: get right colors*/
-        text-decoration: none;
-      }
-      &:hover {
-        color: #111; /*TODO: get right colors*/
-        text-decoration: none;
-      }
-      &:active {
-        text-decoration: none;
-      }
-    }
+    // a { // dnw with tier1categories
+    //   &:link {
+    //     text-decoration: none;
+    //   }
+    //   &:visited {
+    //     color: #333; /*TODO: get right colors*/
+    //     text-decoration: none;
+    //   }
+    //   &:hover {
+    //     color: #111; /*TODO: get right colors*/
+    //     text-decoration: none;
+    //   }
+    //   &:active {
+    //     text-decoration: none;
+    //   }
+    // }
   }
   li {
     margin-bottom: 1em;
@@ -735,3 +781,100 @@ color:#bfd255;
 background: #ea5051;
 }
 #slideshowNav a:focus { outline: none; }
+
+/* Homepage */
+
+#homepageTemplate {
+  color: $color_home_h2
+}
+
+.logosCategoryHome {
+  margin: 0;
+  padding: 0;
+  // text-align: center;
+  ul {
+    display: inline-block;
+  }
+  li {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    a {
+      width: 123px;
+      height: 123px;
+      display: inline-block;
+    }
+  }
+}
+
+/* Category & Product */
+
+.breadcrumb {
+  // homepage
+  color: $color_breadcrumb_home;
+  font-size: 1.3em; 
+  margin-bottom:12px;
+  // display: inline-block;
+  list-style: none;
+  // text-align: right;
+  float: right;
+  vertical-align: bottom;
+  a {
+    &:link {
+      text-decoration: none;
+    }
+  }
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    // vertical-align: bottom;
+    // margin:0;
+    // padding:0;
+    // padding-right: 10px;
+    // cursor: pointer;
+    &:after {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      content:":"; 
+      font-size: 1em;
+      font-weight: normal; 
+      color: $color_breadcrumb_home;
+    }
+    &:last-child:after {
+      content:"";
+    }
+    &:last-child a {
+      color: inherit; // to remove qs_styles
+      font-size: 2em;
+      text-decoration:none;
+      font-weight: normal;
+      cursor:text;
+    }
+  }
+}
+
+.breadcrumbCatBoat {
+  color: $color_cat_boat;
+}
+
+.breadcrumbCatCable {
+  color: $color_cat_cable;
+}
+
+.breadcrumbCatFarm {
+  color: $color_cat_farm;
+}
+
+.breadcrumbCatPocket {
+  color: $color_cat_pocket;
+}
+
+.breadcrumbCatPromo {
+  color: $color_cat_promo;
+}
+
+.breadcrumbCatSos {
+  color: $color_cat_sos;
+}

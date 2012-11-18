@@ -93,20 +93,32 @@ menuProductsPocket = '#tier1categories_pocket__traditional ul';
 menuProductsPromo  = '#tier1categories_promo__customizing ul';
 menuProductsSos    = '#tier1categories_sos__rescue ul';
 
-classBlock = 'classBlock';
+breadcrumb          = '.breadcrumb li:last-child';
+breadcrumbCatBoat   = 'breadcrumbCatBoat';
+breadcrumbCatCable  = 'breadcrumbCatCable';
+breadcrumbCatFarm   = 'breadcrumbCatFarm';
+breadcrumbCatPocket = 'breadcrumbCatPocket';
+breadcrumbCatPromo  = 'breadcrumbCatPromo';
+breadcrumbCatSos    = 'breadcrumbCatSos';
+
+// classBlock = 'classBlock';
 
 // app.u.dump([P]);
 
-function resetBanner () {
+function resetBanner() {
   $(banner).removeClass();
 }
 
-function resetCategoryLogo () {
+function resetCategoryLogo() {
   $(logoCategory).removeClass();
 }
 
-function resetAllMenuProducts (argument) {
+function resetAllMenuProducts() {
   $(menuProducts).addClass('displayNone');
+}
+
+function resetBreadcrumb() {
+  $(breadcrumb).removeClass();
 }
 
 // resetAllMenuProducts();
@@ -134,9 +146,11 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
+    resetBreadcrumb();
     $(banner).addClass(classBannerCategoryBoat);
     $(logoCategory).addClass(classLogoCategoryBoat);
     $(menuProductsBoat).removeClass('displayNone');
+    $(breadcrumb).addClass(breadcrumbCatBoat);
   }
 
   // Cable
@@ -144,9 +158,11 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
+    resetBreadcrumb();
     $(banner).addClass(classBannerCategoryCable);
     $(logoCategory).addClass(classLogoCategoryCable);
     $(menuProductsCable).removeClass('displayNone');
+    $(breadcrumb).addClass(breadcrumbCatCable);
   }
 
   // Farm
@@ -154,9 +170,11 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
+    resetBreadcrumb();
     $(banner).addClass(classBannerCategoryFarm);
     $(logoCategory).addClass(classLogoCategoryFarm);
     $(menuProductsFarm).removeClass('displayNone');
+    $(breadcrumb).addClass(breadcrumbCatFarm);
   }
 
   // Pocket
@@ -164,9 +182,11 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
+    resetBreadcrumb();
     $(banner).addClass(classBannerCategoryPocket);
     $(logoCategory).addClass(classLogoCategoryPocket);
     $(menuProductsPocket).removeClass('displayNone');
+    $(breadcrumb).addClass(breadcrumbCatPocket);
   }
 
   // Promo
@@ -174,9 +194,11 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
+    resetBreadcrumb();
     $(banner).addClass(classBannerCategoryPromo);
     $(logoCategory).addClass(classLogoCategoryPromo);
     $(menuProductsPromo).removeClass('displayNone');
+    $(breadcrumb).addClass(breadcrumbCatPromo);
   }
 
   // Sos
@@ -184,9 +206,11 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
+    resetBreadcrumb();
     $(banner).addClass(classBannerCategorySos);
     $(logoCategory).addClass(classLogoCategorySos);
     $(menuProductsSos).removeClass('displayNone');
+    $(breadcrumb).addClass(breadcrumbCatSos);
   }
 }]);
 
