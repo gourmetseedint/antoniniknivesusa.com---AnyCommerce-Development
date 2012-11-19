@@ -59,47 +59,49 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
 // TODO: maybe add all backgrounds/logos then remove them while loading, so each cat loads faster
 
 ///// variables \\\\\
-navcatBoat   = ".boat_-_fishing";
-navcatCable  = ".cable_-_electrical";
-navcatFarm   = ".farm_-_garden";
-navcatPocket = ".pocket_-_traditional";
-navcatPromo  = ".promo_-_customizing";
-navcatSos    = ".sos_-_rescue";
+var navcatBoat   = ".boat_-_fishing";
+var navcatCable  = ".cable_-_electrical";
+var navcatFarm   = ".farm_-_garden";
+var navcatPocket = ".pocket_-_traditional";
+var navcatPromo  = ".promo_-_customizing";
+var navcatSos    = ".sos_-_rescue";
 
-banner                    = 'header';
-classBannerHome           = 'bannerHome';
-classBannerCategoryBoat   = 'bannerCategoryBoat';
-classBannerCategoryCable  = 'bannerCategoryCable';
-classBannerCategoryFarm   = 'bannerCategoryFarm';
-classBannerCategoryPocket = 'bannerCategoryPocket';
-classBannerCategoryPromo  = 'bannerCategoryPromo';
-classBannerCategorySos    = 'bannerCategorySos';
+var banner                    = "header";
+var classBannerHome           = "bannerHome";
+var classBannerCategoryBoat   = "bannerCategoryBoat";
+var classBannerCategoryCable  = "bannerCategoryCable";
+var classBannerCategoryFarm   = "bannerCategoryFarm";
+var classBannerCategoryPocket = "bannerCategoryPocket";
+var classBannerCategoryPromo  = "bannerCategoryPromo";
+var classBannerCategorySos    = "bannerCategorySos";
 
-logoCategory            = '#logoCategory';
-classLogoCategoryBoat   = 'logoCategoryBoat';
-classLogoCategoryCable  = 'logoCategoryCable';
-classLogoCategoryFarm   = 'logoCategoryFarm';
-classLogoCategoryPocket = 'logoCategoryPocket';
-classLogoCategoryPromo  = 'logoCategoryPromo';
-classLogoCategorySos    = 'logoCategorySos';
+var logoCategory            = "#logoCategory";
+var classLogoCategoryBoat   = "logoCategoryBoat";
+var classLogoCategoryCable  = "logoCategoryCable";
+var classLogoCategoryFarm   = "logoCategoryFarm";
+var classLogoCategoryPocket = "logoCategoryPocket";
+var classLogoCategoryPromo  = "logoCategoryPromo";
+var classLogoCategorySos    = "logoCategorySos";
 
-wholesaleInfo = '.wholesaleInfo';
+var wholesaleInfo = ".wholesaleInfo";
 
-menuProducts       = '.menuProductList';
-menuProductsBoat   = '#tier1categories_boat__fishing ul';
-menuProductsCable  = '#tier1categories_cable__electrical ul';
-menuProductsFarm   = '#tier1categories_farm__garden ul';
-menuProductsPocket = '#tier1categories_pocket__traditional ul';
-menuProductsPromo  = '#tier1categories_promo__customizing ul';
-menuProductsSos    = '#tier1categories_sos__rescue ul';
+var menuProducts       = ".menuProductList";
+var menuProductsBoat   = "#tier1categories_boat__fishing ul";
+var menuProductsCable  = "#tier1categories_cable__electrical ul";
+var menuProductsFarm   = "#tier1categories_farm__garden ul";
+var menuProductsPocket = "#tier1categories_pocket__traditional ul";
+var menuProductsPromo  = "#tier1categories_promo__customizing ul";
+var menuProductsSos    = "#tier1categories_sos__rescue ul";
 
-breadcrumb          = '.breadcrumb li:last-child';
-breadcrumbCatBoat   = 'breadcrumbCatBoat';
-breadcrumbCatCable  = 'breadcrumbCatCable';
-breadcrumbCatFarm   = 'breadcrumbCatFarm';
-breadcrumbCatPocket = 'breadcrumbCatPocket';
-breadcrumbCatPromo  = 'breadcrumbCatPromo';
-breadcrumbCatSos    = 'breadcrumbCatSos';
+var breadcrumb          = ".breadcrumb li:last-child";
+var breadcrumbCatBoat   = "breadcrumbCatBoat";
+var breadcrumbCatCable  = "breadcrumbCatCable";
+var breadcrumbCatFarm   = "breadcrumbCatFarm";
+var breadcrumbCatPocket = "breadcrumbCatPocket";
+var breadcrumbCatPromo  = "breadcrumbCatPromo";
+var breadcrumbCatSos    = "breadcrumbCatSos";
+
+var lastBreadcrumbClass;
 
 // classBlock = 'classBlock';
 
@@ -151,6 +153,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     $(logoCategory).addClass(classLogoCategoryBoat);
     $(menuProductsBoat).removeClass('displayNone');
     $(breadcrumb).addClass(breadcrumbCatBoat);
+    lastBreadcrumbClass = breadcrumbCatBoat;
   }
 
   // Cable
@@ -163,6 +166,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     $(logoCategory).addClass(classLogoCategoryCable);
     $(menuProductsCable).removeClass('displayNone');
     $(breadcrumb).addClass(breadcrumbCatCable);
+    lastBreadcrumbClass = breadcrumbCatCable;
   }
 
   // Farm
@@ -175,6 +179,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     $(logoCategory).addClass(classLogoCategoryFarm);
     $(menuProductsFarm).removeClass('displayNone');
     $(breadcrumb).addClass(breadcrumbCatFarm);
+    lastBreadcrumbClass = breadcrumbCatFarm;
   }
 
   // Pocket
@@ -187,6 +192,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     $(logoCategory).addClass(classLogoCategoryPocket);
     $(menuProductsPocket).removeClass('displayNone');
     $(breadcrumb).addClass(breadcrumbCatPocket);
+    lastBreadcrumbClass = breadcrumbCatPocket;
   }
 
   // Promo
@@ -199,6 +205,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     $(logoCategory).addClass(classLogoCategoryPromo);
     $(menuProductsPromo).removeClass('displayNone');
     $(breadcrumb).addClass(breadcrumbCatPromo);
+    lastBreadcrumbClass = breadcrumbCatPromo;
   }
 
   // Sos
@@ -211,13 +218,16 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     $(logoCategory).addClass(classLogoCategorySos);
     $(menuProductsSos).removeClass('displayNone');
     $(breadcrumb).addClass(breadcrumbCatSos);
+    lastBreadcrumbClass = breadcrumbCatSos;
   }
 }]);
 
 ///// products \\\\\
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
-  resetAllMenuProducts();
+  // TODO: find better way to find product category
+  $(breadcrumb).addClass(lastBreadcrumbClass);
+  // resetAllMenuProducts();
   // TODO: add product's category bg and logo
   // TODO: show category's product list in menu
   // BUG: when cat skipped, breadcrumb missing

@@ -15,11 +15,8 @@ $height_header_home: 492px;
 
 // colors
 
-// backgrounds
 $color_bg: #fdfdfd;
-$color_navTop_bg: #cdcccc;
 
-// text
 $color_text: #101010;
 $color_h2: #8e8e8e;
 
@@ -27,18 +24,26 @@ $color_a: #111;
 $color_a_hover: blue;
 $color_a_visited: purple;
 
+$color_navTop_bg: #cdcccc;
 $color_navTop_text: #222;
 $color_navTop_a: black;
 $color_navTop_a_hover: blue;
 
-$color_menu_a: white;
-$color_menu_a_hover: #999;
+$color_menu_bg: #101010;
+$color_menu_text: white;
+$color_menu_product_bg: #565555;
+// $color_menu_a: white;
+// $color_menu_a_hover: #999;
 
 $color_search_text: #555;
 $color_home_h2: #8e8e8e;
 $color_home_text: #a6a6a6;
 
 $color_breadcrumb_home: #313131;
+
+$color_page_bg: $color_menu_product_bg;
+$color_page_border: #404040;
+$color_page_text: black;
 
 // categories
 $color_cat_boat: #0072b8;
@@ -438,12 +443,12 @@ $menuOffset: -35px;
 .navMenu {
   width: $width_menu;
   padding: $width_menu_padding;
-  background: #101010;
-  color: white;
+  background: $color_menu_bg;
+  color: $color_menu_text;
   h2 {
     margin: 0 0 1em;
     padding: 0;
-    color: white;
+    color: $color_menu_text;
     font-size: 1.6em;
     line-height: 1em;
     font-weight: bold;
@@ -482,20 +487,26 @@ $menuOffset: -35px;
     font-size: 1.2em;
     text-transform: uppercase;
   }
-  ul li ul { // product list
-    // display: none;
-    li {
-      margin: 0.5em 0 0.4em 1em;
-      padding: 0.2em 0.3em;
-      // width: auto; // to clear qs_styles
-      height: auto; // to clear qs_styles
-      display: block;
-      background: #565555;
-      color: white;
-      font-size: 1.1em;
-      text-transform: none;
-      .appMessage { // hide missing products TODO: find better way to hide errors/missing products
-        display: none;
+  ul li { 
+    ul, li {
+      list-style: none;
+    }
+    ul { // product list
+      // display: none;
+      padding: 0.5em 0 0 1.1em;
+      li {
+        margin: 0.1em 0;
+        padding: 0.2em 0.5em;
+        // width: auto; // to clear qs_styles
+        height: auto; // to clear qs_styles
+        display: block;
+        background: $color_menu_product_bg;
+        color: $color_menu_text;
+        font-size: 1.1em;
+        text-transform: none;
+        .appMessage { // hide missing products TODO: find better way to hide errors/missing products
+          display: none;
+        }
       }
     }
   }
@@ -813,12 +824,11 @@ background: #ea5051;
   // homepage
   color: $color_breadcrumb_home;
   font-size: 1.3em; 
-  margin-bottom:12px;
+  margin-bottom: 12px;
   // display: inline-block;
   list-style: none;
-  // text-align: right;
-  float: right;
-  vertical-align: bottom;
+  text-align: right;
+  // float: right;
   a {
     &:link {
       text-decoration: none;
@@ -828,14 +838,15 @@ background: #ea5051;
     margin: 0;
     padding: 0;
     list-style: none;
-    float: left;
+    // float: left;
+    display: inline-block;
     // vertical-align: bottom;
     // margin:0;
     // padding:0;
     // padding-right: 10px;
     // cursor: pointer;
     &:after {
-      margin: 0 0.5em 0 0;
+      margin: 0 0.2em 0 0;
       padding: 0;
       content:":"; 
       font-size: 1em;
@@ -851,6 +862,17 @@ background: #ea5051;
       text-decoration:none;
       font-weight: normal;
       cursor:text;
+    }
+  }
+}
+
+.productTemplateContent {
+  .breadcrumb {
+    a:hover {
+      color: #333;
+    }
+    li:last-child a {
+      cursor: pointer;
     }
   }
 }
@@ -877,4 +899,93 @@ background: #ea5051;
 
 .breadcrumbCatSos {
   color: $color_cat_sos;
+}
+
+$width_productList_bg: 0.6em;
+$width_viewProduct_icon: 1.5em;
+.content {
+  // TODO: keep images aligned bottom, but align names to top
+  .productList {
+    color: #6b6b6b;
+    li {
+      margin-bottom: 30px;
+      width: 230px;
+      height: auto;
+      float: none;
+      display: inline-block;
+    }
+    img {
+      width: 230px;
+      height: 230px;
+    }
+    h5 { // name
+      padding-left: $width_productList_bg * 1.8;
+      font-size: 1.7em;
+      font-weight: bold;
+      color: #6b6b6b;
+      text-transform: uppercase;
+      background: url('images/arrow_cat.png') no-repeat;
+      background-size: $width_productList_bg;
+      background-position: 0 $width_productList_bg/1.8; 
+      // background-size: 0.6em;
+      // &:before {
+      //   content: url('images/arrow_cat.png');
+      //   margin-right: 5px;
+      // }
+    }
+    h6 { // price
+      font-size: 1.3em;
+      font-weight: normal;
+    }
+    .viewProductLink { // TODO: maybe overlay on top of prodThumbContainer
+      margin: 0;
+      padding: 0.6em;
+      padding-left: $width_viewProduct_icon + 1.5em;
+      font-size: 1.6em;
+      background: #cdcdcd url('images/icon_search.png') no-repeat;
+      background-size: $width_viewProduct_icon;
+      background-position: 1em center;
+      // color: #6b6b6b;
+    }
+  }
+}
+
+// pagination
+.mpControls {
+  padding: 0.3em;
+  background: $color_page_bg;
+  border-color: $color_page_border;
+  color: $color_page_text;
+  font-size: 1.3em;
+  font-weight: normal;
+  font-family: inherit;
+  a {
+    &:link { 
+      color: inherit;
+      font-weight: bold;
+    }
+    &:hover {
+      color: #FF8800; // TODO: use better color
+    }
+  }
+  ul li { // page link
+    font-size: 1em;
+    vertical-align: middle;
+    ul { // drop down
+      margin-left: 1.5em;
+      font-size: 0.9em;
+      width: auto;
+      // right: 0;
+      padding: 0 0.5em;
+      border-color: $color_page_border;
+      li {
+        padding: 0.2em;
+        color: $color_page_text;
+      }
+    }
+  }
+}
+
+.paging { // icons
+  border-color: $color_page_border;
 }
