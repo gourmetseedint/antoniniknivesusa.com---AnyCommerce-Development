@@ -59,49 +59,49 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
 // TODO: maybe add all backgrounds/logos then remove them while loading, so each cat loads faster
 
 ///// variables \\\\\
-var navcatBoat   = ".boat_-_fishing";
-var navcatCable  = ".cable_-_electrical";
-var navcatFarm   = ".farm_-_garden";
-var navcatPocket = ".pocket_-_traditional";
-var navcatPromo  = ".promo_-_customizing";
-var navcatSos    = ".sos_-_rescue";
+var navcatBoat   = '.boat_-_fishing';
+var navcatCable  = '.cable_-_electrical';
+var navcatFarm   = '.farm_-_garden';
+var navcatPocket = '.pocket_-_traditional';
+var navcatPromo  = '.promo_-_customizing';
+var navcatSos    = '.sos_-_rescue';
 
-var banner                    = "header";
-var classBannerHome           = "bannerHome";
-var classBannerCategoryBoat   = "bannerCategoryBoat";
-var classBannerCategoryCable  = "bannerCategoryCable";
-var classBannerCategoryFarm   = "bannerCategoryFarm";
-var classBannerCategoryPocket = "bannerCategoryPocket";
-var classBannerCategoryPromo  = "bannerCategoryPromo";
-var classBannerCategorySos    = "bannerCategorySos";
+var banner                    = 'header';
+var classBannerHome           = 'bannerHome';
+var classBannerCategoryBoat   = 'bannerCategoryBoat';
+var classBannerCategoryCable  = 'bannerCategoryCable';
+var classBannerCategoryFarm   = 'bannerCategoryFarm';
+var classBannerCategoryPocket = 'bannerCategoryPocket';
+var classBannerCategoryPromo  = 'bannerCategoryPromo';
+var classBannerCategorySos    = 'bannerCategorySos';
 
-var logoCategory            = "#logoCategory";
-var classLogoCategoryBoat   = "logoCategoryBoat";
-var classLogoCategoryCable  = "logoCategoryCable";
-var classLogoCategoryFarm   = "logoCategoryFarm";
-var classLogoCategoryPocket = "logoCategoryPocket";
-var classLogoCategoryPromo  = "logoCategoryPromo";
-var classLogoCategorySos    = "logoCategorySos";
+var logoCategory            = '#logoCategory';
+var classLogoCategoryBoat   = 'logoCategoryBoat';
+var classLogoCategoryCable  = 'logoCategoryCable';
+var classLogoCategoryFarm   = 'logoCategoryFarm';
+var classLogoCategoryPocket = 'logoCategoryPocket';
+var classLogoCategoryPromo  = 'logoCategoryPromo';
+var classLogoCategorySos    = 'logoCategorySos';
 
-var wholesaleInfo = ".wholesaleInfo";
+var wholesaleInfo = '.wholesaleInfo';
 
-var menuProducts       = ".menuProductList";
-var menuProductsBoat   = "#tier1categories_boat__fishing ul";
-var menuProductsCable  = "#tier1categories_cable__electrical ul";
-var menuProductsFarm   = "#tier1categories_farm__garden ul";
-var menuProductsPocket = "#tier1categories_pocket__traditional ul";
-var menuProductsPromo  = "#tier1categories_promo__customizing ul";
-var menuProductsSos    = "#tier1categories_sos__rescue ul";
+var menuProducts       = '.menuProductList';
+var menuProductsBoat   = '#tier1categories_boat__fishing ul';
+var menuProductsCable  = '#tier1categories_cable__electrical ul';
+var menuProductsFarm   = '#tier1categories_farm__garden ul';
+var menuProductsPocket = '#tier1categories_pocket__traditional ul';
+var menuProductsPromo  = '#tier1categories_promo__customizing ul';
+var menuProductsSos    = '#tier1categories_sos__rescue ul';
 
-var headingCategory = ".headingsCategory h1";
-var categoryBoat     = "categoryBoat";
-var categoryCable    = "categoryCable";
-var categoryFarm     = "categoryFarm";
-var categoryPocket   = "categoryPocket";
-var categoryPromo    = "categoryPromo";
-var categorySos      = "categorySos";
+var headingCategory = '.headingsCategory h1';
+var categoryBoat     = 'categoryBoat';
+var categoryCable    = 'categoryCable';
+var categoryFarm     = 'categoryFarm';
+var categoryPocket   = 'categoryPocket';
+var categoryPromo    = 'categoryPromo';
+var categorySos      = 'categorySos';
 
-var headingProductNavcat         = '#mainContentArea .headingProductNavcat';
+var headingProductNavcat         = '.headingProductNavcat';
 var headingProductName           = '.headingsProduct h1';
 var headingProductCategory       = '.headingsProduct h3';
 var headingProductCategoryPretty = 'Temp Pretty';
@@ -149,116 +149,159 @@ app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
 app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
   
-  if (P.navcat == navcatBoat) { // Boat
-    resetBanner();
-    resetCategoryLogo();
-    resetAllMenuProducts();
-    resetCategoryHeading();
-    $(banner).addClass(classBannerCategoryBoat);
-    $(logoCategory).addClass(classLogoCategoryBoat);
-    $(menuProductsBoat).removeClass('displayNone');
-    $(headingCategory).addClass(categoryBoat);
-    // lastBreadcrumbClass = categoryBoat;
-  }else if (P.navcat == navcatCable) { // Cable
-    resetBanner();
-    resetCategoryLogo();
-    resetAllMenuProducts();
-    resetCategoryHeading();
-    $(banner).addClass(classBannerCategoryCable);
-    $(logoCategory).addClass(classLogoCategoryCable);
-    $(menuProductsCable).removeClass('displayNone');
-    $(headingCategory).addClass(categoryCable);
-    // lastBreadcrumbClass = categoryCable;
-  }else if (P.navcat == navcatFarm) { // Farm
-    resetBanner();
-    resetCategoryLogo();
-    resetAllMenuProducts();
-    resetCategoryHeading();
-    $(banner).addClass(classBannerCategoryFarm);
-    $(logoCategory).addClass(classLogoCategoryFarm);
-    $(menuProductsFarm).removeClass('displayNone');
-    $(headingCategory).addClass(categoryFarm);
-    // lastBreadcrumbClass = categoryFarm;
-  }else if (P.navcat == navcatPocket) { // Pocket
-    resetBanner();
-    resetCategoryLogo();
-    resetAllMenuProducts();
-    resetCategoryHeading();
-    $(banner).addClass(classBannerCategoryPocket);
-    $(logoCategory).addClass(classLogoCategoryPocket);
-    $(menuProductsPocket).removeClass('displayNone');
-    $(headingCategory).addClass(categoryPocket);
-    // lastBreadcrumbClass = categoryPocket;
-  }else if (P.navcat == navcatPromo) { // Promo
-    resetBanner();
-    resetCategoryLogo();
-    resetAllMenuProducts();
-    resetCategoryHeading();
-    $(banner).addClass(classBannerCategoryPromo);
-    $(logoCategory).addClass(classLogoCategoryPromo);
-    $(menuProductsPromo).removeClass('displayNone');
-    $(headingCategory).addClass(categoryPromo);
-    // lastBreadcrumbClass = categoryPromo;
-  }else if (P.navcat == navcatSos) { // Sos
-    resetBanner();
-    resetCategoryLogo();
-    resetAllMenuProducts();
-    resetCategoryHeading();
-    $(banner).addClass(classBannerCategorySos);
-    $(logoCategory).addClass(classLogoCategorySos);
-    $(menuProductsSos).removeClass('displayNone');
-    $(headingCategory).addClass(categorySos);
-    // lastBreadcrumbClass = categorySos;
+  switch(P.navcat) {
+    case navcatBoat:
+      // Boat
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryBoat);
+      $(logoCategory).addClass(classLogoCategoryBoat);
+      $(menuProductsBoat).removeClass('displayNone');
+      $(headingCategory).addClass(categoryBoat);
+      break;
+    case navcatCable:
+      // Cable
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryCable);
+      $(logoCategory).addClass(classLogoCategoryCable);
+      $(menuProductsCable).removeClass('displayNone');
+      $(headingCategory).addClass(categoryCable);
+      break;
+    case navcatFarm:
+      // Farm
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryFarm);
+      $(logoCategory).addClass(classLogoCategoryFarm);
+      $(menuProductsFarm).removeClass('displayNone');
+      $(headingCategory).addClass(categoryFarm);
+      break;
+    case navcatPocket:
+      // Pocket
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryPocket);
+      $(logoCategory).addClass(classLogoCategoryPocket);
+      $(menuProductsPocket).removeClass('displayNone');
+      $(headingCategory).addClass(categoryPocket);
+      break;
+    case navcatPromo:
+      // Promo
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryPromo);
+      $(logoCategory).addClass(classLogoCategoryPromo);
+      $(menuProductsPromo).removeClass('displayNone');
+      $(headingCategory).addClass(categoryPromo);
+      break;
+    case navcatSos:
+      // Sos
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      resetCategoryHeading();
+      $(banner).addClass(classBannerCategorySos);
+      $(logoCategory).addClass(classLogoCategorySos);
+      $(menuProductsSos).removeClass('displayNone');
+      $(headingCategory).addClass(categorySos);
+      break;
   }
 }]);
 
 ///// products \\\\\
+// TODO: add pretty name for each category
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
-  currentCategory = $(headingProductNavcat).html();
-  // BUG: only works the first time - the last product template is still on the dom and currentCategory html() finds the first
-  // app.u.dump($(headingProductNavcat).html());
-  // app.u.dump($(headingProductNavcat).length);
+  // app.u.dump($(headingProductNavcat, '#' + P.parentID).html());
+  currentCategory = $(headingProductNavcat, '#' + P.parentID).html();
+  // alert(currentCategory);
 
   switch(currentCategory) {
-  case navcatBoat:
-    $(headingProductName).addClass(categoryBoat);
-    // $(headingProductCategory).html("<a href='#category?navcat=" + currentCategory + "' class='bindByAnchor' title=''>Boat</a>");
-    $(headingProductCategory).html(headingProductCategoryPretty);
-    break;
-  case navcatCable:
-    $(headingProductName).addClass(categoryCable);
-    $(headingProductCategory).html(headingProductCategoryPretty);
-    break;
-  case navcatFarm:
-    $(headingProductName).addClass(categoryFarm);
-    $(headingProductCategory).html(headingProductCategoryPretty);
-    break;
-  case navcatPocket:
-    $(headingProductName).addClass(categoryPocket);
-    $(headingProductCategory).html(headingProductCategoryPretty);
-    break;
-  case navcatPromo:
-    $(headingProductName).addClass(categoryPromo);
-    $(headingProductCategory).html(headingProductCategoryPretty);
-    break;
-  case navcatSos:
-    $(headingProductName).addClass(categorySos);
-    $(headingProductCategory).html(headingProductCategoryPretty);
-    break;
+    case navcatBoat:
+      // Boat
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      // resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryBoat);
+      $(logoCategory).addClass(classLogoCategoryBoat);
+      $(menuProductsBoat).removeClass('displayNone');
+      $(headingProductName).addClass(categoryBoat);
+      // $(headingProductCategory).html("<a href='#category?navcat=" + currentCategory + "' class='bindByAnchor' title=''>Boat</a>");
+      $(headingProductCategory).html(headingProductCategoryPretty);
+      break;
+    case navcatCable:
+      // Cable
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      // resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryCable);
+      $(logoCategory).addClass(classLogoCategoryCable);
+      $(menuProductsCable).removeClass('displayNone');
+      $(headingProductName).addClass(categoryCable);
+      $(headingProductCategory).html(headingProductCategoryPretty);
+      break;
+    case navcatFarm:
+      // Farm
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      // resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryFarm);
+      $(logoCategory).addClass(classLogoCategoryFarm);
+      $(menuProductsFarm).removeClass('displayNone');
+      $(headingProductName).addClass(categoryFarm);
+      $(headingProductCategory).html(headingProductCategoryPretty);
+      break;
+    case navcatPocket:
+      // Pocket
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryPocket);
+      $(logoCategory).addClass(classLogoCategoryPocket);
+      $(menuProductsPocket).removeClass('displayNone');
+      $(headingProductName).addClass(categoryPocket);
+      $(headingProductCategory).html(headingProductCategoryPretty);
+      break;
+    case navcatPromo:
+      // Promo
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      resetCategoryHeading();
+      $(banner).addClass(classBannerCategoryPromo);
+      $(logoCategory).addClass(classLogoCategoryPromo);
+      $(menuProductsPromo).removeClass('displayNone');
+      $(headingProductName).addClass(categoryPromo);
+      $(headingProductCategory).html(headingProductCategoryPretty);
+      break;
+    case navcatSos:
+      // Sos
+      resetBanner();
+      resetCategoryLogo();
+      resetAllMenuProducts();
+      resetCategoryHeading();
+      $(banner).addClass(classBannerCategorySos);
+      $(logoCategory).addClass(classLogoCategorySos);
+      $(menuProductsSos).removeClass('displayNone');
+      $(headingProductName).addClass(categorySos);
+      $(headingProductCategory).html(headingProductCategoryPretty);
+      break;
   }
-
-  // alert(currentCategory);
-  // TODO: find better way to find product category
-  // $(headingsCategory).addClass(lastBreadcrumbClass);
-  // resetAllMenuProducts();
-  // TODO: add product's category bg and logo
-  // TODO: show category's product list in menu
-  // BUG: when cat skipped, breadcrumb missing
-}]);
-
-app.rq.push(['templateFunction','productTemplate','onDeparts',function(P) {
-  currentCategory = '';
 }]);
 
 ///// end custom \\\\\
@@ -285,7 +328,7 @@ app.u.howManyPassZeroResourcesAreLoaded = function(debug) {
     if(debug) {app.u.dump(" -> "+i+": "+app.vars.rq[i][2]+": "+app.vars.rq[i][app.vars.rq[i].length -1]);}
     }
   return r;
-  }
+  };
 
 
 //gets executed once controller.js is loaded.
@@ -294,11 +337,11 @@ app.u.howManyPassZeroResourcesAreLoaded = function(debug) {
 //the 'attempts' var is incremented each time the function is executed.
 
 app.u.initMVC = function(attempts){
-//  app.u.dump("app.u.initMVC activated ["+attempts+"]");
+  //  app.u.dump("app.u.initMVC activated ["+attempts+"]");
   var includesAreDone = true;
 
-//what percentage of completion a single include represents (if 10 includes, each is 10%).
-  var percentPerInclude = Math.round((100 / app.vars.rq.length));  
+  //what percentage of completion a single include represents (if 10 includes, each is 10%).
+  var percentPerInclude = Math.round((100 / app.vars.rq.length));
   var resourcesLoaded = app.u.howManyPassZeroResourcesAreLoaded();
   var percentComplete = resourcesLoaded * percentPerInclude; //used to sum how many includes have successfully loaded.
 
@@ -311,7 +354,7 @@ app.u.initMVC = function(attempts){
 //tmp is a throw away variable. app is what should be used as is referenced within the mvc.
     app.vars.rq = null; //to get here, all these resources have been loaded. nuke record to keep DOM clean and avoid any duplication.
     var tmp = new zController(app);
-//instantiate wiki parser.
+    //instantiate wiki parser.
     myCreole = new Parse.Simple.Creole();
     }
   else if(attempts > 50)  {
@@ -322,9 +365,8 @@ app.u.initMVC = function(attempts){
     }
   else  {
     setTimeout("app.u.initMVC("+(attempts+1)+")",250);
-    }
-
   }
+};
 
 
 
@@ -332,18 +374,12 @@ app.u.initMVC = function(attempts){
 //will pass in the page info object. (pageType, templateID, pid/navcat/show and more)
 app.u.appInitComplete = function(P) {
   app.u.dump("Executing myAppIsLoaded code...");
-  }
+};
 
 
 
 
 //don't execute script till both jquery AND the dom are ready.
 $(document).ready(function(){
-  app.u.handleRQ(0)
-  });
-
-
-
-
-
-
+  app.u.handleRQ(0);
+});
