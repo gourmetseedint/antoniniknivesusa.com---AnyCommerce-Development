@@ -93,15 +93,21 @@ var menuProductsPocket = "#tier1categories_pocket__traditional ul";
 var menuProductsPromo  = "#tier1categories_promo__customizing ul";
 var menuProductsSos    = "#tier1categories_sos__rescue ul";
 
-var breadcrumb          = ".breadcrumb li:last-child";
-var breadcrumbCatBoat   = "breadcrumbCatBoat";
-var breadcrumbCatCable  = "breadcrumbCatCable";
-var breadcrumbCatFarm   = "breadcrumbCatFarm";
-var breadcrumbCatPocket = "breadcrumbCatPocket";
-var breadcrumbCatPromo  = "breadcrumbCatPromo";
-var breadcrumbCatSos    = "breadcrumbCatSos";
+var headingCategory = ".headingsCategory h1";
+var categoryBoat     = "categoryBoat";
+var categoryCable    = "categoryCable";
+var categoryFarm     = "categoryFarm";
+var categoryPocket   = "categoryPocket";
+var categoryPromo    = "categoryPromo";
+var categorySos      = "categorySos";
 
-var lastBreadcrumbClass;
+var headingProductNavcat         = '#mainContentArea .headingProductNavcat';
+var headingProductName           = '.headingsProduct h1';
+var headingProductCategory       = '.headingsProduct h3';
+var headingProductCategoryPretty = 'Temp Pretty';
+var currentCategory;
+
+// var lastBreadcrumbClass;
 
 // classBlock = 'classBlock';
 
@@ -119,8 +125,8 @@ function resetAllMenuProducts() {
   $(menuProducts).addClass('displayNone');
 }
 
-function resetBreadcrumb() {
-  $(breadcrumb).removeClass();
+function resetCategoryHeading() {
+  $(headingCategory).removeClass();
 }
 
 // resetAllMenuProducts();
@@ -142,95 +148,117 @@ app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
 ///// categories \\\\\
 app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
-
-  // Boat
-  if (P.navcat == navcatBoat) {
+  
+  if (P.navcat == navcatBoat) { // Boat
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
-    resetBreadcrumb();
+    resetCategoryHeading();
     $(banner).addClass(classBannerCategoryBoat);
     $(logoCategory).addClass(classLogoCategoryBoat);
     $(menuProductsBoat).removeClass('displayNone');
-    $(breadcrumb).addClass(breadcrumbCatBoat);
-    lastBreadcrumbClass = breadcrumbCatBoat;
-  }
-
-  // Cable
-  if (P.navcat == navcatCable) {
+    $(headingCategory).addClass(categoryBoat);
+    // lastBreadcrumbClass = categoryBoat;
+  }else if (P.navcat == navcatCable) { // Cable
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
-    resetBreadcrumb();
+    resetCategoryHeading();
     $(banner).addClass(classBannerCategoryCable);
     $(logoCategory).addClass(classLogoCategoryCable);
     $(menuProductsCable).removeClass('displayNone');
-    $(breadcrumb).addClass(breadcrumbCatCable);
-    lastBreadcrumbClass = breadcrumbCatCable;
-  }
-
-  // Farm
-  if (P.navcat == navcatFarm) {
+    $(headingCategory).addClass(categoryCable);
+    // lastBreadcrumbClass = categoryCable;
+  }else if (P.navcat == navcatFarm) { // Farm
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
-    resetBreadcrumb();
+    resetCategoryHeading();
     $(banner).addClass(classBannerCategoryFarm);
     $(logoCategory).addClass(classLogoCategoryFarm);
     $(menuProductsFarm).removeClass('displayNone');
-    $(breadcrumb).addClass(breadcrumbCatFarm);
-    lastBreadcrumbClass = breadcrumbCatFarm;
-  }
-
-  // Pocket
-  if (P.navcat == navcatPocket) {
+    $(headingCategory).addClass(categoryFarm);
+    // lastBreadcrumbClass = categoryFarm;
+  }else if (P.navcat == navcatPocket) { // Pocket
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
-    resetBreadcrumb();
+    resetCategoryHeading();
     $(banner).addClass(classBannerCategoryPocket);
     $(logoCategory).addClass(classLogoCategoryPocket);
     $(menuProductsPocket).removeClass('displayNone');
-    $(breadcrumb).addClass(breadcrumbCatPocket);
-    lastBreadcrumbClass = breadcrumbCatPocket;
-  }
-
-  // Promo
-  if (P.navcat == navcatPromo) {
+    $(headingCategory).addClass(categoryPocket);
+    // lastBreadcrumbClass = categoryPocket;
+  }else if (P.navcat == navcatPromo) { // Promo
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
-    resetBreadcrumb();
+    resetCategoryHeading();
     $(banner).addClass(classBannerCategoryPromo);
     $(logoCategory).addClass(classLogoCategoryPromo);
     $(menuProductsPromo).removeClass('displayNone');
-    $(breadcrumb).addClass(breadcrumbCatPromo);
-    lastBreadcrumbClass = breadcrumbCatPromo;
-  }
-
-  // Sos
-  if (P.navcat == navcatSos) {
+    $(headingCategory).addClass(categoryPromo);
+    // lastBreadcrumbClass = categoryPromo;
+  }else if (P.navcat == navcatSos) { // Sos
     resetBanner();
     resetCategoryLogo();
     resetAllMenuProducts();
-    resetBreadcrumb();
+    resetCategoryHeading();
     $(banner).addClass(classBannerCategorySos);
     $(logoCategory).addClass(classLogoCategorySos);
     $(menuProductsSos).removeClass('displayNone');
-    $(breadcrumb).addClass(breadcrumbCatSos);
-    lastBreadcrumbClass = breadcrumbCatSos;
+    $(headingCategory).addClass(categorySos);
+    // lastBreadcrumbClass = categorySos;
   }
 }]);
 
 ///// products \\\\\
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
+  currentCategory = $(headingProductNavcat).html();
+  // BUG: only works the first time - the last product template is still on the dom and currentCategory html() finds the first
+  // app.u.dump($(headingProductNavcat).html());
+  // app.u.dump($(headingProductNavcat).length);
+
+  switch(currentCategory) {
+  case navcatBoat:
+    $(headingProductName).addClass(categoryBoat);
+    // $(headingProductCategory).html("<a href='#category?navcat=" + currentCategory + "' class='bindByAnchor' title=''>Boat</a>");
+    $(headingProductCategory).html(headingProductCategoryPretty);
+    break;
+  case navcatCable:
+    $(headingProductName).addClass(categoryCable);
+    $(headingProductCategory).html(headingProductCategoryPretty);
+    break;
+  case navcatFarm:
+    $(headingProductName).addClass(categoryFarm);
+    $(headingProductCategory).html(headingProductCategoryPretty);
+    break;
+  case navcatPocket:
+    $(headingProductName).addClass(categoryPocket);
+    $(headingProductCategory).html(headingProductCategoryPretty);
+    break;
+  case navcatPromo:
+    $(headingProductName).addClass(categoryPromo);
+    $(headingProductCategory).html(headingProductCategoryPretty);
+    break;
+  case navcatSos:
+    $(headingProductName).addClass(categorySos);
+    $(headingProductCategory).html(headingProductCategoryPretty);
+    break;
+  }
+
+  // alert(currentCategory);
   // TODO: find better way to find product category
-  $(breadcrumb).addClass(lastBreadcrumbClass);
+  // $(headingsCategory).addClass(lastBreadcrumbClass);
   // resetAllMenuProducts();
   // TODO: add product's category bg and logo
   // TODO: show category's product list in menu
   // BUG: when cat skipped, breadcrumb missing
+}]);
+
+app.rq.push(['templateFunction','productTemplate','onDeparts',function(P) {
+  currentCategory = '';
 }]);
 
 ///// end custom \\\\\

@@ -39,7 +39,8 @@ $color_search_text: #555;
 $color_home_h2: #8e8e8e;
 $color_home_text: #a6a6a6;
 
-$color_breadcrumb_home: #313131;
+$color_cat_home: #313131;
+$color_headingsCat_a_hover: #444;
 
 $color_page_bg: $color_menu_product_bg;
 $color_page_border: #404040;
@@ -394,6 +395,9 @@ header {
 
 .socialBox {
   margin-left: 5px;
+  // a:hover {
+  //   background:yellow;
+  // }
 }
 
 .socialIcon {
@@ -820,84 +824,98 @@ background: #ea5051;
 
 /* Category & Product */
 
-.breadcrumb {
-  // homepage
-  color: $color_breadcrumb_home;
-  font-size: 1.3em; 
-  margin-bottom: 12px;
-  // display: inline-block;
-  list-style: none;
+.headings {
+  margin: 0;
+  padding: 0;
   text-align: right;
-  // float: right;
+  h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.8em;
+    line-height: 1.1em;
+  }
+  h1 { // Category name (categoryTemplate) or Product name (productTemplate)
+    font-size: 3em;
+    display: inline-block;
+    // color: inherit;
+  }
+  h2 { // homepage link
+    margin-right: 0.1em;
+    display: inline-block;
+    // font-size: 1.8em;
+    color: $color_cat_home;
+    a {
+      &:link {
+        color: $color_cat_home;
+      }
+      &:hover {
+        color: $color_headingsCat_a_hover;
+      }
+      &:visited {
+        color: $color_cat_home;
+      }
+      &:active {
+        color: $color_headingsCat_a_hover;
+      }
+    }
+  }
+  h3 { // category name (productTemplate)
+    // font-size: 1.8em;
+    color: $color_cat_home;
+  }
   a {
     &:link {
       text-decoration: none;
     }
   }
-  li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    // float: left;
-    display: inline-block;
-    // vertical-align: bottom;
-    // margin:0;
-    // padding:0;
-    // padding-right: 10px;
-    // cursor: pointer;
-    &:after {
-      margin: 0 0.2em 0 0;
-      padding: 0;
-      content:":"; 
-      font-size: 1em;
-      font-weight: normal; 
-      color: $color_breadcrumb_home;
-    }
-    &:last-child:after {
-      content:"";
-    }
-    &:last-child a {
-      color: inherit; // to remove qs_styles
-      font-size: 2em;
-      text-decoration:none;
-      font-weight: normal;
-      cursor:text;
-    }
+}
+
+.headingProductNavcat {
+  display: none;
+}
+
+.headingsProduct {
+  h1 { // product name
+    text-transform: uppercase;
   }
 }
 
-.productTemplateContent {
-  .breadcrumb {
-    a:hover {
-      color: #333;
-    }
-    li:last-child a {
-      cursor: pointer;
-    }
-  }
+// .productTemplateContent {
+//   .breadcrumb {
+//     a:hover {
+//       color: #333;
+//     }
+//     li:last-child a {
+//       cursor: pointer;
+//     }
+//   }
+// }
+
+.categoryDefault {
+  color: $color_cat_home;
 }
 
-.breadcrumbCatBoat {
+.categoryBoat {
   color: $color_cat_boat;
 }
 
-.breadcrumbCatCable {
+.categoryCable {
   color: $color_cat_cable;
 }
 
-.breadcrumbCatFarm {
+.categoryFarm {
   color: $color_cat_farm;
 }
 
-.breadcrumbCatPocket {
+.categoryPocket {
   color: $color_cat_pocket;
 }
 
-.breadcrumbCatPromo {
+.categoryPromo {
   color: $color_cat_promo;
 }
 
-.breadcrumbCatSos {
+.categorySos {
   color: $color_cat_sos;
 }
 
