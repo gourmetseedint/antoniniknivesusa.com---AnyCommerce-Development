@@ -94,17 +94,18 @@ var menuProductsPromo  = '#tier1categories_promo__customizing ul';
 var menuProductsSos    = '#tier1categories_sos__rescue ul';
 
 var headingCategory = '.headingsCategory h1';
-var categoryBoat     = 'categoryBoat';
-var categoryCable    = 'categoryCable';
-var categoryFarm     = 'categoryFarm';
-var categoryPocket   = 'categoryPocket';
-var categoryPromo    = 'categoryPromo';
-var categorySos      = 'categorySos';
+var categoryBoat    = 'categoryBoat';
+var categoryCable   = 'categoryCable';
+var categoryFarm    = 'categoryFarm';
+var categoryPocket  = 'categoryPocket';
+var categoryPromo   = 'categoryPromo';
+var categorySos     = 'categorySos';
 
 var headingProductNavcat         = '.headingProductNavcat';
 var headingProductName           = '.headingsProduct h1';
 var headingProductCategory       = '.headingsProduct h3';
 var headingProductCategoryPretty = 'Temp Pretty';
+var productID                    = '.productID';
 var currentCategory;
 
 // var lastBreadcrumbClass;
@@ -238,8 +239,10 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryBoat);
       $(menuProductsBoat).removeClass('displayNone');
       $(headingProductName).addClass(categoryBoat);
+      $(productID).addClass(categoryBoat);
       // $(headingProductCategory).html("<a href='#category?navcat=" + currentCategory + "' class='bindByAnchor' title=''>Boat</a>");
       $(headingProductCategory).html(headingProductCategoryPretty);
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + navcatBoat + "\"});'>Category Pretty</a>");
       break;
     case navcatCable:
       // Cable
@@ -251,6 +254,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryCable);
       $(menuProductsCable).removeClass('displayNone');
       $(headingProductName).addClass(categoryCable);
+      $(productID).addClass(categoryCable);
       $(headingProductCategory).html(headingProductCategoryPretty);
       break;
     case navcatFarm:
@@ -263,6 +267,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryFarm);
       $(menuProductsFarm).removeClass('displayNone');
       $(headingProductName).addClass(categoryFarm);
+      $(productID).addClass(categoryFarm);
       $(headingProductCategory).html(headingProductCategoryPretty);
       break;
     case navcatPocket:
@@ -275,6 +280,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryPocket);
       $(menuProductsPocket).removeClass('displayNone');
       $(headingProductName).addClass(categoryPocket);
+      $(productID).addClass(categoryPocket);
       $(headingProductCategory).html(headingProductCategoryPretty);
       break;
     case navcatPromo:
@@ -287,6 +293,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryPromo);
       $(menuProductsPromo).removeClass('displayNone');
       $(headingProductName).addClass(categoryPromo);
+      $(productID).addClass(categoryPromo);
       $(headingProductCategory).html(headingProductCategoryPretty);
       break;
     case navcatSos:
@@ -299,6 +306,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategorySos);
       $(menuProductsSos).removeClass('displayNone');
       $(headingProductName).addClass(categorySos);
+      $(productID).addClass(categorySos);
       $(headingProductCategory).html(headingProductCategoryPretty);
       break;
   }

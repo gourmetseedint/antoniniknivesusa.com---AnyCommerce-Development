@@ -40,7 +40,10 @@ $color_home_h2: #8e8e8e;
 $color_home_text: #a6a6a6;
 
 $color_cat_home: #313131;
-$color_headingsCat_a_hover: #444;
+$color_headingsCat_a_hover: lighten($color_cat_home, 20%);
+
+$color_breadcrumb: $color_cat_home;
+$color_breadcrumb_hover: lighten($color_breadcrumb, 20%);
 
 $color_page_bg: $color_menu_product_bg;
 $color_page_border: #404040;
@@ -53,6 +56,9 @@ $color_cat_farm: #1b962b;
 $color_cat_pocket: #7d3f0c;
 $color_cat_promo: #ff00fe;
 $color_cat_sos: #e3001b;
+
+// product
+$color_product_specs_border: #cdcccc;
 
 
 /* Blue Collar Depot - CSS */
@@ -822,6 +828,74 @@ background: #ea5051;
   }
 }
 
+/* Breadcrumb */
+
+.breadcrumbContainer {
+  text-align: right;
+}
+
+$breadcrumb_margin: 0.2em;
+// $color_breadcrumb: blue;
+
+.breadcrumb {
+  text-transform: lowercase;
+  display: inline-block;
+  li {
+    margin: 0;
+    margin-right: $breadcrumb_margin;
+    padding: 0;
+    font-size: 1.2em;
+    color: $color_breadcrumb;
+    // float: left;
+    // float: right;{float:left; margin:12px; padding:0; display:inline-block;}
+    &:after {
+      margin: 0;
+      margin-left: 2 * $breadcrumb_margin;
+      padding: 0;
+      color: $color_breadcrumb;
+      font-size: 1em;
+      font-weight: normal;
+      content: '/';
+      float: right;
+    }
+    a {
+      &:link {
+        color: $color_breadcrumb;
+        text-decoration: none;
+      }
+      &:hover {
+        color: $color_breadcrumb_hover;
+      }
+      &:visited {
+        color: $color_breadcrumb;
+      }
+      &:active {
+        color: $color_breadcrumb_hover;
+      }
+    }
+    &:last-child {
+      margin-right: 0;
+      a {
+        &:link { 
+          font-weight: normal;
+        }
+        &:hover {
+          color: $color_breadcrumb;
+        }
+      }
+    }
+  }
+}
+
+.breadcrumbProduct {
+  li:last-child a {
+    cursor: pointer;
+    &:hover {
+      color: $color_breadcrumb_hover;
+    }
+  }
+}
+
 /* Category & Product */
 
 .headings {
@@ -844,20 +918,6 @@ background: #ea5051;
     display: inline-block;
     // font-size: 1.8em;
     color: $color_cat_home;
-    a {
-      &:link {
-        color: $color_cat_home;
-      }
-      &:hover {
-        color: $color_headingsCat_a_hover;
-      }
-      &:visited {
-        color: $color_cat_home;
-      }
-      &:active {
-        color: $color_headingsCat_a_hover;
-      }
-    }
   }
   h3 { // category name (productTemplate)
     // font-size: 1.8em;
@@ -866,6 +926,20 @@ background: #ea5051;
   a {
     &:link {
       text-decoration: none;
+    }
+  }
+  a {
+    &:link {
+      color: $color_cat_home;
+    }
+    &:hover {
+      color: $color_headingsCat_a_hover;
+    }
+    &:visited {
+      color: $color_cat_home;
+    }
+    &:active {
+      color: $color_headingsCat_a_hover;
     }
   }
 }
@@ -879,17 +953,6 @@ background: #ea5051;
     text-transform: uppercase;
   }
 }
-
-// .productTemplateContent {
-//   .breadcrumb {
-//     a:hover {
-//       color: #333;
-//     }
-//     li:last-child a {
-//       cursor: pointer;
-//     }
-//   }
-// }
 
 .categoryDefault {
   color: $color_cat_home;
@@ -965,6 +1028,63 @@ $width_viewProduct_icon: 1.5em;
       background-position: 1em center;
       // color: #6b6b6b;
     }
+  }
+}
+
+/* Product */
+
+.productSpecsContainer {
+  margin: 8px 0;
+  padding: 8px 0;
+  border: 1px solid $color_product_specs_border;
+  border-right-width: 0;
+  border-left-width: 0;
+}
+
+.productID {
+  font-size: 2.2em;
+}
+
+$productSpecs_margin: 1.8em;
+.productSpecs {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: 1.6em;
+  ul, li {
+    list-style: none;
+  }
+  li {
+    margin: 0;
+    margin-right: $productSpecs_margin;
+    padding: 0;
+    float: left;
+    &:after {
+      content: "|";
+      margin-left: $productSpecs_margin;
+    }
+    &:last-child {
+      &:after {
+        content: "";
+        margin-left: 0;
+      }
+    }
+  }
+  .pretext {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
+
+.productWeight {
+  &:after {
+    content: ' gr';// BUG: after content getting overwritten by |
+  }
+}
+
+.productLength {
+  &:after {
+    content: ' mm';// BUG: after content getting overwritten by |
   }
 }
 
