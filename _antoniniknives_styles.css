@@ -1,5 +1,4 @@
-/* # Project Styles */
-/* Blue Collar Depot - CSS */
+/* Project Styles */
 /* universal */
 aside,
 details,
@@ -123,6 +122,16 @@ a:active {
   color: blue; }
 
 /* General */
+.clearfixScss, .productSpecsContainer, .productSpecsMiddle {
+  clear: both; }
+
+.clearfixScss:after, .productSpecsContainer:after, .productSpecsMiddle:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; }
+
 .container {
   width: 1120px;
   /* TODO: Find correct width */
@@ -130,6 +139,19 @@ a:active {
   position: relative; }
   .container table {
     margin: 0 auto; }
+
+.button {
+  margin: 0;
+  padding: 0.4em 2.9em;
+  background: #b8b8b8;
+  color: white;
+  font-size: 1.4em;
+  font-weight: bold;
+  border-radius: 0.1em;
+  border: 0; }
+  .button:hover {
+    background: #858585;
+    color: #cccccc; }
 
 /*.shadowBottomOuter {
   -webkit-box-shadow: 0 3px 3px 2px #999;
@@ -179,45 +201,41 @@ header {
 /* Navigation */
 /* Top navigation */
 .navTop {
-  margin: 0;
-  padding: 0;
   position: absolute;
   top: 0;
   right: 50px;
   z-index: 55;
-  color: #222222;
-  /*display: block;*/
-  /*background-color: black;*/
-  /*TODO: maybe add width/height instead of let elements make dims;*/
-  display: inline-block; }
+  color: #222222; }
   .navTop div {
-    padding: 0 7px;
+    padding: 0 0.8em;
     background: #cdcccc;
     display: inline-block; }
-  .navTop ul, .navTop li {
-    list-style: none; }
   .navTop ul {
     margin: 0;
     padding: 0;
+    list-style: none;
+    display: inline; }
+    .navTop ul li {
+      list-style: none;
+      margin: 0;
+      margin-right: 1.1em;
+      padding: 0;
+      float: left; }
+      .navTop ul li:after {
+        margin: 0;
+        padding: 0;
+        margin-left: 1.1em;
+        content: "/"; }
+      .navTop ul li:last-child {
+        margin-right: 0; }
+        .navTop ul li:last-child:after {
+          content: "";
+          margin-left: 0; }
+  .navTop li a {
+    padding: 1em 0.8em;
+    font-size: 1.2em;
+    line-height: 1em;
     display: inline-block; }
-  .navTop li {
-    /* BUG: space inbetween li's because newlines turned into whitespace */
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    /*background-color: blue;*/
-    color: black; }
-    .navTop li a {
-      padding: 1em 0.8em;
-      font-size: 1.1em;
-      line-height: 1em;
-      display: inline-block; }
-    .navTop li:after {
-      margin: 0 1em 0 1.1em;
-      content: '/';
-      color: #222222; }
-    .navTop li:last-child:after {
-      content: ""; }
   .navTop a:link {
     /*TODO: edit colors*/
     color: black;
@@ -238,12 +256,15 @@ header {
   background: url("images/nav_top_bg_left.png") no-repeat scroll right bottom;
   background-size: contain;
   width: 30px;
-  height: 3.3em;
+  height: 3.6em;
   vertical-align: bottom;
   float: left; }
 
 .socialBox {
-  margin-left: 5px; }
+  margin-left: 5px;
+  display: inline-block; }
+  .socialBox a {
+    display: inline-block; }
 
 .socialIcon {
   margin: 0;
@@ -251,6 +272,7 @@ header {
   height: 28px;
   vertical-align: middle;
   display: inline-block;
+  margin-top: 5px;
   /*z-index: 10;*/ }
 
 .socialIconFacebook {
@@ -554,22 +576,33 @@ footer {
 
 .breadcrumb {
   text-transform: lowercase;
-  display: inline-block; }
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style: none; }
   .breadcrumb li {
+    list-style: none;
     margin: 0;
     margin-right: 0.2em;
     padding: 0;
-    font-size: 1.2em;
-    color: #313131; }
+    float: left; }
     .breadcrumb li:after {
       margin: 0;
-      margin-left: 0.4em;
       padding: 0;
+      margin-left: 0.2em;
+      content: "/"; }
+    .breadcrumb li:last-child {
+      margin-right: 0; }
+      .breadcrumb li:last-child:after {
+        content: "";
+        margin-left: 0; }
+  .breadcrumb li {
+    font-size: 1.1em;
+    color: #313131; }
+    .breadcrumb li:after {
       color: #313131;
       font-size: 1em;
-      font-weight: normal;
-      content: '/';
-      float: right; }
+      font-weight: normal; }
     .breadcrumb li a:link {
       color: #313131;
       text-decoration: none; }
@@ -579,12 +612,10 @@ footer {
       color: #313131; }
     .breadcrumb li a:active {
       color: #646464; }
-    .breadcrumb li:last-child {
-      margin-right: 0; }
-      .breadcrumb li:last-child a:link {
-        font-weight: normal; }
-      .breadcrumb li:last-child a:hover {
-        color: #313131; }
+    .breadcrumb li:last-child a:link {
+      font-weight: normal; }
+    .breadcrumb li:last-child a:hover {
+      color: #313131; }
 
 .breadcrumbProduct li:last-child a {
   cursor: pointer; }
@@ -602,8 +633,9 @@ footer {
     font-size: 1.8em;
     line-height: 1.1em; }
   .headings h1 {
-    font-size: 3em;
-    display: inline-block; }
+    font-size: 3.2em;
+    display: inline-block;
+    line-height: 1.3em; }
   .headings h2 {
     margin-right: 0.1em;
     display: inline-block;
@@ -687,31 +719,95 @@ footer {
   border: 1px solid #cdcccc;
   border-right-width: 0;
   border-left-width: 0; }
+  .productSpecsContainer .breadcrumb {
+    float: right; }
 
-.productID {
-  font-size: 2.2em; }
+.productSpecsMiddle {
+  text-align: right;
+  vertical-align: baseline; }
 
-.productSpecs {
+.productSpecsBottom {
+  text-align: right;
+  display: block; }
+  .productSpecsBottom div {
+    margin-top: 1.2em; }
+  .productSpecsBottom span {
+    font-size: 1.2em; }
+  .productSpecsBottom ul {
+    display: inline-block;
+    font-size: 1.3em;
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .productSpecsBottom ul li {
+      list-style: none;
+      margin: 0;
+      margin-right: 0.8em;
+      padding: 0;
+      float: left; }
+      .productSpecsBottom ul li:after {
+        margin: 0;
+        padding: 0;
+        margin-left: 0.8em;
+        content: "|"; }
+      .productSpecsBottom ul li:last-child {
+        margin-right: 0; }
+        .productSpecsBottom ul li:last-child:after {
+          content: "";
+          margin-left: 0; }
+  .productSpecsBottom a:link {
+    text-decoration: none;
+    color: #313131; }
+  .productSpecsBottom a:hover {
+    color: #646464; }
+  .productSpecsBottom a:visited {
+    color: #313131; }
+  .productSpecsBottom a:active {
+    color: #646464; }
+
+.productSpecsList {
   margin: 0;
   padding: 0;
   display: inline-block;
-  font-size: 1.6em; }
-  .productSpecs ul, .productSpecs li {
-    list-style: none; }
-  .productSpecs li {
+  font-size: 1.6em;
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .productSpecsList li {
+    list-style: none;
     margin: 0;
     margin-right: 1.8em;
     padding: 0;
     float: left; }
-    .productSpecs li:after {
-      content: "|";
-      margin-left: 1.8em; }
-    .productSpecs li:last-child:after {
-      content: "";
-      margin-left: 0; }
-  .productSpecs .pretext {
+    .productSpecsList li:after {
+      margin: 0;
+      padding: 0;
+      margin-left: 1.8em;
+      content: "|"; }
+    .productSpecsList li:last-child {
+      margin-right: 0; }
+      .productSpecsList li:last-child:after {
+        content: "";
+        margin-left: 0; }
+  .productSpecsList .pretext {
     text-transform: uppercase;
     font-weight: bold; }
+
+.productID {
+  font-size: 2.2em;
+  margin: 0 0 0.5em;
+  padding: 0;
+  font-weight: bold;
+  display: inline-block; }
+
+.productPrice {
+  font-size: 3em;
+  margin: 0 0 0.2em;
+  padding: 0;
+  font-weight: normal;
+  line-height: 1em;
+  display: inline-block; }
 
 .productWeight:after {
   content: ' gr'; }
