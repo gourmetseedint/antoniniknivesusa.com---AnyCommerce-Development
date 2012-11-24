@@ -11,7 +11,11 @@ $width_content: $width_page - ($width_menu + $width_menu_left_margin + $width_me
 $width_search_form: $width_menu - ($width_menu_padding);
 
 $height_header: 374px;
-$height_header_home: 492px;
+$height_header_home: 497px;
+
+$height_productPrice: 3em;
+$height_productID: 2.2em;
+$height_productSpecsList_top: $height_productPrice - $height_productID;
 
 // colors
 
@@ -32,11 +36,16 @@ $color_button_text_hover: darken($color_button_text, 20%);
 $color_navTop_bg: #cdcccc;
 $color_navTop_text: #222;
 $color_navTop_a: black;
-$color_navTop_a_hover: blue;
+$color_navTop_a_hover: lighten($color_navTop_a, 20%);
+$color_navTop_bg_hover: lighten($color_navTop_bg, 10%);
 
 $color_menu_bg: #101010;
 $color_menu_text: white;
 $color_menu_product_bg: #565555;
+$color_navMenuCategoryHover_text: black;
+$color_navMenuCategoryHover_bg: lighten($color_menu_product_bg, 20%);
+$color_navMenuProductHover_text: darken($color_menu_text, 20%);
+$color_navMenuProductHover_bg: darken($color_menu_product_bg, 20%);
 // $color_menu_a: white;
 // $color_menu_a_hover: #999;
 
@@ -50,12 +59,17 @@ $color_headingsCat_a_hover: lighten($color_cat_home, 20%);
 $color_breadcrumb: $color_cat_home;
 $color_breadcrumb_hover: lighten($color_breadcrumb, 20%);
 
+$color_productList_text: #6b6b6b;
+$color_productList_hover: darken($color_productList_text, 20%);
+
 $color_productSpecs_text: #313131;
 $color_productSpecs_a: $color_productSpecs_text;
 $color_productSpecs_a_hover: lighten($color_productSpecs_a, 20%);
 $color_product_text: #454545;
-$color_product_extras_h: $color_productSpecs_text;
-$color_product_extras_text: #77787b;
+$color_productExtras_h: $color_productSpecs_text;
+$color_productExtras_text: #77787b;
+$color_productExtras_list_border_sides: #cbcbcb;
+$color_productExtras_list_border_top: #8f8f8f;
 
 $color_page_bg: $color_menu_product_bg;
 $color_page_border: #404040;
@@ -73,6 +87,13 @@ $color_cat_sos: #e3001b;
 $color_product_specs_border: #cdcccc;
 
 // mixins
+
+@mixin box_sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 @mixin flat_list_with_divider($spacing: 0.5em, $divider: "|") {
   margin: 0;
@@ -100,6 +121,31 @@ $color_product_specs_border: #cdcccc;
       }
     }
   }
+}
+
+@mixin flat_list_with_border($border: 1px solid gray, $spacing: 1em) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    list-style: none;
+    margin: 0;
+    margin-right: $spacing;
+    // margin-right: $spacing;
+    padding: 0;
+    float: left;
+    border-right: $border;
+    &:last-child {
+      border-width: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+@mixin opacity($percent: 50) {
+  zoom: 1;
+  filter: alpha(opacity = $percent);
+  opacity: $percent / 100;
 }
 
 /* universal */
@@ -139,6 +185,11 @@ img {
   vertical-align: middle;
   border: 0;
   -ms-interpolation-mode: bicubic;
+}
+
+ul, li { // clear qs_styles
+  margin: 0;
+  padding: 0;
 }
 
 /* typography */
@@ -224,6 +275,7 @@ ol {
 li {
   margin: 0 0 0.1em 0;
   padding: 0 0 0.1em 0;
+  // font-size: 1.2em;
   /*line-height: 1.3em;*/
 }
 
@@ -257,7 +309,10 @@ a {
 
 /* General */
 
-.clearfixScss {clear:both;}
+.clearfixScss {
+  clear:both;
+  overflow: hidden;
+}
 .clearfixScss:after {
   content: ".";
   display: block;
@@ -274,7 +329,6 @@ a {
     margin: 0 auto;
   }
   @extend .clearfixScss;
-  overflow: hidden;
 }
 
 .button {
@@ -355,7 +409,6 @@ a {
 
 header {
   height: $height_header;
-  // background: url("images/banner_bg_product.png") no-repeat; // TODO: change per category
 }
 
 .bannerHome {
@@ -430,7 +483,6 @@ $height_navTop_corner: (3 * $height_navTop_font); // since padding is 1em
   color: $color_navTop_text;
   // /*display: block;*/
   // /*background-color: black;*/
-  // /*TODO: maybe add width/height instead of let elements make dims;*/
   // display: inline-block;
   // // background: blue url('images/nav_top_bg_left.png') no-repeat;
   // // vertical-align: center;
@@ -454,7 +506,6 @@ $height_navTop_corner: (3 * $height_navTop_font); // since padding is 1em
     display: inline;
   }
   li  {
-  //   /* BUG: space inbetween li's because newlines turned into whitespace */
   //   // float: left;
   //   margin: 0;
   //   padding: 0;
@@ -479,7 +530,7 @@ $height_navTop_corner: (3 * $height_navTop_font); // since padding is 1em
   }
   a {
     &:link {
-      /*TODO: edit colors*/
+      /*TODO: navtop: edit colors*/
       color: $color_navTop_a;
       text-decoration: none;
     }
@@ -490,6 +541,7 @@ $height_navTop_corner: (3 * $height_navTop_font); // since padding is 1em
     &:hover {
       color: $color_navTop_a_hover;
       text-decoration: none;
+      background: $color_navTop_bg_hover;
     }
     &:active {
       color: $color_navTop_a_hover;
@@ -516,8 +568,13 @@ $height_navTop_corner: (3 * $height_navTop_font); // since padding is 1em
 .socialBox {
   margin-left: 5px;
   display: inline-block;
+  position: relative;
   a {
+    height: $height_navTop_corner;
     display: inline-block;
+    // position: absolute;
+    // top: 5;
+    // left: 0;
   }
   // a:hover {
   //   background:yellow;
@@ -530,7 +587,7 @@ $height_navTop_corner: (3 * $height_navTop_font); // since padding is 1em
   margin: 0;
   width: 32px;
   height: 28px;
-  vertical-align: middle;
+  // vertical-align: middle;
   display: inline-block;
   margin-top: 5px;
   // margin: $height_socialIcon_padding 0;
@@ -586,7 +643,7 @@ $menuOffset: -35px;
     font-weight: bold;
   }
   ul, li {
-    list-style: disc inside url('images/bullet.png'); /*TODO: add diamond;*/
+    list-style: disc inside url('images/bullet.png');
     // display: block;
     margin: 0;
     padding: 0;
@@ -596,22 +653,7 @@ $menuOffset: -35px;
     div {
       display: inline-block;
     }
-    // a { // dnw with tier1categories
-    //   &:link {
-    //     text-decoration: none;
-    //   }
-    //   &:visited {
-    //     color: #333; /*TODO: get right colors*/
-    //     text-decoration: none;
-    //   }
-    //   &:hover {
-    //     color: #111; /*TODO: get right colors*/
-    //     text-decoration: none;
-    //   }
-    //   &:active {
-    //     text-decoration: none;
-    //   }
-    // }
+    // TODO: nav menu - add hover color to text
   }
   li {
     margin-bottom: 1em;
@@ -626,6 +668,7 @@ $menuOffset: -35px;
     ul { // product list
       // display: none;
       padding: 0.5em 0 0 1.1em;
+      color: $color_menu_text;
       li {
         margin: 0.1em 0;
         padding: 0.2em 0.5em;
@@ -633,15 +676,24 @@ $menuOffset: -35px;
         height: auto; // to clear qs_styles
         display: block;
         background: $color_menu_product_bg;
-        color: $color_menu_text;
         font-size: 1.1em;
         text-transform: none;
         .appMessage { // hide missing products TODO: find better way to hide errors/missing products
           display: none;
         }
+        &.navMenuProductHover {
+          color: $color_navMenuProductHover_text;
+          background: $color_navMenuProductHover_bg;
+        }
       }
     }
   }
+}
+
+.navMenuCategoryHover {
+  color: $color_navMenuCategoryHover_text;
+  background: $color_navMenuCategoryHover_bg;
+  // background: blue;
 }
 
 $logoCategoryOffset: -40px;
@@ -687,7 +739,6 @@ $logoCategoryOffset: -40px;
 $width_search_icon: 20px;
 $width_search_icon_margin: $width_search_icon + 5px;
 .productSearchForm {
-  // TODO: edit after adding form
   // margin-bottom: 20px;
   // width: 150px;
   // height: 20px;
@@ -781,7 +832,6 @@ $wholesalePadtop: 10px;
   display: inline-block;
   /*width: 200px;
   height: 150px;*/
-  /*background-color: gray;  TODO: add image bg; */
   /*float: left;*/
 }
 
@@ -816,7 +866,7 @@ footer {
   margin: 0 1.2em;
   padding: 0 1.2em;
   width: 12em;
-  height: 12em; /*TODO: maybe add something more fluid;*/
+  height: 12em; /*TODO: footer box - maybe add something more fluid;*/
   vertical-align: top;
   display: inline-block;
   background: #f0f0f0;
@@ -934,7 +984,7 @@ background: #ea5051;
 .logosCategoryHome {
   margin: 0;
   padding: 0;
-  // text-align: center;
+  text-align: center;
   ul {
     display: inline-block;
   }
@@ -1111,7 +1161,7 @@ $width_viewProduct_icon: 1.5em;
 .content {
   // TODO: keep images aligned bottom, but align names to top
   .productList {
-    color: #6b6b6b;
+    color: $color_productList_text;
     li {
       margin-bottom: 30px;
       width: 230px;
@@ -1127,7 +1177,6 @@ $width_viewProduct_icon: 1.5em;
       padding-left: $width_productList_bg * 1.8;
       font-size: 1.7em;
       font-weight: bold;
-      color: #6b6b6b;
       text-transform: uppercase;
       background: url('images/arrow_cat.png') no-repeat;
       background-size: $width_productList_bg;
@@ -1138,7 +1187,7 @@ $width_viewProduct_icon: 1.5em;
       //   margin-right: 5px;
       // }
     }
-    h6 { // price
+    h6 { // price (not used)
       font-size: 1.3em;
       font-weight: normal;
     }
@@ -1152,6 +1201,13 @@ $width_viewProduct_icon: 1.5em;
       background-position: 1em center;
       // color: #6b6b6b;
     }
+  }
+}
+
+.categoryProductHover {
+  color: $color_productList_hover;
+  img {
+    @include opacity(80);
   }
 }
 
@@ -1176,13 +1232,16 @@ $width_viewProduct_icon: 1.5em;
   // div {
   //   display: inline-block;
   // }
+  margin-bottom: 5px;
 }
 
 .productSpecsMiddle {
-  @extend .clearfixScss;
+  margin-bottom: 5px;
   text-align: right;
   // display: inline-block;
-  vertical-align: baseline;
+  // vertical-align: baseline;
+  // position: relative; // to make list align bottom
+  @extend .clearfixScss;
 }
 
 $productSpecsBottom_list_margin: 0.8em;
@@ -1219,12 +1278,16 @@ $productSpecsBottom_list_margin: 0.8em;
 
 $productSpecs_margin: 1.8em;
 .productSpecsList {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
+  // margin: 0;
+  // padding: 0;
+  @include flat_list_with_divider($productSpecs_margin);
+  margin-top: $height_productSpecsList_top;
+  // display: inline-block;
   font-size: 1.6em;
   float: left;
-  @include flat_list_with_divider($productSpecs_margin);
+  // position: absolute; // to align bottom with price
+  // bottom: 0;
+  // left: 0;
   .pretext {
     text-transform: uppercase;
     font-weight: bold;
@@ -1232,16 +1295,18 @@ $productSpecs_margin: 1.8em;
 }
 
 .productID {
-  font-size: 2.2em;
-  margin: 0 0 0.5em;
+  font-size: $height_productID;
+  line-height: 1em;
+  margin: 0;
   padding: 0;
   font-weight: bold;
   display: inline-block;
 }
 
 .productPrice { // TODO: get price to bottom align to list, float causes it to top align
-  font-size: 3em;
-  margin: 0 0 0.2em;
+  font-size: $height_productPrice;
+  line-height: 1em;
+  margin: 0;
   padding: 0;
   font-weight: normal;
   line-height: 1em;
@@ -1283,6 +1348,12 @@ $widith_product_details: $width_content - $width_product_image;
   height: 100%;
 }
 
+.prodThumbs {
+  div {
+    display: inline-block;
+  }
+}
+
 .productDetailsContainer {
   display: inline-block;
   vertical-align: top;
@@ -1321,11 +1392,44 @@ $widith_product_details: $width_content - $width_product_image;
   }
 }
 
+    $temp: 150px / 2;
 .productExtras {
-  color: $color_product_extras_text;
-  h5 {
-    color: $color_product_extras_h;
+  color: $color_productExtras_text;
+  // @extend .clearfixScss;
+  h4 { // List title
+    color: $color_productExtras_h;
     font-size: 1.4em;
     font-weight: normal;
+  }
+  h5 { // product name
+    font-weight: normal;
+  }
+  img { // probably temp
+    width: 150px;
+    height: 150px;
+  }
+  .arrow {
+    margin: auto;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: $temp;
+    // left: 0;
+  }
+  ul {
+    padding: 10px 0;
+    border: 1px solid $color_productExtras_list_border_sides;
+    border-left-width: 0;
+    border-right-width: 0;
+    // text-align: center;
+    position: relative;
+    // display: inline-block;
+    // @include box-sizing;
+    @extend .clearfixScss;
+  }
+  @include flat_list_with_border(1px dotted $color_productExtras_list_border_top, 1em);
+  li {
+    // margin: 0 10px;
+    text-align: center;
   }
 }

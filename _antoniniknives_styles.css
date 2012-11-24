@@ -31,6 +31,10 @@ img {
   border: 0;
   -ms-interpolation-mode: bicubic; }
 
+ul, li {
+  margin: 0;
+  padding: 0; }
+
 /* typography */
 html {
   font-size: 16px;
@@ -119,10 +123,11 @@ a:active {
   color: blue; }
 
 /* General */
-.clearfixScss, .container, .productSpecsContainer, .productSpecsMiddle {
-  clear: both; }
+.clearfixScss, .container, .productSpecsContainer, .productSpecsMiddle, .productExtras ul {
+  clear: both;
+  overflow: hidden; }
 
-.clearfixScss:after, .container:after, .productSpecsContainer:after, .productSpecsMiddle:after {
+.clearfixScss:after, .container:after, .productSpecsContainer:after, .productSpecsMiddle:after, .productExtras ul:after {
   content: ".";
   display: block;
   height: 0;
@@ -133,8 +138,7 @@ a:active {
   width: 1120px;
   /* TODO: Find correct width */
   margin: 0 auto;
-  position: relative;
-  overflow: hidden; }
+  position: relative; }
   .container table {
     margin: 0 auto; }
 
@@ -186,7 +190,7 @@ header {
 
 .bannerHome {
   background: url("images/banner_bg_home.png") no-repeat;
-  height: 492px; }
+  height: 497px; }
 
 .bannerCategoryDefault {
   /* used when on product template and category skipped */
@@ -253,17 +257,18 @@ header {
     line-height: 1em;
     display: inline-block; }
   .navTop a:link {
-    /*TODO: edit colors*/
+    /*TODO: navtop: edit colors*/
     color: black;
     text-decoration: none; }
   .navTop a:visited {
     color: black;
     text-decoration: none; }
   .navTop a:hover {
-    color: blue;
-    text-decoration: none; }
+    color: #333333;
+    text-decoration: none;
+    background: #e6e6e6; }
   .navTop a:active {
-    color: blue;
+    color: #333333;
     text-decoration: none; }
 
 .navTopLeft {
@@ -278,15 +283,16 @@ header {
 
 .socialBox {
   margin-left: 5px;
-  display: inline-block; }
+  display: inline-block;
+  position: relative; }
   .socialBox a {
+    height: 3.6em;
     display: inline-block; }
 
 .socialIcon {
   margin: 0;
   width: 32px;
   height: 28px;
-  vertical-align: middle;
   display: inline-block;
   margin-top: 5px;
   /*z-index: 10;*/ }
@@ -326,7 +332,6 @@ header {
     font-weight: bold; }
   .navMenu ul, .navMenu li {
     list-style: disc inside url("images/bullet.png");
-    /*TODO: add diamond;*/
     margin: 0;
     padding: 0; }
   .navMenu ul div {
@@ -339,18 +344,25 @@ header {
   .navMenu ul li ul, .navMenu ul li li {
     list-style: none; }
   .navMenu ul li ul {
-    padding: 0.5em 0 0 1.1em; }
+    padding: 0.5em 0 0 1.1em;
+    color: white; }
     .navMenu ul li ul li {
       margin: 0.1em 0;
       padding: 0.2em 0.5em;
       height: auto;
       display: block;
       background: #565555;
-      color: white;
       font-size: 1.1em;
       text-transform: none; }
       .navMenu ul li ul li .appMessage {
         display: none; }
+      .navMenu ul li ul li.navMenuProductHover {
+        color: #cccccc;
+        background: #232222; }
+
+.navMenuCategoryHover {
+  color: black;
+  background: #898888; }
 
 #logoCategory {
   width: 123px;
@@ -443,7 +455,6 @@ header {
   display: inline-block;
   /*width: 200px;
   height: 150px;*/
-  /*background-color: gray;  TODO: add image bg; */
   /*float: left;*/ }
 
 /*.logoTop a {
@@ -471,7 +482,7 @@ footer {
   padding: 0 1.2em;
   width: 12em;
   height: 12em;
-  /*TODO: maybe add something more fluid;*/
+  /*TODO: footer box - maybe add something more fluid;*/
   vertical-align: top;
   display: inline-block;
   background: #f0f0f0;
@@ -574,7 +585,8 @@ footer {
 
 .logosCategoryHome {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  text-align: center; }
   .logosCategoryHome ul {
     display: inline-block; }
   .logosCategoryHome li {
@@ -711,7 +723,6 @@ footer {
     padding-left: 1.08em;
     font-size: 1.7em;
     font-weight: bold;
-    color: #6b6b6b;
     text-transform: uppercase;
     background: url("images/arrow_cat.png") no-repeat;
     background-size: 0.6em;
@@ -728,6 +739,13 @@ footer {
     background-size: 1.5em;
     background-position: 1em center; }
 
+.categoryProductHover {
+  color: #383838; }
+  .categoryProductHover img {
+    zoom: 1;
+    filter: alpha(opacity=80);
+    opacity: 0.8; }
+
 /* Product */
 .productSpecsContainer {
   margin: 8px 0;
@@ -739,9 +757,12 @@ footer {
   .productSpecsContainer .breadcrumb {
     float: right; }
 
+.productSpecsTop {
+  margin-bottom: 5px; }
+
 .productSpecsMiddle {
-  text-align: right;
-  vertical-align: baseline; }
+  margin-bottom: 5px;
+  text-align: right; }
 
 .productSpecsBottom {
   text-align: right;
@@ -785,12 +806,10 @@ footer {
 .productSpecsList {
   margin: 0;
   padding: 0;
-  display: inline-block;
+  list-style: none;
+  margin-top: 0.8em;
   font-size: 1.6em;
-  float: left;
-  margin: 0;
-  padding: 0;
-  list-style: none; }
+  float: left; }
   .productSpecsList li {
     list-style: none;
     margin: 0;
@@ -813,14 +832,16 @@ footer {
 
 .productID {
   font-size: 2.2em;
-  margin: 0 0 0.5em;
+  line-height: 1em;
+  margin: 0;
   padding: 0;
   font-weight: bold;
   display: inline-block; }
 
 .productPrice {
   font-size: 3em;
-  margin: 0 0 0.2em;
+  line-height: 1em;
+  margin: 0;
   padding: 0;
   font-weight: normal;
   line-height: 1em;
@@ -845,6 +866,9 @@ footer {
   vertical-align: top;
   width: 340px;
   height: 100%; }
+
+.prodThumbs div {
+  display: inline-block; }
 
 .productDetailsContainer {
   display: inline-block;
@@ -876,8 +900,40 @@ footer {
   font-size: 1.2em; }
 
 .productExtras {
-  color: #77787b; }
-  .productExtras h5 {
+  color: #77787b;
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .productExtras h4 {
     color: #313131;
     font-size: 1.4em;
     font-weight: normal; }
+  .productExtras h5 {
+    font-weight: normal; }
+  .productExtras img {
+    width: 150px;
+    height: 150px; }
+  .productExtras .arrow {
+    margin: auto;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 75px; }
+  .productExtras ul {
+    padding: 10px 0;
+    border: 1px solid #cbcbcb;
+    border-left-width: 0;
+    border-right-width: 0;
+    position: relative; }
+  .productExtras li {
+    list-style: none;
+    margin: 0;
+    margin-right: 1em;
+    padding: 0;
+    float: left;
+    border-right: 1px dotted #8f8f8f; }
+    .productExtras li:last-child {
+      border-width: 0;
+      margin-right: 0; }
+  .productExtras li {
+    text-align: center; }

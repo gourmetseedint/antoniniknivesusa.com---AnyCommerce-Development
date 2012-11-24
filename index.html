@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<!-- TODO: when on a product, make breadcrumb category link color and underline -->
+<!-- BUG: breadcrumb li homepage has extra space -->
 <!-- BUG: sometimes bindBy links don't work after going through pages, seems more prevalent on production -->
 <!-- BUG: in production, menu links stop working after visiting a product -->
 <!-- TODO: change wholesale pretty form all caps to normal -->
@@ -23,7 +23,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121123172650",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121124003942",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -83,7 +83,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
   <div class='container'>
     <header id="header" class="bannerCategoryDefault">
       <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA" /></a></span>
-      <nav class='navTop'><!-- TODO: add cut out in bg -->
+      <nav class='navTop'>
         <span class='navTopLeft'></span>
         <div>
           <ul>
@@ -114,7 +114,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
             <input class="search" id='headerSearchSubmit' type="submit" value="" />
           </fieldset>
         </form>
-        <a href="#pageType?attribute=value" class='bindByAnchor' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a><!-- TODO: add real link -->
+        <a href="#pageType?attribute=value" class='bindByAnchor' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a><!-- TODO: pdf catalogs - add real link -->
       </nav>
       <div class='wholesaleInfo'>
         <a href="#category?navcat=.wholesale" class='bindByAnchor' title='Wholesale Info'>
@@ -127,7 +127,6 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
       <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
     </div>
-    <!-- <br class="clearfix" /> --><!-- BUG: clear not working in chrome -->
   </div>
   <div class='container'>
     <footer>
@@ -283,15 +282,13 @@ don't modify the 'data-templateid' unless you are changing template names and up
 <ul>
 <li id='categoryListTemplate'>
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
-    <!-- TODO: add cat logos to meta.CAT_THUMB -->
-    <!-- TODO: add hover text of category pretty name -->
     <div class='thumbContainer logoCategoryHome logoCategoryDefault'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div>
     <!-- <div class='catName white2LGray'><span data-bind='var: category(pretty); format:text;'></span></div> -->
   </div>
 </li>
 
 
-<li id='categoryListTemplateRootCats'>
+<li id='categoryListTemplateRootCats' onMouseOver="$(this).addClass('navMenuCategoryHover');" onMouseOut="$(this).removeClass('navMenuCategoryHover');">
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
     <!-- <div class='thumbContainer'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /></div> -->
     <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
@@ -312,7 +309,7 @@ remember to NOT put the button inside the 'onclick' container or two events will
 <!-- QUE: how to style pagination -->
 <!-- TODO: style pagination -->
 <!-- TODO: align h5 to top, but keep img aligned to bottom -->
-<li id='productListTemplate' class='loadingBG  ' onMouseOver="$('.quickView',$(this)).show();" onMouseOut="$('.quickView').hide();" >
+<li id='productListTemplate' class='loadingBG  ' onMouseOver="$('.quickView',$(this)).show();$(this).addClass('categoryProductHover');" onMouseOut="$('.quickView').hide();$(this).removeClass('categoryProductHover');" >
   
   <button class='floatRight pointer quickView displayNone' onClick="quickView('product',{'templateID':'productTemplateQuickView','pid':$(this).closest('[data-pid]').attr('data-pid')});">Quickview</button>
   
@@ -334,7 +331,7 @@ remember to NOT put the button inside the 'onclick' container or two events will
 </li>
 
 <!-- Product list with no images - used in categoryListTemplateRootCats -->
-<li id='productListNoImagesTemplate' class='loadingBG' >
+<li id='productListNoImagesTemplate' class='loadingBG' onMouseOver="$(this).addClass('navMenuProductHover');" onMouseOut="$(this).removeClass('navMenuProductHover');">
   <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
     <span data-bind='var: product(zoovy:prod_name); format:text;'></span>
   </div>
@@ -477,7 +474,7 @@ this will likely become more flexible in the future. ###
 
   <div class='productSpecsContainer'>
     <div class="productSpecsTop">
-      <h5 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h5><!-- QUE: Should I use zoovy:prod_mfgid instead?  Matches more of the designers intent ie. 647/CO instead of 647CO -->
+      <h4 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h4><!-- QUE: Should I use zoovy:prod_mfgid instead?  Matches more of the designers intent ie. 647/CO instead of 647CO -->
       <!-- <div class='breadcrumbContainer breadcrumbProduct'> -->
       <ul class='breadcrumb breadcrumbProduct' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
       <!-- </div> -->
@@ -489,7 +486,7 @@ this will likely become more flexible in the future. ###
         <li><!-- <span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;' class='productLength'></span> --><span class="productLength"><span class="pretext">Overall: </span>205</span></li>
         <li><!-- <span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;' class='productLength'></span> --><span class="productLength"><span class="pretext">Closed: </span>115</span></li>
       </ul>
-      <h5 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h5>
+      <h4 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h4>
     </div>
     <div class="productSpecsBottom">
       <!-- <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
@@ -534,15 +531,21 @@ this will likely become more flexible in the future. ###
       <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
     </div>
   </div>
+  <!-- TODO: product accessories and variants lists -->
   <div class="productExtras productAccessoriesContainer">
-    <h5>Accessories:</h5>
+    <h4>Accessories:</h4>
+    <ul class="prductList">
+      <li><img src="images/arrow_product_list_left.png" class="arrow"></li>
+      <li><div class="prodThumbContainer"><img src="images/product_list_sample.jpg" alt=""></div><h5>Product Name</h5></li>
+      <li><div class="prodThumbContainer"><img src="images/product_list_sample.jpg" alt=""></div><h5>Product Name</h5></li>
+      <li><div class="prodThumbContainer"><img src="images/product_list_sample.jpg" alt=""></div><h5>Product Name</h5></li>
+      <li><div class="prodThumbContainer"><img src="images/product_list_sample.jpg" alt=""></div><h5>Product Name</h5></li>
+      <li><img src="images/arrow_product_list_right.png" class="arrow"></li>
+    </ul>
     <!-- QUE: what is the accessories variable? -->
   </div>
-  <div class="productExtras">
-    <div class='prodlistRelatedContainer'>
-      <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h5>Variants</h5>; withReviews:1;"></ul>
-      <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: category(@products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h5>Variants</h5>; withReviews:1;"></ul>
-    </div>
+  <div class="productExtras productVariantsContainer">
+      <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h4>Variants</h4>; withReviews:1;"></ul>
     <!-- <h5>Variants:</h5>
     <ul title='Variants:' id='prodlistChildren' class='listStyleNone fluidList clearfix noPadOrMargin productList smallProdlist' data-bind="var: product(zoovy:grp_children); format:productList; extension:store_prodlist; loadsTemplate:productListTemplateChildren;hide_summary:true;"></ul>
     zoovy:related_products -->
