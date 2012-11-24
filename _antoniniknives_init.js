@@ -57,6 +57,7 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
 }]);
 
 // TODO: maybe add all backgrounds/logos then remove them while loading, so each cat loads faster
+// TODO: hide menu products when leaving category/product or entering company/customer/other cats
 
 ///// variables \\\\\
 var categoryBoat   = '.boat_-_fishing';
