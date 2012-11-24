@@ -59,12 +59,12 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
 // TODO: maybe add all backgrounds/logos then remove them while loading, so each cat loads faster
 
 ///// variables \\\\\
-var navcatBoat   = '.boat_-_fishing';
-var navcatCable  = '.cable_-_electrical';
-var navcatFarm   = '.farm_-_garden';
-var navcatPocket = '.pocket_-_traditional';
-var navcatPromo  = '.promo_-_customizing';
-var navcatSos    = '.sos_-_rescue';
+var categoryBoat   = '.boat_-_fishing';
+var categoryCable  = '.cable_-_electrical';
+var categoryFarm   = '.farm_-_garden';
+var categoryPocket = '.pocket_-_traditional';
+var categoryPromo  = '.promo_-_customizing';
+var categorySos    = '.sos_-_rescue';
 
 var banner                    = 'header';
 var classBannerHome           = 'bannerHome';
@@ -83,7 +83,7 @@ var classLogoCategoryPocket = 'logoCategoryPocket';
 var classLogoCategoryPromo  = 'logoCategoryPromo';
 var classLogoCategorySos    = 'logoCategorySos';
 
-var wholesaleInfo = '.wholesaleInfo';
+// var wholesaleInfo = '.wholesaleInfo';
 
 var menuProducts       = '.menuProductList';
 var menuProductsBoat   = '#tier1categories_boat__fishing ul';
@@ -94,17 +94,17 @@ var menuProductsPromo  = '#tier1categories_promo__customizing ul';
 var menuProductsSos    = '#tier1categories_sos__rescue ul';
 
 var headingCategory = '.headingsCategory h1';
-var categoryBoat    = 'categoryBoat';
-var categoryCable   = 'categoryCable';
-var categoryFarm    = 'categoryFarm';
-var categoryPocket  = 'categoryPocket';
-var categoryPromo   = 'categoryPromo';
-var categorySos     = 'categorySos';
+var categoryColorBoat    = 'categoryBoat';
+var categoryColorCable   = 'categoryCable';
+var categoryColorFarm    = 'categoryFarm';
+var categoryColorPocket  = 'categoryPocket';
+var categoryColorPromo   = 'categoryPromo';
+var categoryColorSos     = 'categorySos';
 
 var headingProductNavcat         = '.headingProductNavcat';
 // var headingProductName           = '.headingsProduct h1';
 var headingProductCategory       = '.headingsProduct h3';
-var headingProductCategoryPretty = 'Temp Pretty';
+var headingProductCategoryPretty = 'Temp Pretty'; // QUE: How should I get the pretty name from the navcat?  Can I use category(pretty)?
 var elementsWithCategoryColor    = '.categoryColor';
 var currentCategory;
 
@@ -126,9 +126,9 @@ function resetAllMenuProducts() {
   $(menuProducts).addClass('displayNone');
 }
 
-function resetCategoryHeading() {
-  $(headingCategory).removeClass();
-}
+// function resetCategoryHeading() {
+//   $(headingCategory).removeClass();
+// }
 
 // resetAllMenuProducts();
 
@@ -151,8 +151,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
   
   switch(P.navcat) {
-    case navcatBoat:
-      // Boat
+    case categoryBoat:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -160,10 +159,9 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryBoat);
       $(logoCategory).addClass(classLogoCategoryBoat);
       $(menuProductsBoat).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryBoat);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorBoat);
       break;
-    case navcatCable:
-      // Cable
+    case categoryCable:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -171,10 +169,9 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryCable);
       $(logoCategory).addClass(classLogoCategoryCable);
       $(menuProductsCable).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryCable);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorCable);
       break;
-    case navcatFarm:
-      // Farm
+    case categoryFarm:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -182,10 +179,9 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryFarm);
       $(logoCategory).addClass(classLogoCategoryFarm);
       $(menuProductsFarm).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryFarm);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorFarm);
       break;
-    case navcatPocket:
-      // Pocket
+    case categoryPocket:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -193,10 +189,9 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryPocket);
       $(logoCategory).addClass(classLogoCategoryPocket);
       $(menuProductsPocket).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryPocket);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPocket);
       break;
-    case navcatPromo:
-      // Promo
+    case categoryPromo:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -204,10 +199,9 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryPromo);
       $(logoCategory).addClass(classLogoCategoryPromo);
       $(menuProductsPromo).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryPromo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPromo);
       break;
-    case navcatSos:
-      // Sos
+    case categorySos:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -215,7 +209,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategorySos);
       $(logoCategory).addClass(classLogoCategorySos);
       $(menuProductsSos).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categorySos);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorSos);
       break;
   }
 }]);
@@ -229,8 +223,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // alert(currentCategory);
 
   switch(currentCategory) {
-    case navcatBoat:
-      // Boat
+    case categoryBoat:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -238,12 +231,11 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryBoat);
       $(logoCategory).addClass(classLogoCategoryBoat);
       $(menuProductsBoat).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryBoat);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorBoat);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + navcatBoat + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryBoat + "\"});'>" + headingProductCategoryPretty + "</a>");
       break;
-    case navcatCable:
-      // Cable
+    case categoryCable:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -251,12 +243,11 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryCable);
       $(logoCategory).addClass(classLogoCategoryCable);
       $(menuProductsCable).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryCable);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorCable);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + navcatCable + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryCable + "\"});'>" + headingProductCategoryPretty + "</a>");
       break;
-    case navcatFarm:
-      // Farm
+    case categoryFarm:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -264,48 +255,45 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryFarm);
       $(logoCategory).addClass(classLogoCategoryFarm);
       $(menuProductsFarm).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryFarm);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorFarm);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + navcatFarm + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryFarm + "\"});'>" + headingProductCategoryPretty + "</a>");
       break;
-    case navcatPocket:
-      // Pocket
+    case categoryPocket:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
-      resetCategoryHeading();
+      // resetCategoryHeading();
       $(banner).addClass(classBannerCategoryPocket);
       $(logoCategory).addClass(classLogoCategoryPocket);
       $(menuProductsPocket).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryPocket);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPocket);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + navcatPocket + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPocket + "\"});'>" + headingProductCategoryPretty + "</a>");
       break;
-    case navcatPromo:
-      // Promo
+    case categoryPromo:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
-      resetCategoryHeading();
+      // resetCategoryHeading();
       $(banner).addClass(classBannerCategoryPromo);
       $(logoCategory).addClass(classLogoCategoryPromo);
       $(menuProductsPromo).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryPromo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPromo);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + navcatPromo + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPromo + "\"});'>" + headingProductCategoryPretty + "</a>");
       break;
-    case navcatSos:
-      // Sos
+    case categorySos:
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
-      resetCategoryHeading();
+      // resetCategoryHeading();
       $(banner).addClass(classBannerCategorySos);
       $(logoCategory).addClass(classLogoCategorySos);
       $(menuProductsSos).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categorySos);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorSos);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + navcatSos + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categorySos + "\"});'>" + headingProductCategoryPretty + "</a>");
       break;
   }
 }]);

@@ -50,8 +50,12 @@ $color_headingsCat_a_hover: lighten($color_cat_home, 20%);
 $color_breadcrumb: $color_cat_home;
 $color_breadcrumb_hover: lighten($color_breadcrumb, 20%);
 
-$color_productSpecs_a: $color_cat_home;
+$color_productSpecs_text: #313131;
+$color_productSpecs_a: $color_productSpecs_text;
 $color_productSpecs_a_hover: lighten($color_productSpecs_a, 20%);
+$color_product_text: #454545;
+$color_product_extras_h: $color_productSpecs_text;
+$color_product_extras_text: #77787b;
 
 $color_page_bg: $color_menu_product_bg;
 $color_page_border: #404040;
@@ -176,7 +180,7 @@ h1 {
   margin-top: 0.1em;
   margin-bottom: 0.4em;
   /*text-align: left;*/
-  font-weight: normal;
+  // font-weight: bold;
 }
 
 h2 { // TODO: get correct font
@@ -184,7 +188,7 @@ h2 { // TODO: get correct font
   line-height: 1em;
   letter-spacing: -1px;
   /*text-align: left;*/
-  font-weight: normal;
+  // font-weight: bold;
   color: $color_h2;
   /*display: block;*/
 }
@@ -193,7 +197,7 @@ h3 {
   font-size: 1.6em;
   line-height: 1.6em;
   /*color: ;*/
-  font-weight: normal;
+  // font-weight: bold;
   margin-top: 0.1em;
   margin-bottom: 0.2em;
 }
@@ -269,6 +273,8 @@ a {
   table {
     margin: 0 auto;
   }
+  @extend .clearfixScss;
+  overflow: hidden;
 }
 
 .button {
@@ -286,6 +292,46 @@ a {
   }
 }
 
+// pagination
+.mpControls {
+  padding: 0.3em;
+  background: $color_page_bg;
+  border-color: $color_page_border;
+  color: $color_page_text;
+  font-size: 1.3em;
+  font-weight: normal;
+  font-family: inherit;
+  a {
+    &:link { 
+      color: inherit;
+      font-weight: bold;
+    }
+    &:hover {
+      color: #FF8800; // TODO: use better color
+    }
+  }
+  ul li { // page link
+    font-size: 1em;
+    vertical-align: middle;
+    ul { // drop down
+      margin-left: 1.5em;
+      font-size: 0.9em;
+      width: auto;
+      // right: 0;
+      padding: 0 0.5em;
+      border-color: $color_page_border;
+      li {
+        padding: 0.2em;
+        color: $color_page_text;
+      }
+    }
+  }
+}
+
+.paging { // icons
+  border-color: $color_page_border;
+}
+
 // .displayBlock {
 //   display: block;
 // }
@@ -293,17 +339,17 @@ a {
 
 // TODO: make compatible with ie; http://css-tricks.com/snippets/css/css-box-shadow/
 
-/*.shadowBottomOuter {
-  -webkit-box-shadow: 0 3px 3px 2px #999;
-     -moz-box-shadow: 0 3px 3px 2px #999;
-          box-shadow: 0 3px 3px 2px #999;
-}
+// /*.shadowBottomOuter {
+//   -webkit-box-shadow: 0 3px 3px 2px #999;
+//      -moz-box-shadow: 0 3px 3px 2px #999;
+//           box-shadow: 0 3px 3px 2px #999;
+// }
 
-.shadowBottomInner {
-  -webkit-box-shadow: inset 0 -4px 4px -2px #999;
-     -moz-box-shadow: inset 0 -4px 4px -2px #999;
-          box-shadow: inset 0 -4px 4px -2px #999;
-}*/
+// .shadowBottomInner {
+//   -webkit-box-shadow: inset 0 -4px 4px -2px #999;
+//      -moz-box-shadow: inset 0 -4px 4px -2px #999;
+//           box-shadow: inset 0 -4px 4px -2px #999;
+// }*/
 
 /* Header */
 
@@ -417,7 +463,7 @@ $height_navTop_corner: (3 * $height_navTop_font); // since padding is 1em
   //   /*background-color: blue;*/
   //   color: black;
     a {
-      padding: $height_navTop_font_padding 0.8em;
+      padding: $height_navTop_font_padding 1em;
       font-size: $height_navTop_font;
       line-height: 1em;
       display: inline-block;
@@ -1111,6 +1157,8 @@ $width_viewProduct_icon: 1.5em;
 
 /* Product */
 
+// product specs
+
 .productSpecsContainer {
   @extend .clearfixScss;
   margin: 8px 0;
@@ -1118,6 +1166,7 @@ $width_viewProduct_icon: 1.5em;
   border: 1px solid $color_product_specs_border;
   border-right-width: 0;
   border-left-width: 0;
+  color: $color_productSpecs_text;
   .breadcrumb {
     float: right;
   }
@@ -1212,42 +1261,71 @@ $productSpecs_margin: 1.8em;
   }
 }
 
-// pagination
-.mpControls {
-  padding: 0.3em;
-  background: $color_page_bg;
-  border-color: $color_page_border;
-  color: $color_page_text;
-  font-size: 1.3em;
-  font-weight: normal;
-  font-family: inherit;
-  a {
-    &:link { 
-      color: inherit;
-      font-weight: bold;
-    }
-    &:hover {
-      color: #FF8800; // TODO: use better color
-    }
-  }
-  ul li { // page link
-    font-size: 1em;
-    vertical-align: middle;
-    ul { // drop down
-      margin-left: 1.5em;
-      font-size: 0.9em;
-      width: auto;
-      // right: 0;
-      padding: 0 0.5em;
-      border-color: $color_page_border;
-      li {
-        padding: 0.2em;
-        color: $color_page_text;
-      }
-    }
+.prodViewerAddToCartForm {
+  font-size: 1.2em;
+}
+
+// product view
+
+$width_product_image: 340px + 10px;
+$widith_product_details: $width_content - $width_product_image;
+.productViewContainer {
+  // display: block;
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+}
+
+.productImageContainer {
+  display: inline-block;
+  vertical-align: top;
+  width: 340px;
+  height: 100%;
+}
+
+.productDetailsContainer {
+  display: inline-block;
+  vertical-align: top;
+  color: $color_product_text;
+  width: $widith_product_details;
+  height: 100%;
+}
+
+.productDetailsList {
+  margin: 2.5em 0 3.5em;
+  padding: 0;
+  list-style: none;
+  li {
+    font-size: 1.5em;
+    line-height: 1em;
+    margin: 0.6em 0;
+    padding: 0;
+    text-transform: uppercase;
   }
 }
 
-.paging { // icons
-  border-color: $color_page_border;
+.productDescription {
+  p {
+    font-size: 1.4em;
+    line-height: 1.6em;
+  }
+  ul, li {
+    list-style-position: inside;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    font-size: 1.2em;
+  }
+}
+
+.productExtras {
+  color: $color_product_extras_text;
+  h5 {
+    color: $color_product_extras_h;
+    font-size: 1.4em;
+    font-weight: normal;
+  }
 }

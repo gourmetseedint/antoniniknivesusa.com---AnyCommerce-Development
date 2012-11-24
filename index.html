@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <!-- TODO: when on a product, make breadcrumb category link color and underline -->
 <!-- BUG: sometimes bindBy links don't work after going through pages, seems more prevalent on production -->
+<!-- BUG: in production, menu links stop working after visiting a product -->
 <!-- TODO: change wholesale pretty form all caps to normal -->
 <html>
 <head>
@@ -22,7 +23,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121121235102",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121123172650",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -126,7 +127,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
       <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
     </div>
-    <br class="clearfix" /><!-- BUG: clear not working in chrome -->
+    <!-- <br class="clearfix" /> --><!-- BUG: clear not working in chrome -->
   </div>
   <div class='container'>
     <footer>
@@ -491,9 +492,15 @@ this will likely become more flexible in the future. ###
       <h5 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h5>
     </div>
     <div class="productSpecsBottom">
-      <div>
+      <!-- <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
+      <!-- <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div> -->
+      <form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.handleAddToCart($(this),{'action':'modal'}); return false;">
+      
+        <fieldset data-bind='var: product(pid); format:atcVariations; extension:store_product;' class='borderNone'></fieldset>
+        <fieldset data-bind='var: product(pid); format:atcQuantityInput; extension:store_product; pretext:Quantity: ;' class='borderNone'></fieldset>
+      
         <input type='submit' value='Add to Cart' class='button addToCartButton displayNone' data-bind='var: product(pid); format:addToCartButton; extension:store_product;' id='addToCartBtn' />
-      </div>
+      </form>
       <div>
         <ul>
           <li><a href='#' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).parent().attr("data-pid"),"templateID":"reviewFrmTemplate"}); return false;'>Write a Review</a></li>
@@ -503,12 +510,49 @@ this will likely become more flexible in the future. ###
       </div>
     </div>
   </div>
+  <div class="productViewContainer">
+    <div class='productImageContainer'>
+      <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' class='pointer clearfix'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
+        <div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
+        <img src='blank.gif' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='340' height='340' />
+      </div>
+      <div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbs'>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"2"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image2); format:imageURL;' width='100' height='100' /></div>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"3"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image3); format:imageURL;' width='100' height='100' /></div>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"4"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image4); format:imageURL;' width='100' height='100' /></div>
+      </div>
+    </div>
+    <div class="productDetailsContainer">
+      <ul class='productDetailsList'>
+        <li><!-- <span data-bind='var:product(user:prod_steel);     format:text; pretext: Steel: ;'> --><span>Steel: Lorem</span></li>
+        <li><!-- <span data-bind='var:product(user:prod_finishing); format:text; pretext: Finishing: ;'> --><span>Finishing: Ipsum</span></li>
+        <li><!-- <span data-bind='var:product(user:prod_handle);    format:text; pretext: Handle: ;'> --><span>Handle: Dolar</span></li>
+        <li><!-- <span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'> --><span>Locking: Sit</span></li>
+        <li><!-- <span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'> --><span>Clip: Amet</span></li>
+        <li><!-- <span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'> --><span>Fasteners: Consectetur</span></li>
+      </ul>
+      <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
+    </div>
+  </div>
+  <div class="productExtras productAccessoriesContainer">
+    <h5>Accessories:</h5>
+    <!-- QUE: what is the accessories variable? -->
+  </div>
+  <div class="productExtras">
+    <div class='prodlistRelatedContainer'>
+      <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h5>Variants</h5>; withReviews:1;"></ul>
+      <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: category(@products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h5>Variants</h5>; withReviews:1;"></ul>
+    </div>
+    <!-- <h5>Variants:</h5>
+    <ul title='Variants:' id='prodlistChildren' class='listStyleNone fluidList clearfix noPadOrMargin productList smallProdlist' data-bind="var: product(zoovy:grp_children); format:productList; extension:store_prodlist; loadsTemplate:productListTemplateChildren;hide_summary:true;"></ul>
+    zoovy:related_products -->
+  </div>
   
-  <table class='prodViewerContainer'>
+  <!-- <table class='prodViewerContainer'>
     <tr>
-      <td class='imageContainer'>
+      <td class='imageContainer'> -->
     <!--  <img src='%PROJECT_URL%/blank.gif' id='bobWasHere' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format: magicZoomPlus; extension: magicToolBox;' width='340' height='340' /> -->
-      
+     <!-- 
     <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' class='pointer clearfix'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
 
       <div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
@@ -548,10 +592,10 @@ this will likely become more flexible in the future. ###
       
       <ul title='please choose' id='prodlistChildren' class='listStyleNone fluidList clearfix noPadOrMargin productList smallProdlist' data-bind="var: product(zoovy:grp_children); format:productList; extension:store_prodlist; loadsTemplate:productListTemplateChildren;hide_summary:true;"></ul>
 
-      
-    <!--  <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
-      <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div>
-      
+      -->
+     <!-- <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
+      <!-- <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div> -->
+      <!--
       
       <form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.handleAddToCart($(this),{'action':'modal'}); return false;">
       
@@ -593,9 +637,9 @@ this will likely become more flexible in the future. ###
         <li class='prodVideoTab displayNone' data-bind='var: product(youtube:videoid); format:showIfSet;'><a href="#prodVideo" data-bind="var:product(pid);format:assignAttribute; attribute:href; valuePretext:#prodVideo_;">Video</a></li>
         <li class='prodAccessoriesTab displayNone' data-bind='var: product(zoovy:accessory_products); format:showIfSet;'><a href="#prodlistAccessoriesContainer" data-bind="var:product(pid);format:assignAttribute; attribute:href; valuePretext:#prodAccessories_;">Accessories</a></li>
       </ul>
-      
+      -->
     <!-- tab content. only 1 databind per element, so there's a container with a dynamically generated id (for tabs or other scripts) and child with the data. -->
-      <div data-bind="var:product(pid);format:assignAttribute; attribute:id; valuePretext:prodDesc_;">
+      <!--<div data-bind="var:product(pid);format:assignAttribute; attribute:id; valuePretext:prodDesc_;">
         <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;'></div>
       </div>
 
@@ -625,10 +669,10 @@ this will likely become more flexible in the future. ###
       
       
       <div  data-bind="var:product(pid);format:assignAttribute; attribute:id; valuePretext:prodAccessories_;">
-      <!--
+      --><!--
         <ul class='listStyleNone fluidList clearfix noPadOrMargin lineItemProdlist' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplateATC;hide_pagination:true;hide_summary:true; withReviews:1; withInventory:1; withVariations:1;"></ul>
       -->
-      </div>
+      <!--</div>
 
 
 
@@ -639,10 +683,10 @@ this will likely become more flexible in the future. ###
 
       </td>
     </tr>
-  </table>
-  <div class='prodlistRelatedContainer'>
+  </table> -->
+  <!-- <div class='prodlistRelatedContainer'>
     <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h2>Similar Items</h2>; withReviews:1;"></ul>
-  </div>
+  </div> -->
 </div><!-- productTemplate -->
 
 
