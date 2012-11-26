@@ -37,6 +37,36 @@ app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
 
 ///// custom \\\\\
 
+// functions
+
+function titlize(navcatName) {
+  var temp;
+  temp = navcatName.split('.').join('');
+  temp = temp.split('_').join(' ');
+  temp = capitalize(temp);
+  return temp;
+}
+
+function capitalize (lowercase) {
+  var title;
+  title = lowercase.replace(/\b[a-z]/g, function ($0) {
+    return $0.toUpperCase();
+  });
+  return title;
+}
+
+function resetBanner() {
+  $(banner).removeClass();
+}
+
+function resetCategoryLogo() {
+  $(logoCategory).removeClass();
+}
+
+function resetAllMenuProducts() {
+  $(menuProducts).addClass('displayNone');
+}
+
 ///// homepage slideshow \\\\\
 
 //cycle used for slideshow
@@ -66,6 +96,13 @@ var categoryFarm   = '.farm_-_garden';
 var categoryPocket = '.pocket_-_traditional';
 var categoryPromo  = '.promo_-_customizing';
 var categorySos    = '.sos_-_rescue';
+
+var prettyBoat   = titlize(categoryBoat);
+var prettyCable  = titlize(categoryCable);
+var prettyFarm   = titlize(categoryFarm);
+var prettyPocket = titlize(categoryPocket);
+var prettyPromo  = titlize(categoryPromo);
+var prettySos    = titlize(categorySos);
 
 var banner                    = 'header';
 var classBannerHome           = 'bannerHome';
@@ -115,17 +152,6 @@ var currentCategory;
 
 // app.u.dump([P]);
 
-function resetBanner() {
-  $(banner).removeClass();
-}
-
-function resetCategoryLogo() {
-  $(logoCategory).removeClass();
-}
-
-function resetAllMenuProducts() {
-  $(menuProducts).addClass('displayNone');
-}
 
 // function resetCategoryHeading() {
 //   $(headingCategory).removeClass();
@@ -234,7 +260,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(menuProductsBoat).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorBoat);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryBoat + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryBoat + "\"});'>" + prettyBoat + "</a>");
       break;
     case categoryCable:
       resetBanner();
@@ -246,7 +272,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(menuProductsCable).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorCable);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryCable + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryCable + "\"});'>" + prettyCable + "</a>");
       break;
     case categoryFarm:
       resetBanner();
@@ -258,7 +284,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(menuProductsFarm).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorFarm);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryFarm + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryFarm + "\"});'>" + prettyFarm + "</a>");
       break;
     case categoryPocket:
       resetBanner();
@@ -270,7 +296,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(menuProductsPocket).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPocket);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPocket + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPocket + "\"});'>" + prettyPocket + "</a>");
       break;
     case categoryPromo:
       resetBanner();
@@ -282,7 +308,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(menuProductsPromo).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPromo);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPromo + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPromo + "\"});'>" + prettyPromo + "</a>");
       break;
     case categorySos:
       resetBanner();
@@ -294,7 +320,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(menuProductsSos).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorSos);
       // $(headingProductCategory).html(headingProductCategoryPretty);
-      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categorySos + "\"});'>" + headingProductCategoryPretty + "</a>");
+      $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categorySos + "\"});'>" + prettySos + "</a>");
       break;
   }
 }]);
