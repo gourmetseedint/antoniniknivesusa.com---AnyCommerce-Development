@@ -397,13 +397,14 @@ app.u.appInitComplete = function(P) {
   app.u.dump("Executing myAppIsLoaded code...");
 
   // Pre load images
-  $(banner).addClass(classBannerHome);
-  $(banner).addClass(classBannerCategoryBoat);
-  $(banner).addClass(classBannerCategoryCable);
-  $(banner).addClass(classBannerCategoryFarm);
-  $(banner).addClass(classBannerCategoryPocket);
-  $(banner).addClass(classBannerCategoryPromo);
-  $(banner).addClass(classBannerCategorySos);
+  // BUG: seems to run this after product template, results in products having multiple banner classes
+  // $(banner).addClass(classBannerHome);
+  // $(banner).addClass(classBannerCategoryBoat);
+  // $(banner).addClass(classBannerCategoryCable);
+  // $(banner).addClass(classBannerCategoryFarm);
+  // $(banner).addClass(classBannerCategoryPocket);
+  // $(banner).addClass(classBannerCategoryPromo);
+  // $(banner).addClass(classBannerCategorySos);
   // resetBanner();
 };
 
