@@ -23,7 +23,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121124003942",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121126170616",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -128,9 +128,9 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
     </div>
   </div>
-  <div class='container'>
-    <footer>
-      <div class="footerBoxesWrapper">
+  <footer>
+    <div class="footerBoxesWrapper">
+      <div class='container'>
         <ul class="footerBox"><h3>About</h3>
           <li><a href="#category?navcat=." class='bindByAnchor' title='Home'>Home</a></li>
           <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
@@ -151,9 +151,11 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
           <li><a href="#customer?show=myaccount" class='bindByAnchor' title='Recover Password'>Recover Password</a></li>
         </ul>
       </div>
+    </div>
+    <div class='container'>
       <p class='copyright'>&copy; 2012 A.E. Coltellerie snc - all rights reserved</p>
-    </footer>
-  </div>
+    </div>
+  </footer>
   <!-- /VIEW CONTENT -->
 </div>
 

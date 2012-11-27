@@ -145,14 +145,16 @@ a:active {
 .button {
   margin: 0;
   padding: 0.4em 2.9em;
-  background: #b8b8b8;
+  background: black left top url("images/button_bg.png") repeat-x;
+  background-size: auto 100%;
   color: white;
   font-size: 1.4em;
   font-weight: bold;
   border-radius: 0.1em;
-  border: 0; }
+  border: 1px solid black; }
   .button:hover {
-    background: #858585;
+    background: gray left top url("images/button_flipped_bg.png") repeat-x;
+    background-size: auto 100%;
     color: #cccccc; }
 
 .mpControls {
@@ -183,6 +185,11 @@ a:active {
 
 .paging {
   border-color: #404040; }
+
+.shadowBottomOuter, .footerBoxesWrapper {
+  -webkit-box-shadow: 0 3px 3px 2px #999;
+  -moz-box-shadow: 0 3px 3px 2px #999;
+  box-shadow: 0 3px 3px 2px #999; }
 
 /* Header */
 header {
@@ -475,7 +482,7 @@ footer {
 
 .footerBoxesWrapper {
   padding: 1.2em 3.6em;
-  background: #dddddd; }
+  background: black url("images/footer_bg.png") repeat-x; }
 
 .footerBox {
   margin: 0 1.2em;

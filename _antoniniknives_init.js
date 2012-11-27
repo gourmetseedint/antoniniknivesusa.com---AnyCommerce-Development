@@ -395,6 +395,16 @@ app.u.initMVC = function(attempts){
 //will pass in the page info object. (pageType, templateID, pid/navcat/show and more)
 app.u.appInitComplete = function(P) {
   app.u.dump("Executing myAppIsLoaded code...");
+
+  // Pre load images
+  $(banner).addClass(classBannerHome);
+  $(banner).addClass(classBannerCategoryBoat);
+  $(banner).addClass(classBannerCategoryCable);
+  $(banner).addClass(classBannerCategoryFarm);
+  $(banner).addClass(classBannerCategoryPocket);
+  $(banner).addClass(classBannerCategoryPromo);
+  $(banner).addClass(classBannerCategorySos);
+  // resetBanner();
 };
 
 
