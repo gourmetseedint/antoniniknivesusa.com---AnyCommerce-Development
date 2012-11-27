@@ -18,7 +18,8 @@ $height_header_home: 497px;
 
 $height_productPrice: 3em;
 $height_productID: 2.2em;
-$height_productSpecsList_top: $height_productPrice - $height_productID;
+$height_productSpecsList_line: 1.4em;
+$height_productSpecsList_top: $height_productPrice - $height_productID - (($height_productSpecsList_line - 1em) / 2);
 
 // colors
 
@@ -1287,14 +1288,15 @@ $productSpecsBottom_list_margin: 0.8em;
   }
 }
 
-$productSpecs_margin: 1.8em;
+$productSpecs_margin: 0.8em;
 .productSpecsList {
   // margin: 0;
   // padding: 0;
   @include flat_list_with_divider($productSpecs_margin);
   margin-top: $height_productSpecsList_top;
   // display: inline-block;
-  font-size: 1.6em;
+  font-size: 1.5em;
+  line-height: $height_productSpecsList_line;
   float: left;
   // position: absolute; // to align bottom with price
   // bottom: 0;
@@ -1325,17 +1327,17 @@ $productSpecs_margin: 1.8em;
   // float: right;
 }
 
-.productWeight {
-  &:after {
-    content: ' gr';
-  }
-}
+// .productWeight {
+//   &:after {
+//     content: ' gr';
+//   }
+// }
 
-.productLength {
-  &:after {
-    content: ' mm';
-  }
-}
+// .productLength {
+//   &:after {
+//     content: ' mm';
+//   }
+// }
 
 .prodViewerAddToCartForm {
   font-size: 1.2em;
@@ -1379,7 +1381,7 @@ $widith_product_details: $width_content - $width_product_image;
   list-style: none;
   li {
     font-size: 1.5em;
-    line-height: 1em;
+    line-height: 1.3em;
     margin: 0.6em 0;
     padding: 0;
     text-transform: uppercase;

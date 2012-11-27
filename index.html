@@ -23,7 +23,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121127142213",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121127144033",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -483,10 +483,10 @@ this will likely become more flexible in the future. ###
     </div>
     <div class="productSpecsMiddle">
       <ul class='productSpecsList'>
-        <li><span data-bind='var:product(user:prod_weight_grams); format:text; pretext: <span class="pretext">Weight: </span>;' class='productWeight'></span><!-- <span class="productWeight"><span class="pretext">Weight: </span>5.1</span>--></li>
-        <li><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;' class='productLength'><!--</span><span class="productLength"><span class="pretext">Blade: </span>90</span>--></li>
-        <li><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;' class='productLength'></span><!-- <span class="productLength"><span class="pretext">Overall: </span>205</span>--></li>
-        <li><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;' class='productLength'></span><!-- <span class="productLength"><span class="pretext">Closed: </span>115</span> --></li>
+        <li><span data-bind='var:product(user:prod_weight_grams); format:text; pretext: <span class="pretext">Weight: </span>;'></span><!-- <span class="productWeight"><span class="pretext">Weight: </span>5.1</span>--></li>
+        <li><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;'><!--</span><span class="productLength"><span class="pretext">Blade: </span>90</span>--></li>
+        <li><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;'></span><!-- <span class="productLength"><span class="pretext">Overall: </span>205</span>--></li>
+        <li><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span><!-- <span class="productLength"><span class="pretext">Closed: </span>115</span> --></li>
       </ul>
       <h4 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h4>
     </div>
