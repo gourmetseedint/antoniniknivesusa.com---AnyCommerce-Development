@@ -43,11 +43,11 @@ function titlize(navcatName) {
   var temp;
   temp = navcatName.split('.').join('');
   temp = temp.split('_').join(' ');
-  temp = capitalize(temp);
+  temp = capitalizeAllWords(temp);
   return temp;
 }
 
-function capitalize (lowercase) {
+function capitalizeAllWords (lowercase) {
   var title;
   title = lowercase.replace(/\b[a-z]/g, function ($0) {
     return $0.toUpperCase();

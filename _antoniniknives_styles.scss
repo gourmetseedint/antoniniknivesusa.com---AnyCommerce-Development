@@ -46,7 +46,7 @@ $color_menu_bg: #101010;
 $color_menu_text: white;
 $color_menu_product_bg: #565555;
 $color_navMenuCategoryHover_text: darken($color_menu_text, 20%);
-$color_navMenuCategoryHover_bg: darken($color_menu_product_bg, 20%);
+$color_navMenuCategoryHover_bg: darken($color_menu_bg, 20%);
 $color_navMenuProductHover_text: darken($color_menu_text, 20%);
 $color_navMenuProductHover_bg: darken($color_menu_product_bg, 20%);
 // $color_menu_a: white;
