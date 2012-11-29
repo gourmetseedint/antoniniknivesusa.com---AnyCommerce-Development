@@ -641,13 +641,18 @@ $menuOffset: -35px;
   }
 }
 
+// move sidebar down to not overlap home banner
+.sidebarHome {
+  top: $menuOffset + 30px;
+}
+
 .navMenu {
   width: $width_menu;
   padding: $width_menu_padding;
   background: $color_menu_bg;
   color: $color_menu_text;
   h2 {
-    margin: 0 0 1em;
+    margin: 1em 0 0.5em;
     padding: 0;
     color: $color_menu_text;
     font-size: 1.6em;

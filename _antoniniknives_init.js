@@ -37,35 +37,6 @@ app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
 
 ///// custom \\\\\
 
-// functions
-
-function titlize(navcatName) {
-  var temp;
-  temp = navcatName.split('.').join('');
-  temp = temp.split('_').join(' ');
-  temp = capitalizeAllWords(temp);
-  return temp;
-}
-
-function capitalizeAllWords (lowercase) {
-  var title;
-  title = lowercase.replace(/\b[a-z]/g, function ($0) {
-    return $0.toUpperCase();
-  });
-  return title;
-}
-
-function resetBanner() {
-  $(banner).removeClass();
-}
-
-function resetCategoryLogo() {
-  $(logoCategory).removeClass();
-}
-
-function resetAllMenuProducts() {
-  $(menuProducts).addClass('displayNone');
-}
 
 ///// homepage slideshow \\\\\
 
@@ -97,12 +68,19 @@ var categoryPocket = '.pocket_-_traditional';
 var categoryPromo  = '.promo_-_customizing';
 var categorySos    = '.sos_-_rescue';
 
-var prettyBoat   = titlize(categoryBoat);
-var prettyCable  = titlize(categoryCable);
-var prettyFarm   = titlize(categoryFarm);
-var prettyPocket = titlize(categoryPocket);
-var prettyPromo  = titlize(categoryPromo);
-var prettySos    = titlize(categorySos);
+var prettyBoat;
+var prettyCable;
+var prettyFarm;
+var prettyPocket;
+var prettyPromo;
+var prettySos;
+
+// var prettyBoat   = titlize(categoryBoat);
+// var prettyCable  = titlize(categoryCable);
+// var prettyFarm   = titlize(categoryFarm);
+// var prettyPocket = titlize(categoryPocket);
+// var prettyPromo  = titlize(categoryPromo);
+// var prettySos    = titlize(categorySos);
 
 var banner                    = 'header';
 var classBannerHome           = 'bannerHome';
@@ -112,6 +90,9 @@ var classBannerCategoryFarm   = 'bannerCategoryFarm';
 var classBannerCategoryPocket = 'bannerCategoryPocket';
 var classBannerCategoryPromo  = 'bannerCategoryPromo';
 var classBannerCategorySos    = 'bannerCategorySos';
+
+var sidebar = '.sidebar';
+var sidebarHome = 'sidebarHome';
 
 var logoCategory            = '#logoCategory';
 var classLogoCategoryBoat   = 'logoCategoryBoat';
@@ -131,13 +112,13 @@ var menuProductsPocket = '#tier1categories_pocket__traditional ul';
 var menuProductsPromo  = '#tier1categories_promo__customizing ul';
 var menuProductsSos    = '#tier1categories_sos__rescue ul';
 
-var headingCategory = '.headingsCategory h1';
-var categoryColorBoat    = 'categoryBoat';
-var categoryColorCable   = 'categoryCable';
-var categoryColorFarm    = 'categoryFarm';
-var categoryColorPocket  = 'categoryPocket';
-var categoryColorPromo   = 'categoryPromo';
-var categoryColorSos     = 'categorySos';
+var headingCategory     = '.headingsCategory h1';
+var categoryColorBoat   = 'categoryBoat';
+var categoryColorCable  = 'categoryCable';
+var categoryColorFarm   = 'categoryFarm';
+var categoryColorPocket = 'categoryPocket';
+var categoryColorPromo  = 'categoryPromo';
+var categoryColorSos    = 'categorySos';
 
 var headingProductNavcat         = '.headingProductNavcat';
 // var headingProductName           = '.headingsProduct h1';
@@ -152,6 +133,43 @@ var currentCategory;
 
 // app.u.dump([P]);
 
+// functions
+
+// function titlize(navcatName) {
+//   var temp;
+//   temp = navcatName.split('.').join('');
+//   temp = temp.split('_').join(' ');
+//   temp = capitalizeAllWords(temp);
+//   return temp;
+// }
+
+// function capitalizeAllWords(lowercase) {
+//   var title;
+//   title = lowercase.replace(/\b[a-z]/g, function ($0) {
+//     return $0.toUpperCase();
+//   });
+//   return title;
+// }
+
+function navcatToPretty(navcat) {
+  // only works from a rq.push
+  var temp;
+  temp = app.data['appCategoryDetail|' + navcat]['pretty'];
+  return temp;
+}
+
+function resetBanner() {
+  $(banner).removeClass();
+  $(sidebar).removeClass(sidebarHome);
+}
+
+function resetCategoryLogo() {
+  $(logoCategory).removeClass();
+}
+
+function resetAllMenuProducts() {
+  $(menuProducts).addClass('displayNone');
+}
 
 // function resetCategoryHeading() {
 //   $(headingCategory).removeClass();
@@ -164,11 +182,14 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   resetBanner();
   resetAllMenuProducts();
   $(banner).addClass(classBannerHome);
+  $(sidebar).addClass(sidebarHome);
   $(logoCategory).addClass("displayNone");
   // $(wholesaleInfo).removeClass("displayNone");
 }]);
+
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   $(logoCategory).removeClass("displayNone");
+  // $(sidebar).removeClass(sidebarHome);
   // $(wholesaleInfo).addClass("displayNone");
 }]);
 
@@ -244,13 +265,17 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
 ///// products \\\\\
 // TODO: add pretty name for each category
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
+
   // app.u.dump([P]);
   // app.u.dump($(headingProductNavcat, '#' + P.parentID).html());
   currentCategory = $(headingProductNavcat, '#' + P.parentID).html();
-  // alert(currentCategory);
 
   switch(currentCategory) {
     case categoryBoat:
+      // set pretty for when loading dirctly to product
+      if (prettyBoat === undefined) {
+        prettyBoat = navcatToPretty(categoryBoat);
+      }
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -263,6 +288,9 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryBoat + "\"});'>" + prettyBoat + "</a>");
       break;
     case categoryCable:
+      if (prettyCable === undefined) {
+        prettyCable = navcatToPretty(categoryCable);
+      }
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -275,6 +303,9 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryCable + "\"});'>" + prettyCable + "</a>");
       break;
     case categoryFarm:
+      if (prettyFarm === undefined) {
+        prettyFarm = navcatToPretty(categoryFarm);
+      }
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -287,6 +318,9 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryFarm + "\"});'>" + prettyFarm + "</a>");
       break;
     case categoryPocket:
+      if (prettyPocket === undefined) {
+        prettyPocket = navcatToPretty(categoryPocket);
+      }
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -299,6 +333,9 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPocket + "\"});'>" + prettyPocket + "</a>");
       break;
     case categoryPromo:
+      if (prettyPromo === undefined) {
+        prettyPromo = navcatToPretty(categoryPromo);
+      }
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -311,6 +348,9 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPromo + "\"});'>" + prettyPromo + "</a>");
       break;
     case categorySos:
+      if (prettySos === undefined) {
+        prettySos = navcatToPretty(categorySos);
+      }
       resetBanner();
       resetCategoryLogo();
       resetAllMenuProducts();
@@ -394,10 +434,18 @@ app.u.initMVC = function(attempts){
 //Any code that needs to be executed after the app init has occured can go here.
 //will pass in the page info object. (pageType, templateID, pid/navcat/show and more)
 app.u.appInitComplete = function(P) {
-  app.u.dump("Executing myAppIsLoaded code...");
+  // app.u.dump("Executing myAppIsLoaded code...");
+
+  // get pretty names for product pages
+  // BUG: appInitComplete runs after productTemplate onCompletez
+  prettyBoat   = navcatToPretty(categoryBoat);
+  prettyCable  = navcatToPretty(categoryCable);
+  prettyFarm   = navcatToPretty(categoryFarm);
+  prettyPocket = navcatToPretty(categoryPocket);
+  prettyPromo  = navcatToPretty(categoryPromo);
+  prettySos    = navcatToPretty(categorySos);
 
   // Pre load images
-  // BUG: seems to run this after product template, results in products having multiple banner classes
   // $(banner).addClass(classBannerHome);
   // $(banner).addClass(classBannerCategoryBoat);
   // $(banner).addClass(classBannerCategoryCable);
@@ -414,4 +462,13 @@ app.u.appInitComplete = function(P) {
 //don't execute script till both jquery AND the dom are ready.
 $(document).ready(function(){
   app.u.handleRQ(0);
+
+  // Pre load images
+  $(banner).addClass(classBannerHome);
+  $(banner).addClass(classBannerCategoryBoat);
+  $(banner).addClass(classBannerCategoryCable);
+  $(banner).addClass(classBannerCategoryFarm);
+  $(banner).addClass(classBannerCategoryPocket);
+  $(banner).addClass(classBannerCategoryPromo);
+  $(banner).addClass(classBannerCategorySos);
 });

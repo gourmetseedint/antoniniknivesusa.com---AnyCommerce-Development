@@ -3,6 +3,7 @@
 <!-- BUG: sometimes bindBy links don't work after going through pages, seems more prevalent on production -->
 <!-- BUG: in production, menu links stop working after visiting a product -->
 <!-- TODO: change wholesale pretty form all caps to normal -->
+<!-- TODO: get search form to work -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -23,7 +24,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121127144033",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121129134013",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -102,8 +103,6 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
     <aside class="sidebar">
       <nav class="navMenu">
         <div id='logoCategory' class='logoCategoryDefault'></div><!-- QUE: should this be a link to cat? -->
-        <h2>Products</h2>
-        <ul id="tier1categories"></ul>
         <form id='headerSearchFrm' name='headerSearchFrm' action='#' class='productSearchForm' method="get">
           <fieldset>
             <!-- <legend>Search</legend> -->
@@ -114,6 +113,8 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
             <input class="search" id='headerSearchSubmit' type="submit" value="" />
           </fieldset>
         </form>
+        <h2>Products</h2>
+        <ul id="tier1categories"></ul>
         <a href="#pageType?attribute=value" class='bindByAnchor' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a><!-- TODO: pdf catalogs - add real link -->
       </nav>
       <div class='wholesaleInfo'>

@@ -325,13 +325,16 @@ header {
     color: gray;
     text-decoration: none; }
 
+.sidebarHome {
+  top: -5px; }
+
 .navMenu {
   width: 200px;
   padding: 12px;
   background: #101010;
   color: white; }
   .navMenu h2 {
-    margin: 0 0 1em;
+    margin: 1em 0 0.5em;
     padding: 0;
     color: white;
     font-size: 1.6em;
