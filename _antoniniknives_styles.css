@@ -371,8 +371,7 @@ header {
         background: #232222; }
 
 .navMenuCategoryHover {
-  color: #cccccc;
-  background: black; }
+  color: #cccccc; }
 
 #logoCategory {
   width: 123px;
@@ -718,18 +717,18 @@ footer {
 .categorySos {
   color: #e3001b; }
 
-.content .productList {
+.content .productList, .content .subCategoryList {
   color: #6b6b6b; }
-  .content .productList li {
+  .content .productList li, .content .subCategoryList li {
     margin-bottom: 30px;
     width: 230px;
     height: auto;
     float: none;
     display: inline-block; }
-  .content .productList img {
+  .content .productList img, .content .subCategoryList img {
     width: 230px;
     height: 230px; }
-  .content .productList h5 {
+  .content .productList h5, .content .subCategoryList h5 {
     padding-left: 1.08em;
     font-size: 1.7em;
     font-weight: bold;
@@ -737,10 +736,10 @@ footer {
     background: url("images/arrow_cat.png") no-repeat;
     background-size: 0.6em;
     background-position: 0 0.33333em; }
-  .content .productList h6 {
+  .content .productList h6, .content .subCategoryList h6 {
     font-size: 1.3em;
     font-weight: normal; }
-  .content .productList .viewProductLink {
+  .content .productList .viewProductLink, .content .subCategoryList .viewProductLink {
     margin: 0;
     padding: 0.6em;
     padding-left: 3em;

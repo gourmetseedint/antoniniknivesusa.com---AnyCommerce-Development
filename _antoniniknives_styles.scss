@@ -709,7 +709,7 @@ $menuOffset: -35px;
 
 .navMenuCategoryHover {
   color: $color_navMenuCategoryHover_text;
-  background: $color_navMenuCategoryHover_bg;
+  // background: $color_navMenuCategoryHover_bg;
   // background: blue;
 }
 
@@ -1178,7 +1178,7 @@ $width_productList_bg: 0.6em;
 $width_viewProduct_icon: 1.5em;
 .content {
   // TODO: keep images aligned bottom, but align names to top
-  .productList {
+  .productList, .subCategoryList {
     color: $color_productList_text;
     li {
       margin-bottom: 30px;
