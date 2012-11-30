@@ -159,6 +159,12 @@ function navcatToPretty(navcat) {
   return temp;
 }
 
+function navcatToTier1ID(navcat) {
+  // replace '.' with '_' and '-' with ''
+  var temp = '#tier1categories' + navcat.toString().split(/[.]/).join('_').split(/-/).join('');
+  return temp;
+}
+
 function resetBanner() {
   $(banner).removeClass();
   $(sidebar).removeClass(sidebarHome);
@@ -194,11 +200,6 @@ app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   // $(wholesaleInfo).addClass("displayNone");
 }]);
 
-function navcatToTier1ID(navcat) {
-  // replace '.' with '_' and '-' with ''
-  var temp = '#tier1categories' + navcat.toString().split(/[.]/).join('_').split(/-/).join('');
-  return temp;
-}
 
 
 ///// categories \\\\\

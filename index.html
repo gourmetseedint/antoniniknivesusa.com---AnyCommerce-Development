@@ -24,7 +24,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121129174258",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121130133250",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -239,14 +239,6 @@ the homepageTemplate template is loaded into mainContentArea by default when the
 </div>
 
 
-
-
-
-
-
-
-
-
 <!--
 used to organize content when a category is clicked.
 each of the 'sections' are used to load another template. don't change the id.
@@ -263,7 +255,12 @@ don't modify the 'data-templateid' unless you are changing template names and up
     <ul class='breadcrumb' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
   </div>
   
+  <!-- used by category, shows list of subcats -->
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='subCategoryList'></ul>
+
+  <!-- used by subcategory, shows a list of products -->
+  <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
+  
   <!-- <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
 
   <!-- <h2 data-bind="var: category(%page.header); format: text; editor: text;"></h2> -->
@@ -272,11 +269,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
   
   <!-- <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul> -->
 
-  <!-- <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul> -->
-  <!-- QUE: what are these wiki data binds? -->
-  <!-- <p data-bind="var: category(%page.description2); format:wiki; wikiFormats:myRIA; editor: textarea;"></p> -->
-
-    
+  <!-- <p data-bind="var: category(%page.description2); format:wiki; wikiFormats:myRIA; editor: textarea;"></p> -->    
 </div>
 
 
@@ -289,15 +282,15 @@ don't modify the 'data-templateid' unless you are changing template names and up
 <ul>
 <li id='categoryListTemplate'>
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
-    <h5 data-bind='var: category(pretty); format:text;'></h5>
-    <div class='thumbContainer logoCategoryHome logoCategoryDefault'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div>
+    <h5 data-bind='var: category(pretty); format:text;' class='catName'></h5>
+    <div class='thumbContainer logoCategoryDefault'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div>
   </div>
 </li>
 
 <li id='categoryListNoImagesTemplate'>
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
-    <!-- <div class='thumbContainer logoCategoryHome logoCategoryDefault'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div> -->
-    <!-- <div class='catName white2LGray'><span data-bind='var: category(pretty); format:text;'></span></div> -->
+    <!-- <div class='thumbContainer'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div> -->
+    <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
   </div>
 </li>
 
