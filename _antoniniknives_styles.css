@@ -259,7 +259,7 @@ header {
           content: "";
           margin-left: 0; }
   .navTop li a {
-    padding: 1em 1em;
+    padding: 1.4em 1em;
     font-size: 1.2em;
     line-height: 1em;
     display: inline-block; }
@@ -284,7 +284,7 @@ header {
   background: url("images/nav_top_bg_left.png") no-repeat scroll right bottom;
   background-size: contain;
   width: 30px;
-  height: 3.6em;
+  height: 4.56em;
   vertical-align: bottom;
   float: left; }
 
@@ -293,15 +293,16 @@ header {
   display: inline-block;
   position: relative; }
   .socialBox a {
-    height: 3.6em;
+    height: 4.56em;
     display: inline-block; }
 
 .socialIcon {
   margin: 0;
   width: 32px;
   height: 28px;
+  line-height: 4.56em;
   display: inline-block;
-  margin-top: 5px;
+  margin-top: 10px;
   /*z-index: 10;*/ }
 
 .socialIconFacebook {
@@ -488,11 +489,15 @@ header {
 
 /* Footer */
 footer {
-  margin-top: 20px; }
+  margin-top: 20px;
+  font-size: 1em;
+  /* 10px */
+  line-height: 1em; }
 
 .footerBoxesWrapper {
   padding: 1.2em 3.6em;
-  background: black url("images/footer_bg.png") repeat-x; }
+  background: black url("images/footer_bg.png") repeat-x;
+  border: 1px solid black; }
 
 .footerBox {
   margin: 0 1.2em;
@@ -503,48 +508,58 @@ footer {
   vertical-align: top;
   display: inline-block;
   background: #f0f0f0;
-  color: #454545;
+  color: #333333;
   border-radius: 0.4em;
   /*text-align: center;*/ }
+  .footerBox h3, .footerBox h4 {
+    margin: 0.2em 0 0.5em;
+    padding: 0;
+    font-size: 1.5em;
+    line-height: 1em;
+    /*text-align: left;*/ }
+  .footerBox li {
+    margin: 0 0 0.9em;
+    padding: 0;
+    list-style: square inside url("images/arrow_list.png");
+    /*text-align: left;*/ }
+  .footerBox a:link {
+    text-decoration: none;
+    color: #454545;
+    /*color:;*/ }
+  .footerBox a:visited {
+    text-decoration: none;
+    color: #454545; }
+  .footerBox a:hover {
+    text-decoration: underline;
+    color: #121212; }
+  .footerBox a:active {
+    text-decoration: none;
+    color: #121212; }
 
-.footerBox h3,
-.footerBox h4 {
-  margin: 0.2em 0 0.5em;
-  padding: 0;
-  font-size: 1.5em;
-  line-height: 1em;
-  /*text-align: left;*/ }
-
-.footerBox li {
-  margin: 0 0 0.9em;
-  padding: 0;
-  font-size: 1em;
-  /* 10px */
-  line-height: 1em;
-  list-style: square inside url("images/arrow_list.png");
-  /*text-align: left;*/ }
-
-.footerBox a:link {
-  text-decoration: none;
-  color: #454545;
-  /*color:;*/ }
-
-.footerBox a:visited {
-  text-decoration: none;
-  color: #454545; }
-
-.footerBox a:hover {
-  text-decoration: none;
-  color: black; }
-
-.footerBox a:active {
-  text-decoration: none;
-  color: black; }
+.contactInfo {
+  float: right;
+  text-align: right;
+  color: white;
+  list-style: none; }
+  .contactInfo li {
+    list-style: none;
+    line-height: 1.3em; }
+  .contactInfo a:link {
+    color: inherit;
+    text-decoration: none; }
+  .contactInfo a:visited {
+    color: inherit; }
+  .contactInfo a:hover {
+    color: #b3b3b3;
+    text-decoration: underline; }
 
 .copyright {
+  margin: 0;
+  padding: 0;
   text-align: center;
   color: #545454;
-  font-size: 0.9em; }
+  font-size: 1.1em;
+  line-height: 3em; }
 
 /*slideshow*/
 /* setting height/width and overflow hidden eliminates popping (all banners showing then hiding) */
@@ -552,7 +567,6 @@ footer {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 10;
   height: 300px;
   width: 1120px;
   margin: 0 auto;
@@ -670,9 +684,11 @@ footer {
 /* Category & Product */
 .headings {
   margin: 0;
-  margin-bottom: 8px;
   padding: 0;
-  text-align: right; }
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  text-align: right;
+  border-bottom: 1px solid #cdcccc; }
   .headings h1, .headings h2, .headings h3 {
     margin: 0;
     padding: 0;
@@ -727,31 +743,33 @@ footer {
   color: #e3001b; }
 
 .content .productList, .content .subCategoryList {
-  color: #6b6b6b; }
+  color: #6b6b6b;
+  text-align: center;
+  padding-top: 10px; }
   .content .productList li, .content .subCategoryList li {
-    margin-bottom: 30px;
+    margin: 10px;
     width: 230px;
-    height: auto;
+    height: 230px;
     float: none;
-    display: inline-block; }
+    display: inline-block;
+    vertical-align: top;
+    text-align: left; }
   .content .productList img, .content .subCategoryList img {
     width: 230px;
     height: 230px; }
   .content .productList h5, .content .subCategoryList h5 {
-    padding-left: 1.08em;
+    padding: 0.3em 0.3em 0 1.32em;
     font-size: 1.7em;
+    line-height: 1.2em;
     font-weight: bold;
     text-transform: uppercase;
     background: url("images/arrow_cat.png") no-repeat;
     background-size: 0.6em;
-    background-position: 0 0.33333em; }
+    background-position: 0.5em 0.5em; }
   .content .productList h6, .content .subCategoryList h6 {
     font-size: 1.3em;
     font-weight: normal; }
   .content .productList .viewProductLink, .content .subCategoryList .viewProductLink {
-    margin: 0;
-    padding: 0.6em;
-    padding-left: 3em;
     font-size: 1.6em;
     background: #cdcdcd url("images/icon_search.png") no-repeat;
     background-size: 1.5em;
@@ -764,13 +782,30 @@ footer {
     filter: alpha(opacity=80);
     opacity: 0.8; }
 
+.prodThumbContainer {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  border: 1px solid #cdcdcd; }
+  .prodThumbContainer .productName {
+    position: absolute;
+    top: 0;
+    z-index: 10; }
+  .prodThumbContainer .viewProductLink {
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    padding: 0.6em 0; }
+    .prodThumbContainer .viewProductLink span {
+      margin-left: 3em; }
+
 /* Product */
 .productSpecsContainer {
   margin: 8px 0;
   padding: 8px 0;
-  border: 1px solid #cdcccc;
-  border-right-width: 0;
-  border-left-width: 0;
+  border-bottom: 1px solid #cdcccc;
   color: #313131; }
   .productSpecsContainer .breadcrumb {
     float: right; }
@@ -877,17 +912,29 @@ footer {
 .productImageContainer {
   display: inline-block;
   vertical-align: top;
-  width: 340px;
+  width: 360px;
   height: 100%; }
 
-.prodThumbs div {
-  display: inline-block; }
+.productImage img {
+  border: 1px solid gray; }
+
+.productImagePrimary {
+  margin-bottom: 10px; }
+
+.prodThumbs {
+  text-align: center; }
+  .prodThumbs div {
+    display: inline-block; }
+  .prodThumbs .productImage {
+    margin: 0 14px 0 0; }
+  .prodThumbs .productImageLast {
+    margin: 0; }
 
 .productDetailsContainer {
   display: inline-block;
   vertical-align: top;
   color: #454545;
-  width: 486px;
+  width: 471px;
   height: 100%; }
 
 .productDetailsList {

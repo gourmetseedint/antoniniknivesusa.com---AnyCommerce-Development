@@ -4,7 +4,8 @@
 <!-- BUG: in production, menu links stop working after visiting a product -->
 <!-- TODO: change wholesale pretty form all caps to normal -->
 <!-- TODO: get search form to work -->
-<!-- BUG: sub category's pretty are showing up in category template -->
+<!-- BUG: sub category's pretty are showing up in category teplate -->
+<!-- BUG: production - reload on boat category causes 500 error -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -25,7 +26,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121130165747",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121130205607",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -102,6 +103,21 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
           </span>
         </div>
       </nav>
+      <div id="slideshowContainer" class='displayNone'>
+      <!-- <div id="slideshowNav"></div> -->
+        <ul id="wideSlideshow" class="pics slideshow">
+          <li><img src='images/home_slide_1.png'/></li>
+          <li><img src='images/home_slide_2.png'/></li>
+          <li><img src='images/home_slide_3.png'/></li>
+          <!-- Use if slideshows entered into database
+          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow1); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
+          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow2); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
+          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow3); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
+          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow4); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
+          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow5); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
+          -->
+        </ul>
+      </div>
     </header>
     <aside class="sidebar">
       <nav class="navMenu">
@@ -154,6 +170,16 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
           <li><a href="#customer?show=orders" class='bindByAnchor' title='Track Order'>Track Order</a></li>
           <li><a href="#customer?show=myaccount" class='bindByAnchor' title='Recover Password'>Recover Password</a></li>
         </ul>
+        <ul class="contactInfo">
+          <li>GSI Distributing</li>
+          <li>North American Distributer for <a href="http://www.antoniniknives.com" target="_blank">Antonini Knives</a></li>
+          <li>HC 12 Box 510</li>
+          <li>Tatum, NM 88267</li>
+          <li>USA</li>
+          <li>PH: 575-398-6141</li>
+          <li>FX: 575-398-6151</li>
+          <li>EM: <a href="#company?show=contact" class='bindByAnchor' title='Contact'>customerservice [at] antoniniknivesusa.com</a></li><!-- TODO: add real email address -->
+        </ul>
       </div>
     </div>
     <div class='container'>
@@ -203,22 +229,6 @@ COMMONLY EDITED TEMPLATES
 the homepageTemplate template is loaded into mainContentArea by default when the application loads
 -->
 <div id='homepageTemplate'>
-
-  <div id="slideshowContainer">
-  <!-- <div id="slideshowNav"></div> -->
-    <ul id="wideSlideshow" class="pics slideshow">
-      <li><img src='images/home_slide_1.png'/></li>
-      <li><img src='images/home_slide_2.png'/></li>
-      <li><img src='images/home_slide_3.png'/></li>
-      <!-- Use if slideshows entered into database
-      <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow1); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-      <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow2); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-      <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow3); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-      <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow4); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-      <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow5); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-      -->
-    </ul>
-  </div>
 
   <div class='logosCategoryHome'>
     <ul>
@@ -319,18 +329,18 @@ remember to NOT put the button inside the 'onclick' container or two events will
 <!-- QUE: how to style pagination -->
 <!-- TODO: style pagination -->
 <!-- TODO: align h5 to top, but keep img aligned to bottom -->
-<li id='productListTemplate' class='loadingBG  ' onMouseOver="$('.quickView',$(this)).show();$(this).addClass('categoryProductHover');" onMouseOut="$('.quickView').hide();$(this).removeClass('categoryProductHover');" >
+<li id='productListTemplate' class='loadingBG  ' onMouseOver="$(this).addClass('categoryProductHover');" onMouseOut="$(this).removeClass('categoryProductHover');" >
   
   <button class='floatRight pointer quickView displayNone' onClick="quickView('product',{'templateID':'productTemplateQuickView','pid':$(this).closest('[data-pid]').attr('data-pid')});">Quickview</button>
   
   <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
-    <h5 data-bind='var: product(zoovy:prod_name); format:text;'></h5>
 
     <div class='prodThumbContainer' data-bind='var:product(pid); format:addPicSlider; extension:myRIA;'>
+      <h5 data-bind='var: product(zoovy:prod_name); format:text;' class='productName'></h5>
       <img src='blank.gif' class='prodThumb' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='230' height='230' />
+      <div class="viewProductLink"><span>View Product</span></div>
     </div>
     
-    <div class="viewProductLink">View Product</div>
   
     <!-- <h6 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6> -->
     
@@ -526,14 +536,14 @@ this will likely become more flexible in the future. ###
   </div>
   <div class="productViewContainer">
     <div class='productImageContainer'>
-      <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' class='pointer clearfix'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
+      <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' class='pointer clearfix productImage productImagePrimary'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
         <div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
         <img src='blank.gif' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='340' height='340' />
       </div>
       <div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbs'>
-        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"2"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image2); format:imageURL;' width='100' height='100' /></div>
-        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"3"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image3); format:imageURL;' width='100' height='100' /></div>
-        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"4"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image4); format:imageURL;' width='100' height='100' /></div>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"2"});' class='pointer productImage'><img src='blank.gif' data-bind='var: product(zoovy:prod_image2); format:imageURL;' width='100' height='100' /></div>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"3"});' class='pointer productImage'><img src='blank.gif' data-bind='var: product(zoovy:prod_image3); format:imageURL;' width='100' height='100' /></div>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"4"});' class='pointer productImage productImageLast'><img src='blank.gif' data-bind='var: product(zoovy:prod_image4); format:imageURL;' width='100' height='100' /></div>
       </div>
     </div>
     <div class="productDetailsContainer">
@@ -845,13 +855,20 @@ adding classes is not likely to have any bad effects.
   <div class='mainColumn'>
 <!-- .textContentArea is used as a selector in quickstart.js because article tag type isn't ie8 friendly -->
     <div id='aboutArticle' class='textContentArea article'>
-      <h1>About Us</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>About Us</h1>
+      </div>
       <div data-bind='var: profile(zoovy:about); format:wiki; wikiFormats:myRIA;' id='aboutUsContent'></div>
     </div>
   
   
     <div id='contactArticle' class='displayNone textContentArea'>
-      <h1>Contact Information</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Contact Information</h1>
+      </div>
+
       <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" id='contactForm' name='contactForm'>
       <fieldset>
         <legend>Contact Us</legend>
@@ -870,20 +887,32 @@ adding classes is not likely to have any bad effects.
     
   
     <div id='faqArticle' class='displayNone textContentArea'>
-      <h1>Frequently Asked Questions</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Frequently Asked Questions</h1>
+      </div>
+
       <div id='faqContent' class='loadingBG ui-accordion ui-widget ui-helper-reset ui-accordion-icons appAccordianesque'></div>
     </div>
   
 
   
     <div class='displayNone textContentArea' id='paymentArticle'>
-      <h1>Payment Policy</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Payment Policy</h1>
+      </div>
+
       <div data-bind='var: profile(zoovy:payment_policy); format:wiki; wikiFormats:myRIA;' id='paymentContent'></div>
     </div>
     
     
     <div class='displayNone textContentArea' id='privacyArticle'>
-      <h1>Privacy Statement</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Privacy Statement</h1>
+      </div>
+
   <h4>About this Privacy Policy:</h4>
   <p>The entire site, or at least specific portions of this site are assisted by Zoovy technology. Zoovy has created this privacy policy as a template for customers who are using Zoovy technology with their websites. Zoovy in no way takes responsibility for the accuracy or enforcement of this policy. For a copy of Zoovy's privacy policy (which does not necessarily apply to the customers of its customers) visit http://www.zoovy.com/legal</p>
   
@@ -927,22 +956,28 @@ adding classes is not likely to have any bad effects.
     
     
     <div class='displayNone textContentArea' id='returnArticle'>
-      <h1>Return Policy</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Return Policy</h1>
+      </div>
+
       <div data-bind='var: profile(zoovy:return_policy); format:wiki; wikiFormats:myRIA;' id='returnContent'></div>
     </div>
   
   
     
     <div class='displayNone textContentArea' id='shippingArticle'>
-      <h1>Shipping Information</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Shipping Information</h1>
+      </div>
+
       <div data-bind='var: profile(zoovy:shipping_policy); format:wiki; wikiFormats:myRIA;' id='shippingContent'></div>
     </div>
   
   </div>
 
 </div><!-- /companyTemplate -->
-
-
 
 <!-- loadingBG needed on this for app init (content may take a moment to load) -->
 <div id='customerTemplate' class='clearfix loadingBG'>
@@ -964,12 +999,20 @@ adding classes is not likely to have any bad effects.
   <div class='mainColumn'>
 <!-- .textContentArea is used as a selector because IE8 doesn't play well  with tag type article as a selector -->
     <div id='newsletterArticle' class='displayNone textContentArea'>
-      <h1>Subscribe to our Newsletter and Save!</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Subscribe to our Newsletter and Save!</h1>
+      </div>
+
       <div id='newsletterFormContainer'></div>
     </div>
   
     <div id='myaccountArticle' class='displayNone textContentArea'>
-      <h1>My Account</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>My Account</h1>
+      </div>
+
       <div id='logMessaging'></div>
       <div><a href="#" onClick="app.u.logBuyerOut(); showContent('category',{'navcat':'.'}); return false;">Log Out</a></div>
       
@@ -994,14 +1037,22 @@ adding classes is not likely to have any bad effects.
   
   
     <div id='ordersArticle' class='displayNone textContentArea'>
-      <h1>Order History</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Order History</h1>
+      </div>
+
       <div id='orderHistoryContainer' class='ui-accordion ui-widget ui-helper-reset ui-accordion-icons '></div>
     </div>
   
   
   
     <div id='changepasswordArticle' class='displayNone textContentArea'>
-      <h1>Change Password</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Change Password</h1>
+      </div>
+
       <div id='changepasswordContainer'>
 
 <form action='#' id='changePasswordForm' name='changePasswordForm' onSubmit="app.ext.store_crm.u.handleChangePassword('changePasswordForm',{'callback':'showMessaging','message':'Thank you, your password has been changed','targetID':'changepasswordContainer'}); return false">
@@ -1017,7 +1068,11 @@ adding classes is not likely to have any bad effects.
     </div>
   
     <div id='listsArticle' class='displayNone textContentArea'>
-      <h1>List Manager</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>List Manager</h1>
+      </div>
+
       <div id='listsContainer' class='prodlist loadingBG'></div>
       
       <div id='listEditorContainer' class='displayNone loadingBG'></div><!-- editor for a given list gets added here -->
@@ -1025,7 +1080,10 @@ adding classes is not likely to have any bad effects.
     </div>
   
     <div id='forgetmeArticle' class='displayNone textContentArea'>
-      <h1>Your 'Forget Me' list</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Your 'Forget Me' list</h1>
+      </div>
       <p>Items on this list will not show up anywhere on the site. Use it for items you never want to see again. If you add an item to the list by mistake, use this page to remove it from the list and it will start re-appearing during your shopping experience.</p>
       <ul id='forgetmeContainer' class='prodlist loadingBG'>
       </ul>

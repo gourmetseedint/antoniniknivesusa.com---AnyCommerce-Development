@@ -2,6 +2,7 @@
 
 // TODO: hover opacity for home cats
 // TODO: hover opacity for product images
+// TODO: make image popup title the same as pagination
 
 // dimensions
 $width_page: 1120px;
@@ -27,6 +28,8 @@ $color_bg: #fdfdfd;
 
 $color_text: #101010;
 $color_h2: #8e8e8e;
+
+$color_border: #cdcccc;
 
 $color_a: #111;
 $color_a_hover: blue;
@@ -57,6 +60,14 @@ $color_search_text: #555;
 $color_home_h2: #8e8e8e;
 $color_home_text: #a6a6a6;
 
+$color_footer_border: black;
+$color_footerBox_bg: #f0f0f0;
+$color_footerBox_link: #454545;
+$color_footerBox_hover: darken($color_footerBox_link, 20%);
+$color_footerBox_text: #333333;
+$color_contactInfo_text: white;
+$color_contactInfo_hover: darken($color_contactInfo_text, 30%);
+
 $color_cat_home: #313131;
 $color_headingsCat_a_hover: lighten($color_cat_home, 20%);
 
@@ -65,6 +76,9 @@ $color_breadcrumb_hover: lighten($color_breadcrumb, 20%);
 
 $color_productList_text: #6b6b6b;
 $color_productList_hover: darken($color_productList_text, 20%);
+$color_productList_border: #cdcdcd;
+
+$color_productImage_border: gray;
 
 $color_productSpecs_text: #313131;
 $color_productSpecs_a: $color_productSpecs_text;
@@ -88,11 +102,11 @@ $color_cat_promo: #ff00fe;
 $color_cat_sos: #e3001b;
 
 // product
-$color_product_specs_border: #cdcccc;
+$color_product_specs_border: $color_border;
 
 $background_button: black left top url('images/button_bg.png') repeat-x;
 $background_button_hover: gray left top url('images/button_flipped_bg.png') repeat-x;
-$background_footer: black url('images/footer_bg.png') repeat-x;
+$background_footer: $color_footer_border url('images/footer_bg.png') repeat-x;
 
 // mixins
 
@@ -480,8 +494,9 @@ header {
 
 // $height_navTop_padding: 0.8em;
 $height_navTop_font: 1.2em;
-$height_navTop_font_padding: 1em;
-$height_navTop_corner: (3 * $height_navTop_font); // since padding is 1em
+$height_navTop_font_padding_scale: 1.4; 
+$height_navTop_font_padding: $height_navTop_font_padding_scale * 1em;
+$height_navTop_corner: (2 * $height_navTop_font_padding_scale * $height_navTop_font) + $height_navTop_font; // since padding is 1em
 
 .navTop {
   // margin: 0;
@@ -599,9 +614,10 @@ $height_navTop_corner: (3 * $height_navTop_font); // since padding is 1em
   margin: 0;
   width: 32px;
   height: 28px;
+    line-height: $height_navTop_corner;
   // vertical-align: middle;
   display: inline-block;
-  margin-top: 5px;
+  margin-top: 10px;
   // margin: $height_socialIcon_padding 0;
   /*z-index: 10;*/
 }
@@ -884,11 +900,14 @@ $wholesalePadtop: 10px;
 
 footer {
   margin-top: 20px;
+  font-size: 1em; /* 10px */
+  line-height: 1em;
 }
 
 .footerBoxesWrapper {
   padding: 1.2em 3.6em;
   background: $background_footer;
+  border: 1px solid $color_footer_border;
   @extend .shadowBottomOuter;
 }
 
@@ -899,55 +918,79 @@ footer {
   height: 12em; /*TODO: footer box - maybe add something more fluid;*/
   vertical-align: top;
   display: inline-block;
-  background: #f0f0f0;
-  color: #454545;
+  background: $color_footerBox_bg;
+  color: $color_footerBox_text;
   border-radius: 0.4em;
   /*text-align: center;*/
+  h3, h4 {
+    margin: 0.2em 0 0.5em;
+    padding: 0;
+    font-size: 1.5em;
+    line-height: 1em;
+    /*text-align: left;*/
+  }
+  li {
+    margin: 0 0 0.9em;
+    padding: 0;
+    // font-size: 1em; /* 10px */
+    // line-height: 1em;
+    list-style: square inside url("images/arrow_list.png");
+    /*text-align: left;*/
+  }
+  a {
+    &:link {
+      text-decoration: none;
+      color: $color_footerBox_link;
+      /*color:;*/
+    }
+    &:visited {
+      text-decoration: none;
+      color: $color_footerBox_link;
+    }
+    &:hover {
+      text-decoration: underline;
+      color: $color_footerBox_hover;
+    }
+    &:active {
+      text-decoration: none;
+      color: $color_footerBox_hover;
+    }
+  }
 }
 
-.footerBox h3, 
-.footerBox h4 {
-  margin: 0.2em 0 0.5em;
-  padding: 0;
-  font-size: 1.5em;
-  line-height: 1em;
-  /*text-align: left;*/
-}
-
-.footerBox li {
-  margin: 0 0 0.9em;
-  padding: 0;
-  font-size: 1em; /* 10px */
-  line-height: 1em;
-  list-style: square inside url("images/arrow_list.png");
-  /*text-align: left;*/
-}
-
-.footerBox a:link {
-  text-decoration: none;
-  color: #454545;
-  /*color:;*/
-}
-
-.footerBox a:visited {
-  text-decoration: none;
-  color: #454545;
-}
-
-.footerBox a:hover {
-  text-decoration: none;
-  color: black;
-}
-
-.footerBox a:active {
-  text-decoration: none;
-  color: black;
+.contactInfo {
+  // display: inline-block;
+  float: right;
+  text-align: right;
+  color: $color_contactInfo_text;
+  list-style: none;
+  li {
+    list-style: none;
+    line-height: 1.3em;
+  }
+  a {
+    &:link {
+      color: inherit;
+      text-decoration: none;
+    }
+    &:visited {
+      color: inherit;
+    }
+    &:hover {
+      color: $color_contactInfo_hover;
+      text-decoration: underline;
+    }
+  }
 }
 
 .copyright {
+  margin: 0;
+  padding: 0;
   text-align: center;
   color: #545454;
-  font-size: 0.9em;
+  font-size: 1.1em;
+  line-height: 3em;
+  // padding: 1em 0;
 }
 
 /*slideshow*/
@@ -958,7 +1001,7 @@ footer {
   position: absolute;
   top: 0;
   left: 0;
-  z-index:10;
+  // z-index:10;
   height:300px;
   // min-width:720px;
   // max-width:$width_page;
@@ -1103,9 +1146,11 @@ $breadcrumb_margin: 0.2em;
 
 .headings {
   margin: 0;
-  margin-bottom: 8px;
   padding: 0;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
   text-align: right;
+  border-bottom: 1px solid $color_border;
   h1, h2, h3 {
     margin: 0;
     padding: 0;
@@ -1190,29 +1235,41 @@ $breadcrumb_margin: 0.2em;
 
 $width_productList_bg: 0.6em;
 $width_viewProduct_icon: 1.5em;
+$height_productList_h5_padding_top: 0.3em;
+$height_productSpecsList_bg: $height_productList_h5_padding_top + $width_productList_bg/2 - 0.1em;
 .content {
   // TODO: keep images aligned bottom, but align names to top
   .productList, .subCategoryList {
     color: $color_productList_text;
+    text-align: center;
+    padding-top: 10px;
     li {
-      margin-bottom: 30px;
+      margin: 10px;
+      // margin-bottom: 30px;
       width: 230px;
-      height: auto;
+      height: 230px;
+      // height: auto;
       float: none;
       display: inline-block;
+      vertical-align: top;
+      text-align: left;
+      // border: 1px solid $color_productList_border;
     }
     img {
       width: 230px;
       height: 230px;
     }
     h5 { // name
-      padding-left: $width_productList_bg * 1.8;
+      padding: $height_productList_h5_padding_top 0.3em 0 $width_productList_bg * 2.2;
+      // padding-left: $width_productList_bg * 2.2;
+      // padding-top: 0.3em;
       font-size: 1.7em;
+      line-height: 1.2em;
       font-weight: bold;
       text-transform: uppercase;
       background: url('images/arrow_cat.png') no-repeat;
       background-size: $width_productList_bg;
-      background-position: 0 $width_productList_bg/1.8; 
+      background-position: 0.5em $height_productSpecsList_bg; 
       // background-size: 0.6em;
       // &:before {
       //   content: url('images/arrow_cat.png');
@@ -1224,11 +1281,9 @@ $width_viewProduct_icon: 1.5em;
       font-weight: normal;
     }
     .viewProductLink { // TODO: maybe overlay on top of prodThumbContainer
-      margin: 0;
-      padding: 0.6em;
-      padding-left: $width_viewProduct_icon + 1.5em;
       font-size: 1.6em;
-      background: #cdcdcd url('images/icon_search.png') no-repeat;
+      // TODO: maybe add gray transluscent background
+      background: $color_productList_border url('images/icon_search.png') no-repeat;
       background-size: $width_viewProduct_icon;
       background-position: 1em center;
       // color: #6b6b6b;
@@ -1243,6 +1298,38 @@ $width_viewProduct_icon: 1.5em;
   }
 }
 
+.prodThumbContainer {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  border: 1px solid $color_productList_border;
+  .productName {
+    // TODO: maybe add white transluscent background
+    position: absolute;
+    top: 0;
+    z-index: 10;
+  }
+  .viewProductLink {
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    display: block;
+    width: 100%; // absolute causes width to be auto
+    // margin: 0;
+    padding: 0.6em 0;
+    span {
+      // margin: 0 0.6em;
+      margin-left: $width_viewProduct_icon + 1.5em;
+
+    }
+    // width: 230px;
+  }
+}
+
+// .quickView {
+//   top: 40px;
+// }
+
 /* Product */
 
 // product specs
@@ -1251,9 +1338,9 @@ $width_viewProduct_icon: 1.5em;
   @extend .clearfixScss;
   margin: 8px 0;
   padding: 8px 0;
-  border: 1px solid $color_product_specs_border;
-  border-right-width: 0;
-  border-left-width: 0;
+  border-bottom: 1px solid $color_product_specs_border;
+  // border-right-width: 0;
+  // border-left-width: 0;
   color: $color_productSpecs_text;
   .breadcrumb {
     float: right;
@@ -1365,8 +1452,8 @@ $productSpecs_margin: 0.8em;
 
 // product view
 
-$width_product_image: 340px + 10px;
-$widith_product_details: $width_content - $width_product_image;
+$width_product_image: 340px + 20px;
+$widith_product_details: $width_content - $width_product_image - 5px;
 .productViewContainer {
   // display: block;
   vertical-align: top;
@@ -1377,13 +1464,31 @@ $widith_product_details: $width_content - $width_product_image;
 .productImageContainer {
   display: inline-block;
   vertical-align: top;
-  width: 340px;
+  width: $width_product_image;
   height: 100%;
 }
 
+.productImage {
+  img {
+    border: 1px solid $color_productImage_border;
+  }
+  // @include box-sizing;
+}
+
+.productImagePrimary {
+  margin-bottom: 10px;
+}
+
 .prodThumbs {
+  text-align: center;
   div {
     display: inline-block;
+  }
+  .productImage {
+    margin: 0 14px 0 0;
+  }
+  .productImageLast {
+    margin: 0;
   }
 }
 

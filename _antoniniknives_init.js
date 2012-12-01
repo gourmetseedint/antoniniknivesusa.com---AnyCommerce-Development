@@ -37,30 +37,7 @@ app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
 
 ///// custom \\\\\
 
-
-///// homepage slideshow \\\\\
-
-//cycle used for slideshow
-app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
-
-//add slideshow to homepage.
-app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
-  var $target = $('#wideSlideshow');
-  if($target.children().length > 1) {
-    $('#wideSlideshow').cycle({
-      fx:'fade',
-      speed:'slow',
-      timeout: 5000,
-      pager:'#slideshowNav',
-      slideExpr: 'li'
-    });
-  }
-}]);
-
-// TODO: maybe add all backgrounds/logos then remove them while loading, so each cat loads faster
-// TODO: hide menu products when leaving category/product or entering company/customer/other cats
-
-///// variables \\\\\
+/// variables \\\
 var categoryBoat   = '.boat_-_fishing';
 var categoryCable  = '.cable_-_electrical';
 var categoryFarm   = '.farm_-_garden';
@@ -91,8 +68,10 @@ var classBannerCategoryPocket = 'bannerCategoryPocket';
 var classBannerCategoryPromo  = 'bannerCategoryPromo';
 var classBannerCategorySos    = 'bannerCategorySos';
 
-var sidebar = '.sidebar';
+var sidebar     = '.sidebar';
 var sidebarHome = 'sidebarHome';
+
+var slideshow = '#slideshowContainer';
 
 var logoCategory            = '#logoCategory';
 var classLogoCategoryBoat   = 'logoCategoryBoat';
@@ -130,13 +109,11 @@ var currentCategory;
 var currentNavcat;
 var periodCount;
 
+var headingSubsParent = '.headingSubsParent';
+
 // var lastBreadcrumbClass;
 
-// classBlock = 'classBlock';
-
-// app.u.dump([P]);
-
-// functions
+/// functions \\\
 
 // function titlize(navcatName) {
 //   var temp;
@@ -170,6 +147,7 @@ function navcatToTier1ID(navcat) {
 function resetBanner() {
   $(banner).removeClass();
   $(sidebar).removeClass(sidebarHome);
+  $(slideshow).addClass('displayNone');
 }
 
 function resetCategoryLogo() {
@@ -180,20 +158,45 @@ function resetAllMenuProducts() {
   $(menuSubLists).addClass('displayNone');
 }
 
-// function resetCategoryHeading() {
-//   $(headingCategory).removeClass();
-// }
-
-// resetAllMenuProducts();
-
-///// homepage \\\\\
-app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
+function defaultPage() {
   resetBanner();
   resetAllMenuProducts();
   $(banner).addClass(classBannerHome);
+  startSlideShow();
   $(sidebar).addClass(sidebarHome);
   $(logoCategory).addClass("displayNone");
-  // $(wholesaleInfo).removeClass("displayNone");
+}
+
+// function resetCategoryHeading() {
+//   $(headingCategory).removeClass();
+// }
+/// homepage slideshow \\\
+
+function startSlideShow() {
+  var $target = $('#wideSlideshow');
+  $(slideshow).removeClass('displayNone');
+  if($target.children().length > 1) {
+    $('#wideSlideshow').cycle({
+      fx:'fade',
+      speed:'slow',
+      timeout: 5000,
+      pager:'#slideshowNav',
+      slideExpr: 'li'
+    });
+  }
+}
+
+//cycle used for slideshow
+app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
+
+
+// TODO: maybe add all backgrounds/logos then remove them while loading, so each cat loads faster
+// TODO: hide menu products when leaving category/product or entering company/customer/other cats
+
+
+/// homepage \\\
+app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
+  defaultPage();
 }]);
 
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
@@ -202,14 +205,22 @@ app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   // $(wholesaleInfo).addClass("displayNone");
 }]);
 
-var headingSubsParent = '.headingSubsParent';
+/// company \\\
+app.rq.push(['templateFunction','companyTemplate','onCompletes',function(P) {
+  defaultPage();
+}]);
+
+/// customer \\\
+app.rq.push(['templateFunction','customerTemplate','onCompletes',function(P) {
+  defaultPage();
+}]);
 
 ///// categories \\\\\
 app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
 
   currentNavcat = P.navcat;
-  periodCount = (currentNavcat.split(/[.]/) || '').length - 1;
+  periodCount   = (currentNavcat.split(/[.]/) || '').length - 1;
   
   // resets
   resetBanner();
@@ -228,7 +239,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
 
   // $(headingSubCategory).html('asdf');
   // show category sub in menu
-  $(navcatToTier1ID(currentCategory) + ' > ul').removeClass('displayNone');
+  $(navcatToTier1ID(currentCategory) + ' > ul').show();
 
   // app.u.dump([navcatToTier1ID(P.navcat)]);
 
@@ -295,6 +306,8 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       // $(menuProductsSos).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorSos);
       break;
+    default:
+      defaultPage();
   }
 }]);
 
@@ -405,6 +418,8 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categorySos + "\"});'>" + prettySos + "</a>");
       break;
+    default:
+      defaultPage();
   }
 }]);
 
@@ -507,11 +522,13 @@ $(document).ready(function(){
   app.u.handleRQ(0);
 
   // Pre load images
-  $(banner).addClass(classBannerHome);
   $(banner).addClass(classBannerCategoryBoat);
   $(banner).addClass(classBannerCategoryCable);
   $(banner).addClass(classBannerCategoryFarm);
   $(banner).addClass(classBannerCategoryPocket);
   $(banner).addClass(classBannerCategoryPromo);
   $(banner).addClass(classBannerCategorySos);
+  $(banner).addClass(classBannerHome);
+  // resetBanner();
+  // startSlideShow();
 });
