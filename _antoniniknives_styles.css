@@ -354,11 +354,12 @@ header {
   .navMenu ul li ul, .navMenu ul li li {
     list-style: none; }
   .navMenu ul li ul {
-    padding: 0.5em 0 0 1.1em;
+    padding: 0.5em 0 0 0;
     color: white; }
     .navMenu ul li ul li {
-      margin: 0.1em 0;
-      padding: 0.2em 0.5em;
+      margin: 0;
+      margin-bottom: 0.5em;
+      padding: 0;
       height: auto;
       display: block;
       background: #565555;
@@ -366,9 +367,16 @@ header {
       text-transform: none; }
       .navMenu ul li ul li .appMessage {
         display: none; }
-      .navMenu ul li ul li.navMenuProductHover {
+      .navMenu ul li ul li div {
+        display: block; }
+      .navMenu ul li ul li .catName {
+        margin: 0.1em 0;
+        padding: 0.2em 0.5em; }
+      .navMenu ul li ul li.navMenuSubHover {
         color: #cccccc;
         background: #232222; }
+      .navMenu ul li ul li:last-child {
+        margin-bottom: 0; }
 
 .navMenuCategoryHover {
   color: #cccccc; }
@@ -662,6 +670,7 @@ footer {
 /* Category & Product */
 .headings {
   margin: 0;
+  margin-bottom: 8px;
   padding: 0;
   text-align: right; }
   .headings h1, .headings h2, .headings h3 {
@@ -672,7 +681,7 @@ footer {
   .headings h1 {
     font-size: 3.2em;
     display: inline-block;
-    line-height: 1.3em; }
+    font-weight: normal; }
   .headings h2 {
     margin-right: 0.1em;
     display: inline-block;

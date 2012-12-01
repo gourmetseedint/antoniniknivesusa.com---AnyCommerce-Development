@@ -682,13 +682,14 @@ $menuOffset: -35px;
     ul, li {
       list-style: none;
     }
-    ul { // product list
+    ul { // submenu list
       // display: none;
-      padding: 0.5em 0 0 1.1em;
+      padding: 0.5em 0 0 0;
       color: $color_menu_text;
       li {
-        margin: 0.1em 0;
-        padding: 0.2em 0.5em;
+        margin: 0;
+        margin-bottom: 0.5em;
+        padding: 0;
         // width: auto; // to clear qs_styles
         height: auto; // to clear qs_styles
         display: block;
@@ -698,9 +699,20 @@ $menuOffset: -35px;
         .appMessage { // hide missing products TODO: find better way to hide errors/missing products
           display: none;
         }
-        &.navMenuProductHover {
+        div {
+          display: block;
+        }
+        .catName {
+        margin: 0.1em 0;
+        padding: 0.2em 0.5em;
+
+        }
+        &.navMenuSubHover {
           color: $color_navMenuProductHover_text;
           background: $color_navMenuProductHover_bg;
+        }
+        &:last-child {
+          margin-bottom: 0;
         }
       }
     }
@@ -1091,6 +1103,7 @@ $breadcrumb_margin: 0.2em;
 
 .headings {
   margin: 0;
+  margin-bottom: 8px;
   padding: 0;
   text-align: right;
   h1, h2, h3 {
@@ -1102,7 +1115,8 @@ $breadcrumb_margin: 0.2em;
   h1 { // Category name (categoryTemplate) or Product name (productTemplate)
     font-size: 3.2em;
     display: inline-block;
-    line-height: 1.3em;
+    // line-height: 1.3em;
+    font-weight: normal;
     // color: inherit;
   }
   h2 { // homepage link

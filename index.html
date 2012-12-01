@@ -4,6 +4,7 @@
 <!-- BUG: in production, menu links stop working after visiting a product -->
 <!-- TODO: change wholesale pretty form all caps to normal -->
 <!-- TODO: get search form to work -->
+<!-- BUG: sub category's pretty are showing up in category template -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -24,7 +25,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121130133250",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121130165747",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -249,6 +250,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
   <div class='headings headingsCategory'>
     <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
     <h1 data-bind="var:category(pretty); format:text;" class="categoryColor"></h1>
+    <h3 class="headingSubsParent"></h3>
   </div>
   
   <div class='breadcrumbContainer'>
@@ -282,12 +284,12 @@ don't modify the 'data-templateid' unless you are changing template names and up
 <ul>
 <li id='categoryListTemplate'>
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
-    <h5 data-bind='var: category(pretty); format:text;' class='catName'></h5>
+    <h5 data-bind="var:category(pretty); format:text;" class='catName'></h5>
     <div class='thumbContainer logoCategoryDefault'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div>
   </div>
 </li>
 
-<li id='categoryListNoImagesTemplate'>
+<li id='categoryListNoImagesTemplate' onMouseOver="$('.quickView',$(this)).show();$(this).addClass('navMenuSubHover');" onMouseOut="$('.quickView').hide();$(this).removeClass('navMenuSubHover');">
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
     <!-- <div class='thumbContainer'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div> -->
     <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
@@ -497,7 +499,7 @@ this will likely become more flexible in the future. ###
     <div class="productSpecsMiddle">
       <ul class='productSpecsList'>
         <li><span data-bind='var:product(user:prod_weight_grams); format:text; pretext: <span class="pretext">Weight: </span>;'></span><!-- <span class="productWeight"><span class="pretext">Weight: </span>5.1</span>--></li>
-        <li><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;'><!--</span><span class="productLength"><span class="pretext">Blade: </span>90</span>--></li>
+        <li><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;'></span><!--</span><span class="productLength"><span class="pretext">Blade: </span>90</span>--></li>
         <li><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;'></span><!-- <span class="productLength"><span class="pretext">Overall: </span>205</span>--></li>
         <li><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span><!-- <span class="productLength"><span class="pretext">Closed: </span>115</span> --></li>
       </ul>
@@ -536,12 +538,12 @@ this will likely become more flexible in the future. ###
     </div>
     <div class="productDetailsContainer">
       <ul class='productDetailsList'>
-        <li><span data-bind='var:product(user:prod_steel);     format:text; pretext: Steel: ;'><!-- <span>Steel: Lorem</span> --></li>
-        <li><span data-bind='var:product(user:prod_finishing); format:text; pretext: Finishing: ;'><!-- <span>Finishing: Ipsum</span> --></li>
-        <li><span data-bind='var:product(user:prod_handle);    format:text; pretext: Handle: ;'><!-- <span>Handle: Dolar</span> --></li>
-        <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'><!-- <span>Locking: Sit</span> --></li>
-        <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'><!-- <span>Clip: Amet</span> --></li>
-        <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'><!-- <span>Fasteners: Consectetur</span> --></li>
+        <li><span data-bind='var:product(user:prod_steel);     format:text; pretext: Steel: ;'></span><!-- <span>Steel: Lorem</span> --></li>
+        <li><span data-bind='var:product(user:prod_finishing); format:text; pretext: Finishing: ;'></span><!-- <span>Finishing: Ipsum</span> --></li>
+        <li><span data-bind='var:product(user:prod_handle);    format:text; pretext: Handle: ;'></span><!-- <span>Handle: Dolar</span> --></li>
+        <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span><!-- <span>Locking: Sit</span> --></li>
+        <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span><!-- <span>Clip: Amet</span> --></li>
+        <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span><!-- <span>Fasteners: Consectetur</span> --></li>
       </ul>
       <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
     </div>

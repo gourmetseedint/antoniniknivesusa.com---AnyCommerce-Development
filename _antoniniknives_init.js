@@ -114,12 +114,12 @@ var menuProductsSos    = '#tier1categories_sos__rescue ul';
 var menuSubLists = '.menuSubList';
 
 var headingCategory     = '.headingsCategory h1';
-var categoryColorBoat   = 'categoryBoat';
-var categoryColorCable  = 'categoryCable';
-var categoryColorFarm   = 'categoryFarm';
-var categoryColorPocket = 'categoryPocket';
-var categoryColorPromo  = 'categoryPromo';
-var categoryColorSos    = 'categorySos';
+var classColorBoat   = 'categoryBoat';
+var classColorCable  = 'categoryCable';
+var classColorFarm   = 'categoryFarm';
+var classColorPocket = 'categoryPocket';
+var classColorPromo  = 'categoryPromo';
+var classColorSos    = 'categorySos';
 
 var headingProductNavcat         = '.headingProductNavcat';
 // var headingProductName           = '.headingsProduct h1';
@@ -127,6 +127,8 @@ var headingProductCategory       = '.headingsProduct h3';
 var headingProductCategoryPretty = 'Temp Pretty'; // QUE: How should I get the pretty name from the navcat?  Can I use category(pretty)?
 var elementsWithCategoryColor    = '.categoryColor';
 var currentCategory;
+var currentNavcat;
+var periodCount;
 
 // var lastBreadcrumbClass;
 
@@ -161,7 +163,7 @@ function navcatToPretty(navcat) {
 
 function navcatToTier1ID(navcat) {
   // replace '.' with '_' and '-' with ''
-  var temp = '#tier1categories' + navcat.toString().split(/[.]/).join('_').split(/-/).join('');
+  var temp = '#tier1categories' + navcat.split(/[.]/).join('_').split(/-/).join('');
   return temp;
 }
 
@@ -200,22 +202,39 @@ app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   // $(wholesaleInfo).addClass("displayNone");
 }]);
 
-
+var headingSubsParent = '.headingSubsParent';
 
 ///// categories \\\\\
 app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
+
+  currentNavcat = P.navcat;
+  periodCount = (currentNavcat.split(/[.]/) || '').length - 1;
   
   // resets
   resetBanner();
   resetCategoryLogo();
   resetAllMenuProducts();
 
+  if (periodCount === 1) {
+    // catgories
+    currentCategory = P.navcat;
+    $(headingSubsParent).html('');
+  } else if (periodCount === 2) {
+    // sub categories
+    currentCategory = currentNavcat.substring(0, currentNavcat.lastIndexOf('.'));
+    $(headingSubsParent).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + currentCategory + "\"});'>" + navcatToPretty(currentCategory) + "</a>");
+  }
+
+  // $(headingSubCategory).html('asdf');
   // show category sub in menu
-  $(navcatToTier1ID(P.navcat) + ' > ul').removeClass('displayNone');
+  $(navcatToTier1ID(currentCategory) + ' > ul').removeClass('displayNone');
+
   // app.u.dump([navcatToTier1ID(P.navcat)]);
 
-  switch(P.navcat) {
+
+
+  switch(currentCategory) {
     case categoryBoat:
       // resetBanner();
       // resetCategoryLogo();
@@ -224,7 +243,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryBoat);
       $(logoCategory).addClass(classLogoCategoryBoat);
       // $(menuProductsBoat).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorBoat);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorBoat);
       break;
     case categoryCable:
       // resetBanner();
@@ -234,7 +253,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryCable);
       $(logoCategory).addClass(classLogoCategoryCable);
       // $(menuProductsCable).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorCable);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorCable);
       break;
     case categoryFarm:
       // resetBanner();
@@ -244,7 +263,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryFarm);
       $(logoCategory).addClass(classLogoCategoryFarm);
       // $(menuProductsFarm).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorFarm);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorFarm);
       break;
     case categoryPocket:
       // resetBanner();
@@ -254,7 +273,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryPocket);
       $(logoCategory).addClass(classLogoCategoryPocket);
       // $(menuProductsPocket).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPocket);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPocket);
       break;
     case categoryPromo:
       // resetBanner();
@@ -264,7 +283,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryPromo);
       $(logoCategory).addClass(classLogoCategoryPromo);
       // $(menuProductsPromo).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPromo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPromo);
       break;
     case categorySos:
       // resetBanner();
@@ -274,7 +293,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategorySos);
       $(logoCategory).addClass(classLogoCategorySos);
       // $(menuProductsSos).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorSos);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorSos);
       break;
   }
 }]);
@@ -307,7 +326,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryBoat);
       $(logoCategory).addClass(classLogoCategoryBoat);
       // $(menuProductsBoat).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorBoat);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorBoat);
       // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryBoat + "\"});'>" + prettyBoat + "</a>");
       break;
@@ -322,7 +341,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryCable);
       $(logoCategory).addClass(classLogoCategoryCable);
       // $(menuProductsCable).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorCable);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorCable);
       // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryCable + "\"});'>" + prettyCable + "</a>");
       break;
@@ -337,7 +356,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryFarm);
       $(logoCategory).addClass(classLogoCategoryFarm);
       // $(menuProductsFarm).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorFarm);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorFarm);
       // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryFarm + "\"});'>" + prettyFarm + "</a>");
       break;
@@ -352,7 +371,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryPocket);
       $(logoCategory).addClass(classLogoCategoryPocket);
       // $(menuProductsPocket).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPocket);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPocket);
       // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPocket + "\"});'>" + prettyPocket + "</a>");
       break;
@@ -367,7 +386,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategoryPromo);
       $(logoCategory).addClass(classLogoCategoryPromo);
       // $(menuProductsPromo).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorPromo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPromo);
       // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPromo + "\"});'>" + prettyPromo + "</a>");
       break;
@@ -382,7 +401,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(banner).addClass(classBannerCategorySos);
       $(logoCategory).addClass(classLogoCategorySos);
       // $(menuProductsSos).removeClass('displayNone');
-      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categoryColorSos);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorSos);
       // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categorySos + "\"});'>" + prettySos + "</a>");
       break;
@@ -462,12 +481,12 @@ app.u.appInitComplete = function(P) {
 
   // get pretty names for product pages
   // BUG: appInitComplete runs after productTemplate onCompletez
-  prettyBoat   = navcatToPretty(categoryBoat);
-  prettyCable  = navcatToPretty(categoryCable);
-  prettyFarm   = navcatToPretty(categoryFarm);
-  prettyPocket = navcatToPretty(categoryPocket);
-  prettyPromo  = navcatToPretty(categoryPromo);
-  prettySos    = navcatToPretty(categorySos);
+  // prettyBoat   = navcatToPretty(categoryBoat);
+  // prettyCable  = navcatToPretty(categoryCable);
+  // prettyFarm   = navcatToPretty(categoryFarm);
+  // prettyPocket = navcatToPretty(categoryPocket);
+  // prettyPromo  = navcatToPretty(categoryPromo);
+  // prettySos    = navcatToPretty(categorySos);
 
   // Pre load images
   // $(banner).addClass(classBannerHome);
