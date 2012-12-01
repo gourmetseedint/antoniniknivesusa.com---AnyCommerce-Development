@@ -155,7 +155,7 @@ function resetCategoryLogo() {
 }
 
 function resetAllMenuProducts() {
-  $(menuSubLists).addClass('displayNone');
+  $(menuSubLists).slideUp(500);
 }
 
 function defaultPage() {
@@ -239,7 +239,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
 
   // $(headingSubCategory).html('asdf');
   // show category sub in menu
-  $(navcatToTier1ID(currentCategory) + ' > ul').show();
+  $(navcatToTier1ID(currentCategory) + ' > ul').slideDown(500);
 
   // app.u.dump([navcatToTier1ID(P.navcat)]);
 
