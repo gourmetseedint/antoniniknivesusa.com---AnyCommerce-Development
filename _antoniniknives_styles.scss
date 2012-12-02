@@ -49,10 +49,12 @@ $color_navTop_bg_hover: lighten($color_navTop_bg, 10%);
 $color_menu_bg: #101010;
 $color_menu_text: white;
 $color_menu_product_bg: #565555;
-$color_navMenuCategoryHover_text: darken($color_menu_text, 20%);
+$color_navMenuCategoryHover_text: darken($color_menu_text, 30%);
 $color_navMenuCategoryHover_bg: darken($color_menu_bg, 20%);
-$color_navMenuProductHover_text: darken($color_menu_text, 20%);
-$color_navMenuProductHover_bg: darken($color_menu_product_bg, 20%);
+$color_navMenuSubHover_text: darken($color_menu_text, 20%);
+$color_navMenuSubHover_bg: darken($color_menu_product_bg, 20%);
+// $color_navMenuSubActive: #156F15;
+// $color_navMenuSubActive: #15676F;
 // $color_menu_a: white;
 // $color_menu_a_hover: #999;
 
@@ -662,6 +664,23 @@ $menuOffset: -35px;
   top: $menuOffset + 30px;
 }
 
+.navMenuCategoryHover {
+  color: $color_navMenuCategoryHover_text;
+  // background: $color_navMenuCategoryHover_bg;
+  // background: blue;
+}
+
+.navMenuSubHover {
+  color: $color_navMenuSubHover_text;
+  background: $color_navMenuSubHover_bg;
+}
+
+.navMenuSubActive {
+  color: $color_navMenuSubHover_bg;
+  // background: $color_navMenuSubHover_bg;
+  background: $color_navMenuSubHover_text;
+}
+
 .navMenu {
   width: $width_menu;
   padding: $width_menu_padding;
@@ -715,31 +734,39 @@ $menuOffset: -35px;
         .appMessage { // hide missing products TODO: find better way to hide errors/missing products
           display: none;
         }
-        div {
+        div { // not used
           display: block;
         }
-        .catName {
-        margin: 0.1em 0;
-        padding: 0.2em 0.5em;
-
-        }
-        &.navMenuSubHover {
-          color: $color_navMenuProductHover_text;
-          background: $color_navMenuProductHover_bg;
+        .catName { // not used
+          margin: 0.1em 0;
+          padding: 0.2em 0.5em;
         }
         &:last-child {
           margin-bottom: 0;
+        }
+        a { // used by subcategory2LevelList
+          display: block;
+          padding: 0.3em 0.5em;
+          &:link {
+            color: inherit;
+          }
+          &:hover {
+            @extend .navMenuSubHover;
+          }
+          &:visited {
+            color: inherit;
+          }
+          &:active {
+            @extend .navMenuSubActive;
+            color: $color_navMenuSubHover_bg;
+          }
         }
       }
     }
   }
 }
 
-.navMenuCategoryHover {
-  color: $color_navMenuCategoryHover_text;
-  // background: $color_navMenuCategoryHover_bg;
-  // background: blue;
-}
+
 
 $logoCategoryOffset: -40px;
 
@@ -1238,29 +1265,20 @@ $width_viewProduct_icon: 1.5em;
 $height_productList_h5_padding_top: 0.3em;
 $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_productList_bg/2 - 0.1em;
 .content {
-  // TODO: keep images aligned bottom, but align names to top
   .productList, .subCategoryList {
     color: $color_productList_text;
-    text-align: center;
     padding-top: 10px;
+    text-align: center;
     li {
-      margin: 10px;
-      // margin-bottom: 30px;
-      width: 230px;
-      height: 230px;
-      // height: auto;
       float: none;
-      display: inline-block;
-      vertical-align: top;
       text-align: left;
-      // border: 1px solid $color_productList_border;
     }
     img {
       width: 230px;
       height: 230px;
     }
     h5 { // name
-      padding: $height_productList_h5_padding_top 0.3em 0 $width_productList_bg * 2.2;
+      // TODO: add white transluscent background
       // padding-left: $width_productList_bg * 2.2;
       // padding-top: 0.3em;
       font-size: 1.7em;
@@ -1276,17 +1294,55 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       //   margin-right: 5px;
       // }
     }
+    p { // description
+      font-size: 1.4em;
+    }
+    h5, p {
+      padding: $height_productList_h5_padding_top 0.3em 0 $width_productList_bg * 2.2;
+
+    }
     h6 { // price (not used)
       font-size: 1.3em;
       font-weight: normal;
     }
-    .viewProductLink { // TODO: maybe overlay on top of prodThumbContainer
+    .viewProductLink {
       font-size: 1.6em;
-      // TODO: maybe add gray transluscent background
+      // TODO: add gray transluscent background
       background: $color_productList_border url('images/icon_search.png') no-repeat;
       background-size: $width_viewProduct_icon;
       background-position: 1em center;
       // color: #6b6b6b;
+    }
+  }
+  .productList {
+    // text-align: center;
+    li {
+      width: 230px;
+      height: 230px;
+      margin: 10px;
+      display: inline-block;
+      vertical-align: top;
+      // text-align: left;
+    }
+  }
+  .subCategoryList {
+    li {
+      // width: 230px;
+      height: 230px;
+      display: block;
+      text-align: center;
+    }
+    .subcategory {
+      height: 100%;
+      display: block;
+      div { // thumb and text
+        display: inline-block;
+      }
+    }
+    .subCategoryText {
+      width: 300px;
+      vertical-align: top;
+      text-align: left;
     }
   }
 }

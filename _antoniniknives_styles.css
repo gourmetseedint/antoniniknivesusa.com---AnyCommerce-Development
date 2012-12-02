@@ -329,6 +329,17 @@ header {
 .sidebarHome {
   top: -5px; }
 
+.navMenuCategoryHover {
+  color: #b3b3b3; }
+
+.navMenuSubHover, .navMenu ul li ul li a:hover {
+  color: #cccccc;
+  background: #232222; }
+
+.navMenuSubActive, .navMenu ul li ul li a:active {
+  color: #232222;
+  background: #cccccc; }
+
 .navMenu {
   width: 200px;
   padding: 12px;
@@ -373,14 +384,17 @@ header {
       .navMenu ul li ul li .catName {
         margin: 0.1em 0;
         padding: 0.2em 0.5em; }
-      .navMenu ul li ul li.navMenuSubHover {
-        color: #cccccc;
-        background: #232222; }
       .navMenu ul li ul li:last-child {
         margin-bottom: 0; }
-
-.navMenuCategoryHover {
-  color: #cccccc; }
+      .navMenu ul li ul li a {
+        display: block;
+        padding: 0.3em 0.5em; }
+        .navMenu ul li ul li a:link {
+          color: inherit; }
+        .navMenu ul li ul li a:visited {
+          color: inherit; }
+        .navMenu ul li ul li a:active {
+          color: #232222; }
 
 #logoCategory {
   width: 123px;
@@ -744,21 +758,15 @@ footer {
 
 .content .productList, .content .subCategoryList {
   color: #6b6b6b;
-  text-align: center;
-  padding-top: 10px; }
+  padding-top: 10px;
+  text-align: center; }
   .content .productList li, .content .subCategoryList li {
-    margin: 10px;
-    width: 230px;
-    height: 230px;
     float: none;
-    display: inline-block;
-    vertical-align: top;
     text-align: left; }
   .content .productList img, .content .subCategoryList img {
     width: 230px;
     height: 230px; }
   .content .productList h5, .content .subCategoryList h5 {
-    padding: 0.3em 0.3em 0 1.32em;
     font-size: 1.7em;
     line-height: 1.2em;
     font-weight: bold;
@@ -766,6 +774,10 @@ footer {
     background: url("images/arrow_cat.png") no-repeat;
     background-size: 0.6em;
     background-position: 0.5em 0.5em; }
+  .content .productList p, .content .subCategoryList p {
+    font-size: 1.4em; }
+  .content .productList h5, .content .productList p, .content .subCategoryList h5, .content .subCategoryList p {
+    padding: 0.3em 0.3em 0 1.32em; }
   .content .productList h6, .content .subCategoryList h6 {
     font-size: 1.3em;
     font-weight: normal; }
@@ -774,6 +786,25 @@ footer {
     background: #cdcdcd url("images/icon_search.png") no-repeat;
     background-size: 1.5em;
     background-position: 1em center; }
+.content .productList li {
+  width: 230px;
+  height: 230px;
+  margin: 10px;
+  display: inline-block;
+  vertical-align: top; }
+.content .subCategoryList li {
+  height: 230px;
+  display: block;
+  text-align: center; }
+.content .subCategoryList .subcategory {
+  height: 100%;
+  display: block; }
+  .content .subCategoryList .subcategory div {
+    display: inline-block; }
+.content .subCategoryList .subCategoryText {
+  width: 300px;
+  vertical-align: top;
+  text-align: left; }
 
 .categoryProductHover {
   color: #383838; }

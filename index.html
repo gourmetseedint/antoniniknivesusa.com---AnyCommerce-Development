@@ -6,6 +6,7 @@
 <!-- TODO: get search form to work -->
 <!-- BUG: sub category's pretty are showing up in category teplate -->
 <!-- BUG: production - reload on boat category causes 500 error -->
+<!-- BUG: bottom pagination drop down hidden, because container has overflow: hidden -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -26,7 +27,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121130205607",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121201163524",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -54,6 +55,9 @@ css files should be included before any .js file to ensure they are downloaded i
 <!--[if lt IE 9]><script src="dist/html5shiv.js"></script><![endif]-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="loadscript.js"></script>
+
+<!-- IE Shim for HTML5 -->
+<!--[if lt IE 9]><script src="dist/html5shiv.js"></script><![endif]-->
 
 <script type="text/javascript">
 app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
@@ -268,7 +272,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
   </div>
   
   <!-- used by category, shows list of subcats -->
-  <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='subCategoryList'></ul>
+  <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>
 
   <!-- used by subcategory, shows a list of products -->
   <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
@@ -293,15 +297,18 @@ don't modify the 'data-templateid' unless you are changing template names and up
 <!-- used to display a category within a 'list', usually in the body of a category or the homepage. -->
 <ul>
 <li id='categoryListTemplate'>
-  <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
-    <h5 data-bind="var:category(pretty); format:text;" class='catName'></h5>
-    <div class='thumbContainer logoCategoryDefault'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div>
+  <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" onMouseOver="$(this).addClass('categoryProductHover');" onMouseOut="$(this).removeClass('categoryProductHover');" class='pointer subcategory'>
+    <div class='thumbContainer'><img src='blank.gif' class='catThumb' alt='Category Image' data-bind='var: category(%meta.CAT_THUMB); format:imageURL; ' /></div>
+    <div class="subCategoryText">
+      <h5 data-bind="var:category(pretty); format:text;" class='catName'></h5>
+      <!-- TODO: add subcat description -->
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa.</p>
+    </div>
   </div>
 </li>
 
 <li id='categoryListNoImagesTemplate' onMouseOver="$('.quickView',$(this)).show();$(this).addClass('navMenuSubHover');" onMouseOut="$('.quickView').hide();$(this).removeClass('navMenuSubHover');">
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
-    <!-- <div class='thumbContainer'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' /></div> -->
     <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
   </div>
 </li>
@@ -312,7 +319,8 @@ don't modify the 'data-templateid' unless you are changing template names and up
     <!-- <div class='thumbContainer'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /></div> -->
     <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
   </div>
-  <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListNoImagesTemplate; detail:max;" class='menuSubList'></ul>
+  <!-- BUG: adding subcategory list in tier1, breaks list in category list, format: subcategory2LevelList works, removing deatail from categoryTemplate, works, but no thumbnail -->
+  <ul data-bind="var: category(@subcategoryDetail); format: subcategory2LevelList; extension: store_navcats; loadsTemplate: categoryListNoImagesTemplate;" class='menuSubList'></ul>
   <!-- <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListNoImagesTemplate; hide_summary:1; withReviews:0; withInventory:0; withVariations:0;" class='listStyleNone fluidList clearfix noPadOrMargin productList menuProductList displayNone'></ul> -->
 </li>
 
