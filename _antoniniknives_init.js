@@ -1,3 +1,5 @@
+// BUG: mvc - appInitComplete runs after productTemplate onCompletes
+
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 
@@ -13,13 +15,16 @@ app.rq.push(['extension',0,'store_search','extensions/store_search.js']);
 app.rq.push(['extension',0,'store_product','extensions/store_product.js']);
 app.rq.push(['extension',0,'store_cart','extensions/store_cart.js']);
 app.rq.push(['extension',0,'store_crm','extensions/store_crm.js']);
+// app.rq.push(['extension',0,'carousel','carousel-ad.js','carousel-ad.js']);
 app.rq.push(['extension',0,'myRIA','quickstart.js','startMyProgram']);
+
 
 app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','addTriggers']);
 //app.rq.push(['extension',1,'bonding_buysafe','extensions/bonding_buysafe.js','addTriggers']);
 //app.rq.push(['extension',1,'powerReviews','extensions/reviews_powerreviews.js','startExtension']);
 //app.rq.push(['extension',0,'magicToolBox','extensions/imaging_magictoolbox.js','startExtension']); // (not working yet - ticket in to MTB)
 
+// app.rq.push(["namespace":"myRIA","filename":"carousel-ad.js","callback":"startMyProgram"]);
 
 
 // add tabs to product data.
@@ -31,6 +36,7 @@ app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){
 app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
 app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
 app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
+app.rq.push(['script',0,app.vars.baseURL+'carousel-ad.js']);
 
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 // app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
@@ -103,7 +109,6 @@ var classColorSos    = 'categorySos';
 var headingProductNavcat         = '.headingProductNavcat';
 // var headingProductName           = '.headingsProduct h1';
 var headingProductCategory       = '.headingsProduct h3';
-var headingProductCategoryPretty = 'Temp Pretty'; // QUE: How should I get the pretty name from the navcat?  Can I use category(pretty)?
 var elementsWithCategoryColor    = '.categoryColor';
 var currentCategory;
 var currentNavcat;
@@ -190,8 +195,7 @@ function startSlideShow() {
 app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
 
 
-// TODO: maybe add all backgrounds/logos then remove them while loading, so each cat loads faster
-// TODO: hide menu products when leaving category/product or entering company/customer/other cats
+// TODO: add all backgrounds/logos then remove them while loading, so each cat loads faster
 
 
 /// homepage \\\
@@ -282,7 +286,6 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
 }]);
 
 ///// products \\\\\
-// TODO: add pretty name for each category
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // resets
   resetBanner();
@@ -296,6 +299,14 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // show category sub in menu
   $(navcatToTier1ID(currentCategory) + ' > ul').removeClass('displayNone');
 
+  // $('.productListProductExtras').append('<li data-role="previous"><img src="images/arrow_product_list_left.png" class="arrow"></li>');
+  // $('.productListProductExtras').append('<li data-role="next"><img src="images/arrow_product_list_right.png" class="arrow"></li>');
+
+  // jcarousel
+  // $('#productListCarouselAccessories').jcarousel();
+  // app.ext.myRIA.action.showCarousel({"parentID":"prodlistCarousel","query":{"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_PREORDER"}}}});
+  // app.ext.myRIA.action.showProdList({"targetID":"productListCarouselAccessories", "templateID":P.parentID});
+
   switch(currentCategory) {
     case categoryBoat:
       // set pretty for when loading dirctly to product
@@ -306,7 +317,6 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryBoat);
       // $(menuProductsBoat).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorBoat);
-      // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryBoat + "\"});'>" + prettyBoat + "</a>");
       break;
     case categoryCable:
@@ -317,7 +327,6 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryCable);
       // $(menuProductsCable).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorCable);
-      // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryCable + "\"});'>" + prettyCable + "</a>");
       break;
     case categoryFarm:
@@ -328,7 +337,6 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryFarm);
       // $(menuProductsFarm).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorFarm);
-      // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryFarm + "\"});'>" + prettyFarm + "</a>");
       break;
     case categoryPocket:
@@ -339,7 +347,6 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryPocket);
       // $(menuProductsPocket).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPocket);
-      // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPocket + "\"});'>" + prettyPocket + "</a>");
       break;
     case categoryPromo:
@@ -350,7 +357,6 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategoryPromo);
       // $(menuProductsPromo).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPromo);
-      // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categoryPromo + "\"});'>" + prettyPromo + "</a>");
       break;
     case categorySos:
@@ -361,7 +367,6 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategorySos);
       // $(menuProductsSos).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorSos);
-      // $(headingProductCategory).html(headingProductCategoryPretty);
       $(headingProductCategory).html("<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + categorySos + "\"});'>" + prettySos + "</a>");
       break;
     default:
@@ -441,7 +446,6 @@ app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
   // get pretty names for product pages
-  // BUG: appInitComplete runs after productTemplate onCompletez
   // prettyBoat   = navcatToPretty(categoryBoat);
   // prettyCable  = navcatToPretty(categoryCable);
   // prettyFarm   = navcatToPretty(categoryFarm);

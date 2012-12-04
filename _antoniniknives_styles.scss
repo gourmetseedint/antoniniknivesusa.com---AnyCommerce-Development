@@ -3,6 +3,7 @@
 // TODO: hover opacity for home cats
 // TODO: hover opacity for product images
 // TODO: make image popup title the same as pagination
+// TODO: fix cable icon border
 
 // dimensions
 $width_page: 1120px;
@@ -28,6 +29,7 @@ $color_bg: #fdfdfd;
 
 $color_text: #101010;
 $color_h2: #8e8e8e;
+$color_p_home: #a6a6a6;
 
 $color_border: #cdcccc;
 
@@ -232,7 +234,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
  /* color: ;
   font-family: ;*/
-  font-weight: bold;
+  font-weight: normal;
   text-rendering: optimizelegibility;
   margin-top: 0.2em;
   margin-bottom: 0.3em;
@@ -376,21 +378,21 @@ a {
 // pagination
 .mpControls {
   padding: 0.3em;
-  background: $color_page_bg;
-  border-color: $color_page_border;
-  color: $color_page_text;
+  // background: $color_page_bg;
+  // border-color: $color_page_border;
+  // color: $color_page_text;
   font-size: 1.3em;
   font-weight: normal;
   font-family: inherit;
-  a {
-    &:link { 
-      color: inherit;
-      font-weight: bold;
-    }
-    &:hover {
-      color: #FF8800; // TODO: use better color
-    }
-  }
+  // a {
+  //   &:link { 
+  //     color: inherit;
+  //     font-weight: bold;
+  //   }
+  //   &:hover {
+  //     // color: #FF8800; // TODO: use better color
+  //   }
+  // }
   ul li { // page link
     font-size: 1em;
     vertical-align: middle;
@@ -400,17 +402,17 @@ a {
       width: auto;
       // right: 0;
       padding: 0 0.5em;
-      border-color: $color_page_border;
+      // border-color: $color_page_border;
       li {
         padding: 0.2em;
-        color: $color_page_text;
+        // color: $color_page_text;
       }
     }
   }
 }
 
 .paging { // icons
-  border-color: $color_page_border;
+  // border-color: $color_page_border;
 }
 
 // .displayBlock {
@@ -1075,30 +1077,6 @@ background: #ea5051;
 }
 #slideshowNav a:focus { outline: none; }
 
-/* Homepage */
-
-#homepageTemplate {
-  color: $color_home_h2
-}
-
-.logosCategoryHome {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  ul {
-    display: inline-block;
-  }
-  li {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    a {
-      width: 123px;
-      height: 123px;
-      display: inline-block;
-    }
-  }
-}
 
 /* Breadcrumb */
 
@@ -1169,6 +1147,44 @@ $breadcrumb_margin: 0.2em;
   }
 }
 
+/* Homepage */
+
+.homepageContainer {
+  color: $color_home_h2;
+  p {
+    color: $color_p_home;
+  }
+}
+
+.logosCategoryHome {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  ul {
+    display: inline-block;
+  }
+  li {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    a {
+      width: 123px;
+      height: 123px;
+      display: inline-block;
+    }
+  }
+}
+
+.productListHome {
+  // float: left;
+  .prodThumb {
+    // img {
+    //   width: 300px;
+    //   height: 300px;
+    // }
+  }
+}
+
 /* Category & Product */
 
 .headings {
@@ -1183,6 +1199,7 @@ $breadcrumb_margin: 0.2em;
     padding: 0;
     font-size: 1.8em;
     line-height: 1.1em;
+    font-weight: bold;
   }
   h1 { // Category name (categoryTemplate) or Product name (productTemplate)
     font-size: 3.2em;
@@ -1267,7 +1284,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
 .content {
   .productList, .subCategoryList {
     color: $color_productList_text;
-    padding-top: 10px;
+    // padding-top: 10px;
     text-align: center;
     li {
       float: none;
@@ -1345,7 +1362,11 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       text-align: left;
     }
   }
+  .productListCategory {
+    padding-top: 10px;
+  }
 }
+
 
 .categoryProductHover {
   color: $color_productList_hover;
@@ -1587,15 +1608,23 @@ $widith_product_details: $width_content - $width_product_image - 5px;
 }
 
 $temp: 150px / 2;
-.productExtras {
+.productListProductExtras {
+  padding: 10px 0;
+  // border: 1px solid $color_productExtras_list_border_sides;
+  // border-left-width: 0;
+  // border-right-width: 0;
+  // text-align: center;
+  position: relative;
+  // display: inline-block;
+  // @include box-sizing;
+  @include flat_list_with_border(1px dotted $color_productExtras_list_border_top, 1em);
+  @extend .clearfixScss;
   color: $color_productExtras_text;
   // @extend .clearfixScss;
-  h4 { // List title
+  h5 { // List title
     color: $color_productExtras_h;
     font-size: 1.4em;
     font-weight: normal;
-  }
-  h5 { // product name
     font-weight: normal;
   }
   img { // probably temp
@@ -1610,18 +1639,6 @@ $temp: 150px / 2;
     top: $temp;
     // left: 0;
   }
-  ul {
-    padding: 10px 0;
-    border: 1px solid $color_productExtras_list_border_sides;
-    border-left-width: 0;
-    border-right-width: 0;
-    // text-align: center;
-    position: relative;
-    // display: inline-block;
-    // @include box-sizing;
-    @extend .clearfixScss;
-  }
-  @include flat_list_with_border(1px dotted $color_productExtras_list_border_top, 1em);
   li {
     // margin: 0 10px;
     text-align: center;
