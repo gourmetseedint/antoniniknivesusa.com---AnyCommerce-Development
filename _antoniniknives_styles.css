@@ -215,20 +215,25 @@ header {
 /* Navigation */
 /* Top navigation */
 .navTop {
+  height: 50px;
+  line-height: 50px;
   position: absolute;
   top: 0;
   right: 50px;
   z-index: 55;
   color: #222222; }
   .navTop div {
-    padding: 0 0.8em;
-    background: #cdcccc;
+    padding: 0 8px;
+    height: 100%;
+    background: #cdcccc; }
+  .navTop span {
+    height: 100%;
     display: inline-block; }
   .navTop ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    display: inline; }
+    display: inline-block; }
     .navTop ul li {
       list-style: none;
       margin: 0;
@@ -245,13 +250,14 @@ header {
         .navTop ul li:last-child:after {
           content: "";
           margin-left: 0; }
-  .navTop li a {
-    padding: 1.4em 1em;
-    font-size: 1.2em;
-    line-height: 1em;
-    display: inline-block; }
+  .navTop li {
+    height: 100%; }
+    .navTop li a {
+      height: 100%;
+      display: inline-block;
+      padding: 0 1em;
+      font-size: 1.2em; }
   .navTop a:link {
-    /*TODO: navtop: edit colors*/
     color: black;
     text-decoration: none; }
   .navTop a:visited {
@@ -270,33 +276,39 @@ header {
   padding: 0;
   background: url("images/nav_top_bg_left.png") no-repeat scroll right bottom;
   background-size: contain;
-  width: 30px;
-  height: 4.56em;
+  width: 50px;
+  margin-left: -50px;
+  height: 100%;
   vertical-align: bottom;
   float: left; }
 
 .socialBox {
   margin-left: 5px;
-  display: inline-block;
-  position: relative; }
+  float: right; }
   .socialBox a {
-    height: 4.56em;
+    width: 32px;
+    height: 100%;
     display: inline-block; }
 
 .socialIcon {
-  margin: 0;
-  width: 32px;
-  height: 28px;
-  line-height: 4.56em;
-  display: inline-block;
-  margin-top: 10px;
   /*z-index: 10;*/ }
+  .socialIcon a {
+    background-position: 50%;
+    background-repeat: no-repeat; }
+    .socialIcon a:hover {
+      background-color: #e6e6e6;
+      background-position: 50%;
+      background-repeat: no-repeat; }
 
-.socialIconFacebook {
-  background: url("images/icon_facebook.png") no-repeat; }
+.socialIconFacebook a {
+  background-image: url("images/icon_facebook_noshadow.png"); }
+  .socialIconFacebook a:hover {
+    background-image: url("images/icon_facebook.png"); }
 
-.socialIconTwitter {
-  background: url("images/icon_twitter.png") no-repeat; }
+.socialIconTwitter a {
+  background-image: url("images/icon_twitter_noshadow.png"); }
+  .socialIconTwitter a:hover {
+    background-image: url("images/icon_twitter.png"); }
 
 /* Menu navigation */
 .sidebar {
@@ -314,7 +326,8 @@ header {
     text-decoration: none; }
 
 .sidebarHome {
-  top: -5px; }
+  top: -5px;
+  margin-bottom: -5px; }
 
 .navMenuCategoryHover {
   color: #b3b3b3; }
@@ -674,6 +687,8 @@ footer {
   padding: 0;
   text-align: center; }
   .logosCategoryHome ul {
+    margin: 0;
+    padding: 0;
     display: inline-block; }
   .logosCategoryHome li {
     margin: 0;

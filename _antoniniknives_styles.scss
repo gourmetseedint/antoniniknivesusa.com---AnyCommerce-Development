@@ -503,65 +503,38 @@ $height_navTop_font_padding: $height_navTop_font_padding_scale * 1em;
 $height_navTop_corner: (2 * $height_navTop_font_padding_scale * $height_navTop_font) + $height_navTop_font; // since padding is 1em
 
 .navTop {
-  // margin: 0;
-  // padding: 0;
-  // // margin-left: 21px;
-  // // height: 50px;
+  height: 50px;
+  line-height: 50px;
   position: absolute;
   top: 0;
   right: 50px;
   z-index: 55;
   color: $color_navTop_text;
-  // /*display: block;*/
-  // /*background-color: black;*/
-  // display: inline-block;
-  // // background: blue url('images/nav_top_bg_left.png') no-repeat;
-  // // vertical-align: center;
   div { // ul & social wrapper
-    padding: 0 0.8em;
-  //   // margin: auto;
+    padding: 0 8px;
+    height: 100%;
     background: $color_navTop_bg;
-  //   // height: 100%;
+  }
+  span {
+    height: 100%;
     display: inline-block;
   }
-  // span {
-  //   display: inline-block;
-  // }
-  // ul, li {
-  //   list-style: none;
-  // }
   ul {
     @include flat_list_with_divider(1.1em, "/");
-  //   margin: 0;
-  //   padding: 0;
-    display: inline;
+    display: inline-block;
   }
   li  {
-  //   // float: left;
-  //   margin: 0;
-  //   padding: 0;
-  //   // width: auto;
-  //   display:inline-block;
-  //   /*background-color: blue;*/
-  //   color: black;
+    height: 100%;
     a {
-      padding: $height_navTop_font_padding 1em;
-      font-size: $height_navTop_font;
-      line-height: 1em;
+      height: 100%;
       display: inline-block;
+      padding: 0 1em;
+      font-size: $height_navTop_font;
     }
-  //   &:after {
-  //     margin: 0 1em 0 1.1em;
-  //     content: '/';
-  //     color: $color_navTop_text;
-  //   }
-  //   &:last-child:after {
-  //     content: "";
-  //   }
   }
   a {
     &:link {
-      /*TODO: navtop: edit colors*/
+      // TODO: navtop: edit colors
       color: $color_navTop_a;
       text-decoration: none;
     }
@@ -581,13 +554,15 @@ $height_navTop_corner: (2 * $height_navTop_font_padding_scale * $height_navTop_f
   }
 }
 
+$width_navTopLeft: 50px;
 .navTopLeft {
   margin: 0;
   padding: 0;
   background: url('images/nav_top_bg_left.png') no-repeat scroll right bottom;
   background-size: contain;
-  width: 30px;
-  height: $height_navTop_corner;
+  width: $width_navTopLeft;
+  margin-left: -$width_navTopLeft;
+  height: 100%;
   // margin-left: -21px;
   // display: inline-block;
   vertical-align: bottom;
@@ -598,11 +573,15 @@ $height_navTop_corner: (2 * $height_navTop_font_padding_scale * $height_navTop_f
 
 .socialBox {
   margin-left: 5px;
-  display: inline-block;
-  position: relative;
-  a {
-    height: $height_navTop_corner;
+  float: right;
+  // display: inline-block;
+  // position: relative;
+  // height: $height_navTop_corner;
+  a { // social icons
+    width: 32px;
+    height: 100%;
     display: inline-block;
+    // display: block;
     // position: absolute;
     // top: 5;
     // left: 0;
@@ -615,23 +594,43 @@ $height_navTop_corner: (2 * $height_navTop_font_padding_scale * $height_navTop_f
 // $height_socialIcon: 2em;
 // $height_socialIcon_padding: ($height_navTop_corner - $height_socialIcon)/2;
 .socialIcon {
-  margin: 0;
-  width: 32px;
-  height: 28px;
-    line-height: $height_navTop_corner;
+  // margin: 0;
+  // width: 32px;
+  // height: 28px;
+  // height: 100%;
+  // line-height: $height_navTop_corner;
   // vertical-align: middle;
-  display: inline-block;
-  margin-top: 10px;
+  // display: inline-block;
+  // margin-top: 10px;
   // margin: $height_socialIcon_padding 0;
   /*z-index: 10;*/
+  a { // facebook & twitter links
+    background-position: 50%;
+    background-repeat: no-repeat;
+    &:hover {
+      background-color: $color_navTop_bg_hover;
+      background-position: 50%;
+      background-repeat: no-repeat;
+    }
+  }
 }
 
 .socialIconFacebook{
-  background: url('images/icon_facebook.png') no-repeat;
+  a {
+    background-image: url('images/icon_facebook_noshadow.png');
+    &:hover {
+      background-image: url('images/icon_facebook.png');
+    }
+  }
 }
 
 .socialIconTwitter{
-  background: url('images/icon_twitter.png') no-repeat;
+  a {
+    background-image: url('images/icon_twitter_noshadow.png');
+    &:hover {
+      background-image: url('images/icon_twitter.png');  
+    }
+  }
 }
 
 /* Menu navigation */
@@ -664,6 +663,7 @@ $menuOffset: -35px;
 // move sidebar down to not overlap home banner
 .sidebarHome {
   top: $menuOffset + 30px;
+  margin-bottom: $menuOffset + 30px;
 }
 
 .navMenuCategoryHover {
@@ -1161,6 +1161,8 @@ $breadcrumb_margin: 0.2em;
   padding: 0;
   text-align: center;
   ul {
+    margin: 0;
+    padding: 0;
     display: inline-block;
   }
   li {

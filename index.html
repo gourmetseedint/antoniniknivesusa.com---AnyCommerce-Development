@@ -10,6 +10,7 @@
 <!-- BUG: when menu longer than page, wholesale link cuts off -->
 <!-- TODO: add home desc to homepage -->
 <!-- TODO: social links, make shadow, hover image -->
+<!-- BUG: product - sub menu not showing -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -30,7 +31,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121203174959",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121204163010",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -107,8 +108,8 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
             <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (4)</a><!-- TODO: add cart item num --></li>
           </ul>
           <span class="socialBox">
-            <a href="http://www.facebook.com" target="_blank" title="Facebook link"><span class='socialIcon socialIconFacebook'></span></a><!-- TODO: get facebook name -->
-            <a href="http://www.twitter.com" target="_blank" title="Twitter link"><span class='socialIcon socialIconTwitter'></span></a><!-- TODO: get twitter name -->
+            <span class='socialIcon socialIconFacebook'><a href="http://www.facebook.com" target="_blank" title="Facebook link"></a></span><!-- TODO: get facebook name -->
+            <span class='socialIcon socialIconTwitter'><a href="http://www.twitter.com" target="_blank" title="Twitter link"></a></span><!-- TODO: get twitter name -->
           </span>
         </div>
       </nav>
@@ -238,28 +239,28 @@ COMMONLY EDITED TEMPLATES
 the homepageTemplate template is loaded into mainContentArea by default when the application loads
 -->
 <div id='homepageTemplate'>
-  <div class='container homepageContainer'>
+  <div class='homepageContainer'>
     <div class='logosCategoryHome'>
-      <ul>
+      <ul class='logosCategoryHome'>
         <li class="logoCategoryHome logoCategoryBoat"><a    href="#category?navcat=.boat_-_fishing"       class='bindByAnchor' title='Boat - Fishing'></a></li>
         <li class="logoCategoryHome logoCategoryCable"><a   href="#category?navcat=.cable_-_electrical"   class='bindByAnchor' title='Cable - Electrical'></a></li>
         <li class="logoCategoryHome logoCategoryFarm"><a    href="#category?navcat=.farm_-_garden"        class='bindByAnchor' title='Farm - Garden'></a></li>
         <li class="logoCategoryHome logoCategoryPocket"><a  href="#category?navcat=.pocket_-_traditional" class='bindByAnchor' title='Pocket - Traditional'></a></li>
-        <li class="logoCategoryHome logoCategoryPromo"><a   href="#category?navcat=.promo_-_customizing"  class='bindByAnchor' title='Promo - Customizing'></a></li>
         <li class="logoCategoryHome logoCategorySos"><a     href="#category?navcat=.sos_-_rescue"         class='bindByAnchor' title='SOS - Rescue'></a></li>
+        <li class="logoCategoryHome logoCategoryPromo"><a   href="#category?navcat=.promo_-_customizing"  class='bindByAnchor' title='Promo - Customizing'></a></li>
       </ul>
       <!-- <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul> -->
     </div>
     
     <!-- <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; hide_summary:1; before:<h2>Featured Items</h2>; withReviews:1;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul> -->
 
-    <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"1","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;' class='productList productListScroll productListHome'></ul>
+   <!--  <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"1","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;' class='productList productListScroll productListHome'></ul>
     <p data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa. 
       Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. 
       Suspendisse vulputate aliquam dui. Nulla elementum dui ut augue. Aliquam vehicula mi at mauris. Maecenas placerat, nisl at consequat rhoncus, sem nunc 
       gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, 
       sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.
-    </p>
+    </p> -->
   </div>
 
 </div>
