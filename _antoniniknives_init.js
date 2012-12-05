@@ -307,7 +307,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   currentCategory = $(headingProductNavcat, '#' + P.parentID).html();
 
   // show category sub in menu
-  $(navcatToTier1ID(currentCategory) + ' > ul').removeClass('displayNone');
+  $(navcatToTier1ID(currentCategory) + ' > ul').slideDown();
 
   // $('.productListProductExtras').append('<li data-role="previous"><img src="images/arrow_product_list_left.png" class="arrow"></li>');
   // $('.productListProductExtras').append('<li data-role="next"><img src="images/arrow_product_list_right.png" class="arrow"></li>');
