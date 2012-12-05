@@ -1177,6 +1177,23 @@ $breadcrumb_margin: 0.2em;
   }
 }
 
+.homepageContent {
+  // vertical-align: top;
+  ul {
+    display: inline-block;
+    // vertical-align: top;
+    li {
+      margin: 0;
+    }
+  }
+  p {
+    display: inline-block;
+    float: right;
+    width: 350px;
+    // vertical-align: top;
+  }
+}
+
 .productListHome {
   // float: left;
   .prodThumb {

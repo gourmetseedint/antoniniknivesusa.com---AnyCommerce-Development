@@ -699,6 +699,15 @@ footer {
       height: 123px;
       display: inline-block; }
 
+.homepageContent ul {
+  display: inline-block; }
+  .homepageContent ul li {
+    margin: 0; }
+.homepageContent p {
+  display: inline-block;
+  float: right;
+  width: 350px; }
+
 /* Category & Product */
 .headings {
   margin: 0;
