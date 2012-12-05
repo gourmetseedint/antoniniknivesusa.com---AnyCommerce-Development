@@ -39,8 +39,10 @@ $color_a_visited: purple;
 
 $color_button_bg: #b8b8b8;
 $color_button_bg_hover: darken($color_button_bg, 20%);
-$color_button_text: white;
-$color_button_text_hover: darken($color_button_text, 20%);
+$color_submit_text_hover: white;
+$color_submit_text: darken($color_submit_text_hover, 20%);
+$color_submit_border: black;
+$color_submit_border_top: lighten($color_submit_border, 30%);
 
 $color_navTop_bg: #cdcccc;
 $color_navTop_text: #222;
@@ -357,21 +359,50 @@ a {
   @extend .clearfixScss;
 }
 
+$color_button_text: white;
+$color_button_text_hover: darken($color_button_text, 20%);
+
 .button {
   margin: 0;
-  padding: 0.4em 2.9em;
-  background: $background_button;
-  background-size: auto 100%;
-  color: $color_button_text;
+  padding: 0.4em 0.6em;
+  display: inline-block;
   font-size: 1.4em;
   // text-shadow: 1px 1px 1px gray;
   font-weight: bold;
-  border-radius: 0.1em;
+  background: $color_button_bg;
+  border-radius: 0.3em;
+  color: $color_button_text;
+  &:link {
+    text-decoration: none;
+    color: $color_button_text;
+  }
+  &:hover {
+    text-decoration: none;
+    background: $color_button_bg_hover;
+    color: $color_button_text_hover;
+  }
+  &:visited {
+    text-decoration: none;
+    color: $color_button_text;
+  }
+  &:active {
+    text-decoration: none;
+  }
+}
+
+.submit {
+  margin: 0;
+  padding: 0.4em 2.9em;
+  color: $color_submit_text;
+  background: $background_button;
+  background-size: auto 100%;
   border: 1px solid black;
+  border-top-color: $color_submit_border_top;
   &:hover {
     background: $background_button_hover;
     background-size: auto 100%;
-    color: $color_button_text_hover;
+    color: $color_submit_text_hover;
+    border-bottom-color: $color_submit_border_top;
   }
 }
 
@@ -472,12 +503,6 @@ header {
 
 .bannerCategorySos {
   background: url('images/banner_bg_sos.png') no-repeat;
-}
-
-// TODO: move slideshow down
-#slideshowContainer {
-  position: absolute;
-  top: 0;
 }
 
 /* Navigation */
@@ -1024,21 +1049,30 @@ footer {
 
 /*slideshow*/
 
+$width_slideshow: 700px;
+$width_slideshow_left: ($width_page - $width_slideshow) / 2;
+
 /* setting height/width and overflow hidden eliminates popping (all banners showing then hiding) */
 #slideshowContainer {
   // position:relative;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 100px;
+  left: $width_slideshow_left;
+  width: $width_slideshow;
   // z-index:10;
   height:300px;
   // min-width:720px;
   // max-width:$width_page;
-  width: $width_page;
-  margin:0 auto;
+  // margin:0 auto;
   overflow:hidden;
   z-index:5;
 }
+
+// TODO: move slideshow down
+#slideshowContainer {
+  position: absolute;
+}
+
 /* the slides */
 #slideshowContainer ul, 
 .slideshow li {
@@ -1187,11 +1221,20 @@ $breadcrumb_margin: 0.2em;
     }
   }
   p {
-    display: inline-block;
-    float: right;
-    width: 350px;
+    // display: inline-block;
+    // width: 350px;
     // vertical-align: top;
   }
+}
+
+.homepageText {
+  float: right;
+  width: 350px;
+  text-align: right;
+}
+
+.homepageDescription {
+  text-align: left;
 }
 
 .productListHome {
@@ -1501,6 +1544,7 @@ $productSpecs_margin: 0.8em;
   font-size: 1.5em;
   line-height: $height_productSpecsList_line;
   float: left;
+  width: 700px;
   // position: absolute; // to align bottom with price
   // bottom: 0;
   // left: 0;

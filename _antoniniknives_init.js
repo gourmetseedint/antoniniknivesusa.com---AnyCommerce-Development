@@ -138,8 +138,14 @@ var headingSubsParent = '.headingSubsParent';
 
 function navcatToPretty(navcat) {
   // only works from a rq.push
-  var temp;
-  temp = app.data['appCategoryDetail|' + navcat]['pretty'];
+  return fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']);
+}
+
+function fixHiddenPretty(pretty) {
+  var temp = pretty;
+  if (temp.charAt(0) == ('!')) {
+    temp = temp.replace(/!/, '');
+  }
   return temp;
 }
 

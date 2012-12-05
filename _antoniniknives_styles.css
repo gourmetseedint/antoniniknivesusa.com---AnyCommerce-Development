@@ -144,18 +144,39 @@ a:active {
 
 .button {
   margin: 0;
-  padding: 0.4em 2.9em;
-  background: black left top url("images/button_bg.png") repeat-x;
-  background-size: auto 100%;
-  color: white;
+  padding: 0.4em 0.6em;
+  display: inline-block;
   font-size: 1.4em;
   font-weight: bold;
-  border-radius: 0.1em;
-  border: 1px solid black; }
+  background: #b8b8b8;
+  border-radius: 0.3em;
+  color: white; }
+  .button:link {
+    text-decoration: none;
+    color: white; }
   .button:hover {
+    text-decoration: none;
+    background: #858585;
+    color: #cccccc; }
+  .button:visited {
+    text-decoration: none;
+    color: white; }
+  .button:active {
+    text-decoration: none; }
+
+.submit {
+  margin: 0;
+  padding: 0.4em 2.9em;
+  color: #cccccc;
+  background: black left top url("images/button_bg.png") repeat-x;
+  background-size: auto 100%;
+  border: 1px solid black;
+  border-top-color: #4d4d4d; }
+  .submit:hover {
     background: gray left top url("images/button_flipped_bg.png") repeat-x;
     background-size: auto 100%;
-    color: #cccccc; }
+    color: white;
+    border-bottom-color: #4d4d4d; }
 
 .mpControls {
   padding: 0.3em;
@@ -207,10 +228,6 @@ header {
 
 .bannerCategorySos {
   background: url("images/banner_bg_sos.png") no-repeat; }
-
-#slideshowContainer {
-  position: absolute;
-  top: 0; }
 
 /* Navigation */
 /* Top navigation */
@@ -579,13 +596,15 @@ footer {
 /* setting height/width and overflow hidden eliminates popping (all banners showing then hiding) */
 #slideshowContainer {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 100px;
+  left: 210px;
+  width: 700px;
   height: 300px;
-  width: 1120px;
-  margin: 0 auto;
   overflow: hidden;
   z-index: 5; }
+
+#slideshowContainer {
+  position: absolute; }
 
 /* the slides */
 #slideshowContainer ul,
@@ -703,10 +722,14 @@ footer {
   display: inline-block; }
   .homepageContent ul li {
     margin: 0; }
-.homepageContent p {
-  display: inline-block;
+
+.homepageText {
   float: right;
-  width: 350px; }
+  width: 350px;
+  text-align: right; }
+
+.homepageDescription {
+  text-align: left; }
 
 /* Category & Product */
 .headings {
@@ -909,7 +932,8 @@ footer {
   margin-top: 0.6em;
   font-size: 1.5em;
   line-height: 1.4em;
-  float: left; }
+  float: left;
+  width: 700px; }
   .productSpecsList li {
     list-style: none;
     margin: 0;
