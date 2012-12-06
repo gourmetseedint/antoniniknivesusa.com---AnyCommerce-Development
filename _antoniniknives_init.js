@@ -36,7 +36,7 @@ app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){
 app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
 app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
 app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
-app.rq.push(['script',0,app.vars.baseURL+'carousel-ad.js']);
+// app.rq.push(['script',0,app.vars.baseURL+'jcarousel/carousel-ad.js']);
 
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 // app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
@@ -201,6 +201,50 @@ function startSlideShow() {
   }
 }
 
+// jCarousel http://sorgalla.com/projects/jcarousel/
+
+function mycarousel_initCallback(carousel) {
+    // Disable autoscrolling if the user clicks the prev or next button.
+    carousel.buttonNext.bind('click', function() {
+        carousel.startAuto(0);
+    });
+
+    carousel.buttonPrev.bind('click', function() {
+        carousel.startAuto(0);
+    });
+
+    // Pause autoscrolling if the user moves with the cursor over the clip.
+    carousel.clip.hover(function() {
+        carousel.stopAuto();
+    }, function() {
+        carousel.startAuto();
+    });
+}
+
+function startCarouselHome() {
+  $('#homeProdSearchBestSellers').jcarousel({
+    auto: 3, // Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.
+    scroll: 1,
+    // visible: 1,
+    wrap: 'both', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
+    itemFallbackDimension: 300, // has to be image size - If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
+    initCallback: mycarousel_initCallback
+  });
+}
+
+function startCarouselProduct(parentID) {
+  $('#' + parentID + ' .productListProductExtras').jcarousel({
+    auto: 3, // Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.
+    scroll: 1,
+    start: 0,
+    offset: 0,
+    // visible: 1,
+    // wrap: 'last', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
+    itemFallbackDimension: 230, // If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
+    initCallback: mycarousel_initCallback
+  });
+}
+
 //cycle used for slideshow
 app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
 
@@ -211,6 +255,14 @@ app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
 /// homepage \\\
 app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   defaultPage();
+  startCarouselHome();
+  //<ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"1","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;' class='productList productListScroll productListHome'></ul> -->
+
+  // app.ext.myRIA.a.showCarousel({"parentID":"prodlistCarousel","query":{"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}});
+  // $('testList').jcarousel({
+  //   "scroll": 1
+  // });
+  // alert($('homeProdSearchBestSellers').html);
 }]);
 
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
@@ -308,6 +360,9 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
 
   // show category sub in menu
   $(navcatToTier1ID(currentCategory) + ' > ul').slideDown();
+
+  // carousels
+  startCarouselProduct(P.parentID);
 
   // $('.productListProductExtras').append('<li data-role="previous"><img src="images/arrow_product_list_left.png" class="arrow"></li>');
   // $('.productListProductExtras').append('<li data-role="next"><img src="images/arrow_product_list_right.png" class="arrow"></li>');

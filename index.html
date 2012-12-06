@@ -1,19 +1,20 @@
 <!DOCTYPE HTML>
-<!-- BUG: ? sometimes bindBy links don't work after going through pages, seems more prevalent on production -->
-<!-- TODO: change wholesale pretty from all caps to normal -->
-<!-- TODO: get search form to work -->
-<!-- BUG: production - reload on boat category causes 500 error -->
-<!-- BUG: bottom pagination drop down hidden, because container has overflow: hidden -->
-<!-- BUG: mvc - adding subcategory list in tier1, breaks list in category list, format: subcategory2LevelList works, removing deatail from categoryTemplate, works, but no thumbnail -->
-<!-- TODO: add real home slides -->
-<!-- TODO: add optional fields -->
-<!-- BUG: when menu longer than page, wholesale link cuts off -->
-<!-- TODO: add home desc to homepage -->
-<!-- TODO: social links, make shadow, hover image -->
-<!-- BUG: product - sub menu not showing -->
 <html>
 <head>
 <meta charset="utf-8">
+<!-- BUG: ? sometimes bindBy links don't work after going through pages, seems more prevalent on production -->
+<!-- TODO: get search form to work -->
+<!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
+<!-- BUG: bottom pagination drop down hidden, because container has overflow: hidden -->
+<!-- BUG: mvc - adding subcategory list in tier1, breaks list in category list, format: subcategory2LevelList works, removing deatail from categoryTemplate, works, but no thumbnail -->
+<!-- TODO: add better home slides -->
+<!-- TODO: add optional product fields -->
+<!-- TODO: add home desc to homepage -->
+<!-- TODO: 'Tell a friend' should send a email with link to product -->
+<!-- TODO: add reviews to bottom of product -->
+<!-- TODO: add pdf catalogs -->
+<!-- BUG: carousel, when one item, it gets pushed to the left -->
+<!-- BUG: carousel, remove pagination -->
 <title>Antonini Knives USA</title>
 
 <meta name="description" content="" id='metaDescription' />
@@ -31,7 +32,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121204204059",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121205205026",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -54,13 +55,13 @@ css files should be included before any .js file to ensure they are downloaded i
 -->
 <link rel="stylesheet" type="text/css" href="qs_styles.css" />
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/jquery-ui.css" />
-<!-- <link rel="stylesheet" type="text/css" href="/jcarousel/skin.css" /> -->
+<link rel="stylesheet" type="text/css" href="jcarousel/skin.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles.css" />
 <!-- IE Shim for HTML5 -->
 <!--[if lt IE 9]><script src="dist/html5shiv.js"></script><![endif]-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="loadscript.js"></script>
-<script type="text/javascript" src="jcarousel/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="jcarousel/jquery.jcarousel.min-0.2.7.js"></script>
 
 <!-- IE Shim for HTML5 -->
 <!--[if lt IE 9]><script src="dist/html5shiv.js"></script><![endif]-->
@@ -256,7 +257,9 @@ the homepageTemplate template is loaded into mainContentArea by default when the
     
     <!-- <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; hide_summary:1; before:<h2>Featured Items</h2>; withReviews:1;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul> -->
     <div class='homepageContent'>
-      <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"1","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;' class='productList productListScroll productListHome'></ul>
+
+      <ul id='homeProdSearchBestSellers' class='jcarousel-skin-antoniniknives' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListCarouselHomepageTemplate; before:<h2>Our Top Blades</h2>;'></ul>
+
       <div class='homepageText'>
         <p class='homepageDescription' data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa. 
           Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. 
@@ -289,12 +292,13 @@ don't modify the 'data-templateid' unless you are changing template names and up
     <ul class='breadcrumb' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
   </div>
   
+  <p data-bind='var:category(%page.description) format:wiki wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p>
+  
   <!-- used by category, shows list of subcats -->
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>
 
   <!-- used by subcategory, shows a list of products -->
   <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList productListCategory'></ul>
-  
   <!-- <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
 
   <!-- <h2 data-bind="var: category(%page.header); format: text; editor: text;"></h2> -->
@@ -351,9 +355,6 @@ Used for the product in a product list (prodlist), usually in the body of a cate
 the loadingBG class is removed (must be that classname) when the template is translated.
 remember to NOT put the button inside the 'onclick' container or two events will occur onclick.
 -->
-<!-- QUE: how to style pagination -->
-<!-- TODO: style pagination -->
-<!-- TODO: align h5 to top, but keep img aligned to bottom -->
 <li id='productListTemplate' class='loadingBG  ' onMouseOver="$(this).addClass('categoryProductHover');" onMouseOut="$(this).removeClass('categoryProductHover');" >
   
   <button class='floatRight pointer quickView displayNone' onClick="quickView('product',{'templateID':'productTemplateQuickView','pid':$(this).closest('[data-pid]').attr('data-pid')});">Quickview</button>
@@ -490,10 +491,24 @@ remember to NOT put the button inside the 'onclick' container or two events will
       <img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;bgcolor:ffffff;' width='300' height='300' />
     </div>
     
+    <h5 data-bind='var: product(prod_name); format:text;'></h5>
+  
+    <h6 data-bind='var: product(base_price); format:elasticMoney; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6>
+  </div>
+</li>
+
+<li id='productListCarouselHomepageTemplate' class='loadingBG' >
+  <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer'>
+    <img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;bgcolor:ffffff;' />
+  </div>
+  <!-- <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer'> -->
+    <!-- <div class='prodThumbContainer'> -->
+    <!-- </div> -->
+    
     <!-- <h5 data-bind='var: product(prod_name); format:text;'></h5> -->
   
     <!-- <h6 data-bind='var: product(base_price); format:elasticMoney; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6> -->
-  </div>
+  <!-- </div> -->
 </li>
 </ul>
 
@@ -584,16 +599,26 @@ this will likely become more flexible in the future. ###
     </div>
     <div class="productDetailsContainer">
       <ul class='productDetailsList'>
-        <li><span data-bind='var:product(user:prod_steel);     format:text; pretext: Steel: ;'></span><!-- <span>Steel: Lorem</span> --></li>
-        <li><span data-bind='var:product(user:prod_finishing); format:text; pretext: Finishing: ;'></span><!-- <span>Finishing: Ipsum</span> --></li>
-        <li><span data-bind='var:product(user:prod_handle);    format:text; pretext: Handle: ;'></span><!-- <span>Handle: Dolar</span> --></li>
-        <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span><!-- <span>Locking: Sit</span> --></li>
-        <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span><!-- <span>Clip: Amet</span> --></li>
-        <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span><!-- <span>Fasteners: Consectetur</span> --></li>
+        <li><span data-bind='var:product(user:prod_steel);     format:text; pretext: Steel: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_finishing); format:text; pretext: Finishing: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_handle);    format:text; pretext: Handle: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_inner);     format:text; pretext: Inner: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span></li>
       </ul>
       <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
     </div>
   </div>
+
+  <!-- <ul id='homeProdSearchBestSellers' class='jcarousel-skin-antoniniknives' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListCarouselHomepageTemplate; before:<h2>Our Top Blades</h2>;'></ul> -->
+
+  <div class="productExtras">
+    <ul id='productListCarouselAccessories' class='productList productListProductExtras jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h5>Accessories</h5>; withReviews:0; items_per_page: 100; hide_pagination:true;"></ul>
+    <ul id='productListCarouselRelated'     class='productList productListProductExtras jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h5>Variants</h5>;    withReviews:0; items_per_page: 100; hide_pagination:true;"></ul>
+  </div>
+  
+
   <!-- TODO: product accessories and variants lists -->
   <!-- TODO: add .categoryProductHover to mouse -->
   <!-- <ul id="productlistCarouselAccessories" class="jcarousel-skin-antoniniknives productList productListCarousel productListProductExtras">

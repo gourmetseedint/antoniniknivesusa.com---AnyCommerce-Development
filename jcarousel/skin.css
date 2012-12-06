@@ -1,24 +1,24 @@
 .jcarousel-skin-antoniniknives .jcarousel-container {
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-   border-radius: 10px;
-    background: #F0F6F9;
-    border: 1px solid #346F97;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #F0F6F9;
+  border: 1px solid #346F97;
 }
 
 .jcarousel-skin-antoniniknives .jcarousel-direction-rtl {
-	direction: rtl;
+  direction: rtl;
 }
 
 .jcarousel-skin-antoniniknives .jcarousel-container-horizontal {
-    width: 245px;
-    padding: 20px 40px;
+  width: 245px;
+  padding: 20px 40px;
 }
 
 .jcarousel-skin-antoniniknives .jcarousel-container-vertical {
-    width: 75px;
-    height: 245px;
-    padding: 40px 20px;
+  width: 75px;
+  height: 245px;
+  padding: 40px 20px;
 }
 
 .jcarousel-skin-antoniniknives .jcarousel-clip {
@@ -41,12 +41,12 @@
 }
 
 .jcarousel-skin-antoniniknives .jcarousel-item-horizontal {
-	margin-left: 0;
+  margin-left: 0;
     margin-right: 10px;
 }
 
 .jcarousel-skin-antoniniknives .jcarousel-direction-rtl .jcarousel-item-horizontal {
-	margin-left: 10px;
+  margin-left: 10px;
     margin-right: 0;
 }
 
