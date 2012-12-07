@@ -116,6 +116,12 @@ $background_footer: $color_footer_border url('images/footer_bg.png') repeat-x;
 
 // mixins
 
+@mixin min_height($size:200px) {
+   min-height: $size; 
+   height:auto !important; 
+   height: $size; 
+}
+
 @mixin box_sizing {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1446,9 +1452,14 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
   .subCategoryList {
     li {
       // width: 230px;
-      height: 230px;
+      // height: 230px;
+      @include min_height(230px);
       display: block;
       text-align: center;
+    }
+    img {
+      width: 200px;
+      height: 200px;
     }
     .subcategory {
       height: 100%;
@@ -1458,7 +1469,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       }
     }
     .subCategoryText {
-      width: 300px;
+      width: 400px;
       vertical-align: top;
       text-align: left;
     }

@@ -851,16 +851,21 @@ footer {
   display: inline-block;
   vertical-align: top; }
 .content .subCategoryList li {
+  min-height: 230px;
+  height: auto !important;
   height: 230px;
   display: block;
   text-align: center; }
+.content .subCategoryList img {
+  width: 200px;
+  height: 200px; }
 .content .subCategoryList .subcategory {
   height: 100%;
   display: block; }
   .content .subCategoryList .subcategory div {
     display: inline-block; }
 .content .subCategoryList .subCategoryText {
-  width: 300px;
+  width: 400px;
   vertical-align: top;
   text-align: left; }
 .content .productListCategory {

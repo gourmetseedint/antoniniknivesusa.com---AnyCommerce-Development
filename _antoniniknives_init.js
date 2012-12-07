@@ -36,7 +36,11 @@ app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){
 app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
 app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
 app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
+// app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcats.json']);
 // app.rq.push(['script',0,app.vars.baseURL+'jcarousel/carousel-ad.js']);
+
+//cycle used for slideshow
+app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
 
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 // app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
@@ -44,11 +48,13 @@ app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
 ///// custom \\\\\
 
 /// variables \\\
+
 var categoryBoat   = '.boat_-_fishing';
 var categoryCable  = '.cable_-_electrical';
 var categoryFarm   = '.farm_-_garden';
 var categoryPocket = '.pocket_-_traditional';
-var categoryPromo  = '.promo_-_customizing';
+// var categoryPromo  = '.promo_-_customizing';
+var categoryPromo  = '.promo-customizing';
 var categorySos    = '.sos_-_rescue';
 
 var prettyBoat;
@@ -57,13 +63,6 @@ var prettyFarm;
 var prettyPocket;
 var prettyPromo;
 var prettySos;
-
-// var prettyBoat   = titlize(categoryBoat);
-// var prettyCable  = titlize(categoryCable);
-// var prettyFarm   = titlize(categoryFarm);
-// var prettyPocket = titlize(categoryPocket);
-// var prettyPromo  = titlize(categoryPromo);
-// var prettySos    = titlize(categorySos);
 
 var banner                    = 'header';
 var classBannerHome           = 'bannerHome';
@@ -96,9 +95,9 @@ var menuProductsFarm   = '#tier1categories_farm__garden ul';
 var menuProductsPocket = '#tier1categories_pocket__traditional ul';
 var menuProductsPromo  = '#tier1categories_promo__customizing ul';
 var menuProductsSos    = '#tier1categories_sos__rescue ul';
-var menuSubLists = '.menuSubList';
+var menuSubLists       = '.menuSubList';
 
-var headingCategory     = '.headingsCategory h1';
+var headingCategory  = '.headingsCategory h1';
 var classColorBoat   = 'categoryBoat';
 var classColorCable  = 'categoryCable';
 var classColorFarm   = 'categoryFarm';
@@ -116,7 +115,77 @@ var periodCount;
 
 var headingSubsParent = '.headingSubsParent';
 
-// var lastBreadcrumbClass;
+var subcatPrettyLong = '.subcatPrettyLong';
+var subcatDescription = '.subcatDescription';
+
+var subcatData = [];
+// $.getJSON('_antoniniknives_subcatData.json', function(data) {
+//   // var items = [];
+//   app.u.dump('got into json');
+//   $.each(data, function(key, val) {
+//     subcatData.push(key, val);
+//   });
+// });
+
+// sub category data
+var subcatData = {
+  ".boat_-_fishing": {
+    ".antonini": {
+      "prettyLong":"Antonini Long Pretty", // missing
+      "description" : "Lorem ipsum dolor sit amet." // missing
+    }
+  }
+};
+
+// var subcatData = {
+//   // boat - fishing
+//   ".boat_-_fishing.antonini" : {
+//   "prettyLong":"Antonini Long Pretty", // missing
+//   "description" : "Lorem ipsum dolor sit amet." // missing
+//   },
+//   ".boat_-_fishing.boat" : {
+//   "prettyLong":"Boat Multipurpose Yachting Knives",
+//   "description" : "Lorem ipsum dolor sit amet." // missing
+//   },
+//   ".boat_-_fishing.classic" : {
+//   "prettyLong":"Classic Fisherman Knives",
+//   "description" : "The Classic Line of knives are great basic Fisherman's Knives covering a range of tasks. The blades are in 2 sizes (190 & 160 mm) made of quality stainless steel. Plastic handles."
+//   },
+//   ".boat_-_fishing.fontanin" : {
+//   "prettyLong":"Fontanin Fisherman Knives",
+//   "description" : "In 2003 Antonini acquired the business of Messrs.Fontanin to continue crafting one of the most popular Italian fishing knives already sold worldwide in millions of pieces. Featuring ABS plastic handles (now available in 7 different colors: red, black, orange, green, yellow, blue and white and with convenient lanyard hole - some colors by special order only) and Aisi 420 stainless steel blades. <br/><br/>The plastic handle of this knife is particularly suited to effective customizing with your company logo (heat printing, screen printing and pad printing methods all available)."
+//   },
+//   ".boat_-_fishing.nauta" : {
+//   "prettyLong":"Nauta Boating and Pro-Rescue Knives",
+//   "description" : "Lorem ipsum dolor sit amet." // missing
+//   },
+//   // cable - electrical
+//   ".cable_-_electrical.ampere": {
+//     "prettyLong": "AMPERE Professional Electrician Knives",
+//     "description": ""
+//   },
+//   ".cable_-_electrical.export": {
+//     "prettyLong": "EXPORT Series Professional Electrician Knives",
+//     "description": ""
+//   },
+//   ".cable_-_electrical.ohm": {
+//     "prettyLong": "OHM Professional Electrician Knives Insulated",
+//     "description": ""
+//   },
+//   ".cable_-_electrical.volt": {
+//     "prettyLong": "VOLT Professional Electrician Knives",
+//     "description": ""
+//   },
+//   ".cable_-_electrical.watt": {
+//     "prettyLong": "WATT Professional Electrician Knives",
+//     "description": ""
+//   },
+//   "farm_-_garden.sub": {
+//     "prettyLong": "",
+//     "description": ""
+//   }
+// };
+
 
 /// functions \\\
 
@@ -136,9 +205,28 @@ var headingSubsParent = '.headingSubsParent';
 //   return title;
 // }
 
+
+// subcat conversion
+function setValueFromSubcatData(selector, field) {
+  var navcat = $(selector).text(); // navcat/json key must be text in html
+  var temp   = 'Not set';
+
+  // set json value
+  if(navcat && subcatData[navcat] && subcatData[navcat][field]){
+    temp = subcatData[navcat][field];
+  }
+  // change text json value
+  $(selector).html(temp);
+}
+
 function navcatToPretty(navcat) {
   // only works from a rq.push
   return fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']);
+}
+
+function getCategoryDescription(navcat) {
+  // only works from a rq.push
+  return app.data['appCategoryDetail|' + navcat]['%page']['desc'];
 }
 
 function fixHiddenPretty(pretty) {
@@ -245,8 +333,7 @@ function startCarouselProduct(parentID) {
   });
 }
 
-//cycle used for slideshow
-app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
+
 
 
 // TODO: add all backgrounds/logos then remove them while loading, so each cat loads faster
@@ -284,15 +371,16 @@ app.rq.push(['templateFunction','customerTemplate','onCompletes',function(P) {
 ///// categories \\\\\
 app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
-
-  currentNavcat = P.navcat;
-  periodCount   = (currentNavcat.split(/[.]/) || '').length - 1;
   
   // resets
   resetBanner();
   resetCategoryLogo();
   resetAllMenuProducts();
 
+  currentNavcat = P.navcat;
+  periodCount   = (currentNavcat.split(/[.]/) || '').length - 1;
+
+  // see if category or sub
   if (periodCount === 1) {
     // catgories
     currentCategory = P.navcat;
@@ -307,7 +395,19 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // show category sub in menu
   $(navcatToTier1ID(currentCategory) + ' > ul').slideDown(500);
 
-  // app.u.dump([navcatToTier1ID(P.navcat)]);
+  // set subcategory data
+  // $('#' + P.parentID + ' ' + subcatPrettyLong).each(function () {
+  //   setValueFromSubcatData(this, 'prettyLong');
+  // });
+
+  // $('#' + P.parentID + ' ' + subcatDescription).each(function () {
+  //   setValueFromSubcatData(this, 'description');
+  // });
+
+  app.u.dump([subcatData]);
+
+    // setValueFromSubcatData(this, 'description');
+  // app.u.dump([Object.keys(subcatData)]);
 
 
 
@@ -544,13 +644,13 @@ $(document).ready(function(){
 
 
   // Pre load images
-  $(banner).addClass(classBannerCategoryBoat);
-  $(banner).addClass(classBannerCategoryCable);
-  $(banner).addClass(classBannerCategoryFarm);
-  $(banner).addClass(classBannerCategoryPocket);
-  $(banner).addClass(classBannerCategoryPromo);
-  $(banner).addClass(classBannerCategorySos);
-  $(banner).addClass(classBannerHome);
+  // $(banner).addClass(classBannerCategoryBoat);
+  // $(banner).addClass(classBannerCategoryCable);
+  // $(banner).addClass(classBannerCategoryFarm);
+  // $(banner).addClass(classBannerCategoryPocket);
+  // $(banner).addClass(classBannerCategoryPromo);
+  // $(banner).addClass(classBannerCategorySos);
+  // $(banner).addClass(classBannerHome);
   // resetBanner();
   // startSlideShow();
 });
