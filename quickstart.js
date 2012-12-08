@@ -572,6 +572,10 @@ need to be customized on a per-ria basis.
 
 		renderFormats : {
 
+			// showPretty : function ($tag, data) {
+			// 	$tag.html('test');
+			// },
+
 //This function works in conjuction with the showContent/showPage and buildQueriesFromTemplate functions.
 //the parent and subcategory data (appCategoryDetail) must be in memory already for this to work right.
 //data.value is the category object. data.bindData is the bindData obj.

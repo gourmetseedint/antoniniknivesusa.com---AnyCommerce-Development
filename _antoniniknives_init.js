@@ -421,11 +421,11 @@ function startCarouselProduct(parentID) {
   $('#' + parentID + ' .productListProductExtras').jcarousel({
     auto: 3, // Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.
     scroll: 1,
-    start: 0,
-    offset: 0,
+    // start: 1,
+    // offset: 1,
     // visible: 1,
     // wrap: 'last', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
-    itemFallbackDimension: 230, // If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
+    // itemFallbackDimension: 230, // If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
     initCallback: mycarousel_initCallback
   });
 }
@@ -556,6 +556,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
 
   // carousels
   startCarouselProduct(P.parentID);
+
 
   // $('.productListProductExtras').append('<li data-role="previous"><img src="images/arrow_product_list_left.png" class="arrow"></li>');
   // $('.productListProductExtras').append('<li data-role="next"><img src="images/arrow_product_list_right.png" class="arrow"></li>');
@@ -703,6 +704,7 @@ app.u.initMVC = function(attempts){
 app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
+  // app.rq.push(['renderFormats',0,'myRIA','quickstart.js']);
   // get pretty names for product pages
   // prettyBoat   = getPretty(categoryBoat);
   // prettyCable  = getPretty(categoryCable);

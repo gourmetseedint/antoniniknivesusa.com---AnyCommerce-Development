@@ -83,6 +83,9 @@ $color_breadcrumb_hover: lighten($color_breadcrumb, 20%);
 $color_productList_text: #6b6b6b;
 $color_productList_hover: darken($color_productList_text, 20%);
 $color_productList_border: #cdcdcd;
+$color_productList_border_red: 205;
+$color_productList_border_green: 205;
+$color_productList_border_blue: 205;
 
 $color_productImage_border: gray;
 
@@ -114,7 +117,14 @@ $background_button: black left top url('images/button_bg.png') repeat-x;
 $background_button_hover: gray left top url('images/button_flipped_bg.png') repeat-x;
 $background_footer: $color_footer_border url('images/footer_bg.png') repeat-x;
 
+$background_white: white url('images/bg_white.png');
+
 // mixins
+
+@mixin transparent_background_color($red:255, $green:255, $blue:255, $alpha:0.5) {
+  background-color: rgb($red, $green, $blue);
+  background-color: rgba($red, $green, $blue, $alpha);
+}
 
 @mixin min_height($size:200px) {
    min-height: $size; 
@@ -185,6 +195,9 @@ $background_footer: $color_footer_border url('images/footer_bg.png') repeat-x;
 @mixin jcarousel_horizontal($image_width:100px, $image_height:100px, $count:1, $margin_right:10px) {
   $container_width: $count * ($image_width + $margin_right);
 
+  .productListCarouselAccessories {
+  }
+
   img {
     width: $image_width;
     height: $image_height;
@@ -193,6 +206,10 @@ $background_footer: $color_footer_border url('images/footer_bg.png') repeat-x;
   .jcarousel-container {
     border-width: 0;
     background-color: transparent;
+    ul {
+      
+      width: 99999px !important;
+    }
     li {
       margin: 0 $margin_right 0 0;
     }
@@ -485,10 +502,6 @@ $color_button_text_hover: darken($color_button_text, 20%);
       }
     }
   }
-}
-
-.paging { // icons
-  // border-color: $color_page_border;
 }
 
 // .displayBlock {
@@ -1410,9 +1423,14 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       line-height: 1.2em;
       font-weight: bold;
       text-transform: uppercase;
-      background: url('images/arrow_cat.png') no-repeat;
+      background-color: white;
+      background-color: rgba(255,255,255, 0.6);
+      background-image: url('images/arrow_cat.png');
+      background-repeat: no-repeat;
       background-size: $width_productList_bg;
-      background-position: 0.5em $height_productSpecsList_bg; 
+      background-position: 0.5em $height_productSpecsList_bg;
+      // background: white;
+      // background: url('images/bg_white.png');
       // background-size: 0.6em;
       // &:before {
       //   content: url('images/arrow_cat.png');
@@ -1423,7 +1441,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       font-size: 1.4em;
     }
     h5, p {
-      padding: $height_productList_h5_padding_top 0.3em 0 $width_productList_bg * 2.2;
+      padding: $height_productList_h5_padding_top 0.3em 0.3em $width_productList_bg * 2.2;
 
     }
     h6 { // price (not used)
@@ -1433,7 +1451,10 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
     .viewProductLink {
       font-size: 1.6em;
       // TODO: add gray transluscent background
-      background: $color_productList_border url('images/icon_search.png') no-repeat;
+      @include transparent_background_color($color_productList_border_red, $color_productList_border_blue, $color_productList_border_green, 0.8);
+      // background: $color_productList_border url('images/icon_search.png') no-repeat;
+      background-image: url('images/icon_search.png');
+      background-repeat: no-repeat;
       background-size: $width_viewProduct_icon;
       background-position: 1em center;
       // color: #6b6b6b;
@@ -1484,7 +1505,6 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
     padding-top: 10px;
   }
 }
-
 
 .categoryProductHover {
   color: $color_productList_hover;
@@ -1661,8 +1681,9 @@ $productSpecs_margin: 0.8em;
 
 // product view
 
-$width_product_image: 340px + 20px;
-$widith_product_details: $width_content - $width_product_image - 5px;
+$width_product_image: 340px + 2px; // image width and border
+$width_productImageContainer_margin: 10px;
+$width_product_details: $width_content - $width_product_image - $width_productImageContainer_margin - 20px;
 .productViewContainer {
   // display: block;
   vertical-align: top;
@@ -1675,6 +1696,7 @@ $widith_product_details: $width_content - $width_product_image - 5px;
   vertical-align: top;
   width: $width_product_image;
   height: 100%;
+  margin-right: $width_productImageContainer_margin;
 }
 
 .productImage {
@@ -1705,7 +1727,7 @@ $widith_product_details: $width_content - $width_product_image - 5px;
   display: inline-block;
   vertical-align: top;
   color: $color_product_text;
-  width: $widith_product_details;
+  width: $width_product_details;
   height: 100%;
 }
 

@@ -13,8 +13,9 @@
 <!-- TODO: 'Tell a friend' should send a email with link to product -->
 <!-- TODO: add reviews to bottom of product -->
 <!-- TODO: add pdf catalogs -->
-<!-- BUG: carousel, when one item, it gets pushed to the left -->
+<!-- BUG: carousel, when one item, it gets pushed to the left, because fallback number -->
 <!-- BUG: carousel, remove pagination -->
+<!-- BUG: carousel, when no items, infinite items added -->
 <title>Antonini Knives USA</title>
 
 <meta name="description" content="" id='metaDescription' />
@@ -32,7 +33,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121207162750",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121207221004",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -267,7 +268,7 @@ the homepageTemplate template is loaded into mainContentArea by default when the
           gravida justo, quis eleifend arcu velit quis lacus. Morbi magna magna, tincidunt a, mattis non, imperdiet vitae, tellus. Sed odio est, auctor ac, 
           sollicitudin in, consequat vitae, orci. Fusce id felis. Vivamus sollicitudin metus eget eros.
         </p>
-        <a class='bindByAnchor button' href="#company?show=about" title='More About Antonini'>More About Antonini</a>
+        <a class='button bindByAnchor' href="#company?show=about" title='More About Antonini'>More About Antonini</a>
       </div>
     </div>
   </div>
@@ -375,6 +376,20 @@ remember to NOT put the button inside the 'onclick' container or two events will
     
     <!-- <span data-bind='var: product(reviews.average); format:addClass; className:review_;' class='reviewSprite'></span> -->
 <!--  <span data-bind='var: reviews(total); format:text; pretext: from ;posttext: reviews; className:numReviews;'></span> -->
+  </div>
+</li>
+
+<li id='productListCarouselTemplate' class='loadingBG  ' onMouseOver="$(this).addClass('categoryProductHover');" onMouseOut="$(this).removeClass('categoryProductHover');" >
+  
+  <button class='floatRight pointer quickView displayNone' onClick="quickView('product',{'templateID':'productTemplateQuickView','pid':$(this).closest('[data-pid]').attr('data-pid')});">Quickview</button>
+  
+  <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
+
+    <div class='prodThumbContainer' data-bind='var:product(pid); format:addPicSlider; extension:myRIA;'>
+      <h5 data-bind='var: product(zoovy:prod_name); format:text;' class='productName'></h5>
+      <img src='blank.gif' class='prodThumb' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='230' height='230' />
+      <div class="viewProductLink"><span>View Product</span></div>
+    </div>
   </div>
 </li>
 
@@ -543,7 +558,6 @@ this will likely become more flexible in the future. ###
 -->
 
 <div id='productTemplate'>
-  <!-- TODO: once flex fields are set up, uncomment spec list -->
 
   <div class='headings headingsProduct'>
     <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
@@ -616,8 +630,9 @@ this will likely become more flexible in the future. ###
   <!-- <ul id='homeProdSearchBestSellers' class='jcarousel-skin-antoniniknives' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListCarouselHomepageTemplate; before:<h2>Our Top Blades</h2>;'></ul> -->
 
   <div class="productExtras">
-    <ul id='productListCarouselAccessories' class='productList productListProductExtras jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h5>Accessories</h5>; withReviews:0; items_per_page: 100; hide_pagination:true;"></ul>
-    <ul id='productListCarouselRelated'     class='productList productListProductExtras jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h5>Variants</h5>;    withReviews:0; items_per_page: 100; hide_pagination:true;"></ul>
+    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselAccessories jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Accessories</h5>; withReviews:0; items_per_page: 20; hide_pagination:true; hideMultipageControls: true;"></ul></div>
+    <div data-bind="var: product(zoovy:related_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselRelated jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Variants</h5>;    withReviews:0; items_per_page: 20; hide_pagination:true;"></ul></div>
+    <!-- <ul class='productListProductExtras productListCarouselTest jcarousel-skin-antoniniknives'><li>Blank</li></ul> -->
   </div>
   
 

@@ -725,6 +725,8 @@ footer {
 .homepageContent .jcarousel-container {
   border-width: 0;
   background-color: transparent; }
+  .homepageContent .jcarousel-container ul {
+    width: 99999px !important; }
   .homepageContent .jcarousel-container li {
     margin: 0 0 0 0; }
 .homepageContent .jcarousel-container-horizontal {
@@ -830,19 +832,25 @@ footer {
     line-height: 1.2em;
     font-weight: bold;
     text-transform: uppercase;
-    background: url("images/arrow_cat.png") no-repeat;
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6);
+    background-image: url("images/arrow_cat.png");
+    background-repeat: no-repeat;
     background-size: 0.6em;
     background-position: 0.5em 0.5em; }
   .content .productList p, .content .subCategoryList p {
     font-size: 1.4em; }
   .content .productList h5, .content .productList p, .content .subCategoryList h5, .content .subCategoryList p {
-    padding: 0.3em 0.3em 0 1.32em; }
+    padding: 0.3em 0.3em 0.3em 1.32em; }
   .content .productList h6, .content .subCategoryList h6 {
     font-size: 1.3em;
     font-weight: normal; }
   .content .productList .viewProductLink, .content .subCategoryList .viewProductLink {
     font-size: 1.6em;
-    background: #cdcdcd url("images/icon_search.png") no-repeat;
+    background-color: #cdcdcd;
+    background-color: rgba(205, 205, 205, 0.8);
+    background-image: url("images/icon_search.png");
+    background-repeat: no-repeat;
     background-size: 1.5em;
     background-position: 1em center; }
 .content .productList li {
@@ -1015,8 +1023,9 @@ footer {
 .productImageContainer {
   display: inline-block;
   vertical-align: top;
-  width: 360px;
-  height: 100%; }
+  width: 342px;
+  height: 100%;
+  margin-right: 10px; }
 
 .productImage img {
   border: 1px solid gray; }
@@ -1037,7 +1046,7 @@ footer {
   display: inline-block;
   vertical-align: top;
   color: #454545;
-  width: 471px;
+  width: 464px;
   height: 100%; }
 
 .productDetailsList {
@@ -1068,6 +1077,8 @@ footer {
 .productExtras .jcarousel-container {
   border-width: 0;
   background-color: transparent; }
+  .productExtras .jcarousel-container ul {
+    width: 99999px !important; }
   .productExtras .jcarousel-container li {
     margin: 0 10px 0 0; }
 .productExtras .jcarousel-container-horizontal {
