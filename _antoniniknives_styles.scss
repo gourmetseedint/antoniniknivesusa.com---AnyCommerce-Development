@@ -192,6 +192,7 @@ $background_footer: $color_footer_border url('images/footer_bg.png') repeat-x;
 
   .jcarousel-container {
     border-width: 0;
+    background-color: transparent;
     li {
       margin: 0 $margin_right 0 0;
     }
@@ -1453,9 +1454,14 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
     li {
       // width: 230px;
       // height: 230px;
-      @include min_height(230px);
+      margin: 0 0 10px 0;
+      // @include min_height(230px);
       display: block;
       text-align: center;
+      // border: 1px solid gray;
+    }
+    div {
+      display: inline-block;
     }
     img {
       width: 200px;

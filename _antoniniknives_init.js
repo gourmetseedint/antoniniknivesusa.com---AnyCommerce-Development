@@ -54,7 +54,7 @@ var categoryCable  = '.cable_-_electrical';
 var categoryFarm   = '.farm_-_garden';
 var categoryPocket = '.pocket_-_traditional';
 // var categoryPromo  = '.promo_-_customizing';
-var categoryPromo  = '.promo-customizing';
+var categoryPromo  = '.promo-customize';
 var categorySos    = '.sos_-_rescue';
 
 var prettyBoat;
@@ -129,62 +129,140 @@ var subcatData = [];
 
 // sub category data
 var subcatData = {
+  // category:
+  //   subcategory:
+  //     fields:
   ".boat_-_fishing": {
     ".antonini": {
-      "prettyLong":"Antonini Long Pretty", // missing
-      "description" : "Lorem ipsum dolor sit amet." // missing
+      "prettyLong": "Antonini Long Pretty", // missing
+      "description": "" // missing
+    },
+    ".boat" : {
+      "prettyLong":"Boat Multipurpose Yachting Knives",
+      "description" : "" // missing
+    },
+    ".classic" : {
+      "prettyLong":"Classic Fisherman Knives",
+      "description" : "The Classic Line of knives are great basic Fisherman's Knives covering a range of tasks. The blades are in 2 sizes (190 & 160 mm) made of quality stainless steel. Plastic handles."
+    },
+    ".fontanin" : {
+      "prettyLong":"Fontanin Fisherman Knives",
+      "description" : "In 2003 Antonini acquired the business of Messrs.Fontanin to continue crafting one of the most popular Italian fishing knives already sold worldwide in millions of pieces. Featuring ABS plastic handles (now available in 7 different colors: red, black, orange, green, yellow, blue and white and with convenient lanyard hole - some colors by special order only) and Aisi 420 stainless steel blades. <br/><br/>The plastic handle of this knife is particularly suited to effective customizing with your company logo (heat printing, screen printing and pad printing methods all available)."
+    },
+    ".nauta" : {
+      "prettyLong":"Nauta Boating and Pro-Rescue Knives",
+      "description" : "" // missing
+    }
+  },
+  ".cable_-_electrical": {
+    ".ampere": {
+      "prettyLong": "Ampere Professional Electrician Knives",
+      "description": "" // missing
+    },
+    ".export": {
+      "prettyLong": "Export Series Professional Electrician Knives",
+      "description": "" // missing
+    },
+    ".ohm": {
+      "prettyLong": "Ohm Professional Electrician Knives Insulated",
+      "description": "" // missing
+    },
+    ".volt": {
+      "prettyLong": "Volt Professional Electrician Knives",
+      "description": "" // missing
+    },
+    ".watt": {
+      "prettyLong": "Watt Professional Electrician Knives",
+      "description": "" // missing
+    }
+  },
+  ".farm_-_garden": {
+    ".classic": {
+      "prettyLong": "Classical Full-Arch Billhook Pruning Knives ",
+      "description": "" // missing
+    },
+    ".high-tech": {
+      "prettyLong": "High-Tech Pruning and Grafting Knives",
+      "description": "" // missing
+    },
+    ".hobby": {
+      "prettyLong": "Hobby Pruning and Grafting Knives",
+      "description": "" // missing
+    },
+    ".professional": {
+      "prettyLong": "Professional Pruning and Grafting Knives",
+      "description": "" // missing
+    },
+    ".traditional": {
+      "prettyLong": "Traditional Pruning Knives",
+      "description": "" // missing
+    }
+  },
+  ".pocket_-_traditional": {
+    ".10bullet": {
+      "prettyLong": "Bullet Pocket Knives",
+      "description": "" // missing
+    },
+    ".20cartridge": {
+      "prettyLong": "12-Guage Shotgun Cartridge Knives",
+      "description": "" // missing
+    },
+    ".30maniaghese": {
+      "prettyLong": "Traditional Pocket Knives of Maniago",
+      "description": "" // missing
+    },
+    ".40pattada": {
+      "prettyLong": "Traditional Pocket Knives of Pattada",
+      "description": "" // missing
+    },
+    ".50siciliano": {
+      "prettyLong": "Traditional Pocket Knives of Sicily",
+      "description": "" // missing
+    },
+    ".60other-pocket": {
+      "prettyLong": "Other Pocket Knives",
+      "description": "" // missing
+    }
+  },
+  ".sos_-_rescue": {
+    ".10ara-xl": {
+      "prettyLong": "ARA XL Professional Rescue Knives",
+      "description": "" // missing
+    },
+    ".20nauta": {
+      "prettyLong": "Nauta Boating and Pro-Rescue Knives",
+      "description": "" // missing
+    },
+    ".30mamba": {
+      "prettyLong": "Mamba Pro-Rescue Knives with Fixed Blades",
+      "description": "" // missing
+    },
+    ".40narmada": {
+      "prettyLong": "Narmada Tactical Pro-Rescue Knives",
+      "description": "" // missing
+    },
+    ".50si-plus": {
+      "prettyLong": "SI Plus Pro-Rescue Knives",
+      "description": "" // missing
+    },
+    ".60uri-xl": {
+      "prettyLong": "URI XL Pro-Rescue Knives",
+      "description": "" // missing
+    },
+    ".70eighty-plus": {
+      "prettyLong": "80 Plus Pro-Rescue Knives Anniversary Edition",
+      "description": "To celebrate their 80th Anniversary in 2005 (1925-2005), A. E. Coltellerie (Antonini Knives) created this very special series of the SOS rescue knives. Due to their popularity, production continues on these very useful, very well-crafted knives."
+    },
+    ".90other-sos": {
+      "prettyLong": "Other SOS Professional Rescue Tools",
+      "description": "" // missing
+    },
+    ".95sos-sheaths": {
+      "prettyLong": "Sheaths for Various SOS Products",
+      "description": "" // missing
     }
   }
 };
-
-// var subcatData = {
-//   // boat - fishing
-//   ".boat_-_fishing.antonini" : {
-//   "prettyLong":"Antonini Long Pretty", // missing
-//   "description" : "Lorem ipsum dolor sit amet." // missing
-//   },
-//   ".boat_-_fishing.boat" : {
-//   "prettyLong":"Boat Multipurpose Yachting Knives",
-//   "description" : "Lorem ipsum dolor sit amet." // missing
-//   },
-//   ".boat_-_fishing.classic" : {
-//   "prettyLong":"Classic Fisherman Knives",
-//   "description" : "The Classic Line of knives are great basic Fisherman's Knives covering a range of tasks. The blades are in 2 sizes (190 & 160 mm) made of quality stainless steel. Plastic handles."
-//   },
-//   ".boat_-_fishing.fontanin" : {
-//   "prettyLong":"Fontanin Fisherman Knives",
-//   "description" : "In 2003 Antonini acquired the business of Messrs.Fontanin to continue crafting one of the most popular Italian fishing knives already sold worldwide in millions of pieces. Featuring ABS plastic handles (now available in 7 different colors: red, black, orange, green, yellow, blue and white and with convenient lanyard hole - some colors by special order only) and Aisi 420 stainless steel blades. <br/><br/>The plastic handle of this knife is particularly suited to effective customizing with your company logo (heat printing, screen printing and pad printing methods all available)."
-//   },
-//   ".boat_-_fishing.nauta" : {
-//   "prettyLong":"Nauta Boating and Pro-Rescue Knives",
-//   "description" : "Lorem ipsum dolor sit amet." // missing
-//   },
-//   // cable - electrical
-//   ".cable_-_electrical.ampere": {
-//     "prettyLong": "AMPERE Professional Electrician Knives",
-//     "description": ""
-//   },
-//   ".cable_-_electrical.export": {
-//     "prettyLong": "EXPORT Series Professional Electrician Knives",
-//     "description": ""
-//   },
-//   ".cable_-_electrical.ohm": {
-//     "prettyLong": "OHM Professional Electrician Knives Insulated",
-//     "description": ""
-//   },
-//   ".cable_-_electrical.volt": {
-//     "prettyLong": "VOLT Professional Electrician Knives",
-//     "description": ""
-//   },
-//   ".cable_-_electrical.watt": {
-//     "prettyLong": "WATT Professional Electrician Knives",
-//     "description": ""
-//   },
-//   "farm_-_garden.sub": {
-//     "prettyLong": "",
-//     "description": ""
-//   }
-// };
 
 
 /// functions \\\
@@ -205,21 +283,40 @@ var subcatData = {
 //   return title;
 // }
 
+function getPeriodCount(value) {
+  return (value.split(/[.]/) || '').length - 1;
+}
+
+function getCategory (navcat, subLevel) {
+  var periodCount = getPeriodCount(navcat);
+  var level = (subLevel || 0) + 1; // default is category
+  var value;
+
+  if (periodCount > 0) {
+    value = navcat.split('.')[level];
+    if (value) {
+      return '.' + value;
+    }
+  }
+  return '';
+}
 
 // subcat conversion
 function setValueFromSubcatData(selector, field) {
-  var navcat = $(selector).text(); // navcat/json key must be text in html
-  var temp   = 'Not set';
+  var value   = 'Not set';
+  var navcat = $(selector).text(); // navcat must be text in html
+  var category = getCategory(navcat);
+  var subCategory = getCategory(navcat, 1);
 
   // set json value
-  if(navcat && subcatData[navcat] && subcatData[navcat][field]){
-    temp = subcatData[navcat][field];
+  if(category && subCategory && subcatData[category] && subcatData[category][subCategory] && subcatData[category][subCategory][field]){
+    value = subcatData[category][subCategory][field];
   }
   // change text json value
-  $(selector).html(temp);
+  $(selector).html(value);
 }
 
-function navcatToPretty(navcat) {
+function getPretty(navcat) {
   // only works from a rq.push
   return fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']);
 }
@@ -237,7 +334,7 @@ function fixHiddenPretty(pretty) {
   return temp;
 }
 
-function navcatToTier1ID(navcat) {
+function getTier1ID(navcat) {
   // replace '.' with '_' and '-' with ''
   var temp = '#tier1categories' + navcat.split(/[.]/).join('_').split(/-/).join('');
   return temp;
@@ -377,34 +474,30 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   resetCategoryLogo();
   resetAllMenuProducts();
 
-  currentNavcat = P.navcat;
-  periodCount   = (currentNavcat.split(/[.]/) || '').length - 1;
+  currentNavcat   = P.navcat;
+  currentCategory = getCategory(currentNavcat);
 
-  // see if category or sub
-  if (periodCount === 1) {
-    // catgories
-    currentCategory = P.navcat;
+  if (currentNavcat === currentCategory) {
+    // category
     $(headingSubsParent).html('');
-  } else if (periodCount === 2) {
-    // sub categories
-    currentCategory = currentNavcat.substring(0, currentNavcat.lastIndexOf('.'));
-    $(headingSubsParent).html(categoryLink(currentCategory, navcatToPretty(currentCategory)));
+  }else {
+    // sub category
+    $(headingSubsParent).html(categoryLink(currentCategory, getPretty(currentCategory)));
   }
 
-  // $(headingSubCategory).html('asdf');
+
   // show category sub in menu
-  $(navcatToTier1ID(currentCategory) + ' > ul').slideDown(500);
+  $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
 
   // set subcategory data
-  // $('#' + P.parentID + ' ' + subcatPrettyLong).each(function () {
-  //   setValueFromSubcatData(this, 'prettyLong');
-  // });
+  $('#' + P.parentID + ' ' + subcatPrettyLong).each(function () {
+    setValueFromSubcatData(this, 'prettyLong');
+  });
+  $('#' + P.parentID + ' ' + subcatDescription).each(function () {
+    setValueFromSubcatData(this, 'description');
+  });
 
-  // $('#' + P.parentID + ' ' + subcatDescription).each(function () {
-  //   setValueFromSubcatData(this, 'description');
-  // });
-
-  app.u.dump([subcatData]);
+  // app.u.dump([subcatData]);
 
     // setValueFromSubcatData(this, 'description');
   // app.u.dump([Object.keys(subcatData)]);
@@ -459,7 +552,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   currentCategory = $(headingProductNavcat, '#' + P.parentID).html();
 
   // show category sub in menu
-  $(navcatToTier1ID(currentCategory) + ' > ul').slideDown();
+  $(getTier1ID(currentCategory) + ' > ul').slideDown();
 
   // carousels
   startCarouselProduct(P.parentID);
@@ -476,7 +569,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
     case categoryBoat:
       // set pretty for when loading dirctly to product
       if (prettyBoat === undefined) {
-        prettyBoat = navcatToPretty(categoryBoat);
+        prettyBoat = getPretty(categoryBoat);
       }
       $(banner).addClass(classBannerCategoryBoat);
       $(logoCategory).addClass(classLogoCategoryBoat);
@@ -486,7 +579,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       break;
     case categoryCable:
       if (prettyCable === undefined) {
-        prettyCable = navcatToPretty(categoryCable);
+        prettyCable = getPretty(categoryCable);
       }
       $(banner).addClass(classBannerCategoryCable);
       $(logoCategory).addClass(classLogoCategoryCable);
@@ -496,7 +589,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       break;
     case categoryFarm:
       if (prettyFarm === undefined) {
-        prettyFarm = navcatToPretty(categoryFarm);
+        prettyFarm = getPretty(categoryFarm);
       }
       $(banner).addClass(classBannerCategoryFarm);
       $(logoCategory).addClass(classLogoCategoryFarm);
@@ -506,7 +599,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       break;
     case categoryPocket:
       if (prettyPocket === undefined) {
-        prettyPocket = navcatToPretty(categoryPocket);
+        prettyPocket = getPretty(categoryPocket);
       }
       $(banner).addClass(classBannerCategoryPocket);
       $(logoCategory).addClass(classLogoCategoryPocket);
@@ -516,7 +609,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       break;
     case categoryPromo:
       if (prettyPromo === undefined) {
-        prettyPromo = navcatToPretty(categoryPromo);
+        prettyPromo = getPretty(categoryPromo);
       }
       $(banner).addClass(classBannerCategoryPromo);
       $(logoCategory).addClass(classLogoCategoryPromo);
@@ -526,7 +619,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       break;
     case categorySos:
       if (prettySos === undefined) {
-        prettySos = navcatToPretty(categorySos);
+        prettySos = getPretty(categorySos);
       }
       $(banner).addClass(classBannerCategorySos);
       $(logoCategory).addClass(classLogoCategorySos);
@@ -611,12 +704,12 @@ app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
   // get pretty names for product pages
-  // prettyBoat   = navcatToPretty(categoryBoat);
-  // prettyCable  = navcatToPretty(categoryCable);
-  // prettyFarm   = navcatToPretty(categoryFarm);
-  // prettyPocket = navcatToPretty(categoryPocket);
-  // prettyPromo  = navcatToPretty(categoryPromo);
-  // prettySos    = navcatToPretty(categorySos);
+  // prettyBoat   = getPretty(categoryBoat);
+  // prettyCable  = getPretty(categoryCable);
+  // prettyFarm   = getPretty(categoryFarm);
+  // prettyPocket = getPretty(categoryPocket);
+  // prettyPromo  = getPretty(categoryPromo);
+  // prettySos    = getPretty(categorySos);
 
   // Pre load images
   // $(banner).addClass(classBannerHome);
@@ -630,9 +723,11 @@ app.u.appInitComplete = function(P) {
 
   // Add promo to menu
   if (prettyPromo === undefined) {
-    prettyPromo = navcatToPretty(categoryPromo);
+    prettyPromo = getPretty(categoryPromo);
   }
   $('#tier1categories').append("<li id='tier1categories_promo__customizing'>" + categoryLink(categoryPromo, prettyPromo) + "</li>");
+  app.u.dump('categoryPromo: ' + categoryPromo);
+  app.u.dump('prettyPromo: ' + prettyPromo);
 };
 
 

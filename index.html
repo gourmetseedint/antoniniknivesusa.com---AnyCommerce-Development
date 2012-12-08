@@ -32,7 +32,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121206165612",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121207160431",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -281,7 +281,7 @@ each of the 'sections' are used to load another template. don't change the id.
 don't modify the 'data-templateid' unless you are changing template names and updating everywhere appropriate.
 -->
 <div id='categoryTemplate' class='loadingBG'>
-  
+
   <div class='headings headingsCategory'>
     <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
     <h1 data-bind="var:category(pretty); format:text;" class="categoryColor"></h1>
@@ -292,7 +292,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
     <ul class='breadcrumb' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
   </div>
   
-  <p data-bind='var:category(%page.description) format:wiki wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p>
+  <p data-bind='var:category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p>
   
   <!-- used by category, shows list of subcats -->
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>

@@ -723,7 +723,8 @@ footer {
   width: 300px;
   height: 300px; }
 .homepageContent .jcarousel-container {
-  border-width: 0; }
+  border-width: 0;
+  background-color: transparent; }
   .homepageContent .jcarousel-container li {
     margin: 0 0 0 0; }
 .homepageContent .jcarousel-container-horizontal {
@@ -851,11 +852,11 @@ footer {
   display: inline-block;
   vertical-align: top; }
 .content .subCategoryList li {
-  min-height: 230px;
-  height: auto !important;
-  height: 230px;
+  margin: 0 0 10px 0;
   display: block;
   text-align: center; }
+.content .subCategoryList div {
+  display: inline-block; }
 .content .subCategoryList img {
   width: 200px;
   height: 200px; }
@@ -1065,7 +1066,8 @@ footer {
   width: 230px;
   height: 230px; }
 .productExtras .jcarousel-container {
-  border-width: 0; }
+  border-width: 0;
+  background-color: transparent; }
   .productExtras .jcarousel-container li {
     margin: 0 10px 0 0; }
 .productExtras .jcarousel-container-horizontal {
