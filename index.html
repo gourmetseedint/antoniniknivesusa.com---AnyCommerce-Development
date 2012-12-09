@@ -33,7 +33,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121208191026",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121208201657",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -162,15 +162,6 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
     </div>
   </div>
-  <div class='preload'>
-    <div class="bannerHome"></div>
-    <div class="bannerCategoryBoat"></div>
-    <div class="bannerCategoryCable"></div>
-    <div class="bannerCategoryFarm"></div>
-    <div class="bannerCategoryPocket"></div>
-    <div class="bannerCategoryPromo"></div>
-    <div class="bannerCategorySos"></div>
-  </div>
   <footer>
     <div class="footerBoxesWrapper">
       <div class='container'>
@@ -209,6 +200,15 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <p class='copyright'>&copy; 2012 A.E. Coltellerie snc - all rights reserved</p>
     </div>
   </footer>
+  <div class='preload'>
+    <div class="bannerHome"></div>
+    <div class="bannerCategoryBoat"></div>
+    <div class="bannerCategoryCable"></div>
+    <div class="bannerCategoryFarm"></div>
+    <div class="bannerCategoryPocket"></div>
+    <div class="bannerCategoryPromo"></div>
+    <div class="bannerCategorySos"></div>
+  </div>
   <!-- /VIEW CONTENT -->
 </div>
 
@@ -302,7 +302,9 @@ don't modify the 'data-templateid' unless you are changing template names and up
     <ul class='breadcrumb' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
   </div>
   
-  <p data-bind='var:category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p>
+  <div data-bind='var:category(%page.description); format:showIfSet;' class='displayNone'>
+    <p data-bind='var:category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p>
+  </div>
   
   <!-- used by category, shows list of subcats -->
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>
@@ -570,14 +572,14 @@ this will likely become more flexible in the future. ###
 
   <div class='headings headingsProduct'>
     <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
-    <h1 data-bind="var:product(zoovy:prod_name); format:text;" class='headingProductName categoryColor'></h1>
+    <h1 data-bind="var:product(user:prod_primary_cat); format:text;" class='headingProductSubCategory categoryColor'></h1>
     <span data-bind="var:product(user:prod_primary_cat); format:text;" class='headingProductNavcat'></span>
     <h3 data-bind="var:product(user:prod_primary_cat); format:text;" class='headingProductCategory'></h3>
   </div>
 
   <div class='productSpecsContainer'>
     <div class="productSpecsTop">
-      <h4 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h4><!-- QUE: Should I use zoovy:prod_mfgid instead?  Matches more of the designers intent ie. 647/CO instead of 647CO -->
+      <h4 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h4><h1 data-bind="var:product(zoovy:prod_name); format:text;" class='productName categoryColor'></h1><!-- QUE: Should I use zoovy:prod_mfgid instead?  Matches more of the designers intent ie. 647/CO instead of 647CO -->
       <!-- <div class='breadcrumbContainer breadcrumbProduct'> -->
       <ul class='breadcrumb breadcrumbProduct' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
       <!-- </div> -->

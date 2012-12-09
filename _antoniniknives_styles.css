@@ -925,6 +925,12 @@ footer {
 
 .productSpecsTop {
   margin-bottom: 5px; }
+  .productSpecsTop .productName {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    font-size: 2.7em;
+    line-height: 1em; }
 
 .productSpecsMiddle {
   margin-bottom: 5px;
@@ -1005,6 +1011,8 @@ footer {
   padding: 0;
   font-weight: bold;
   display: inline-block; }
+  .productID:after {
+    content: ":\00a0"; }
 
 .productPrice {
   font-size: 3em;
