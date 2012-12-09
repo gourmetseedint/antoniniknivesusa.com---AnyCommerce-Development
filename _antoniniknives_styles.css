@@ -199,6 +199,9 @@ a:active {
   -moz-box-shadow: 0 3px 3px 2px #999;
   box-shadow: 0 3px 3px 2px #999; }
 
+.preload div {
+  height: 100px; }
+
 /* Header */
 header {
   height: 386px; }

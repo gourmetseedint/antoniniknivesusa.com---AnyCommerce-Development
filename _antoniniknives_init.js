@@ -741,6 +741,7 @@ $(document).ready(function(){
 
 
   // Pre load images
+  $('.preload').hide();
   // $(banner).addClass(classBannerCategoryBoat);
   // $(banner).addClass(classBannerCategoryCable);
   // $(banner).addClass(classBannerCategoryFarm);

@@ -33,7 +33,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121207221004",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121208191026",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -161,6 +161,15 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
       <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
     </div>
+  </div>
+  <div class='preload'>
+    <div class="bannerHome"></div>
+    <div class="bannerCategoryBoat"></div>
+    <div class="bannerCategoryCable"></div>
+    <div class="bannerCategoryFarm"></div>
+    <div class="bannerCategoryPocket"></div>
+    <div class="bannerCategoryPromo"></div>
+    <div class="bannerCategorySos"></div>
   </div>
   <footer>
     <div class="footerBoxesWrapper">
