@@ -4,16 +4,16 @@ var subcatData = {
   //     fields:
   ".boat_-_fishing": {
     ".antonini": {
-      "prettyLong": "ANTONINI Boating Knives", // missing
-      "description": "" // missing
+      "prettyLong": "ANTONINI Boating Knives",
+      "description": "The ANTONINI collection is a group of basic and essential knifes for the tool box of any boat or fisherman."
     },
     ".boat" : {
       "prettyLong":"BOAT Multipurpose Yachting Knives",
-      "description" : "" // missing
+      "description" : "The BOAT range of knives feature multiple tools/blades in stainless steel, and will be a welcome addition to the tools of any boat or fisherman."
     },
     ".classic" : {
       "prettyLong":"CLASSIC Fisherman Knives",
-      "description" : "The Classic Line of knives are great basic Fisherman's Knives covering a range of tasks. The blades are in 2 sizes (190 & 160 mm) made of quality stainless steel. Plastic handles."
+      "description" : "The CLASSIC Line of knives are great basic Fisherman's Knives covering a range of tasks. The blades are in 2 sizes (190 & 160 mm) made of quality stainless steel. Plastic handles."
     },
     ".fontanin" : {
       "prettyLong":"FONTANIN Fisherman Knives",
@@ -27,7 +27,7 @@ var subcatData = {
   ".cable_-_electrical": {
     ".ampere": {
       "prettyLong": "AMPERE Pro Electrician Knives",
-      "description": "" // missing
+      "description": "The AMPERE line of professional electrician knifes is optimized for utility with two wire-scrapers built in to the blade."
     },
     ".export": {
       "prettyLong": "EXPORT Pro Electrician Knives",
@@ -97,7 +97,7 @@ var subcatData = {
   ".sos_-_rescue": {
     ".10ara-xl": {
       "prettyLong": "ARA XL Pro-Rescue Knives",
-      "description": "" // missing
+      "description": "The ARA XL knives represent the top-of-the-range for the SOS line of Antonini, fully-featured for use in a wide range of emergency and rescue needs."
     },
     ".20nauta": {
       "prettyLong": "NAUTA Boating Pro-Rescue Knives",
