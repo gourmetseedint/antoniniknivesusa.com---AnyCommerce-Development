@@ -278,7 +278,7 @@ function startCarouselProduct(parentID) {
     // start: 1,
     // offset: 1,
     // visible: 1,
-    // wrap: 'last', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
+    wrap: 'both', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
     // itemFallbackDimension: 230, // If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
     initCallback: mycarousel_initCallback
   });

@@ -16,6 +16,9 @@
 <!-- BUG: carousel, when one item, it gets pushed to the left, because fallback number -->
 <!-- BUG: carousel, remove pagination -->
 <!-- BUG: carousel, when no items, infinite items added -->
+<!-- TODO: add images to promo -->
+<!-- TODO: add gsi, testimonials categories to company layout -->
+<!-- TODO: add email form to wholesale "The wholesale page will need to be a paragraph of info along with a fill-in form to request info (send as email). It would be good to have a text box they can use to explain the nature of their request." -->
 <title>Antonini Knives USA</title>
 
 <meta name="description" content="" id='metaDescription' />
@@ -33,7 +36,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121208201657",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121210171228",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -304,6 +307,8 @@ don't modify the 'data-templateid' unless you are changing template names and up
   
   <div data-bind='var:category(%page.description); format:showIfSet;' class='displayNone'>
     <p data-bind='var:category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p>
+    <!-- TODO: edit images for special categories -->
+    <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
   </div>
   
   <!-- used by category, shows list of subcats -->
@@ -311,7 +316,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
   <!-- used by subcategory, shows a list of products -->
   <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList productListCategory'></ul>
-  <!-- <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
+
 
   <!-- <h2 data-bind="var: category(%page.header); format: text; editor: text;"></h2> -->
   
@@ -641,8 +646,8 @@ this will likely become more flexible in the future. ###
   <!-- <ul id='homeProdSearchBestSellers' class='jcarousel-skin-antoniniknives' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListCarouselHomepageTemplate; before:<h2>Our Top Blades</h2>;'></ul> -->
 
   <div class="productExtras">
-    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselAccessories jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Accessories</h5>; withReviews:0; items_per_page: 20; hide_pagination:true; hideMultipageControls: true;"></ul></div>
-    <div data-bind="var: product(zoovy:related_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselRelated jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Variants</h5>;    withReviews:0; items_per_page: 20; hide_pagination:true;"></ul></div>
+    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselAccessories jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Accessories</h5>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
+    <div data-bind="var: product(zoovy:related_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselRelated jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Variants</h5>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
     <!-- <ul class='productListProductExtras productListCarouselTest jcarousel-skin-antoniniknives'><li>Blank</li></ul> -->
   </div>
   
