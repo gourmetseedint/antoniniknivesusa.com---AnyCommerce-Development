@@ -1,0 +1,22 @@
+body {
+  color : #000000;
+  background : #ffffff;
+  font-family : "Times New Roman", Times, serif;
+  font-size : 12pt;
+}
+
+a {
+  text-decoration : underline;
+  color : #0000ff;
+}
+
+.container {width:auto}
+/*#configuratorLeftColumn, #configuratorRightColumn {display:none; width:1px;}*/
+/*#configuratorMiddleColumn {left:0;}*/
+
+.printNo  {display:none;}
+.printYes  {display:block;}
+
+/*#slideshowContainer li {
+  display: none;
+}*/

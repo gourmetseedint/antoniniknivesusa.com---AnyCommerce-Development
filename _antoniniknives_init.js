@@ -262,27 +262,35 @@ function mycarousel_initCallback(carousel) {
 }
 
 function startCarouselHome() {
-  $('#homeProdSearchBestSellers').jcarousel({
-    auto: 3, // Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.
-    scroll: 1,
-    // visible: 1,
-    wrap: 'both', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
-    itemFallbackDimension: 300, // has to be image size - If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
-    initCallback: mycarousel_initCallback
-  });
+  var $target = $('#homeProdSearchBestSellers');
+
+  if ($target.children().length > 1) {
+    $target.jcarousel({
+      auto: 3, // Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.
+      scroll: 1,
+      // visible: 1,
+      wrap: 'both', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
+      itemFallbackDimension: 300, // has to be image size - If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
+      initCallback: mycarousel_initCallback
+    });
+  }
 }
 
 function startCarouselProduct(parentID) {
-  $('#' + parentID + ' .productListProductExtras').jcarousel({
-    auto: 3, // Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.
-    scroll: 1,
-    // start: 1,
-    // offset: 1,
-    // visible: 1,
-    wrap: 'both', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
-    // itemFallbackDimension: 230, // If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
-    initCallback: mycarousel_initCallback
-  });
+  var $target = $('#' + parentID + ' .productListProductExtras');
+
+  if ($target.children().length > 3) {
+    $target.jcarousel({
+      auto: 3, // Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.
+      scroll: 1,
+      // start: 1,
+      // offset: 1,
+      // visible: 1,
+      wrap: 'both', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
+      // itemFallbackDimension: 230, // If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
+      initCallback: mycarousel_initCallback
+    });
+  }
 }
 
 

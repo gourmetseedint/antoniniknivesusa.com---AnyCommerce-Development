@@ -37,7 +37,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121211225913",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121212012348",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -62,6 +62,7 @@ css files should be included before any .js file to ensure they are downloaded i
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="jcarousel/skin.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles.css" />
+<link rel="stylesheet" href="_antoniniknives_styles_print.css" type="text/css" media="print"/>
 <!-- IE Shim for HTML5 -->
 <!--[if lt IE 9]><script src="dist/html5shiv.js"></script><![endif]-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -102,7 +103,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 <div id='appView' class='displayNone'>
   <!-- VIEW CONTENT -->
   <div class='container'>
-    <header id="header" class="bannerCategoryDefault">
+    <header id="header" class="bannerCategoryDefault printNo">
       <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA" /></a></span>
       <nav class='navTop'>
         <span class='navTopLeft'></span>
@@ -137,7 +138,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         </ul>
       </div>
     </header>
-    <aside class="sidebar">
+    <aside class="sidebar printNo">
       <nav class="navMenu">
         <div id='logoCategory' class='logoCategoryDefault'></div><!-- QUE: should this be a link to cat? -->
         <form id='headerSearchFrm' name='headerSearchFrm' action='#' class='productSearchForm' method="get">
@@ -166,7 +167,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
     </div>
   </div>
-  <footer>
+  <footer class='printNo'>
     <div class="footerBoxesWrapper">
       <div class='container'>
         <ul class="footerBox"><h3>About</h3>
@@ -204,7 +205,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <p class='copyright'>&copy; 2012 A.E. Coltellerie snc - all rights reserved</p>
     </div>
   </footer>
-  <div class='preload'>
+  <div class='preload printNo'>
     <div class="bannerHome"></div>
     <div class="bannerCategoryBoat"></div>
     <div class="bannerCategoryCable"></div>
@@ -237,7 +238,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 -->
 
 
-<div id='appTemplates' class='displayNone'>
+<div id='appTemplates' class='displayNone printNo'>
 
 
 <!--
@@ -316,7 +317,9 @@ don't modify the 'data-templateid' unless you are changing template names and up
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>
 
   <!-- used by subcategory, shows a list of products -->
-  <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList productListCategory'></ul>
+  <div class="productListWrapper" data-bind="var: category(@products); format: showIfSet;">
+    <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList productListCategory'></ul>
+  </div>
 
   <img data-bind="var: category(%page.CAT_THUMB); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
   <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />

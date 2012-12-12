@@ -1108,6 +1108,8 @@ footer {
   top: 95px; }
 .productExtras h5 {
   font-size: 1.6em; }
+.productExtras .productList {
+  text-align: left; }
 .productExtras .jcarousel-skin-antoniniknives {
   margin-bottom: 20px; }
 

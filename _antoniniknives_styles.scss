@@ -4,6 +4,7 @@
 // TODO: hover opacity for product images
 // TODO: make image popup title the same as pagination
 // TODO: fix cable icon border
+// TODO: change social hover to just shadow
 
 // dimensions
 $width_page: 1120px;
@@ -1481,6 +1482,13 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       // text-align: left;
     }
   }
+  .productListWrapper {
+    // display: block;
+    // ul {
+    //   display: inline-block;
+    //   margin: 0 auto;
+    // }
+  }
   .subCategoryList {
     li {
       // width: 230px;
@@ -1829,6 +1837,9 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
   @include jcarousel_horizontal(230px, 230px, 3, 10px);
   h5 { // list pretext
     font-size: 1.6em;
+  }
+  .productList{
+    text-align: left;
   }
   .jcarousel-skin-antoniniknives {
     margin-bottom: 20px;
