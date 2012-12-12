@@ -34,7 +34,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121211162048",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121211163258",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -606,7 +606,7 @@ this will likely become more flexible in the future. ###
       </form>
       <div>
         <ul>
-          <li><a href='#' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).parent().attr("data-pid"),"templateID":"reviewFrmTemplate"}); return false;'>Write a Review</a></li>
+          <li><a href="javascript:void(0)" onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write a Review</a></li>
           <li><a href='#'>Tell a Friend</a></li><!-- TODO: get link for 'tell a friend' -->
           <li><a href='#'>Printer Friendly Version</a></li><!-- TODO: setup/get link for 'printer friendly version' -->
         </ul>
