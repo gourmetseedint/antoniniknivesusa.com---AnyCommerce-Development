@@ -793,12 +793,11 @@ footer {
     color: #313131; }
   .headings a:active {
     color: #646464; }
+  .headings .headingProductSubCategory a:link {
+    color: inherit; }
 
 .headingProductNavcat {
   display: none; }
-
-.headingsProduct h1 {
-  text-transform: uppercase; }
 
 .categoryDefault {
   color: #313131; }
@@ -871,6 +870,9 @@ footer {
 .content .subCategoryList img {
   width: 200px;
   height: 200px; }
+.content .subCategoryList h5, .content .subCategoryList p {
+  padding-bottom: 0;
+  margin-bottom: 0; }
 .content .subCategoryList .subcategory {
   height: 100%;
   display: block; }
@@ -1104,3 +1106,10 @@ footer {
   height: 230px; }
 .productExtras .jcarousel-next-horizontal, .productExtras .jcarousel-prev-horizontal {
   top: 95px; }
+.productExtras h5 {
+  font-size: 1.6em; }
+.productExtras .jcarousel-skin-antoniniknives {
+  margin-bottom: 20px; }
+
+.prodTabs {
+  margin-top: 20px; }

@@ -16,6 +16,7 @@ app.rq.push(['extension',0,'store_product','extensions/store_product.js']);
 app.rq.push(['extension',0,'store_cart','extensions/store_cart.js']);
 app.rq.push(['extension',0,'store_crm','extensions/store_crm.js']);
 // app.rq.push(['extension',0,'carousel','carousel-ad.js','carousel-ad.js']);
+app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
 app.rq.push(['extension',0,'myRIA','quickstart.js','startMyProgram']);
 
 
@@ -218,7 +219,7 @@ function defaultPage() {
 }
 
 function categoryLink (navcat, pretty) {
-  return "<a href='#top' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'>" + pretty + "</a>";
+  return "<a href='#top' title='" + pretty + "' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'>" + pretty + "</a>";
 }
 
 // function resetCategoryHeading() {
@@ -344,12 +345,12 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
 
   // set subcategory data
-  $('#' + P.parentID + ' ' + subcatPrettyLong).each(function () {
-    setValueFromSubcatData(this, 'prettyLong');
-  });
-  $('#' + P.parentID + ' ' + subcatDescription).each(function () {
-    setValueFromSubcatData(this, 'description');
-  });
+  // $('#' + P.parentID + ' ' + subcatPrettyLong).each(function () {
+  //   setValueFromSubcatData(this, 'prettyLong');
+  // });
+  // $('#' + P.parentID + ' ' + subcatDescription).each(function () {
+  //   setValueFromSubcatData(this, 'description');
+  // });
 
   // app.u.dump([subcatData]);
 
@@ -413,7 +414,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // carousels
   startCarouselProduct(P.parentID);
 
-  setValueFromSubcatData($('#' + P.parentID + ' ' + headingProductSub), 'prettyLong');
+  // setValueFromSubcatData($('#' + P.parentID + ' ' + headingProductSub), 'prettyLong'); // handled in extesnsion
 
 
   // $('.productListProductExtras').append('<li data-role="previous"><img src="images/arrow_product_list_left.png" class="arrow"></li>');
@@ -562,6 +563,8 @@ app.u.initMVC = function(attempts){
 app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
+  // app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
+
   // app.rq.push(['renderFormats',0,'myRIA','quickstart.js']);
   // get pretty names for product pages
   // prettyBoat   = getPretty(categoryBoat);
@@ -581,6 +584,7 @@ app.u.appInitComplete = function(P) {
   // $(banner).addClass(classBannerCategorySos);
   // resetBanner();
 
+  // BUG: getpretty doesn't work after debug clear
   // Add promo to menu
   if (prettyPromo === undefined) {
     prettyPromo = getPretty(categoryPromo);

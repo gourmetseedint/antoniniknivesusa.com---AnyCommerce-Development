@@ -1364,6 +1364,11 @@ $width_carouselHomepage_image: 300px;
       color: $color_headingsCat_a_hover;
     }
   }
+  .headingProductSubCategory {
+    a:link {
+      color: inherit;
+    }
+  }
 }
 
 .headingProductNavcat {
@@ -1372,7 +1377,7 @@ $width_carouselHomepage_image: 300px;
 
 .headingsProduct {
   h1 { // product name
-    text-transform: uppercase;
+    // text-transform: uppercase;
   }
 }
 
@@ -1448,7 +1453,6 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
     }
     h5, p {
       padding: $height_productList_h5_padding_top 0.3em 0.3em $width_productList_bg * 2.2;
-
     }
     h6 { // price (not used)
       font-size: 1.3em;
@@ -1493,6 +1497,10 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
     img {
       width: 200px;
       height: 200px;
+    }
+    h5, p {
+      padding-bottom: 0;
+      margin-bottom: 0;
     }
     .subcategory {
       height: 100%;
@@ -1592,6 +1600,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
     display: inline-block;
     font-size: 2.7em;
     line-height: 1em;
+    // text-transform: uppercase;
   }
 }
 
@@ -1818,7 +1827,17 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
 
 .productExtras {
   @include jcarousel_horizontal(230px, 230px, 3, 10px);
+  h5 { // list pretext
+    font-size: 1.6em;
+  }
+  .jcarousel-skin-antoniniknives {
+    margin-bottom: 20px;
+  }
   // .productList li {
   //   margin: 0 5px 0 0;
   // }
+}
+
+.prodTabs { // reviews
+  margin-top: 20px;
 }
