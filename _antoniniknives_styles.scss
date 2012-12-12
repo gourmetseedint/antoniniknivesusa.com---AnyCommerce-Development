@@ -1819,6 +1819,12 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
 
 .productExtras {
   @include jcarousel_horizontal(230px, 230px, 3, 10px);
+  h5 { // list pretext
+    font-size: 1.6em;
+  }
+  .jcarousel-skin-antoniniknives {
+    margin-bottom: 20px;
+  }
   // .productList li {
   //   margin: 0 5px 0 0;
   // }

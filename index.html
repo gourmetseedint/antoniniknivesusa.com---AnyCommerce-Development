@@ -16,6 +16,7 @@
 <!-- BUG: carousel, when one item, it gets pushed to the left, because fallback number -->
 <!-- BUG: carousel, remove pagination -->
 <!-- BUG: carousel, when no items, infinite items added -->
+<!-- TODO: One minor alignment issue: is it possible to have the 'wholesale' box at bottom left and the left menu box match in width? -->
 <title>Antonini Knives USA</title>
 
 <meta name="description" content="" id='metaDescription' />
@@ -33,7 +34,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121208201657",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121211162048",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -641,9 +642,25 @@ this will likely become more flexible in the future. ###
   <!-- <ul id='homeProdSearchBestSellers' class='jcarousel-skin-antoniniknives' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListCarouselHomepageTemplate; before:<h2>Our Top Blades</h2>;'></ul> -->
 
   <div class="productExtras">
-    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselAccessories jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Accessories</h5>; withReviews:0; items_per_page: 20; hide_pagination:true; hideMultipageControls: true;"></ul></div>
-    <div data-bind="var: product(zoovy:related_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselRelated jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Variants</h5>;    withReviews:0; items_per_page: 20; hide_pagination:true;"></ul></div>
+    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselAccessories jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Accessories</h5>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
+    <div data-bind="var: product(zoovy:related_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselRelated jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Variants</h5>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
     <!-- <ul class='productListProductExtras productListCarouselTest jcarousel-skin-antoniniknives'><li>Blank</li></ul> -->
+  </div>
+
+  <div class='prodTabs tabbedProductContent'>
+
+    <ul class='tabs'>
+      <li class='prodReviewsTab'><a href="#prodReviews" data-bind="var:product(pid);format:assignAttribute; attribute:href; valuePretext:#prodReviews_;">Reviews</a></li>
+    </ul>    
+    
+    <div data-bind="var:product(pid);format:assignAttribute; attribute:id; valuePretext:prodReviews_;">
+      
+      <div class='clearfix alignRight'>
+        <button class='ui-button-text ui-button ui-state-default ui-corner-all' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write Review</button>
+      </div>
+      
+      <ul class='listStyleNone clearfix productReviewsList' id='prodViewerReviews' data-bind="var: reviews(@reviews); format:reviewList; extension:store_product; loadsTemplate:productReviewsTemplateDetail;"></ul>
+    </div>    
   </div>
   
 

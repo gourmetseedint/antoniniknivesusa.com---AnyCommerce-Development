@@ -1,7 +1,9 @@
 var subcatData = {
-  // category:
-  //   subcategory:
+  // category: {
+  //   subcategory: {
   //     fields:
+  //   }
+  // }
   ".boat_-_fishing": {
     ".antonini": {
       "prettyLong": "ANTONINI Boating Knives",

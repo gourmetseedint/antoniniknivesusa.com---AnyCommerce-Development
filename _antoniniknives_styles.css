@@ -1104,3 +1104,7 @@ footer {
   height: 230px; }
 .productExtras .jcarousel-next-horizontal, .productExtras .jcarousel-prev-horizontal {
   top: 95px; }
+.productExtras h5 {
+  font-size: 1.6em; }
+.productExtras .jcarousel-skin-antoniniknives {
+  margin-bottom: 20px; }
