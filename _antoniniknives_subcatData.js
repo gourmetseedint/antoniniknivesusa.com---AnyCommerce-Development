@@ -20,10 +20,6 @@ var subcatData = {
     ".fontanin" : {
       "prettyLong":"FONTANIN Fisherman Knives",
       "description" : "In 2003 Antonini acquired the business of Messrs.Fontanin to continue crafting one of the most popular Italian fishing knives that by then had already sold worldwide in millions of pieces."
-    },
-    ".nauta" : {
-      "prettyLong":"NAUTA Boating Pro-Rescue Knives",
-      "description" : "With features great for any rescue or emergency need, the NAUTA line includes a marlin-spike typical of boating knives and nautical tools."
     }
   },
   ".cable_-_electrical": {
