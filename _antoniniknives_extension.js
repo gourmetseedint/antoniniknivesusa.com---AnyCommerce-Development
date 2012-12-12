@@ -2,7 +2,6 @@
 Antonini Extension
 */
 
-
 var antoniniknives_extension = function() {
 
   // tells you if navcat is for a category or sub
@@ -28,9 +27,7 @@ var antoniniknives_extension = function() {
 
   // functions for render formats
   var getValueFromSubcatData = function (navcat, field) {
-
-
-    var value   = 'Not set';
+    var value;
     var category = getCategory(navcat);
     var subCategory = getCategory(navcat, 1);
 
@@ -68,18 +65,27 @@ var antoniniknives_extension = function() {
     }, //callbacks
 
     renderFormats : {
-
       subcat_pretty_long : function ($tag, data) {
         var value = getValueFromSubcatData(data.value, 'prettyLong');
         // change text to json value
-        $tag.html(value);
+        // must be called from a child (span inside of a heading)
+        if (value) {
+          $tag.parent().html(value);
+        }else {
+          $tag.html('');
+        }
       },
 
       subcat_pretty_long_link : function ($tag, data) {
         var navcat = data.value;
         var value = getValueFromSubcatData(navcat, 'prettyLong');
         // change text to json value
-        $tag.html(categoryLink(navcat, value));
+        // must be called from a child (span inside of a heading)
+        if (value) {
+          $tag.parent().html(categoryLink(navcat, value));
+        }else {
+          $tag.html('');
+        }
       },
 
       // subcat_category_link : function ($tag, data) {
@@ -90,12 +96,11 @@ var antoniniknives_extension = function() {
       // },
 
       subcat_description : function ($tag, data) {
-        var value = getValueFromSubcatData(data.value, 'description');
+        var value = getValueFromSubcatData(data.value, 'description') || '';
         // change text to json value
         $tag.html(value);
       }
-    }, // renderformats
-    u : {} //util  
+    } // renderformats
   }; //r object.
   return r;
 };

@@ -348,7 +348,6 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     $(headingSubsParent).html(categoryLink(currentCategory, getPretty(currentCategory)));
   }
 
-
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
 

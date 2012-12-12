@@ -795,6 +795,8 @@ footer {
     color: #646464; }
   .headings .headingProductSubCategory a:link {
     color: inherit; }
+  .headings .headingProductSubCategory a:hover {
+    color: #646464; }
 
 .headingProductNavcat {
   display: none; }
@@ -887,6 +889,8 @@ footer {
 
 .categoryProductHover {
   color: #383838; }
+  .categoryProductHover h5 {
+    color: #383838; }
   .categoryProductHover img {
     zoom: 1;
     filter: alpha(opacity=80);
