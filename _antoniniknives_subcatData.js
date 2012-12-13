@@ -124,10 +124,6 @@ var subcatData = {
     ".90other-sos": {
       "prettyLong": "OTHER SOS Pro-Rescue Tools",
       "description": "These are tools great for rescue use and are great for any crew's tool box."
-    },
-    ".95sos-sheaths": {
-      "prettyLong": "SHEATHS for Various SOS Products",
-      "description": "Here are sheaths and other accessories for the SOS line."
     }
   }
 };
