@@ -1,9 +1,5 @@
 /* Project Styles */
 
-// TODO: hover opacity for home cats
-// TODO: hover opacity for product images
-// TODO: make image popup title the same as pagination
-// TODO: fix cable icon border
 // TODO: change social hover to just shadow
 
 // dimensions
@@ -325,7 +321,7 @@ h1 {
 }
 
 h2 { // TODO: get correct font
-  font-size: 3em;
+  font-size: 1.9em;
   line-height: 1em;
   letter-spacing: -1px;
   /*text-align: left;*/
@@ -335,7 +331,7 @@ h2 { // TODO: get correct font
 }
 
 h3 {
-  font-size: 1.6em;
+  font-size: 1.8em;
   line-height: 1.6em;
   /*color: ;*/
   // font-weight: bold;
@@ -346,7 +342,7 @@ h3 {
 h4,
 h5,
 h6 {
-  font-size: 1.3em;
+  font-size: 1.8em;
   line-height: 1.5em;
 }
 
@@ -412,7 +408,7 @@ a {
 }
 
 .container {
-  width: $width_page; /* TODO: Find correct width */
+  width: $width_page;
   margin: 0 auto;
   position: relative;
   table {
@@ -471,21 +467,9 @@ $color_button_text_hover: darken($color_button_text, 20%);
 // pagination
 .mpControls {
   padding: 0.3em;
-  // background: $color_page_bg;
-  // border-color: $color_page_border;
-  // color: $color_page_text;
   font-size: 1.3em;
   font-weight: normal;
   font-family: inherit;
-  // a {
-  //   &:link { 
-  //     color: inherit;
-  //     font-weight: bold;
-  //   }
-  //   &:hover {
-  //     // color: #FF8800; // TODO: use better color
-  //   }
-  // }
   ul li { // page link
     font-size: 1em;
     vertical-align: middle;
@@ -624,7 +608,6 @@ $height_navTop_corner: (2 * $height_navTop_font_padding_scale * $height_navTop_f
   }
   a {
     &:link {
-      // TODO: navtop: edit colors
       color: $color_navTop_a;
       text-decoration: none;
     }
@@ -797,7 +780,6 @@ $menuOffset: -35px;
     div {
       display: inline-block;
     }
-    // TODO: nav menu - add hover color to text
   }
   li {
     margin-bottom: 1em;
@@ -823,7 +805,7 @@ $menuOffset: -35px;
         background: $color_menu_product_bg;
         font-size: 1.1em;
         text-transform: none;
-        .appMessage { // hide missing products TODO: find better way to hide errors/missing products
+        .appMessage { // hide missing products
           display: none;
         }
         div { // not used
@@ -1137,7 +1119,6 @@ $width_slideshow_left: ($width_page - $width_slideshow) / 2;
   z-index:5;
 }
 
-// TODO: move slideshow down
 #slideshowContainer {
   position: absolute;
 }
@@ -1438,7 +1419,6 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       height: 230px;
     }
     h5 { // name
-      // TODO: add white transluscent background
       // padding-left: $width_productList_bg * 2.2;
       // padding-top: 0.3em;
       font-size: 1.7em;
@@ -1471,7 +1451,6 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
     }
     .viewProductLink {
       font-size: 1.6em;
-      // TODO: add gray transluscent background
       @include transparent_background_color($color_productList_border_red, $color_productList_border_blue, $color_productList_border_green, 0.8);
       // background: $color_productList_border url('images/icon_search.png') no-repeat;
       background-image: url('images/icon_search.png');
@@ -1543,9 +1522,10 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
   h5 {
     color: $color_productList_hover;
   }
-  img {
-    @include opacity(80);
-  }
+  @include opacity(80);
+  // img {
+    // @include opacity(80);
+  // }
 }
 
 .prodThumbContainer {
@@ -1699,7 +1679,7 @@ $productSpecs_margin: 0.8em;
 }
 
 
-.productPrice { // TODO: get price to bottom align to list, float causes it to top align
+.productPrice {
   font-size: $height_productPrice;
   line-height: 1em;
   margin: 0;
@@ -1864,4 +1844,30 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
 
 .prodTabs { // reviews
   margin-top: 20px;
+}
+
+/* Wholesale contact form*/
+.contactForm {
+  float:right;
+  margin: 0 0 12px 12px;
+  fieldset {
+    border:1px solid #cccccc;
+    padding:10px;
+  }
+  div {
+    margin-bottom:5px
+  }
+  label {
+    width:105px;
+    display:inline-block;
+    margin-right:6px;
+    vertical-align:top;
+    text-align:right;
+  }
+  input, textarea {
+    width:145px;
+  }
+  textarea {
+    height:125px;
+  }
 }

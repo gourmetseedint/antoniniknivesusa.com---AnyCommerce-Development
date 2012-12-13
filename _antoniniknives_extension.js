@@ -145,20 +145,12 @@ var antoniniknives_extension = function() {
           link += "<h1 class='categoryColor'>" + catPretty + "</h1>";
         }
 
-        // <h1 class="categoryColor"><span data-bind="var:category(pretty); format:text;"></span><span data-bind="var:category(id); format:subcat_pretty_long; extension:antoniniknives_extension;"></span></h1>
-        // <h3 class="headingSubsParent"></h3>
-
-        // if (navcat && subCatLong && category && catPretty) {
-        //   // product resides in a sub category
-        //   link += "<h1 class='headingProductSubCategory categoryColor'>" + categoryLink(navcat, subCatLong) + "<h1>";
-        //   link += "<h3 class='headingProductCategory'>" + categoryLink(category, catPretty) + "</h3>";
-        // }else if(category && catPretty) {
-        //   // product resides in top category
-        //   link += "<h1 class='headingProductSubCategory categoryColor'>" + categoryLink(category, catPretty) + "<h1>";
-        // }
-
         $tag.html(link);
       }
+
+      // pdfLinks : function ($tag, data) {
+      //   $tag.html('stuff');
+      // }
     } // renderformats
   }; //r object.
   return r;

@@ -36,6 +36,7 @@ app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':functi
 app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
 app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
 app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
+app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
 // app.rq.push(['script',0,app.vars.baseURL+'jcarousel/carousel-ad.js']);
 
 //cycle used for slideshow
@@ -48,22 +49,24 @@ app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
 
 /// variables \\\
 
-var categoryBoat   = '.boat_-_fishing';
-var categoryCable  = '.cable_-_electrical';
-var categoryFarm   = '.farm_-_garden';
-var categoryPocket = '.pocket_-_traditional';
-// var categoryPromo  = '.promo_-_customizing';
-var categoryPromo  = '.promo-customize';
-var categorySos    = '.sos_-_rescue';
+var categoryBoat        = '.boat_-_fishing';
+var categoryCable       = '.cable_-_electrical';
+var categoryFarm        = '.farm_-_garden';
+var categoryPocket      = '.pocket_-_traditional';
+var categoryPromo       = '.promo_-_customizing';
+var categorySos         = '.sos_-_rescue';
 var categoryAccessories = '.accessories';
+var categoryWholesale   = '.wholesale';
+var categoryPdf         = '.pdf-catalogs';
 
-var prettyBoat;
-var prettyCable;
-var prettyFarm;
-var prettyPocket;
-var prettyPromo;
-var prettySos;
-var prettyAccessories;
+var prettyNames = {};
+// var prettyBoat;
+// var prettyCable;
+// var prettyFarm;
+// var prettyPocket;
+// var prettyPromo;
+// var prettySos;
+// var prettyAccessories;
 
 var banner                    = 'header';
 var classBannerHome           = 'bannerHome';
@@ -114,6 +117,9 @@ var elementsWithCategoryColor = '.categoryColor';
 var currentCategory;
 var currentNavcat;
 var periodCount;
+
+var wholesaleContact = '.contactFormWholesale';
+var pdfLinks         = '.pdfLinks';
 
 var headingSubsParent = '.headingSubsParent';
 
@@ -171,22 +177,36 @@ function setValueFromSubcatData(selector, field) {
   $(selector).html(value);
 }
 
-function getPretty(navcat) {
-  // only works from a rq.push
-  return fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '';
-}
-
-// function getCategoryDescription(navcat) {
-//   // only works from a rq.push
-//   return app.data['appCategoryDetail|' + navcat]['%page']['desc'];
-// }
-
 function fixHiddenPretty(pretty) {
   var temp = pretty;
   if (temp.charAt(0) == ('!')) {
     temp = temp.replace(/!/, '');
   }
   return temp;
+}
+
+function getPretty(navcat) {
+  if (app.data['appCategoryDetail|' + navcat] && app.data['appCategoryDetail|' + navcat]['pretty']) {
+    return prettyNames[navcat] || (prettyNames[navcat] = fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '');
+  }
+  return '';
+}
+
+function getPdfLinks() {
+  // creates content for the pdf catalogs category
+  var page = "<h4>Click link below to download</h4>";
+  var directory = pdfDirectory || '';
+  var name;
+  var value;
+  for(var key in pdfData) {
+    name = getPretty(key);
+    link  = name + ' PDF Catalog';
+    value = pdfData[key];
+    if (value) {
+      page += "<p><a title='" + link + "' href='" + directory + value + "'>" + name + "</a></p>";
+    }
+  }
+  return page;
 }
 
 function getTier1ID(navcat) {
@@ -305,23 +325,13 @@ function startCarouselProduct(parentID) {
   }
 }
 
-
-
-
-// TODO: add all backgrounds/logos then remove them while loading, so each cat loads faster
-
-
 /// homepage \\\
 app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   defaultPage();
   startCarouselHome();
-  //<ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"1","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;' class='productList productListScroll productListHome'></ul> -->
-
-  // app.ext.myRIA.a.showCarousel({"parentID":"prodlistCarousel","query":{"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}});
-  // $('testList').jcarousel({
-  //   "scroll": 1
-  // });
-  // alert($('homeProdSearchBestSellers').html);
+  $('#' + P.parentID + ' .logoCategoryHome').hover(function () {
+    $(this).toggleClass('categoryProductHover');
+  });
 }]);
 
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
@@ -341,9 +351,7 @@ app.rq.push(['templateFunction','customerTemplate','onCompletes',function(P) {
 }]);
 
 ///// categories \\\\\
-app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
-  // app.u.dump([P]);
-  
+app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {  
   // resets
   resetBanner();
   resetCategoryLogo();
@@ -363,19 +371,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
 
-  // set subcategory data
-  // $('#' + P.parentID + ' ' + subcatPrettyLong).each(function () {
-  //   setValueFromSubcatData(this, 'prettyLong');
-  // });
-  // $('#' + P.parentID + ' ' + subcatDescription).each(function () {
-  //   setValueFromSubcatData(this, 'description');
-  // });
-
-  // app.u.dump([subcatData]);
-
-    // setValueFromSubcatData(this, 'description');
-  // app.u.dump([Object.keys(subcatData)]);
-
+  //add link to logo
   $(logoCategory).html(categoryLink(currentNavcat));
 
   switch(currentCategory) {
@@ -409,6 +405,16 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(logoCategory).addClass(classLogoCategorySos);
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorSos);
       break;
+    case categoryWholesale:
+      defaultPage();
+      $(wholesaleContact).show();
+      break;
+    case categoryPdf:
+      defaultPage();
+      $(pdfLinks).html(getPdfLinks());
+      $(pdfLinks).show();
+      break;
+    
     default: // wholesale, gsi, testimonials, etc
       defaultPage();
   }
@@ -432,17 +438,6 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
 
   // carousels
   startCarouselProduct(P.parentID);
-
-  // setValueFromSubcatData($('#' + P.parentID + ' ' + headingProductSub), 'prettyLong'); // handled in extesnsion
-
-
-  // $('.productListProductExtras').append('<li data-role="previous"><img src="images/arrow_product_list_left.png" class="arrow"></li>');
-  // $('.productListProductExtras').append('<li data-role="next"><img src="images/arrow_product_list_right.png" class="arrow"></li>');
-
-  // jcarousel
-  // $('#productListCarouselAccessories').jcarousel();
-  // app.ext.myRIA.action.showCarousel({"parentID":"prodlistCarousel","query":{"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_PREORDER"}}}});
-  // app.ext.myRIA.action.showProdList({"targetID":"productListCarouselAccessories", "templateID":P.parentID});
 
   switch(currentCategory) {
     case categoryBoat:
@@ -582,40 +577,9 @@ app.u.initMVC = function(attempts){
 app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
-  // app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
-
-  // app.rq.push(['renderFormats',0,'myRIA','quickstart.js']);
-  // get pretty names for product pages
-  // prettyBoat   = getPretty(categoryBoat);
-  // prettyCable  = getPretty(categoryCable);
-  // prettyFarm   = getPretty(categoryFarm);
-  // prettyPocket = getPretty(categoryPocket);
-  // prettyPromo  = getPretty(categoryPromo);
-  // prettySos    = getPretty(categorySos);
-
-  // Pre load images
-  // $(banner).addClass(classBannerHome);
-  // $(banner).addClass(classBannerCategoryBoat);
-  // $(banner).addClass(classBannerCategoryCable);
-  // $(banner).addClass(classBannerCategoryFarm);
-  // $(banner).addClass(classBannerCategoryPocket);
-  // $(banner).addClass(classBannerCategoryPromo);
-  // $(banner).addClass(classBannerCategorySos);
-  // resetBanner();
-
-  // BUG: getpretty doesn't always work after debug clear
   // Add accessores & promo to menu
-  if (prettyAccessories === undefined) {
-    prettyAccessories = getPretty(categoryAccessories);
-  }
-  $('#tier1categories').append("<li id='tier1categories_accessories'>" + categoryLink(categoryAccessories, prettyAccessories) + "</li>");
-  if (prettyPromo === undefined) {
-    prettyPromo = getPretty(categoryPromo);
-  }
-  $('#tier1categories').append("<li id='tier1categories_promo__customizing'>" + categoryLink(categoryPromo, prettyPromo) + "</li>");
-
-  // app.u.dump('categoryPromo: ' + categoryPromo);
-  // app.u.dump('prettyPromo: ' + prettyPromo);
+  $('#tier1categories').append("<li id='tier1categories_accessories'>" + categoryLink(categoryAccessories, getPretty(categoryAccessories)) + "</li>");
+  $('#tier1categories').append("<li id='tier1categories_promo__customizing'>" + categoryLink(categoryPromo, getPretty(categoryPromo)) + "</li>");
 };
 
 
@@ -628,13 +592,4 @@ $(document).ready(function(){
 
   // Pre load images
   $('.preload').hide();
-  // $(banner).addClass(classBannerCategoryBoat);
-  // $(banner).addClass(classBannerCategoryCable);
-  // $(banner).addClass(classBannerCategoryFarm);
-  // $(banner).addClass(classBannerCategoryPocket);
-  // $(banner).addClass(classBannerCategoryPromo);
-  // $(banner).addClass(classBannerCategorySos);
-  // $(banner).addClass(classBannerHome);
-  // resetBanner();
-  // startSlideShow();
 });

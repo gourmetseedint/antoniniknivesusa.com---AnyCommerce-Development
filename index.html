@@ -9,12 +9,11 @@
 <!-- TODO: 'Tell a friend' should send a email with link to product -->
 <!-- TODO: add pdf catalogs -->
 <!-- TODO: add images to promo -->
-<!-- TODO: add email form to wholesale "The wholesale page will need to be a paragraph of info along with a fill-in form to request info (send as email). It would be good to have a text box they can use to explain the nature of their request." -->
 <!-- TODO: One minor alignment issue: is it possible to have the 'wholesale' box at bottom left and the left menu box match in width? -->
 <!-- BUG: product reviews, shows apppreview and adds another set of tier1cats -->
-<!-- TODO: add showIfSet around spec list items -->
 <!-- TODO: IE compatibility -->
 <!-- TODO: add gsi, testimonials categories to company layout -->
+<!-- TODO: change carousel arrows -->
 <title>Antonini Knives USA</title>
 
 <meta name="description" content="" id='metaDescription' />
@@ -32,7 +31,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121212211157",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121212231045",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -123,19 +122,12 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
           <li><img src='images/home_slide_3.png'/></li>
           <li><img src='images/home_slide_4.png'/></li>
           <li><img src='images/home_slide_5.png'/></li>
-          <!-- Use if slideshows entered into database
-          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow1); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow2); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow3); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow4); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-          <img src='blank.gif' width='900' height='300' data-bind="var: page(banner_slideshow5); format: banner; extension:myRIA; editor:banner; wrap:<li>;" />
-          -->
         </ul>
       </div>
     </header>
     <aside class="sidebar printNo">
       <nav class="navMenu">
-        <div id='logoCategory' class='logoCategoryDefault'></div><!-- QUE: should this be a link to cat? -->
+        <div id='logoCategory' class='logoCategoryDefault'></div>
         <form id='headerSearchFrm' name='headerSearchFrm' action='#' class='productSearchForm' method="get">
           <fieldset>
             <!-- <legend>Search</legend> -->
@@ -148,7 +140,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         </form>
         <h2>Products</h2>
         <ul id="tier1categories"></ul>
-        <a href="#pageType?attribute=value" class='bindByAnchor' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a><!-- TODO: pdf catalogs - add real link -->
+        <a href="#category?navcat=.pdf-catalogs" class='bindByAnchor' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a>
       </nav>
       <div class='wholesaleInfo'>
         <a href="#category?navcat=.wholesale" class='bindByAnchor' title='Wholesale Info'>
@@ -324,6 +316,22 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
   <img data-bind="var: category(%page.CAT_THUMB); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
   <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
+
+  <!-- used by wholesale -->
+  <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactForm contactFormWholesale'>
+    <fieldset>
+      <legend>Acquire Wholesale Information</legend>
+      <div class='contactFormMessaging'></div>
+      <div><label for='contactFormSenderWholesale'>Email Address: </label><input type='email' name='sender' required='required' id='contactFormSenderWholesale' /></div>
+      <div class='displayNone'><input type='hidden' name='subject' id='contactFormSubjectWholesale' value="Wholesale Inquiry"/></div>
+      <!-- <div><label for='contactFormOID'>Order ID: </label><input type='text' name='OID' id='contactFormOID' /></div> -->
+      <div><label for='contactFormBodyWholesale'>Nature of Request: </label><textarea name='body' required='required' id='contactFormBodyWholesale'></textarea></div>
+      <div class='alignRight'><input type='submit' class='ui-button-text ui-button ui-state-default ui-corner-all' value='Send Message' />
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="pdfLinks displayNone"></div>
 
   <!-- <h2 data-bind="var: category(%page.header); format: text; editor: text;"></h2> -->
   
@@ -509,7 +517,6 @@ Used for the product in a product list (prodlist), usually in the body of a cate
 the loadingBG class is removed (must be that classname) when the template is translated.
 remember to NOT put the button inside the 'onclick' container or two events will occur onclick.
 -->
-<!-- TODO: add carousel -->
 <li id='productListTemplateResults' class='loadingBG' >
   <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
     <div class='prodThumbContainer'>
@@ -592,17 +599,17 @@ this will likely become more flexible in the future. ###
 
   <div class='productSpecsContainer'>
     <div class="productSpecsTop">
-      <h4 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h4><h1 data-bind="var:product(zoovy:prod_name); format:text;" class='productName categoryColor'></h1><!-- QUE: Should I use zoovy:prod_mfgid instead?  Matches more of the designers intent ie. 647/CO instead of 647CO -->
+      <h4 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h4><h1 data-bind="var:product(zoovy:prod_name); format:text;" class='productName categoryColor'></h1>
       <!-- <div class='breadcrumbContainer breadcrumbProduct'> -->
       <ul class='breadcrumb breadcrumbProduct' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
       <!-- </div> -->
     </div>
     <div class="productSpecsMiddle">
       <ul class='productSpecsList'>
-        <li><span data-bind='var:product(user:prod_weight_grams); format:text; pretext: <span class="pretext">Weight: </span>;'></span><!-- <span class="productWeight"><span class="pretext">Weight: </span>5.1</span>--></li>
-        <li><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;'></span><!--</span><span class="productLength"><span class="pretext">Blade: </span>90</span>--></li>
-        <li><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;'></span><!-- <span class="productLength"><span class="pretext">Overall: </span>205</span>--></li>
-        <li><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span><!-- <span class="productLength"><span class="pretext">Closed: </span>115</span> --></li>
+        <li class='displayNone' data-bind='var:product(user:prod_weight_grams); format:showIfSet;'><span data-bind='var:product(user:prod_weight_grams); format:text; pretext: <span class="pretext">Weight: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_blade_length); format:showIfSet;'><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_overall_length); format:showIfSet;'><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_closed_length); format:showIfSet;'><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span></li>
       </ul>
       <h4 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h4>
     </div>
@@ -676,8 +683,6 @@ this will likely become more flexible in the future. ###
   </div>
   
 
-  <!-- TODO: product accessories and variants lists -->
-  <!-- TODO: add .categoryProductHover to mouse -->
   <!-- <ul id="productlistCarouselAccessories" class="jcarousel-skin-antoniniknives productList productListCarousel productListProductExtras">
     <li>First</li>
     <li>Second</li>
@@ -696,7 +701,6 @@ this will likely become more flexible in the future. ###
       <li><div class="prodThumbContainer"><img src="images/product_list_sample.jpg" alt=""></div><h5>Product Name</h5></li>
       <li><img src="images/arrow_product_list_right.png" class="arrow"></li>
     </ul> -->
-    <!-- QUE: what is the accessories variable? -->
   <!-- </div> -->
   <!-- <div class="productExtras productVariantsContainer"> -->
     <!-- <h5>Variants:</h5>
@@ -996,7 +1000,7 @@ adding classes is not likely to have any bad effects.
         <h1>Contact Information</h1>
       </div>
 
-      <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" id='contactForm' name='contactForm'>
+      <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" id='contactForm' class='contactForm' name='contactForm'>
       <fieldset>
         <legend>Contact Us</legend>
         <div id='contactFormMessaging'></div>
