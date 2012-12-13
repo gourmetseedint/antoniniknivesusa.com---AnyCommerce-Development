@@ -372,7 +372,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
 
   //add link to logo
-  $(logoCategory).html(categoryLink(currentNavcat));
+  $(logoCategory).html(categoryLink(currentCategory));
 
   switch(currentCategory) {
     case categoryBoat:
