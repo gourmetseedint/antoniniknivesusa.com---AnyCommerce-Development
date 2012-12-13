@@ -870,6 +870,10 @@ $logoCategoryOffset: -40px;
   margin: 0 auto ($logoCategoryOffset + 10px);
   // background: white;
   text-align: center;
+  a {
+    display: block;
+    height: 100%;
+  }
 }
 
 .logoCategoryDefault { /* used when on product template and category skipped */

@@ -2,26 +2,19 @@
 <html>
 <head>
 <meta charset="utf-8">
-<!-- BUG: ? sometimes bindBy links don't work after going through pages, seems more prevalent on production -->
 <!-- TODO: get search form to work -->
 <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
 <!-- BUG: bottom pagination drop down hidden, because container has overflow: hidden -->
-<!-- BUG: mvc - adding subcategory list in tier1, breaks list in category list, format: subcategory2LevelList works, removing deatail from categoryTemplate, works, but no thumbnail -->
-<!-- TODO: add better home slides -->
 <!-- TODO: add optional product fields -->
-<!-- TODO: add home desc to homepage -->
 <!-- TODO: 'Tell a friend' should send a email with link to product -->
 <!-- TODO: add pdf catalogs -->
-<!-- BUG: carousel, when one item, it gets pushed to the left, because fallback number -->
-<!-- BUG: carousel, remove pagination -->
-<!-- BUG: carousel, when no items, infinite items added -->
 <!-- TODO: add images to promo -->
-<!-- TODO: add gsi, testimonials categories to company layout -->
 <!-- TODO: add email form to wholesale "The wholesale page will need to be a paragraph of info along with a fill-in form to request info (send as email). It would be good to have a text box they can use to explain the nature of their request." -->
 <!-- TODO: One minor alignment issue: is it possible to have the 'wholesale' box at bottom left and the left menu box match in width? -->
 <!-- BUG: product reviews, shows apppreview and adds another set of tier1cats -->
 <!-- TODO: add showIfSet around spec list items -->
 <!-- TODO: IE compatibility -->
+<!-- TODO: add gsi, testimonials categories to company layout -->
 <title>Antonini Knives USA</title>
 
 <meta name="description" content="" id='metaDescription' />
@@ -39,7 +32,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121212174033",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121212211157",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -300,10 +293,16 @@ don't modify the 'data-templateid' unless you are changing template names and up
 <div id='categoryTemplate' class='loadingBG'>
 
   <div class='headings headingsCategory'>
+    <div data-bind="var:category(id); format:category_headings; extension:antoniniknives_extension;">
+      <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+    </div>
+  </div>
+
+  <!-- <div class='headings headingsCategory'>
     <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
     <h1 class="categoryColor"><span data-bind="var:category(pretty); format:text;"></span><span data-bind="var:category(id); format:subcat_pretty_long; extension:antoniniknives_extension;"></span></h1>
     <h3 class="headingSubsParent"></h3>
-  </div>
+  </div> -->
   
   <div class='breadcrumbContainer'>
     <ul class='breadcrumb' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
@@ -967,13 +966,15 @@ adding classes is not likely to have any bad effects.
   <div class='sideline' >
 <nav id='companyNav'>
 <ul class='listStyleNone noPadOrMargin'>
-  <li><a href='#company?show=about'  id='navLink_about'>About Us</a></li>
-  <li><a href='#company?show=contact'  id='navLink_contact'>Contact Information</a></li>
-  <li><a href='#company?show=faq'  id='navLink_faq'>FAQ</a></li>
-  <li><a href='#company?show=payment' id='navLink_payment'>Payment Policy</a></li>
-  <li><a href='#company?show=privacy' id='navLink_privacy'>Privacy Statement</a></li>
-  <li><a href='#company?show=return' id='navLink_return'>Return Policy</a></li>
-  <li><a href='#company?show=shipping' id='navLink_shipping'>Shipping Information</a></li>
+  <li><a href='#company?show=about'  id='navLink_about' title='About Antonini'>About Antonini</a></li>
+  <li><a href="#category?navcat=.about_gsi_distributing" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a></li>
+  <li><a href="#category?navcat=.testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
+  <li><a href='#company?show=contact'  id='navLink_contact' title='Contact Information'>Contact Information</a></li>
+  <li><a href='#company?show=faq'  id='navLink_faq' title='FAQ'>FAQ</a></li>
+  <li><a href='#company?show=payment' id='navLink_payment' title='Payment Policy'>Payment Policy</a></li>
+  <li><a href='#company?show=privacy' id='navLink_privacy' title='Privacy Statement'>Privacy Statement</a></li>
+  <li><a href='#company?show=return' id='navLink_return' title='Return Policy'>Return Policy</a></li>
+  <li><a href='#company?show=shipping' id='navLink_shipping' title='Shipping Information'>Shipping Information</a></li>
 </ul>
 </nav>
   </div>
@@ -983,7 +984,7 @@ adding classes is not likely to have any bad effects.
     <div id='aboutArticle' class='textContentArea article'>
       <div class='headings'>
         <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
-        <h1>About Us</h1>
+        <h1>About Antonini</h1>
       </div>
       <div data-bind='var: profile(zoovy:about); format:wiki; wikiFormats:myRIA;' id='aboutUsContent'></div>
     </div>

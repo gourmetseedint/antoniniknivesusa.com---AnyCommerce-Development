@@ -1,5 +1,3 @@
-// BUG: mvc - appInitComplete runs after productTemplate onCompletes
-
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 
@@ -57,6 +55,7 @@ var categoryPocket = '.pocket_-_traditional';
 // var categoryPromo  = '.promo_-_customizing';
 var categoryPromo  = '.promo-customize';
 var categorySos    = '.sos_-_rescue';
+var categoryAccessories = '.accessories';
 
 var prettyBoat;
 var prettyCable;
@@ -64,6 +63,7 @@ var prettyFarm;
 var prettyPocket;
 var prettyPromo;
 var prettySos;
+var prettyAccessories;
 
 var banner                    = 'header';
 var classBannerHome           = 'bannerHome';
@@ -173,7 +173,7 @@ function setValueFromSubcatData(selector, field) {
 
 function getPretty(navcat) {
   // only works from a rq.push
-  return fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']);
+  return fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '';
 }
 
 // function getCategoryDescription(navcat) {
@@ -211,7 +211,13 @@ function resetAllMenuProducts() {
 
 
 function categoryLink (navcat, pretty) {
-  return "<a href='#top' title='" + pretty + "' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'>" + pretty + "</a>";
+  var temp = pretty || '';
+  return "<a href='#top' title='" + temp + "' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'>" + temp + "</a>";
+}
+
+function categoryLinkNoText (navcat, pretty) {
+  var temp = pretty || '';
+  return "<a href='#top' title='" + temp + "' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'></a>";
 }
 
 // function resetCategoryHeading() {
@@ -370,7 +376,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     // setValueFromSubcatData(this, 'description');
   // app.u.dump([Object.keys(subcatData)]);
 
-
+  $(logoCategory).html(categoryLink(currentNavcat));
 
   switch(currentCategory) {
     case categoryBoat:
@@ -597,13 +603,17 @@ app.u.appInitComplete = function(P) {
   // $(banner).addClass(classBannerCategorySos);
   // resetBanner();
 
-  // BUG: getpretty doesn't work after debug clear
-  // Add promo to menu
+  // BUG: getpretty doesn't always work after debug clear
+  // Add accessores & promo to menu
+  if (prettyAccessories === undefined) {
+    prettyAccessories = getPretty(categoryAccessories);
+  }
+  $('#tier1categories').append("<li id='tier1categories_accessories'>" + categoryLink(categoryAccessories, prettyAccessories) + "</li>");
   if (prettyPromo === undefined) {
     prettyPromo = getPretty(categoryPromo);
   }
   $('#tier1categories').append("<li id='tier1categories_promo__customizing'>" + categoryLink(categoryPromo, prettyPromo) + "</li>");
-  // TODO: add accessories in nav
+
   // app.u.dump('categoryPromo: ' + categoryPromo);
   // app.u.dump('prettyPromo: ' + prettyPromo);
 };

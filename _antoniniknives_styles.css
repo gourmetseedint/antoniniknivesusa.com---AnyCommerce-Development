@@ -423,6 +423,9 @@ header {
   top: -40px;
   margin: 0 auto -30px;
   text-align: center; }
+  #logoCategory a {
+    display: block;
+    height: 100%; }
 
 .logoCategoryDefault {
   /* used when on product template and category skipped */
