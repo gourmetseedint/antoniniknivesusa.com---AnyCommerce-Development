@@ -351,7 +351,7 @@ app.rq.push(['templateFunction','customerTemplate','onCompletes',function(P) {
 }]);
 
 ///// categories \\\\\
-app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {  
+app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // resets
   resetBanner();
   resetCategoryLogo();
