@@ -43,9 +43,13 @@ var antoniniknives_extension = function() {
     return "<a href='#top' title='" + pretty + "' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'>" + pretty + "</a>";
   };
 
+  var getPretty = function(navcat) {
+    return fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']);
+  };
+
   var r = {
     vars : {
-
+      catPrettyNames : {}
       // forgetmeContainer : {} //used to store an object of pids (key) for items that don't show in the prodlist. value can be app specific. TS makes sense.
       },
     calls : {}, //calls
@@ -99,6 +103,25 @@ var antoniniknives_extension = function() {
         var value = getValueFromSubcatData(data.value, 'description') || '';
         // change text to json value
         $tag.html(value);
+      },
+
+      product_headings : function ($tag, data) {
+        var navcat     = data.value;
+        var category   = getCategory(navcat);
+        var subcatLong = getValueFromSubcatData(navcat, 'prettyLong');
+        var catPretty  = r.vars.catPrettyNames[category] || (r.vars.catPrettyNames[category] = getPretty(category)); // stash pretty name in object if undefined
+        var linkHome   = "<h2><a href='#top' onClick=\"return showContent('category',{'navcat':'.'});\">Antonini:</a></h2>";
+        var link       = linkHome;
+
+        if (navcat && subcatLong && category && catPretty) {
+          // product resides in a sub category
+          link += "<h1 class='headingProductSubCategory categoryColor'>" + categoryLink(navcat, subcatLong) + "<h1>";
+          link += "<h3 class='headingProductCategory'>" + categoryLink(category, catPretty) + "</h3>";
+        }else if(category && catPretty) {
+          // product resides in top category
+          link += "<h1 class='headingProductSubCategory categoryColor'>" + categoryLink(category, catPretty) + "<h1>";
+        }
+        $tag.html(link);
       }
     } // renderformats
   }; //r object.

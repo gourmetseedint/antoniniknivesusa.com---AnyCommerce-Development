@@ -223,7 +223,7 @@ function startSlideShow() {
   var $target = $('#wideSlideshow');
   var len = $target.children().length;
   var startIndex = Math.floor((Math.random()*len)+1); // random start
-  app.u.dump(startIndex);
+  // app.u.dump(startIndex);
   $(slideshow).removeClass('displayNone');
   if(len > 1) {
     $('#wideSlideshow').cycle({
@@ -348,7 +348,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
 
   if (currentNavcat === currentCategory) {
     // category
-    $(headingSubsParent).html('');
+    $(headingSubsParent).html('').hide();
   }else {
     // sub category
     $(headingSubsParent).html(categoryLink(currentCategory, getPretty(currentCategory)));
@@ -419,7 +419,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // app.u.dump($(headingProductNavcat, '#' + P.parentID).html());
   currentNavcat   = $(headingProductNavcat, '#' + P.parentID).html();
   currentCategory = getCategory(currentNavcat);
-  currentSub      = getCategory(currentNavcat, 1);
+  // currentSub      = getCategory(currentNavcat, 1);
 
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown();
@@ -441,64 +441,64 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   switch(currentCategory) {
     case categoryBoat:
       // set pretty for when loading dirctly to product
-      if (prettyBoat === undefined) {
-        prettyBoat = getPretty(categoryBoat);
-      }
+      // if (prettyBoat === undefined) {
+      //   prettyBoat = getPretty(categoryBoat);
+      // }
       $(banner).addClass(classBannerCategoryBoat);
       $(logoCategory).addClass(classLogoCategoryBoat);
       // $(menuProductsBoat).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorBoat);
-      $(headingProductCategory).html(categoryLink(categoryBoat, prettyBoat));
+      // $(headingProductCategory).html(categoryLink(categoryBoat, prettyBoat));
       break;
     case categoryCable:
-      if (prettyCable === undefined) {
-        prettyCable = getPretty(categoryCable);
-      }
+      // if (prettyCable === undefined) {
+      //   prettyCable = getPretty(categoryCable);
+      // }
       $(banner).addClass(classBannerCategoryCable);
       $(logoCategory).addClass(classLogoCategoryCable);
       // $(menuProductsCable).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorCable);
-      $(headingProductCategory).html(categoryLink(categoryCable, prettyCable));
+      // $(headingProductCategory).html(categoryLink(categoryCable, prettyCable));
       break;
     case categoryFarm:
-      if (prettyFarm === undefined) {
-        prettyFarm = getPretty(categoryFarm);
-      }
+      // if (prettyFarm === undefined) {
+      //   prettyFarm = getPretty(categoryFarm);
+      // }
       $(banner).addClass(classBannerCategoryFarm);
       $(logoCategory).addClass(classLogoCategoryFarm);
       // $(menuProductsFarm).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorFarm);
-      $(headingProductCategory).html(categoryLink(categoryFarm, prettyFarm));
+      // $(headingProductCategory).html(categoryLink(categoryFarm, prettyFarm));
       break;
     case categoryPocket:
-      if (prettyPocket === undefined) {
-        prettyPocket = getPretty(categoryPocket);
-      }
+      // if (prettyPocket === undefined) {
+      //   prettyPocket = getPretty(categoryPocket);
+      // }
       $(banner).addClass(classBannerCategoryPocket);
       $(logoCategory).addClass(classLogoCategoryPocket);
       // $(menuProductsPocket).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPocket);
-      $(headingProductCategory).html(categoryLink(categoryPocket, prettyPocket));
+      // $(headingProductCategory).html(categoryLink(categoryPocket, prettyPocket));
       break;
     case categoryPromo:
-      if (prettyPromo === undefined) {
-        prettyPromo = getPretty(categoryPromo);
-      }
+      // if (prettyPromo === undefined) {
+      //   prettyPromo = getPretty(categoryPromo);
+      // }
       $(banner).addClass(classBannerCategoryPromo);
       $(logoCategory).addClass(classLogoCategoryPromo);
       // $(menuProductsPromo).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPromo);
-      $(headingProductCategory).html(categoryLink(categoryPromo, prettyPromo));
+      // $(headingProductCategory).html(categoryLink(categoryPromo, prettyPromo));
       break;
     case categorySos:
-      if (prettySos === undefined) {
-        prettySos = getPretty(categorySos);
-      }
+      // if (prettySos === undefined) {
+      //   prettySos = getPretty(categorySos);
+      // }
       $(banner).addClass(classBannerCategorySos);
       $(logoCategory).addClass(classLogoCategorySos);
       // $(menuProductsSos).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorSos);
-      $(headingProductCategory).html(categoryLink(categorySos, prettySos));
+      // $(headingProductCategory).html(categoryLink(categorySos, prettySos));
       break;
     default:
       defaultPage();
@@ -603,6 +603,7 @@ app.u.appInitComplete = function(P) {
     prettyPromo = getPretty(categoryPromo);
   }
   $('#tier1categories').append("<li id='tier1categories_promo__customizing'>" + categoryLink(categoryPromo, prettyPromo) + "</li>");
+  // TODO: add accessories in nav
   // app.u.dump('categoryPromo: ' + categoryPromo);
   // app.u.dump('prettyPromo: ' + prettyPromo);
 };

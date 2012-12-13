@@ -21,6 +21,7 @@
 <!-- TODO: One minor alignment issue: is it possible to have the 'wholesale' box at bottom left and the left menu box match in width? -->
 <!-- BUG: product reviews, shows apppreview and adds another set of tier1cats -->
 <!-- TODO: add showIfSet around spec list items -->
+<!-- TODO: IE compatibility -->
 <title>Antonini Knives USA</title>
 
 <meta name="description" content="" id='metaDescription' />
@@ -38,7 +39,7 @@ var _gaq = _gaq || {'push':function(){}} // TODO: here for testing. REPLACE BEFO
 var myCreole;
 
 var app = {vars:{
-  "release":"20121212125324",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121212174033",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
   "httpURL":"http://www.antoniniknivesusa.com/"
@@ -579,11 +580,15 @@ this will likely become more flexible in the future. ###
 
 <div id='productTemplate'>
 
+  <!-- Required for category specific colors and sub menu -->
+  <span data-bind="var:product(user:prod_primary_cat); format:text;" class='headingProductNavcat displayNone'></span>
+
   <div class='headings headingsProduct'>
-    <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
-    <h1 class='headingProductSubCategory categoryColor'><span data-bind="var:product(user:prod_primary_cat); format:subcat_pretty_long_link; extension:antoniniknives_extension;"></h1>
-    <span data-bind="var:product(user:prod_primary_cat); format:text;" class='headingProductNavcat'></span>
-    <h3 data-bind="var:product(user:prod_primary_cat); format:text;" class='headingProductCategory'></h3>
+    <div data-bind="var:product(user:prod_primary_cat); format:product_headings; extension:antoniniknives_extension;">
+      <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+    </div>
+    <!-- <h1 class='headingProductSubCategory categoryColor'><span data-bind="var:product(user:prod_primary_cat); format:subcat_pretty_long_link; extension:antoniniknives_extension;"></span></h1>
+    <h3 data-bind="var:product(user:prod_primary_cat); format:text;" class='headingProductCategory'></h3> -->
   </div>
 
   <div class='productSpecsContainer'>

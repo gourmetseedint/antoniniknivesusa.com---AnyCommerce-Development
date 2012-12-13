@@ -1322,6 +1322,9 @@ $width_carouselHomepage_image: 300px;
   margin-bottom: 8px;
   text-align: right;
   border-bottom: 1px solid $color_border;
+  div { // extension data bind
+    display: inline-block;
+  }
   h1, h2, h3 {
     margin: 0;
     padding: 0;
@@ -1337,7 +1340,7 @@ $width_carouselHomepage_image: 300px;
     // color: inherit;
   }
   h2 { // homepage link
-    margin-right: 0.1em;
+    margin-right: 0.2em;
     display: inline-block;
     // font-size: 1.8em;
     color: $color_cat_home;
