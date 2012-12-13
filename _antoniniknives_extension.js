@@ -31,23 +31,39 @@ var antoniniknives_extension = function() {
       },
 
       getValueFromSubcatData : function (navcat, field) {
-        var value;
-        var category = r.vars.getCategory(navcat);
+        var value       = '';
+        var category    = r.vars.getCategory(navcat);
         var subCategory = r.vars.getCategory(navcat, 1);
 
         // get json value
-        if(category && subCategory && subcatData[category] && subcatData[category][subCategory] && subcatData[category][subCategory][field]){
-          value = subcatData[category][subCategory][field];
+        if(typeof subcatData != 'undefined') {
+          if(category && subCategory && subcatData[category] && subcatData[category][subCategory] && subcatData[category][subCategory][field]){
+            value = subcatData[category][subCategory][field];
+          }else {
+            app.u.dump("Warning: subcatData entry for " + navcat + "[" + field + "]" + " is missing");
+          }
+        }else {
+          app.u.dump("Warning: subcatData is missing");
         }
 
         return value;
       },
 
+      fixHiddenPretty : function(pretty) {
+        var temp = pretty;
+        if (temp.charAt(0) == ('!')) {
+          temp = temp.replace(/!/, '');
+        }
+        return temp;
+      },
+
       getPretty : function(navcat) {
         if (app.data['appCategoryDetail|' + navcat] && app.data['appCategoryDetail|' + navcat]['pretty']) {
-          return r.vars.catPrettyNames[navcat] || (r.vars.catPrettyNames[navcat] = fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '');
+          return r.vars.catPrettyNames[navcat] || (r.vars.catPrettyNames[navcat] = r.vars.fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '');
+        }else {
+          app.u.dump("Warning: pretty name for " + navcat + " not found.");
+          return '';
         }
-        return '';
       }
       // forgetmeContainer : {} //used to store an object of pids (key) for items that don't show in the prodlist. value can be app specific. TS makes sense.
     },
@@ -64,7 +80,6 @@ var antoniniknives_extension = function() {
         },
         onError : function() {
           app.u.dump('antoniniknives_extension callback error');
-          return false;
           }
         }
     }, //callbacks
@@ -109,10 +124,15 @@ var antoniniknives_extension = function() {
       product_headings : function ($tag, data) {
         var navcat     = data.value;
         var category   = r.vars.getCategory(navcat);
-        var subCatLong = r.vars.getValueFromSubcatData(navcat, 'prettyLong') || r.vars.getPretty(navcat);
-        var catPretty  = r.vars.catPrettyNames[category] || (r.vars.catPrettyNames[category] = r.vars.getPretty(category)); // stash pretty name in object if undefined
+        var subCatLong = r.vars.getValueFromSubcatData(navcat, 'prettyLong');
+        var catPretty  = r.vars.getPretty(category);
         var linkHome   = "<h2><a href='#top' onClick=\"return showContent('category',{'navcat':'.'});\">Antonini:</a></h2>";
         var link       = linkHome;
+
+        if (!subCatLong) {
+          app.u.dump("Warning: trying " + navcat + "'s' pretty name");
+          subCatLong = r.vars.getPretty(navcat);
+        }
 
         if (navcat && subCatLong && category && catPretty) {
           // product resides in a sub category
@@ -128,14 +148,19 @@ var antoniniknives_extension = function() {
       category_headings : function ($tag, data) {
         var navcat      = data.value;
         var category    = r.vars.getCategory(navcat);
-        var subCategory = r.vars.getCategory(navcat, 1);
         var subCatLong  = r.vars.getValueFromSubcatData(navcat, 'prettyLong');
-        var catPretty   = r.vars.catPrettyNames[category] || (r.vars.catPrettyNames[category] = r.vars.getPretty(category)); // stash pretty name in object if undefined
+        var catPretty   = r.vars.getPretty(category);
         var linkHome    = "<h2><a href='#top' onClick=\"return showContent('category',{'navcat':'.'});\">Antonini:</a></h2>";
         var link        = linkHome;
 
+        if (!subCatLong) {
+          app.u.dump("Warning: trying " + navcat + "'s' pretty name");
+          subCatLong = r.vars.getPretty(navcat);
+        }
+
         if (navcat && subCatLong) {
           // on a sub category
+          // app.u.dump("On a sub category");
           link += "<h1 class='categoryColor'>" + subCatLong + "<h1>";
 
           if (category && catPretty) {
@@ -143,6 +168,7 @@ var antoniniknives_extension = function() {
           }
         }else if(catPretty) {
           // on a primary category
+          // app.u.dump("On a primary category");
           link += "<h1 class='categoryColor'>" + catPretty + "</h1>";
         }
 
