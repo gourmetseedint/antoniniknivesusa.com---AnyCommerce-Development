@@ -34,7 +34,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121213151043",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121213183030",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -55,10 +55,13 @@ all css includes need to be after the js that changes the base url.
 css files should be included before any .js file to ensure they are downloaded in parallel
 -->
 <link rel="stylesheet" type="text/css" href="qs_styles.css" />
-<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="jcarousel/skin.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles_print.css" media="print"/>
+
+<!-- IE Shim for HTML5 -->
+<!--[if lt IE 9]><script src="dist/html5shiv.js"></script><![endif]-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="loadscript.js"></script>
@@ -99,7 +102,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
   <!-- VIEW CONTENT -->
   <div class='container'>
     <header id="header" class="bannerCategoryDefault printNo">
-      <span class="logoTop"><a href="#category?navcat=." class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA" /></a></span>
+      <span class="logoTop"><a href="#homepage" class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA" /></a></span>
       <nav class='navTop'>
         <span class='navTopLeft'></span>
         <div>
@@ -129,18 +132,16 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
     <aside class="sidebar printNo">
       <nav class="navMenu">
         <div id='logoCategory' class='logoCategoryDefault'></div>
-        <form id='headerSearchFrm' name='headerSearchFrm' action='#' class='productSearchForm' method="get">
+        <form name='headerSearchFrm' action='#' class='productSearchForm' method="get">
           <fieldset>
-            <!-- <legend>Search</legend> -->
-            <input type='search' name='KEYWORDS' value='Find Products' class="productSearchKeyword handleDefault" />
-            <input type='hidden' name='CATALOG' value='' class="productSearchCatalog" />
+          <!-- <legend>Search</legend> -->
+          <input type='search' name='KEYWORDS' value='Enter Search Term' class="productSearchKeyword handleDefault" />
           </fieldset>
-          <fieldset>
-            <input class="search" id='headerSearchSubmit' type="submit" value="" />
-          </fieldset>
+          <input class="search" type="submit" value="" />
+        </form>
         </form>
         <h2>Products</h2>
-        <ul id="tier1categories"></ul>
+        <ul id="tier1categories"></ul><!-- BUG: tier1 not working -->
         <a href="#category?navcat=.pdf-catalogs" class='bindByAnchor' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a>
       </nav>
       <div class='wholesaleInfo'>
@@ -159,7 +160,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
     <div class="footerBoxesWrapper">
       <div class='container'>
         <ul class="footerBox"><h3>About</h3>
-          <li><a href="#category?navcat=." class='bindByAnchor' title='Home'>Home</a></li>
+          <li><a href="#homepage" class='bindByAnchor' title='Home'>Home</a></li>
           <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
           <li><a href="#category?navcat=.testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
           <li><a href="#category?navcat=.about_gsi_distributing" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a></li>
@@ -248,12 +249,12 @@ the homepageTemplate template is loaded into mainContentArea by default when the
   <div class='homepageContainer'>
     <div class='logosCategoryHome'>
       <ul>
-        <li class="logoCategoryHome logoCategoryBoat pointer"   onClick="showContent('category', {'navcat':'.boat_-_fishing'})"></li>
-        <li class="logoCategoryHome logoCategoryCable pointer"  onClick="showContent('category', {'navcat':'.cable_-_electrical'})"></li>
-        <li class="logoCategoryHome logoCategoryFarm pointer"   onClick="showContent('category', {'navcat':'.farm_-_garden'})"></li>
-        <li class="logoCategoryHome logoCategoryPocket pointer" onClick="showContent('category', {'navcat':'.pocket_-_traditional'})"></li>
-        <li class="logoCategoryHome logoCategorySos pointer"    onClick="showContent('category', {'navcat':'.sos_-_rescue'})"></li>
-        <li class="logoCategoryHome logoCategoryPromo pointer"  onClick="showContent('category', {'navcat':'.promo_-_customizing'})"></li>
+        <li class="logoCategoryHome logoCategoryBoat pointer"></li>
+        <li class="logoCategoryHome logoCategoryCable pointer"></li>
+        <li class="logoCategoryHome logoCategoryFarm pointer"></li>
+        <li class="logoCategoryHome logoCategoryPocket pointer"></li>
+        <li class="logoCategoryHome logoCategorySos pointer"></li>
+        <li class="logoCategoryHome logoCategoryPromo pointer"></li>
       </ul>
     </div>
     
@@ -386,9 +387,16 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
 <li id='categoryListTemplateRootCats'>
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
+    <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
+  </div>
+  <!-- <ul data-bind="var: category(@subcategoryDetail); format: subcategory2LevelList; extension: store_navcats; loadsTemplate: categoryListNoImagesTemplate;" class='menuSubList'></ul> -->
+
+  <!-- Original
+  <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
     <div class='thumbContainer'><img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /></div>
     <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
   </div>
+   -->
 </li>
 
 </ul>
@@ -401,8 +409,18 @@ Used for the product in a product list (prodlist), usually in the body of a cate
 the loadingBG class is removed (must be that classname) when the template is translated.
 remember to NOT put the button inside the 'onclick' container or two events will occur onclick.
 -->
-<li id='productListTemplate' class='loadingBG  ' onMouseOver="$('.quickView',$(this)).show();" onMouseOut="$('.quickView').hide();" >
+<li id='productListTemplate' class='loadingBG  '  onMouseOver="$(this).addClass('categoryProductHover');" onMouseOut="$(this).removeClass('categoryProductHover');" >
   
+  <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
+
+    <div class='prodThumbContainer' data-bind='var:product(pid); format:addPicSlider; extension:myRIA;'>
+      <h5 data-bind='var: product(zoovy:prod_name); format:text;' class='productName'></h5>
+      <img src='blank.gif' class='prodThumb' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='230' height='230' />
+      <div class="viewProductLink"><span>View Product</span></div>
+    </div>
+  </div>
+
+  <!-- Original
   <button class='floatRight pointer quickView displayNone' onClick="quickView('product',{'templateID':'productTemplateQuickView','pid':$(this).closest('[data-pid]').attr('data-pid')});">Quickview</button>
   
   <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
@@ -416,7 +434,26 @@ remember to NOT put the button inside the 'onclick' container or two events will
     
     
     <span data-bind='var: product(reviews.average); format:addClass; className:review_;' class='reviewSprite'></span>
-<!--  <span data-bind='var: reviews(total); format:text; pretext: from ;posttext: reviews; className:numReviews;'></span> -->
+    -->
+    <!--  <span data-bind='var: reviews(total); format:text; pretext: from ;posttext: reviews; className:numReviews;'></span> -->
+  <!-- </div> -->
+</li>
+
+<li id='productListCarouselTemplate' class='loadingBG  ' onMouseOver="$(this).addClass('categoryProductHover');" onMouseOut="$(this).removeClass('categoryProductHover');" >
+    
+  <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
+
+    <div class='prodThumbContainer' data-bind='var:product(pid); format:addPicSlider; extension:myRIA;'>
+      <h5 data-bind='var: product(zoovy:prod_name); format:text;' class='productName'></h5>
+      <img src='blank.gif' class='prodThumb' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='230' height='230' />
+      <div class="viewProductLink"><span>View Product</span></div>
+    </div>
+  </div>
+</li>
+
+<li id='productListCarouselHomepageTemplate' class='loadingBG' >
+  <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer'>
+    <img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;bgcolor:ffffff;' />
   </div>
 </li>
 
@@ -546,144 +583,238 @@ this will likely become more flexible in the future. ###
 
 <div id='productTemplate'>
 
-<ul class='clearfix noPadOrMargin fluidList breadcrumb' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
-
-<table class='prodViewerContainer'>
-<tr>
-  <td class='imageContainer'>
-<!--  <img src='%PROJECT_URL%/blank.gif' id='bobWasHere' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format: magicZoomPlus; extension: magicToolBox;' width='340' height='340' /> -->
-  
-<div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' class='pointer clearfix'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
-
-  <div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
-  <img src='blank.gif' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='340' height='340' />
-
-</div>
-
-  <div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbs'>
-  
-<div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"2"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image2); format:imageURL;' width='100' height='100' /></div>
-  
-<div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"3"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image3); format:imageURL;' width='100' height='100' /></div>
-  
-<div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"4"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image4); format:imageURL;' width='100' height='100' /></div>
-  
+  <div class='headings headingsProduct'>
+    <div data-bind="var:product(user:prod_primary_cat); format:product_headings; extension:antoniniknives_extension;">
+      <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+    </div>
   </div>
 
-  </td>
-
-  <td class='prodSummaryContainer marginBottom no_underline'>
-  <h1 data-bind='var: product(zoovy:prod_name); format:text;'></h1>
-  
-  <h5 class='stid' data-bind='var: product(pid); format:text; pretext: Sku: ;'></h5>
-  <h5 data-bind='var: product(zoovy:prod_mfg); format:searchLink; extension:myRIA; pretext: Mfg: ;'></h5>
-  <h5 data-bind='var: product(zoovy:prod_mfgid); format:text; pretext: Mfg ID: ;'></h5>
-  
-  
-  <div class='priceContainer'>
-    <h4 class='basePrice' data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; pretext: Our Price: ;'></h4>
-    <h5 class='prodMSRP' data-bind='var: product(zoovy:prod_msrp); format:money; currencySign: $;  hideZero:true; pretext: MSRP: ;'></h5>
-    <span class='savings'>
-      <span class='savingsDifference' data-bind='var: product(pid); format:priceRetailSavingsDifference; extension:myRIA; pretext: You save: ;'></span>
-      <span class='savingsPercentage' data-bind='var: product(pid); format:priceRetailSavingsPercentage; extension:myRIA; pretext: (; posttext:);'></span>
-    </span>
-  </div>
-  
-  
-  <ul title='please choose' id='prodlistChildren' class='listStyleNone fluidList clearfix noPadOrMargin productList smallProdlist' data-bind="var: product(zoovy:grp_children); format:productList; extension:store_prodlist; loadsTemplate:productListTemplateChildren;hide_summary:true;"></ul>
-
-  
-<!--  <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
-  <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div>
-  
-  
-  <form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.handleAddToCart($(this),{'action':'modal'}); return false;">
-  
-    <fieldset data-bind='var: product(pid); format:atcVariations; extension:store_product;' class='borderNone'></fieldset>
-    <fieldset data-bind='var: product(pid); format:atcQuantityInput; extension:store_product; pretext:Quantity: ;' class='borderNone'></fieldset>
-  
-    <input type='submit' value='Add to Cart' class='ui-button ui-button-text ui-corner-all ui-state-default addToCartButton displayNone' data-bind='var: product(pid); format:addToCartButton; extension:store_product;' id='addToCartBtn' />
-  </form>
-  
-
-  <div data-bind='var:product(zoovy:qty_price);format:quantityDiscounts; extension:store_product; pretext:Quantity Discounts:; className:marginBottom;'></div>
-
-  <section class='marginBottom'>
-    <span data-bind='var: product(reviews.average); format:addClass; className:review_;' class='reviewSprite'></span>
-    <span data-bind='var: reviews(total); format:text;posttext: from ;posttext: reviews; className:numReviews;'></span>
-  </section>
-  
-  <menu data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='CRMButtonMenu'>
-
-  <a href='#' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).parent().attr("data-pid"),"templateID":"reviewFrmTemplate"}); return false;'>Write Review</a>  | 
-
-  <a href='#' onClick="app.ext.myRIA.a.add2BuyerList({pid:$(this).parent().attr('data-pid'),'listid':'wishlist'}); return false;">Add to Wishlist</a>
-
-  </menu>
-
-  <span id="buySAFE_Kicker" name="buySAFE_Kicker" type="Kicker Guaranteed Transparent 33 175x30"></span>
-  </td>
-</tr>
-<tr>
-  <td colspan='2' class="tabbedProductContentTD">
-<!--
-the tabs are built in an onComplete.  ID's are added based on sku AND index, so the index (order) of the tabs MUST match the order of the tabContent divs
-or the tab clicked won't open the right content.
-It's done this way because ID's hard coded into template are bad mojo (templates are recycled) and because using data-binds to add id's caused some serious issues
--->
-<div class='prodTabs tabbedProductContent'>
-
-  <ul class='tabs'>
-    <li class='prodDescTab'><a>Description</a></li>
-    <li class='prodDetailTab displayNone' data-bind='var: product(zoovy:prod_detail); format:showIfSet;'><a>Specs</a></li>
-    <li class='prodFeaturesTab displayNone' data-bind='var: product(zoovy:prod_features); format:showIfSet;'><a>Features</a></li>
-    <li class='prodReviewsTab'><a>Reviews</a></li>
-    <li class='prodVideoTab displayNone' data-bind='var: product(youtube:videoid); format:showIfSet;'><a >Video</a></li>
-    <li class='prodAccessoriesTab displayNone' data-bind='var: product(zoovy:accessory_products); format:showIfSet;'><a>Accessories</a></li>
-  </ul>
-  
-  <div class='tabContent'>
-    <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;'></div>
+  <div class='productSpecsContainer'>
+    <div class="productSpecsTop">
+      <h4 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h4><h1 data-bind="var:product(zoovy:prod_name); format:text;" class='productName categoryColor'></h1>
+      <ul class='breadcrumb breadcrumbProduct' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
+    </div>
+    <div class="productSpecsMiddle">
+      <ul class='productSpecsList'>
+        <li class='displayNone' data-bind='var:product(user:prod_weight_grams); format:showIfSet;'><span data-bind='var:product(user:prod_weight_grams); format:text; pretext: <span class="pretext">Weight: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_blade_length); format:showIfSet;'><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_overall_length); format:showIfSet;'><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_closed_length); format:showIfSet;'><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span></li>
+      </ul>
+      <h4 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h4>
+    </div>
+    <div class="productSpecsBottom">
+      <!-- <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
+      <!-- <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div> -->
+      <form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.handleAddToCart($(this),{'action':'modal'}); return false;">
+      
+        <fieldset data-bind='var: product(pid); format:atcVariations; extension:store_product;' class='borderNone'></fieldset>
+        <fieldset data-bind='var: product(pid); format:atcQuantityInput; extension:store_product; pretext:Quantity: ;' class='borderNone'></fieldset>
+      
+        <input type='submit' value='Add to Cart' class='button submit displayNone' data-bind='var: product(pid); format:addToCartButton; extension:store_product;' id='addToCartBtn' />
+      </form>
+      <div>
+        <ul>
+          <li><a href="javascript:void(0)" onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write a Review</a></li>
+          <li><a href='#'>Tell a Friend</a></li><!-- TODO: get link for 'tell a friend' -->
+          <li><a href='#'>Printer Friendly Version</a></li><!-- TODO: setup/get link for 'printer friendly version' -->
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <div class='tabContent'>
-    <div data-bind='var: product(zoovy:prod_detail); format:wiki; wikiFormats:myRIA;'></div>
+  <div class="productViewContainer">
+    <div class='productImageContainer'>
+      <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');"  class='pointer clearfix productImage productImagePrimary'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
+        <div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
+        <img src='blank.gif' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='340' height='340' />
+      </div>
+      <div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbs'>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"2"});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer productImage'><img src='blank.gif' data-bind='var: product(zoovy:prod_image2); format:imageURL;' width='100' height='100' /></div>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"3"});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer productImage'><img src='blank.gif' data-bind='var: product(zoovy:prod_image3); format:imageURL;' width='100' height='100' /></div>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"4"});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer productImage productImageLast'><img src='blank.gif' data-bind='var: product(zoovy:prod_image4); format:imageURL;' width='100' height='100' /></div>
+      </div>
+    </div>
+    <div class="productDetailsContainer">
+      <ul class='productDetailsList'>
+        <li><span data-bind='var:product(user:prod_steel);     format:text; pretext: Steel: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_finishing); format:text; pretext: Finishing: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_handle);    format:text; pretext: Handle: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_inner);     format:text; pretext: Inner: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span></li>
+      </ul>
+      <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
+    </div>
   </div>
 
-  <div class='tabContent'>
-    <div data-bind='var: product(zoovy:prod_features); format:wiki; wikiFormats:myRIA;'></div>
+  <div class="productExtras">
+    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselAccessories jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Accessories</h5>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
+    <div data-bind="var: product(zoovy:related_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselRelated jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListCarouselTemplate; before:<h5>Variants</h5>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
   </div>
 
+  <div class='prodTabs tabbedProductContent'>
 
-  <div  class='tabContent'>
+    <ul class='tabs'>
+      <li class='prodReviewsTab'><a>Reviews</a></li>
+    </ul>
 
-    <div class='clearfix alignRight'>
-      <button class='ui-button-text ui-button ui-state-default ui-corner-all' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write Review</button>
+    <div  class='tabContent'>
+      <div class='clearfix alignRight'>
+        <button class='ui-button-text ui-button ui-state-default ui-corner-all' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write Review</button>
+      </div>
+      <ul class='listStyleNone clearfix productReviewsList' id='prodViewerReviews' data-bind="var: reviews(@reviews); format:reviewList; extension:store_product; loadsTemplate:productReviewsTemplateDetail;"></ul>
+    </div>
+  </div>
+
+  <!-- Required for category specific colors and sub menu -->
+  <span data-bind="var:product(user:prod_primary_cat); format:text;" class='headingProductNavcat displayNone'></span>
+
+  <!-- Original
+  <ul class='clearfix noPadOrMargin fluidList breadcrumb' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
+
+  <table class='prodViewerContainer'>
+  <tr>
+    <td class='imageContainer'>
+    -->
+  <!--  <img src='%PROJECT_URL%/blank.gif' id='bobWasHere' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format: magicZoomPlus; extension: magicToolBox;' width='340' height='340' /> -->
+  <!--
+  <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' class='pointer clearfix'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
+
+    <div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
+    <img src='blank.gif' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='340' height='340' />
+
+  </div>
+
+    <div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbs'>
+    
+  <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"2"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image2); format:imageURL;' width='100' height='100' /></div>
+    
+  <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"3"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image3); format:imageURL;' width='100' height='100' /></div>
+    
+  <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"4"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image4); format:imageURL;' width='100' height='100' /></div>
+    
+    </div>
+
+    </td>
+
+    <td class='prodSummaryContainer marginBottom no_underline'>
+    <h1 data-bind='var: product(zoovy:prod_name); format:text;'></h1>
+    
+    <h5 class='stid' data-bind='var: product(pid); format:text; pretext: Sku: ;'></h5>
+    <h5 data-bind='var: product(zoovy:prod_mfg); format:searchLink; extension:myRIA; pretext: Mfg: ;'></h5>
+    <h5 data-bind='var: product(zoovy:prod_mfgid); format:text; pretext: Mfg ID: ;'></h5>
+    
+    
+    <div class='priceContainer'>
+      <h4 class='basePrice' data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; pretext: Our Price: ;'></h4>
+      <h5 class='prodMSRP' data-bind='var: product(zoovy:prod_msrp); format:money; currencySign: $;  hideZero:true; pretext: MSRP: ;'></h5>
+      <span class='savings'>
+        <span class='savingsDifference' data-bind='var: product(pid); format:priceRetailSavingsDifference; extension:myRIA; pretext: You save: ;'></span>
+        <span class='savingsPercentage' data-bind='var: product(pid); format:priceRetailSavingsPercentage; extension:myRIA; pretext: (; posttext:);'></span>
+      </span>
     </div>
     
-    <ul class='listStyleNone clearfix productReviewsList' id='prodViewerReviews' data-bind="var: reviews(@reviews); format:reviewList; extension:store_product; loadsTemplate:productReviewsTemplateDetail;"></ul>
+    
+    <ul title='please choose' id='prodlistChildren' class='listStyleNone fluidList clearfix noPadOrMargin productList smallProdlist' data-bind="var: product(zoovy:grp_children); format:productList; extension:store_prodlist; loadsTemplate:productListTemplateChildren;hide_summary:true;"></ul>
 
+  -->
+  <!--  <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
+  <!--
+    <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div>
+    
+    
+    <form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.handleAddToCart($(this),{'action':'modal'}); return false;">
+    
+      <fieldset data-bind='var: product(pid); format:atcVariations; extension:store_product;' class='borderNone'></fieldset>
+      <fieldset data-bind='var: product(pid); format:atcQuantityInput; extension:store_product; pretext:Quantity: ;' class='borderNone'></fieldset>
+    
+      <input type='submit' value='Add to Cart' class='ui-button ui-button-text ui-corner-all ui-state-default addToCartButton displayNone' data-bind='var: product(pid); format:addToCartButton; extension:store_product;' id='addToCartBtn' />
+    </form>
+    
+
+    <div data-bind='var:product(zoovy:qty_price);format:quantityDiscounts; extension:store_product; pretext:Quantity Discounts:; className:marginBottom;'></div>
+
+    <section class='marginBottom'>
+      <span data-bind='var: product(reviews.average); format:addClass; className:review_;' class='reviewSprite'></span>
+      <span data-bind='var: reviews(total); format:text;posttext: from ;posttext: reviews; className:numReviews;'></span>
+    </section>
+    
+    <menu data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='CRMButtonMenu'>
+
+    <a href='#' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).parent().attr("data-pid"),"templateID":"reviewFrmTemplate"}); return false;'>Write Review</a>  | 
+
+    <a href='#' onClick="app.ext.myRIA.a.add2BuyerList({pid:$(this).parent().attr('data-pid'),'listid':'wishlist'}); return false;">Add to Wishlist</a>
+
+    </menu>
+
+    <span id="buySAFE_Kicker" name="buySAFE_Kicker" type="Kicker Guaranteed Transparent 33 175x30"></span>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='2' class="tabbedProductContentTD">
+    -->
+  <!--
+  the tabs are built in an onComplete.  ID's are added based on sku AND index, so the index (order) of the tabs MUST match the order of the tabContent divs
+  or the tab clicked won't open the right content.
+  It's done this way because ID's hard coded into template are bad mojo (templates are recycled) and because using data-binds to add id's caused some serious issues
+  -->
+  <!--
+  <div class='prodTabs tabbedProductContent'>
+
+    <ul class='tabs'>
+      <li class='prodDescTab'><a>Description</a></li>
+      <li class='prodDetailTab displayNone' data-bind='var: product(zoovy:prod_detail); format:showIfSet;'><a>Specs</a></li>
+      <li class='prodFeaturesTab displayNone' data-bind='var: product(zoovy:prod_features); format:showIfSet;'><a>Features</a></li>
+      <li class='prodReviewsTab'><a>Reviews</a></li>
+      <li class='prodVideoTab displayNone' data-bind='var: product(youtube:videoid); format:showIfSet;'><a >Video</a></li>
+      <li class='prodAccessoriesTab displayNone' data-bind='var: product(zoovy:accessory_products); format:showIfSet;'><a>Accessories</a></li>
+    </ul>
+    
+    <div class='tabContent'>
+      <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;'></div>
+    </div>
+
+    <div class='tabContent'>
+      <div data-bind='var: product(zoovy:prod_detail); format:wiki; wikiFormats:myRIA;'></div>
+    </div>
+
+    <div class='tabContent'>
+      <div data-bind='var: product(zoovy:prod_features); format:wiki; wikiFormats:myRIA;'></div>
+    </div>
+
+
+    <div  class='tabContent'>
+
+      <div class='clearfix alignRight'>
+        <button class='ui-button-text ui-button ui-state-default ui-corner-all' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write Review</button>
+      </div>
+      
+      <ul class='listStyleNone clearfix productReviewsList' id='prodViewerReviews' data-bind="var: reviews(@reviews); format:reviewList; extension:store_product; loadsTemplate:productReviewsTemplateDetail;"></ul>
+
+    </div>
+    
+    <div class='tabContent'>
+      <div id="prodVideo" data-bind='var: product(youtube:videoid); format:youtubeVideo;'></div>
+    </div>
+
+    <div class='tabContent'>
+  <ul class='listStyleNone fluidList clearfix noPadOrMargin lineItemProdlist' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplateATC;hide_pagination:true;hide_summary:true; withReviews:1; withInventory:1; withVariations:1;"></ul>
+    </div>
+
+    
+    
+    
   </div>
-  
-  <div class='tabContent'>
-    <div id="prodVideo" data-bind='var: product(youtube:videoid); format:youtubeVideo;'></div>
+
+    </td>
+  </tr>
+  </table>
+  <div class='prodlistRelatedContainer'>
+    <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h2>Similar Items</h2>; withReviews:1;"></ul>
   </div>
-
-  <div class='tabContent'>
-<ul class='listStyleNone fluidList clearfix noPadOrMargin lineItemProdlist' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplateATC;hide_pagination:true;hide_summary:true; withReviews:1; withInventory:1; withVariations:1;"></ul>
-  </div>
-
-  
-  
-  
-</div>
-
-  </td>
-</tr>
-</table>
-<div class='prodlistRelatedContainer'>
-  <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h2>Similar Items</h2>; withReviews:1;"></ul>
-</div>
+  -->
 
 
 </div><!-- productTemplate -->
@@ -796,7 +927,7 @@ adding classes is not likely to have any bad effects.
 <!--  used in breadcrumb -->
 <ul>
   <li id='breadcrumbTemplate'>
-  <a href='#' onClick="return showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" data-bind='var: category(pretty); format:text;'></a>
+  <a href='#' onClick="return showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" data-bind='var: category(pretty); format:hiddenPrettyFixed; extension:antoniniknives_extension;'></a>
   </li>
 </ul>
 
@@ -809,13 +940,15 @@ adding classes is not likely to have any bad effects.
   <div class='sideline' >
 <nav id='companyNav'>
 <ul class='listStyleNone noPadOrMargin'>
-  <li><a href='#company?show=about'  id='navLink_about'>About Us</a></li>
-  <li><a href='#company?show=contact'  id='navLink_contact'>Contact Information</a></li>
-  <li><a href='#company?show=faq'  id='navLink_faq'>FAQ</a></li>
-  <li><a href='#company?show=payment' id='navLink_payment'>Payment Policy</a></li>
-  <li><a href='#company?show=privacy' id='navLink_privacy'>Privacy Statement</a></li>
-  <li><a href='#company?show=return' id='navLink_return'>Return Policy</a></li>
-  <li><a href='#company?show=shipping' id='navLink_shipping'>Shipping Information</a></li>
+  <li><a href='#company?show=about'  id='navLink_about' title='About Antonini'>About Antonini</a></li>
+  <li><a href="#category?navcat=.about_gsi_distributing" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a></li>
+  <li><a href="#category?navcat=.testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
+  <li><a href='#company?show=contact'  id='navLink_contact' title='Contact Information'>Contact Information</a></li>
+  <li><a href='#company?show=faq'  id='navLink_faq' title='FAQ'>FAQ</a></li>
+  <li><a href='#company?show=payment' id='navLink_payment' title='Payment Policy'>Payment Policy</a></li>
+  <li><a href='#company?show=privacy' id='navLink_privacy' title='Privacy Statement'>Privacy Statement</a></li>
+  <li><a href='#company?show=return' id='navLink_return' title='Return Policy'>Return Policy</a></li>
+  <li><a href='#company?show=shipping' id='navLink_shipping' title='Shipping Information'>Shipping Information</a></li>
 </ul>
 </nav>
   </div>
@@ -823,13 +956,20 @@ adding classes is not likely to have any bad effects.
   <div class='mainColumn'>
 <!-- .textContentArea is used as a selector in quickstart.js because article tag type isn't ie8 friendly -->
     <div id='aboutArticle' class='textContentArea article'>
-      <h1>About Us</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>About Antonini</h1>
+      </div>
       <div data-bind='var: profile(zoovy:about); format:wiki; wikiFormats:myRIA;' id='aboutUsContent'></div>
     </div>
+
   
   
     <div id='contactArticle' class='displayNone textContentArea'>
-      <h1>Contact Information</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Contact Information</h1>
+      </div>
       <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" id='contactForm' name='contactForm'>
       <fieldset>
         <legend>Contact Us</legend>
@@ -848,20 +988,29 @@ adding classes is not likely to have any bad effects.
     
   
     <div id='faqArticle' class='displayNone textContentArea'>
-      <h1>Frequently Asked Questions</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Frequently Asked Questions</h1>
+      </div>
       <div id='faqContent' class='loadingBG ui-accordion ui-widget ui-helper-reset ui-accordion-icons appAccordianesque'></div>
     </div>
   
 
   
     <div class='displayNone textContentArea' id='paymentArticle'>
-      <h1>Payment Policy</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Payment Policy</h1>
+      </div>
       <div data-bind='var: profile(zoovy:payment_policy); format:wiki; wikiFormats:myRIA;' id='paymentContent'></div>
     </div>
     
     
     <div class='displayNone textContentArea' id='privacyArticle'>
-      <h1>Privacy Statement</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Privacy Statement</h1>
+      </div>
   <h4>About this Privacy Policy:</h4>
   <p>The entire site, or at least specific portions of this site are assisted by Zoovy technology. Zoovy has created this privacy policy as a template for customers who are using Zoovy technology with their websites. Zoovy in no way takes responsibility for the accuracy or enforcement of this policy. For a copy of Zoovy's privacy policy (which does not necessarily apply to the customers of its customers) visit http://www.zoovy.com/legal</p>
   
@@ -905,14 +1054,20 @@ adding classes is not likely to have any bad effects.
     
     
     <div class='displayNone textContentArea' id='returnArticle'>
-      <h1>Return Policy</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Return Policy</h1>
+      </div>
       <div data-bind='var: profile(zoovy:return_policy); format:wiki; wikiFormats:myRIA;' id='returnContent'></div>
     </div>
   
   
     
     <div class='displayNone textContentArea' id='shippingArticle'>
-      <h1>Shipping Information</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Shipping Information</h1>
+      </div>
       <div data-bind='var: profile(zoovy:shipping_policy); format:wiki; wikiFormats:myRIA;' id='shippingContent'></div>
     </div>
   
@@ -942,12 +1097,18 @@ adding classes is not likely to have any bad effects.
   <div class='mainColumn'>
 <!-- .textContentArea is used as a selector because IE8 doesn't play well  with tag type article as a selector -->
     <div id='newsletterArticle' class='displayNone textContentArea'>
-      <h1>Subscribe to our Newsletter and Save!</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Sign Up</h1>
+      </div>
       <div id='newsletterFormContainer'></div>
     </div>
   
     <div id='myaccountArticle' class='displayNone textContentArea'>
-      <h1>My Account</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>My Account</h1>
+      </div>
       <div id='logMessaging'></div>
       <div><a href="#" onClick="app.u.logBuyerOut(); showContent('homepage',{}); return false;">Log Out</a></div>
       
@@ -972,14 +1133,20 @@ adding classes is not likely to have any bad effects.
   
   
     <div id='ordersArticle' class='displayNone textContentArea'>
-      <h1>Order History</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Order History</h1>
+      </div>
       <div id='orderHistoryContainer' class='ui-accordion ui-widget ui-helper-reset ui-accordion-icons '></div>
     </div>
   
   
   
     <div id='changepasswordArticle' class='displayNone textContentArea'>
-      <h1>Change Password</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Change Password</h1>
+      </div>
       <div id='changepasswordContainer'>
 
 <form action='#' id='changePasswordForm' name='changePasswordForm' onSubmit="app.ext.store_crm.u.handleChangePassword('changePasswordForm',{'callback':'showMessaging','message':'Thank you, your password has been changed','targetID':'changepasswordContainer'}); return false">
@@ -995,7 +1162,10 @@ adding classes is not likely to have any bad effects.
     </div>
   
     <div id='listsArticle' class='displayNone textContentArea'>
-      <h1>List Manager</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>List Manager</h1>
+      </div>
       <div id='listsContainer' class='prodlist loadingBG'></div>
       
       <div id='listEditorContainer' class='displayNone loadingBG'></div><!-- editor for a given list gets added here -->
@@ -1003,7 +1173,10 @@ adding classes is not likely to have any bad effects.
     </div>
   
     <div id='forgetmeArticle' class='displayNone textContentArea'>
-      <h1>Your 'Forget Me' list</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+        <h1>Your 'Forget Me' list</h1>
+      </div>
       <p>Items on this list will not show up anywhere on the site. Use it for items you never want to see again. If you add an item to the list by mistake, use this page to remove it from the list and it will start re-appearing during your shopping experience.</p>
       <ul id='forgetmeContainer' class='prodlist loadingBG'>
       </ul>
@@ -1582,7 +1755,7 @@ The 'data-action' attribute is used to assign an onclick.
   
 <form name='headerSearchFrm' action='#' class='productSearchForm' method="get">
   <fieldset>
-  <legend>Search</legend>
+  <!-- <legend>Search</legend> -->
   <input type='search' name='KEYWORDS' value='Enter Search Term' class="productSearchKeyword handleDefault" />
   </fieldset>
   <input class="search" type="submit" value="Search" />
