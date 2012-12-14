@@ -1,6 +1,8 @@
 /* Project Styles */
 
 // TODO: change social hover to just shadow
+// TODO: add bg gradient to banner
+// TODO: edit wholesale img
 
 // dimensions
 $width_page: 1120px;
@@ -311,7 +313,7 @@ p {
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 3em;
   line-height: 2em;
   letter-spacing: -1px;
   margin-top: 0.1em;
@@ -321,7 +323,7 @@ h1 {
 }
 
 h2 { // TODO: get correct font
-  font-size: 1.9em;
+  font-size: 2.4em;
   line-height: 1em;
   letter-spacing: -1px;
   /*text-align: left;*/
@@ -417,6 +419,10 @@ a {
   @extend .clearfixScss;
 }
 
+.containerInner {
+  width: 100%;
+}
+
 $color_button_text: white;
 $color_button_text_hover: darken($color_button_text, 20%);
 
@@ -487,11 +493,6 @@ $color_button_text_hover: darken($color_button_text, 20%);
     }
   }
 }
-
-// .displayBlock {
-//   display: block;
-// }
-
 
 // TODO: make compatible with ie; http://css-tricks.com/snippets/css/css-box-shadow/
 
@@ -647,36 +648,14 @@ $width_navTopLeft: 50px;
 .socialBox {
   margin-left: 5px;
   float: right;
-  // display: inline-block;
-  // position: relative;
-  // height: $height_navTop_corner;
   a { // social icons
     width: 32px;
     height: 100%;
     display: inline-block;
-    // display: block;
-    // position: absolute;
-    // top: 5;
-    // left: 0;
   }
-  // a:hover {
-  //   background:yellow;
-  // }
 }
 
-// $height_socialIcon: 2em;
-// $height_socialIcon_padding: ($height_navTop_corner - $height_socialIcon)/2;
 .socialIcon {
-  // margin: 0;
-  // width: 32px;
-  // height: 28px;
-  // height: 100%;
-  // line-height: $height_navTop_corner;
-  // vertical-align: middle;
-  // display: inline-block;
-  // margin-top: 10px;
-  // margin: $height_socialIcon_padding 0;
-  /*z-index: 10;*/
   a { // facebook & twitter links
     background-position: 50%;
     background-repeat: no-repeat;
@@ -717,10 +696,8 @@ $menuOffset: -35px;
   top: $menuOffset;
   margin-bottom: $menuOffset;
   margin-right: $width_menu_right_margin;
-  padding-left: $width_menu_left_margin;
-  // display: inline-block;
-  // top: 340px;
-  // left: 30px;
+  margin-left: $width_menu_left_margin;
+  background: $color_menu_bg;
   a {
     &:link, &:visited {
       color: white;
@@ -733,33 +710,9 @@ $menuOffset: -35px;
   }
 }
 
-// move sidebar down to not overlap home banner
-.sidebarHome {
-  top: $menuOffset + 30px;
-  margin-bottom: $menuOffset + 30px;
-}
-
-.navMenuCategoryHover {
-  color: $color_navMenuCategoryHover_text;
-  // background: $color_navMenuCategoryHover_bg;
-  // background: blue;
-}
-
-.navMenuSubHover {
-  color: $color_navMenuSubHover_text;
-  background: $color_navMenuSubHover_bg;
-}
-
-.navMenuSubActive {
-  color: $color_navMenuSubHover_bg;
-  // background: $color_navMenuSubHover_bg;
-  background: $color_navMenuSubHover_text;
-}
-
 .navMenu {
   width: $width_menu;
   padding: $width_menu_padding;
-  background: $color_menu_bg;
   color: $color_menu_text;
   h2 {
     margin: 1em 0 0.5em;
@@ -840,6 +793,28 @@ $menuOffset: -35px;
   }
 }
 
+// move sidebar down to not overlap home banner
+.sidebarHome {
+  top: $menuOffset + 30px;
+  margin-bottom: $menuOffset + 30px;
+}
+
+.navMenuCategoryHover {
+  color: $color_navMenuCategoryHover_text;
+  // background: $color_navMenuCategoryHover_bg;
+  // background: blue;
+}
+
+.navMenuSubHover {
+  color: $color_navMenuSubHover_text;
+  background: $color_navMenuSubHover_bg;
+}
+
+.navMenuSubActive {
+  color: $color_navMenuSubHover_bg;
+  // background: $color_navMenuSubHover_bg;
+  background: $color_navMenuSubHover_text;
+}
 
 
 $logoCategoryOffset: -40px;
@@ -889,11 +864,6 @@ $logoCategoryOffset: -40px;
 $width_search_icon: 20px;
 $width_search_icon_margin: $width_search_icon + 5px;
 .productSearchForm {
-  // margin-bottom: 20px;
-  // width: 150px;
-  // height: 20px;
-  // background: white;
-  // color: black;
   font-size: 1.1em;
   fieldset, input {
     margin: 0;
@@ -942,10 +912,12 @@ $pdfIconSize: 20px;
 .wholesaleInfo {
   margin: 10px auto 0;
   background: url('images/wholesale_bg.png') no-repeat;
+  background-size: cover;
   font-size: 14px;
   // line-height: 1.2em;
   text-align: center;
-  width: 214px;
+  // width: 214px;
+  width: 100%;
   height: 125px;
   span {
     display: block;
@@ -967,11 +939,6 @@ $wholesalePadtop: 10px;
   }
 }
 
-// .wholesaleInfoBottom {
-//   // height: 60px;
-//   // font-size: 30px;
-// }
-
 /* Logo */
 
 .logoTop {
@@ -980,16 +947,7 @@ $wholesalePadtop: 10px;
   left: 50px;
   z-index: 6;
   display: inline-block;
-  /*width: 200px;
-  height: 150px;*/
-  /*float: left;*/
 }
-
-/*.logoTop a {
-  width: 300px;
-  height: 125px;
-  display: inline-block;
-}*/
 
 /* Content */
 
@@ -1010,7 +968,7 @@ footer {
 }
 
 .footerBoxesWrapper {
-  padding: 1.2em 3.6em;
+  padding: 1.2em 0;
   background: $background_footer;
   border: 1px solid $color_footer_border;
   @extend .shadowBottomOuter;
@@ -1069,6 +1027,7 @@ footer {
   text-align: right;
   color: $color_contactInfo_text;
   list-style: none;
+  margin-right: 20px;
   li {
     list-style: none;
     line-height: 1.3em;
@@ -1238,6 +1197,10 @@ $breadcrumb_margin: 0.2em;
   p {
     color: $color_p_home;
   }
+  .prodThumbContainer {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 .logosCategoryHome {
@@ -1254,11 +1217,9 @@ $breadcrumb_margin: 0.2em;
     margin: 0;
     padding: 0;
     display: inline-block;
-    a {
-      width: 123px;
-      height: 123px;
-      display: inline-block;
-    }
+    width: 123px;
+    height: 123px;
+    display: inline-block;
   }
 }
 
@@ -1418,47 +1379,29 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       width: 230px;
       height: 230px;
     }
-    h5 { // name
-      // padding-left: $width_productList_bg * 2.2;
-      // padding-top: 0.3em;
-      font-size: 1.7em;
-      line-height: 1.2em;
-      font-weight: bold;
-      text-transform: uppercase;
-      background-color: white;
-      background-color: rgba(255,255,255, 0.6);
-      background-image: url('images/arrow_cat.png');
-      background-repeat: no-repeat;
-      background-size: $width_productList_bg;
-      background-position: 0.5em $height_productSpecsList_bg;
-      // background: white;
-      // background: url('images/bg_white.png');
-      // background-size: 0.6em;
-      // &:before {
-      //   content: url('images/arrow_cat.png');
-      //   margin-right: 5px;
-      // }
-    }
     p { // description
       font-size: 1.4em;
     }
-    h5, p {
-      padding: $height_productList_h5_padding_top 0.3em 0.3em $width_productList_bg * 2.2;
-    }
+    // h5, p {
+    //   padding: $height_productList_h5_padding_top 0.3em 0.3em $width_productList_bg * 2.2;
+    // }
     h6 { // price (not used)
       font-size: 1.3em;
       font-weight: normal;
     }
-    .viewProductLink {
-      font-size: 1.6em;
-      @include transparent_background_color($color_productList_border_red, $color_productList_border_blue, $color_productList_border_green, 0.8);
-      // background: $color_productList_border url('images/icon_search.png') no-repeat;
-      background-image: url('images/icon_search.png');
-      background-repeat: no-repeat;
-      background-size: $width_viewProduct_icon;
-      background-position: 1em center;
-      // color: #6b6b6b;
+    .prodThumbContainer {
+      border: 1px solid $color_productList_border;
     }
+    // .viewProductLink {
+      // font-size: 1.6em;
+      // @include transparent_background_color($color_productList_border_red, $color_productList_border_blue, $color_productList_border_green, 0.8);
+      // // background: $color_productList_border url('images/icon_search.png') no-repeat;
+      // background-image: url('images/icon_search.png');
+      // background-repeat: no-repeat;
+      // background-size: $width_viewProduct_icon;
+      // background-position: 1em center;
+      // // color: #6b6b6b;
+    // }
   }
   .productList {
     // text-align: center;
@@ -1499,7 +1442,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       padding-bottom: 0;
       margin-bottom: 0;
     }
-    .subcategory {
+    .subCategory {
       height: 100%;
       display: block;
       div { // thumb and text
@@ -1517,12 +1460,13 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
   }
 }
 
-.categoryProductHover {
+.categoryProductHover, .categoryListHover {
   color: $color_productList_hover;
+  @include opacity(80);
   h5 {
     color: $color_productList_hover;
+    // @include opacity(100);
   }
-  @include opacity(80);
   // img {
     // @include opacity(80);
   // }
@@ -1532,25 +1476,57 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
   position: relative;
   width: 230px;
   height: 230px;
-  border: 1px solid $color_productList_border;
-  .productName {
-    // TODO: maybe add white transluscent background
+  // border: 1px solid $color_productList_border;
+  img {
+    position: relative;
+    z-index: -1;
+  }
+  .productAttribute {
+    margin: 0;
     position: absolute;
-    top: 0;
+    display: block;
+    width: 100%;
     z-index: 10;
   }
+  .productName {
+    top: 0;
+    // padding: $height_productList_h5_padding_top 0.3em 0.3em $width_productList_bg * 2.2;
+    font-size: 1.7em;
+    line-height: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    // background-color: white;
+    // background-color: rgba(255,255,255, 0.6);
+    @include transparent_background_color(255, 255, 255, 0.6);
+    background-image: url('images/arrow_cat.png');
+    background-repeat: no-repeat;
+    background-size: $width_productList_bg;
+    background-position: 0.5em $height_productSpecsList_bg;
+    span {
+      padding: $height_productList_h5_padding_top 0.3em 0.3em $width_productList_bg * 2.2;
+      display: inline-block;
+    }
+  }
   .viewProductLink {
-    position: absolute;
-    z-index: 10;
+    // position: absolute;
+    // z-index: 10;
     bottom: 0;
-    display: block;
-    width: 100%; // absolute causes width to be auto
+    // display: block;
+    // width: 100%; // absolute causes width to be auto
     // margin: 0;
     padding: 0.6em 0;
-    span {
+    font-size: 1.6em;
+    @include transparent_background_color($color_productList_border_red, $color_productList_border_blue, $color_productList_border_green, 0.8);
+    // background: $color_productList_border url('images/icon_search.png') no-repeat;
+    background-image: url('images/icon_search.png');
+    background-repeat: no-repeat;
+    background-size: $width_viewProduct_icon;
+    background-position: 1em center;
+    // color: #6b6b6b;
+    span { // view product
       // margin: 0 0.6em;
       margin-left: $width_viewProduct_icon + 1.5em;
-
+      display: inline-block;
     }
     // width: 230px;
   }
@@ -1837,9 +1813,6 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
   .jcarousel-skin-antoniniknives {
     margin-bottom: 20px;
   }
-  // .productList li {
-  //   margin: 0 5px 0 0;
-  // }
 }
 
 .prodTabs { // reviews

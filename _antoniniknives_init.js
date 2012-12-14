@@ -1,9 +1,6 @@
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 
-
-
-
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
 app.rq.push(['extension',0,'store_checkout','extensions/store_checkout.js']);
@@ -13,31 +10,42 @@ app.rq.push(['extension',0,'store_search','extensions/store_search.js']);
 app.rq.push(['extension',0,'store_product','extensions/store_product.js']);
 app.rq.push(['extension',0,'store_cart','extensions/store_cart.js']);
 app.rq.push(['extension',0,'store_crm','extensions/store_crm.js']);
-// app.rq.push(['extension',0,'carousel','carousel-ad.js','carousel-ad.js']);
 app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
 app.rq.push(['extension',0,'myRIA','quickstart.js','startMyProgram']);
 
-
-app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','addTriggers']);
-//app.rq.push(['extension',1,'bonding_buysafe','extensions/bonding_buysafe.js','addTriggers']);
+app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','startExtension']);
+//app.rq.push(['extension',1,'bonding_buysafe','extensions/bonding_buysafe.js','startExtension']);
 //app.rq.push(['extension',1,'powerReviews','extensions/reviews_powerreviews.js','startExtension']);
 //app.rq.push(['extension',0,'magicToolBox','extensions/imaging_magictoolbox.js','startExtension']); // (not working yet - ticket in to MTB)
 
-// app.rq.push(["namespace":"myRIA","filename":"carousel-ad.js","callback":"startMyProgram"]);
 
 
 // add tabs to product data.
+// tabs are handled this way because jquery UI tabs REALLY wants an id and this ensures unique id's between product
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
-  $( ".tabbedProductContent",$('#productTemplate_'+app.u.makeSafeHTMLId(P.pid))).tabs();
+ var safePID = app.u.makeSafeHTMLId(P.pid); //can't use jqSelector because productTEmplate_pid still used makesafe. planned Q1-2012 update ###
+ var $tabContainer = $( ".tabbedProductContent",$('#productTemplate_'+safePID));
+ if($tabContainer.data("tabs")){} //tabs have already been instantiated. no need to be redundant.
+ else {
+   $(".tabs li a",$tabContainer).each(function (index) {
+     $(this).attr("href", "#spec_"+safePID+"_" + index.toString());
+   });
+   $("div.tabContent",$tabContainer).each(function (index) {
+     $(this).attr("id", "spec_"+safePID+"_" + index.toString());
+   });
+   $tabContainer.tabs();
+ }
 }]);
+
 app.rq.push(['script',0,(document.location.protocol == 'file:') ? app.vars.httpURL+'jquery/config.js' : app.vars.baseURL+'jquery/config.js']); //The config.js is dynamically generated.
 app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){return (typeof zoovyModel == 'function') ? true : false;}}
 app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
 app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
 app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
+
+// json data
 app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
 app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
-// app.rq.push(['script',0,app.vars.baseURL+'jcarousel/carousel-ad.js']);
 
 //cycle used for slideshow
 app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
@@ -60,13 +68,6 @@ var categoryWholesale   = '.wholesale';
 var categoryPdf         = '.pdf-catalogs';
 
 var prettyNames = {};
-// var prettyBoat;
-// var prettyCable;
-// var prettyFarm;
-// var prettyPocket;
-// var prettyPromo;
-// var prettySos;
-// var prettyAccessories;
 
 var banner                    = 'header';
 var classBannerHome           = 'bannerHome';
@@ -89,8 +90,6 @@ var classLogoCategoryFarm   = 'logoCategoryFarm';
 var classLogoCategoryPocket = 'logoCategoryPocket';
 var classLogoCategoryPromo  = 'logoCategoryPromo';
 var classLogoCategorySos    = 'logoCategorySos';
-
-// var wholesaleInfo = '.wholesaleInfo';
 
 var menuProducts       = '.menuProductList';
 var menuProductsBoat   = '#tier1categories_boat__fishing ul';
@@ -276,21 +275,21 @@ function defaultPage() {
 // jCarousel http://sorgalla.com/projects/jcarousel/
 
 function mycarousel_initCallback(carousel) {
-    // Disable autoscrolling if the user clicks the prev or next button.
-    carousel.buttonNext.bind('click', function() {
-        carousel.startAuto(0);
-    });
+  // Disable autoscrolling if the user clicks the prev or next button.
+  carousel.buttonNext.bind('click', function() {
+      carousel.startAuto(0);
+  });
 
-    carousel.buttonPrev.bind('click', function() {
-        carousel.startAuto(0);
-    });
+  carousel.buttonPrev.bind('click', function() {
+      carousel.startAuto(0);
+  });
 
-    // Pause autoscrolling if the user moves with the cursor over the clip.
-    carousel.clip.hover(function() {
-        carousel.stopAuto();
-    }, function() {
-        carousel.startAuto();
-    });
+  // Pause autoscrolling if the user moves with the cursor over the clip.
+  carousel.clip.hover(function() {
+      carousel.stopAuto();
+  }, function() {
+      carousel.startAuto();
+  });
 }
 
 function startCarouselHome() {
@@ -325,10 +324,34 @@ function startCarouselProduct(parentID) {
   }
 }
 
+function addLink(parent, tag, navcat) {
+  $('#'+parent+' .'+tag).click(function () {
+    showContent('category', {'navcat':navcat});
+  });
+}
+
 /// homepage \\\
 app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   defaultPage();
   startCarouselHome();
+
+  // add links to category logos
+  addLink(P.parentID, classLogoCategoryBoat, categoryBoat);
+  addLink(P.parentID, classLogoCategoryCable, categoryCable);
+  addLink(P.parentID, classLogoCategoryFarm, categoryFarm);
+  addLink(P.parentID, classLogoCategoryPocket, categoryPocket);
+  addLink(P.parentID, classLogoCategorySos, categorySos);
+  addLink(P.parentID, classLogoCategoryPromo, categoryPromo);
+
+  // add hover to carousel
+  $('#' + P.parentID + ' .prodThumbContainer' + ' .productAttribute').hide();
+  $('#' + P.parentID + ' .prodThumbContainer').hover(function (){
+    $(this).toggleClass('categoryProductHover', function () {
+      $(this).children('.productAttribute').slideToggle();
+    });
+  });
+
+  // add hover class to category logos
   $('#' + P.parentID + ' .logoCategoryHome').hover(function () {
     $(this).toggleClass('categoryProductHover');
   });
@@ -360,16 +383,26 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   currentNavcat   = P.navcat;
   currentCategory = getCategory(currentNavcat);
 
-  if (currentNavcat === currentCategory) {
-    // category
-    $(headingSubsParent).html('').hide();
-  }else {
-    // sub category
-    $(headingSubsParent).html(categoryLink(currentCategory, getPretty(currentCategory)));
-  }
+  // if (currentNavcat === currentCategory) {
+  //   // category
+  //   $(headingSubsParent).html('').hide();
+  // }else {
+  //   // sub category
+  //   $(headingSubsParent).html(categoryLink(currentCategory, getPretty(currentCategory)));
+  // }
 
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
+
+  // add hover class to lists
+  $('#'+P.parentID+' '+'.subCategory').hover(function() {
+    $(this).toggleClass('categoryListHover');
+  });
+
+  // add hover class to products
+  $('#'+P.parentID+' '+'.product').hover(function() {
+    $(this).toggleClass('categoryProductHover');
+  });
 
   //add link to logo
   $(logoCategory).html(categoryLink(currentCategory));
@@ -414,8 +447,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(pdfLinks).html(getPdfLinks());
       $(pdfLinks).show();
       break;
-    
-    default: // wholesale, gsi, testimonials, etc
+    default:
       defaultPage();
   }
 }]);
@@ -436,70 +468,46 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown();
 
+  // add hover class to products
+  $('#'+P.parentID+' '+'.product' + ' .productAttribute').hide();
+  $('#'+P.parentID+' '+'.product').hover(function() {
+    $(this).toggleClass('categoryProductHover');
+    $(this).children().children('.productAttribute').slideToggle();
+  });
+
   // carousels
   startCarouselProduct(P.parentID);
 
   switch(currentCategory) {
     case categoryBoat:
-      // set pretty for when loading dirctly to product
-      // if (prettyBoat === undefined) {
-      //   prettyBoat = getPretty(categoryBoat);
-      // }
       $(banner).addClass(classBannerCategoryBoat);
       $(logoCategory).addClass(classLogoCategoryBoat);
-      // $(menuProductsBoat).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorBoat);
-      // $(headingProductCategory).html(categoryLink(categoryBoat, prettyBoat));
       break;
     case categoryCable:
-      // if (prettyCable === undefined) {
-      //   prettyCable = getPretty(categoryCable);
-      // }
       $(banner).addClass(classBannerCategoryCable);
       $(logoCategory).addClass(classLogoCategoryCable);
-      // $(menuProductsCable).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorCable);
-      // $(headingProductCategory).html(categoryLink(categoryCable, prettyCable));
       break;
     case categoryFarm:
-      // if (prettyFarm === undefined) {
-      //   prettyFarm = getPretty(categoryFarm);
-      // }
       $(banner).addClass(classBannerCategoryFarm);
       $(logoCategory).addClass(classLogoCategoryFarm);
-      // $(menuProductsFarm).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorFarm);
-      // $(headingProductCategory).html(categoryLink(categoryFarm, prettyFarm));
       break;
     case categoryPocket:
-      // if (prettyPocket === undefined) {
-      //   prettyPocket = getPretty(categoryPocket);
-      // }
       $(banner).addClass(classBannerCategoryPocket);
       $(logoCategory).addClass(classLogoCategoryPocket);
-      // $(menuProductsPocket).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPocket);
-      // $(headingProductCategory).html(categoryLink(categoryPocket, prettyPocket));
       break;
     case categoryPromo:
-      // if (prettyPromo === undefined) {
-      //   prettyPromo = getPretty(categoryPromo);
-      // }
       $(banner).addClass(classBannerCategoryPromo);
       $(logoCategory).addClass(classLogoCategoryPromo);
-      // $(menuProductsPromo).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorPromo);
-      // $(headingProductCategory).html(categoryLink(categoryPromo, prettyPromo));
       break;
     case categorySos:
-      // if (prettySos === undefined) {
-      //   prettySos = getPretty(categorySos);
-      // }
       $(banner).addClass(classBannerCategorySos);
       $(logoCategory).addClass(classLogoCategorySos);
-      // $(menuProductsSos).removeClass('displayNone');
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(classColorSos);
-      // $(headingProductCategory).html(categoryLink(categorySos, prettySos));
       break;
     default:
       defaultPage();
@@ -507,6 +515,8 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
 }]);
 
 ///// end custom \\\\\
+
+
 
 //group any third party files together (regardless of pass) to make troubleshooting easier.
 app.rq.push(['script',0,(document.location.protocol == 'https:' ? 'https:' : 'http:')+'//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.js']);
@@ -516,9 +526,9 @@ app.rq.push(['script',0,(document.location.protocol == 'https:' ? 'https:' : 'ht
 This function is overwritten once the controller is instantiated.
 Having a placeholder allows us to always reference the same messaging function, but not impede load time with a bulky error function.
 */
-app.u.throwMessage = function(m)  {
+app.u.throwMessage = function(m) {
   alert(m);
-  };
+};
 
 app.u.howManyPassZeroResourcesAreLoaded = function(debug) {
   var L = app.vars.rq.length;
@@ -530,7 +540,7 @@ app.u.howManyPassZeroResourcesAreLoaded = function(debug) {
     if(debug) {app.u.dump(" -> "+i+": "+app.vars.rq[i][2]+": "+app.vars.rq[i][app.vars.rq[i].length -1]);}
     }
   return r;
-  };
+};
 
 
 //gets executed once controller.js is loaded.
@@ -551,12 +561,12 @@ app.u.initMVC = function(attempts){
   $('#appPreViewProgressText').empty().append(percentComplete+"% Complete");
 
   if(resourcesLoaded == app.vars.rq.length) {
-//instantiate controller. handles all logic and communication between model and view.
-//passing in app will extend app so all previously declared functions will exist in addition to all the built in functions.
-//tmp is a throw away variable. app is what should be used as is referenced within the mvc.
+  //instantiate controller. handles all logic and communication between model and view.
+  //passing in app will extend app so all previously declared functions will exist in addition to all the built in functions.
+  //tmp is a throw away variable. app is what should be used as is referenced within the mvc.
     app.vars.rq = null; //to get here, all these resources have been loaded. nuke record to keep DOM clean and avoid any duplication.
     var tmp = new zController(app);
-    //instantiate wiki parser.
+  //instantiate wiki parser.
     myCreole = new Parse.Simple.Creole();
     }
   else if(attempts > 50)  {
@@ -578,8 +588,8 @@ app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
   // Add accessores & promo to menu
-  $('#tier1categories').append("<li id='tier1categories_accessories'>" + categoryLink(categoryAccessories, getPretty(categoryAccessories)) + "</li>");
-  $('#tier1categories').append("<li id='tier1categories_promo__customizing'>" + categoryLink(categoryPromo, getPretty(categoryPromo)) + "</li>");
+  // $('#tier1categories').append("<li id='tier1categories_accessories'>" + categoryLink(categoryAccessories, getPretty(categoryAccessories)) + "</li>");
+  // $('#tier1categories').append("<li id='tier1categories_promo__customizing'>" + categoryLink(categoryPromo, getPretty(categoryPromo)) + "</li>");
 };
 
 
@@ -588,7 +598,6 @@ app.u.appInitComplete = function(P) {
 //don't execute script till both jquery AND the dom are ready.
 $(document).ready(function(){
   app.u.handleRQ(0);
-
 
   // Pre load images
   $('.preload').hide();

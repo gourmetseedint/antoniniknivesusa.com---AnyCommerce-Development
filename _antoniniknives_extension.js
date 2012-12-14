@@ -126,11 +126,11 @@ var antoniniknives_extension = function() {
         var category   = r.vars.getCategory(navcat);
         var subCatLong = r.vars.getValueFromSubcatData(navcat, 'prettyLong');
         var catPretty  = r.vars.getPretty(category);
-        var linkHome   = "<h2><a href='#top' onClick=\"return showContent('category',{'navcat':'.'});\">Antonini:</a></h2>";
+        var linkHome   = "<h2><a href='#top' onClick=\"return showContent('homepage', {});\">Antonini:</a></h2>";
         var link       = linkHome;
 
         if (!subCatLong) {
-          app.u.dump("Warning: trying " + navcat + "'s' pretty name");
+          app.u.dump("Warning: trying " + navcat + "'s pretty name");
           subCatLong = r.vars.getPretty(navcat);
         }
 
@@ -148,17 +148,23 @@ var antoniniknives_extension = function() {
       category_headings : function ($tag, data) {
         var navcat      = data.value;
         var category    = r.vars.getCategory(navcat);
-        var subCatLong  = r.vars.getValueFromSubcatData(navcat, 'prettyLong');
+        var subCategory = r.vars.getCategory(navcat, 1);
+        var subCatLong;
         var catPretty   = r.vars.getPretty(category);
-        var linkHome    = "<h2><a href='#top' onClick=\"return showContent('category',{'navcat':'.'});\">Antonini:</a></h2>";
+        var linkHome    = "<h2><a href='#top' onClick=\"return showContent('homepage', {});\">Antonini:</a></h2>";
         var link        = linkHome;
 
-        if (!subCatLong) {
-          app.u.dump("Warning: trying " + navcat + "'s' pretty name");
-          subCatLong = r.vars.getPretty(navcat);
+        if(subCategory) {
+          // on a sub category
+          subCatLong = r.vars.getValueFromSubcatData(navcat, 'prettyLong');
+
+          if (!subCatLong) {
+            app.u.dump("Warning: trying " + navcat + "'s' pretty name");
+            subCatLong = r.vars.getPretty(navcat);
+          }
         }
 
-        if (navcat && subCatLong) {
+        if (navcat && subCategory && subCatLong) {
           // on a sub category
           // app.u.dump("On a sub category");
           link += "<h1 class='categoryColor'>" + subCatLong + "<h1>";
@@ -173,6 +179,10 @@ var antoniniknives_extension = function() {
         }
 
         $tag.html(link);
+      },
+
+      hiddenPrettyFixed : function ($tag, data) {
+        $tag.text(r.vars.fixHiddenPretty(data.value));
       }
     } // renderformats
   }; //r object.
