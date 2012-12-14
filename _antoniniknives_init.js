@@ -343,6 +343,14 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   addLink(P.parentID, classLogoCategorySos, categorySos);
   addLink(P.parentID, classLogoCategoryPromo, categoryPromo);
 
+  // add hover to carousel
+  $('#' + P.parentID + ' .prodThumbContainer' + ' .productAttribute').hide();
+  $('#' + P.parentID + ' .prodThumbContainer').hover(function (){
+    $(this).toggleClass('categoryProductHover', function () {
+      $(this).children('.productAttribute').slideToggle();
+    });
+  });
+
   // add hover class to category logos
   $('#' + P.parentID + ' .logoCategoryHome').hover(function () {
     $(this).toggleClass('categoryProductHover');
@@ -385,6 +393,16 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
 
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
+
+  // add hover class to lists
+  $('#'+P.parentID+' '+'.subCategory').hover(function() {
+    $(this).toggleClass('categoryListHover');
+  });
+
+  // add hover class to products
+  $('#'+P.parentID+' '+'.product').hover(function() {
+    $(this).toggleClass('categoryProductHover');
+  });
 
   //add link to logo
   $(logoCategory).html(categoryLink(currentCategory));
@@ -449,6 +467,13 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
 
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown();
+
+  // add hover class to products
+  $('#'+P.parentID+' '+'.product' + ' .productAttribute').hide();
+  $('#'+P.parentID+' '+'.product').hover(function() {
+    $(this).toggleClass('categoryProductHover');
+    $(this).children().children('.productAttribute').slideToggle();
+  });
 
   // carousels
   startCarouselProduct(P.parentID);
