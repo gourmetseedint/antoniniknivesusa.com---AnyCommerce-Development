@@ -34,7 +34,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121214014813",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121214161402",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -110,7 +110,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
             <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
             <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a></li>
             <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a></li>
-            <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (4)</a><!-- TODO: add cart item num --></li>
+            <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a><!-- TODO: add cart item num --></li>
           </ul>
           <span class="socialBox">
             <span class='socialIcon socialIconFacebook'><a href="http://www.facebook.com" target="_blank" title="Facebook link"></a></span><!-- TODO: get facebook name -->
@@ -128,6 +128,8 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
           <li><img src='images/home_slide_5.png'/></li>
         </ul>
       </div>
+      <div class="headerInner headerInnerLeft"></div>
+      <div class="headerInner headerInnerRight"></div>
     </header>
     <aside class="sidebar printNo">
       <nav class="navMenu">
@@ -343,6 +345,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
   </div>
 
   <img data-bind="var: category(%page.CAT_THUMB); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
+  <img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' />
   <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
 
   <!-- used by wholesale -->
@@ -403,12 +406,18 @@ don't modify the 'data-templateid' unless you are changing template names and up
   -->
 </li>
 
+<li id='categoryListNoImagesTemplate' onMouseOver="$('.quickView',$(this)).show();$(this).addClass('navMenuSubHover');" onMouseOut="$('.quickView').hide();$(this).removeClass('navMenuSubHover');">
+  <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
+    <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
+  </div>
+</li>
+
 
 <li id='categoryListTemplateRootCats'>
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
     <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
   </div>
-  <!-- <ul data-bind="var: category(@subcategoryDetail); format: subcategory2LevelList; extension: store_navcats; loadsTemplate: categoryListNoImagesTemplate;" class='menuSubList'></ul> -->
+  <ul data-bind="var: category(@subcategoryDetail); format: subcategory2LevelList; extension: store_navcats; loadsTemplate: categoryListNoImagesTemplate;" class='menuSubList'></ul>
 
   <!-- Original
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>

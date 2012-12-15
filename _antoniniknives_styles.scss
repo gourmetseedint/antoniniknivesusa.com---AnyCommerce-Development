@@ -521,6 +521,27 @@ header {
   height: $height_header;
 }
 
+$width_headerInner: 90px;
+.headerInner {
+  width: $width_headerInner;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.headerInnerLeft {
+  background: url('images/bg_gradient_left.png') repeat-y;
+  background-size: $width_headerInner auto;
+  left: 0;
+}
+
+.headerInnerRight {
+  background: url('images/bg_gradient_right.png') repeat-y;
+  background-size: $width_headerInner auto;
+  right: 0;
+}
+
+
 .bannerHome {
   background: url('images/banner_bg_home.png') no-repeat;
   height: $height_header_home;
@@ -693,6 +714,7 @@ $menuOffset: -35px;
   // display: inline-block
   float: left;
   position: relative;
+  z-index: 98;
   top: $menuOffset;
   margin-bottom: $menuOffset;
   margin-right: $width_menu_right_margin;
@@ -714,6 +736,7 @@ $menuOffset: -35px;
   width: $width_menu;
   padding: $width_menu_padding;
   color: $color_menu_text;
+  // position: relative;
   h2 {
     margin: 1em 0 0.5em;
     padding: 0;
@@ -919,6 +942,7 @@ $pdfIconSize: 20px;
   // width: 214px;
   width: 100%;
   height: 125px;
+  position: relative;
   span {
     display: block;
   }
@@ -939,6 +963,12 @@ $wholesalePadtop: 10px;
   }
 }
 
+.wholesaleInfoBottom {
+  position: absolute;
+  bottom: 3px;
+  width: 100%;
+}
+
 /* Logo */
 
 .logoTop {
@@ -957,6 +987,8 @@ $wholesalePadtop: 10px;
   width: $width_content;
   display: inline-block;
   /*padding-left: 10px;*/
+  position: relative;
+  z-index: 99;
 }
 
 /* Footer */
