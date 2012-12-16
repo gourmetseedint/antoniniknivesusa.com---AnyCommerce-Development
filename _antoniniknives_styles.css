@@ -269,7 +269,8 @@ header {
     height: 300px; }
 
 .anythingSlider-default {
-  margin: 0; }
+  margin: 0;
+  /* start-stop button, playing, default state */ }
   .anythingSlider-default .anythingControls a {
     background: #cdcdcd url(AnythingSlider/default.png) center -288px repeat-x; }
   .anythingSlider-default .anythingWindow {
@@ -288,6 +289,8 @@ header {
         color: #B90007; }
       .anythingSlider-default.activeSlider .anythingControls a.start-stop:hover, .anythingSlider-default.activeSlider .anythingControls a.start-stop.hover {
         color: black; }
+  .anythingSlider-default .anythingSlider-default .anythingControls a.start-stop, .anythingSlider-default .anythingSlider-default .anythingControls a.start-stop.playing {
+    background-color: #cdcdcd; }
   .anythingSlider-default .arrow a {
     background: url(AnythingSlider/default.png) no-repeat; }
   .anythingSlider-default .back a {
@@ -772,14 +775,12 @@ footer {
 /* Homepage */
 .homepageContainer {
   color: #8e8e8e; }
-  .homepageContainer p {
-    color: #a6a6a6; }
   .homepageContainer .prodThumbContainer {
     width: 300px;
     height: 300px; }
 
 .logosCategoryHome {
-  margin: 0;
+  margin: 0 0 20px;
   padding: 0;
   text-align: center; }
   .logosCategoryHome ul {
@@ -794,6 +795,12 @@ footer {
     width: 123px;
     height: 123px;
     display: inline-block; }
+
+.homepageContent .anythingSlider-default {
+  display: inline-block;
+  margin-right: 20px; }
+.homepageContent h2 {
+  margin-left: 1.3em; }
 
 .homepageText {
   display: inline-block;

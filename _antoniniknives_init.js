@@ -362,7 +362,7 @@ function startAnythingSlider ($target, slidesAtOnce) {
       autoPlayLocked      : true,     // If true, user changing slides will not stop the slideshow
       autoPlayDelayed     : true,     // If true, starting a slideshow will delay advancing slides; if false, the slider will immediately advance to the next slide when slideshow starts
       pauseOnHover        : true,      // If true & the slideshow is active, the slideshow will pause on hover
-      // stopAtEnd           : false,     // If true & the slideshow is active, the slideshow will stop on the last page. This also stops the rewind effect when infiniteSlides is false.
+      stopAtEnd           : true,     // If true & the slideshow is active, the slideshow will stop on the last page. This also stops the rewind effect when infiniteSlides is false.
       // playRtl             : false,     // If true, the slideshow will move right-to-left
      
       // Times
@@ -399,7 +399,7 @@ function startAnythingSlider ($target, slidesAtOnce) {
 }
 
 function stopAnythingSlider() {
-  $('.anythingSlider').data('AnythingSlider').startStop(false);
+  // $('.anythingSlider').data('AnythingSlider').startStop(false);
 }
 
 function startSliderHomeBestSellers() {
@@ -446,6 +446,7 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
 
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   $(logoCategory).removeClass("displayNone");
+  stopAnythingSlider();
   // $('#' + P.parentID + ' .prodThumbContainer').unbind();
   // app.u.dump('unbinding');
   // $(sidebar).removeClass(sidebarHome);

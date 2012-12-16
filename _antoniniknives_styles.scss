@@ -639,6 +639,14 @@ $width_headerInner: 90px;
       }
     }
   }
+
+/* start-stop button, playing, default state */
+.anythingSlider-default .anythingControls {
+  a.start-stop, a.start-stop.playing {
+    background-color: $anythingSlider_border;
+  }
+}
+
   // .anythingSlider-default.activeSlider .anythingControls a.start-stop {
   //   background-color: #080;
   //   color: #fff;
@@ -1330,9 +1338,6 @@ $breadcrumb_margin: 0.2em;
 
 .homepageContainer {
   color: $color_home_h2;
-  p {
-    color: $color_p_home;
-  }
   .prodThumbContainer {
     width: 300px;
     height: 300px;
@@ -1340,7 +1345,7 @@ $breadcrumb_margin: 0.2em;
 }
 
 .logosCategoryHome {
-  margin: 0;
+  margin: 0 0 20px;
   padding: 0;
   text-align: center;
   ul {
@@ -1362,7 +1367,13 @@ $breadcrumb_margin: 0.2em;
 $width_carouselHomepage_image: 300px;
 
 .homepageContent {
-
+  .anythingSlider-default {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  h2 {
+    margin-left: 1.3em;
+  }
   // // @include jcarousel_horizontal($width_carouselHomepage_image, $width_carouselHomepage_image, 1, 0);
   // .jcarousel-clip-horizontal {
   // //   border: 1px solid $color_border; // border around image
