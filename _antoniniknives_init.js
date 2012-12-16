@@ -362,7 +362,7 @@ function startAnythingSlider ($target, slidesAtOnce) {
       autoPlayLocked      : true,     // If true, user changing slides will not stop the slideshow
       autoPlayDelayed     : true,     // If true, starting a slideshow will delay advancing slides; if false, the slider will immediately advance to the next slide when slideshow starts
       pauseOnHover        : true,      // If true & the slideshow is active, the slideshow will pause on hover
-      stopAtEnd           : true,     // If true & the slideshow is active, the slideshow will stop on the last page. This also stops the rewind effect when infiniteSlides is false.
+      stopAtEnd           : false,     // If true & the slideshow is active, the slideshow will stop on the last page. This also stops the rewind effect when infiniteSlides is false.
       // playRtl             : false,     // If true, the slideshow will move right-to-left
      
       // Times
@@ -398,16 +398,33 @@ function startAnythingSlider ($target, slidesAtOnce) {
   }
 }
 
-function stopAnythingSlider() {
+function stopAnythingSlider($target) {
   // $('.anythingSlider').data('AnythingSlider').startStop(false);
+  // $('.anythingSlider').eq(1).remove();
+  // $target.data('AnythingSlider').startStop(false);
+  // app.u.dump([$target]);
+  $target.data('AnythingSlider').startStop(false);
+  // app.u.dump('stopped slider: ' + $target.selector);
 }
 
 function startSliderHomeBestSellers() {
   startAnythingSlider($('#homeProdSearchBestSellers'));
+  // app.u.dump([($('#homeProdSearchBestSellers').data('AnythingSlider').startStop(false))]);
+}
+
+function stopSliderHomeBestSellers() {
+  stopAnythingSlider($('#homeProdSearchBestSellers'));
 }
 
 function startSliderProductExtras(parentID) {
   startAnythingSlider($('#' + parentID + ' .productListProductExtras'), 3);
+}
+
+function stopSliderProductExtras(parentID) {
+  // app.u.dump([$('#' + parentID + ' .anythingSlider ul.productList')]);
+  $('.anythingSlider ul.productList').each( function () {
+    stopAnythingSlider($(this));
+  });
 }
 
 function addLink(parent, tag, navcat) {
@@ -446,7 +463,7 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
 
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   $(logoCategory).removeClass("displayNone");
-  stopAnythingSlider();
+  stopSliderHomeBestSellers();
   // $('#' + P.parentID + ' .prodThumbContainer').unbind();
   // app.u.dump('unbinding');
   // $(sidebar).removeClass(sidebarHome);
@@ -604,10 +621,11 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   }
 }]);
 
-// app.rq.push(['templateFunction', 'productTemplate', 'onDeparts', function () {
-//   app.u.dump('leaving product');
-//   stopAnythingSlider();
-// }]);
+app.rq.push(['templateFunction', 'productTemplate', 'onDeparts', function (P) {
+  // app.u.dump('leaving product');
+  // stopSliderProductExtras(P.parentID);
+  stopSliderProductExtras();
+}]);
 
 ///// end custom \\\\\
 
