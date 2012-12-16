@@ -191,50 +191,63 @@ $background_white: white url('images/bg_white.png');
   opacity: $percent / 100;
 }
 
-@mixin jcarousel_horizontal($image_width:100px, $image_height:100px, $count:1, $margin_right:10px) {
-  $container_width: $count * ($image_width + $margin_right);
-
-  .productListCarouselAccessories {
-  }
-
+@mixin anythingSlider($width:700px, $height:390px) {
+  width: $width;
+  height: $height;
+  list-style: none;
+  /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
+  overflow-y: auto;
+  overflow-x: hidden;
   img {
-    width: $image_width;
-    height: $image_height;
-  }
-
-  .jcarousel-container {
-    border-width: 0;
-    background-color: transparent;
-    ul {
-      width: 99999px !important;
-    }
-    li {
-      margin: 0 $margin_right 0 0;
-    }
-  }
-
-  .jcarousel-container-horizontal {
-    width: $container_width;
-    height: $image_height;
-    padding: 0 40px;
-  }
-
-  .jcarousel-clip-horizontal {
-    // border: 1px solid $color_border; // border around image
-    width: $container_width;  // set to image width to only show one at a time
-    height: $image_height;
-  }
-
-  .jcarousel-item {
-    width: $image_width;
-    height: $image_height;
-  }
-
-  // buttons
-  .jcarousel-next-horizontal, .jcarousel-prev-horizontal {
-    top: $image_height/2 - 20px;
+    width: $width;
+    height: $height;
   }
 }
+
+// @mixin jcarousel_horizontal($image_width:100px, $image_height:100px, $count:1, $margin_right:10px) {
+//   $container_width: $count * ($image_width + $margin_right);
+
+//   .productListCarouselAccessories {
+//   }
+
+//   img {
+//     width: $image_width;
+//     height: $image_height;
+//   }
+
+//   .jcarousel-container {
+//     border-width: 0;
+//     background-color: transparent;
+//     ul {
+//       width: 99999px !important;
+//     }
+//     li {
+//       margin: 0 $margin_right 0 0;
+//     }
+//   }
+
+//   .jcarousel-container-horizontal {
+//     width: $container_width;
+//     height: $image_height;
+//     padding: 0 40px;
+//   }
+
+//   .jcarousel-clip-horizontal {
+//     // border: 1px solid $color_border; // border around image
+//     width: $container_width;  // set to image width to only show one at a time
+//     height: $image_height;
+//   }
+
+//   .jcarousel-item {
+//     width: $image_width;
+//     height: $image_height;
+//   }
+
+//   // buttons
+//   .jcarousel-next-horizontal, .jcarousel-prev-horizontal {
+//     top: $image_height/2 - 20px;
+//   }
+// }
 
 /* universal */
 
@@ -519,6 +532,7 @@ $color_button_text_hover: darken($color_button_text, 20%);
 
 header {
   height: $height_header;
+  position: relative;
 }
 
 $width_headerInner: 90px;
@@ -541,6 +555,14 @@ $width_headerInner: 90px;
   right: 0;
 }
 
+.bannerText {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 55;
+  // background: url('images/banner_text.bg') no-repeat;
+  // display: block;
+}
 
 .bannerHome {
   background: url('images/banner_bg_home.png') no-repeat;
@@ -575,6 +597,88 @@ $width_headerInner: 90px;
 .bannerCategorySos {
   background: url('images/banner_bg_sos.png') no-repeat;
 }
+
+#homeProdSearchBestSellers {
+  @include anythingSlider(300px, 300px);
+}
+
+// Anything Slider
+.anythingSlider-default {
+  $anythingSlider_border: $color_productList_border;
+  $anythingSlider_inactive: darken($anythingSlider_border, 20%);
+  margin: 0;
+  .anythingControls a {
+    background: $anythingSlider_border url(AnythingSlider/default.png) center -288px repeat-x;
+  }
+  .anythingWindow {
+    border: 1px solid $anythingSlider_border;
+  }
+  &.activeSlider .anythingWindow {
+    border-color: $anythingSlider_border;
+  }
+  &.activeSlider {
+     // Navigation current & hovered button, active state
+    .anythingControls a {
+      background-color: $anythingSlider_inactive;
+      &.cur, &:hover {
+        background: $anythingSlider_border;
+      }
+      &.start-stop {
+      // /* start-stop button, stopped, active state */
+        background-color: $anythingSlider_inactive;
+        color: #068500;
+        &.playing {
+          // /* start-stop button, playing, active state */
+          background-color: $anythingSlider_inactive;
+          color: #B90007;
+        }
+        &:hover, &.hover {
+          //start-stop button, active slider hovered text color (when visible) */
+          color: black;
+        }
+      }
+    }
+  }
+  // .anythingSlider-default.activeSlider .anythingControls a.start-stop {
+  //   background-color: #080;
+  //   color: #fff;
+  // }
+  // .anythingSlider-default.activeSlider .anythingControls a.start-stop.playing {
+  //   background-color: #d00;
+  //   color: #fff;
+  // }
+  // /* start-stop button, active slider hovered text color (when visible) */
+  // .anythingSlider-default.activeSlider .start-stop:hover,
+  // .anythingSlider-default.activeSlider .start-stop.hover {
+  //   color: #fff;
+  // }
+  .arrow a {
+    background: url(AnythingSlider/default.png) no-repeat;
+  }
+  // back arrow
+  .back {
+    a { 
+      background-position: left top;
+      &:hover, &.hover { 
+        background-position: left -140px;
+      }
+    }
+  }
+  // forward arrow
+  .forward {
+    a { 
+      background-position: right top; 
+      &:hover, &.hover { 
+        background-position: right -140px; 
+      }
+    }
+  }
+}
+
+
+// .anythingSlider {
+//   back {}
+// }
 
 /* Navigation */
 
@@ -1259,13 +1363,13 @@ $width_carouselHomepage_image: 300px;
 
 .homepageContent {
 
-  @include jcarousel_horizontal($width_carouselHomepage_image, $width_carouselHomepage_image, 1, 0);
-  .jcarousel-clip-horizontal {
-    border: 1px solid $color_border; // border around image
-  }
-  .jcarousel-skin-antoniniknives{
-    display: inline-block;
-  }
+  // // @include jcarousel_horizontal($width_carouselHomepage_image, $width_carouselHomepage_image, 1, 0);
+  // .jcarousel-clip-horizontal {
+  // //   border: 1px solid $color_border; // border around image
+  // // }
+  // .jcarousel-skin-antoniniknives{
+  // //   display: inline-block;
+  // // }
 }
 
 .homepageText {
@@ -1440,7 +1544,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
     li {
       width: 230px;
       height: 230px;
-      margin: 10px;
+      // margin: 10px;
       display: inline-block;
       vertical-align: top;
       // text-align: left;
@@ -1835,16 +1939,22 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
 // }
 
 .productExtras {
-  @include jcarousel_horizontal(230px, 230px, 3, 10px);
-  h5 { // list pretext
-    font-size: 1.6em;
+  // @include jcarousel_horizontal(230px, 230px, 3, 10px);
+  ul {
+    @include anythingSlider(230px, 230px);
   }
-  .productList{
-    text-align: left;
+  .productList .prodThumbContainer {
+    border-width: 0;
   }
-  .jcarousel-skin-antoniniknives {
-    margin-bottom: 20px;
-  }
+  // h5 { // list pretext
+  //   font-size: 1.6em;
+  // }
+  // .productList{
+  //   text-align: left;
+  // }
+  // .jcarousel-skin-antoniniknives {
+  //   margin-bottom: 20px;
+  // }
 }
 
 .prodTabs { // reviews

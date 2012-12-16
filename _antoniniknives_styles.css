@@ -206,7 +206,8 @@ a:active {
 
 /* Header */
 header {
-  height: 386px; }
+  height: 386px;
+  position: relative; }
 
 .headerInner {
   width: 90px;
@@ -223,6 +224,12 @@ header {
   background: url("images/bg_gradient_right.png") repeat-y;
   background-size: 90px auto;
   right: 0; }
+
+.bannerText {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 55; }
 
 .bannerHome {
   background: url("images/banner_bg_home.png") no-repeat;
@@ -249,6 +256,48 @@ header {
 
 .bannerCategorySos {
   background: url("images/banner_bg_sos.png") no-repeat; }
+
+#homeProdSearchBestSellers {
+  width: 300px;
+  height: 300px;
+  list-style: none;
+  /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
+  overflow-y: auto;
+  overflow-x: hidden; }
+  #homeProdSearchBestSellers img {
+    width: 300px;
+    height: 300px; }
+
+.anythingSlider-default {
+  margin: 0; }
+  .anythingSlider-default .anythingControls a {
+    background: #cdcdcd url(AnythingSlider/default.png) center -288px repeat-x; }
+  .anythingSlider-default .anythingWindow {
+    border: 1px solid #cdcdcd; }
+  .anythingSlider-default.activeSlider .anythingWindow {
+    border-color: #cdcdcd; }
+  .anythingSlider-default.activeSlider .anythingControls a {
+    background-color: #9a9a9a; }
+    .anythingSlider-default.activeSlider .anythingControls a.cur, .anythingSlider-default.activeSlider .anythingControls a:hover {
+      background: #cdcdcd; }
+    .anythingSlider-default.activeSlider .anythingControls a.start-stop {
+      background-color: #9a9a9a;
+      color: #068500; }
+      .anythingSlider-default.activeSlider .anythingControls a.start-stop.playing {
+        background-color: #9a9a9a;
+        color: #B90007; }
+      .anythingSlider-default.activeSlider .anythingControls a.start-stop:hover, .anythingSlider-default.activeSlider .anythingControls a.start-stop.hover {
+        color: black; }
+  .anythingSlider-default .arrow a {
+    background: url(AnythingSlider/default.png) no-repeat; }
+  .anythingSlider-default .back a {
+    background-position: left top; }
+    .anythingSlider-default .back a:hover, .anythingSlider-default .back a.hover {
+      background-position: left -140px; }
+  .anythingSlider-default .forward a {
+    background-position: right top; }
+    .anythingSlider-default .forward a:hover, .anythingSlider-default .forward a.hover {
+      background-position: right -140px; }
 
 /* Navigation */
 /* Top navigation */
@@ -746,33 +795,6 @@ footer {
     height: 123px;
     display: inline-block; }
 
-.homepageContent img {
-  width: 300px;
-  height: 300px; }
-.homepageContent .jcarousel-container {
-  border-width: 0;
-  background-color: transparent; }
-  .homepageContent .jcarousel-container ul {
-    width: 99999px !important; }
-  .homepageContent .jcarousel-container li {
-    margin: 0 0 0 0; }
-.homepageContent .jcarousel-container-horizontal {
-  width: 300px;
-  height: 300px;
-  padding: 0 40px; }
-.homepageContent .jcarousel-clip-horizontal {
-  width: 300px;
-  height: 300px; }
-.homepageContent .jcarousel-item {
-  width: 300px;
-  height: 300px; }
-.homepageContent .jcarousel-next-horizontal, .homepageContent .jcarousel-prev-horizontal {
-  top: 130px; }
-.homepageContent .jcarousel-clip-horizontal {
-  border: 1px solid #cdcccc; }
-.homepageContent .jcarousel-skin-antoniniknives {
-  display: inline-block; }
-
 .homepageText {
   display: inline-block;
   width: 350px;
@@ -867,7 +889,6 @@ footer {
 .content .productList li {
   width: 230px;
   height: 230px;
-  margin: 10px;
   display: inline-block;
   vertical-align: top; }
 .content .subCategoryList li {
@@ -1117,34 +1138,18 @@ footer {
 .productDescription li {
   font-size: 1.2em; }
 
-.productExtras img {
+.productExtras ul {
   width: 230px;
-  height: 230px; }
-.productExtras .jcarousel-container {
-  border-width: 0;
-  background-color: transparent; }
-  .productExtras .jcarousel-container ul {
-    width: 99999px !important; }
-  .productExtras .jcarousel-container li {
-    margin: 0 10px 0 0; }
-.productExtras .jcarousel-container-horizontal {
-  width: 720px;
   height: 230px;
-  padding: 0 40px; }
-.productExtras .jcarousel-clip-horizontal {
-  width: 720px;
-  height: 230px; }
-.productExtras .jcarousel-item {
-  width: 230px;
-  height: 230px; }
-.productExtras .jcarousel-next-horizontal, .productExtras .jcarousel-prev-horizontal {
-  top: 95px; }
-.productExtras h5 {
-  font-size: 1.6em; }
-.productExtras .productList {
-  text-align: left; }
-.productExtras .jcarousel-skin-antoniniknives {
-  margin-bottom: 20px; }
+  list-style: none;
+  /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
+  overflow-y: auto;
+  overflow-x: hidden; }
+  .productExtras ul img {
+    width: 230px;
+    height: 230px; }
+.productExtras .productList .prodThumbContainer {
+  border-width: 0; }
 
 .prodTabs {
   margin-top: 20px; }

@@ -34,7 +34,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121214161402",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121215194903",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -56,7 +56,8 @@ css files should be included before any .js file to ensure they are downloaded i
 -->
 <link rel="stylesheet" type="text/css" href="qs_styles.css" />
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="jcarousel/skin.css" />
+<!-- <link rel="stylesheet" type="text/css" href="jcarousel/skin.css" /> -->
+<link rel="stylesheet" type="text/css" href="AnythingSlider/anythingslider.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles_print.css" media="print"/>
 
@@ -65,7 +66,7 @@ css files should be included before any .js file to ensure they are downloaded i
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="loadscript.js"></script>
-<script type="text/javascript" src="jcarousel/jquery.jcarousel.min-0.2.7.js"></script>
+<!-- <script type="text/javascript" src="jcarousel/jquery.jcarousel.min-0.2.7.js"></script> -->
 
 
 
@@ -101,35 +102,38 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 <div id='appView' class='displayNone'>
   <!-- VIEW CONTENT -->
   <div class='container'>
-    <header id="header" class="bannerCategoryDefault printNo">
-      <span class="logoTop"><a href="#homepage" class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonino Knives USA" /></a></span>
-      <nav class='navTop'>
-        <span class='navTopLeft'></span>
-        <div>
-          <ul>
-            <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
-            <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a></li>
-            <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a></li>
-            <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a><!-- TODO: add cart item num --></li>
+    <header id="header" class="">
+      <div class='printNo'>
+        <span class="logoTop"><a href="#homepage" class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonini Knives USA" /></a></span>
+        <span class="bannerText"><img src="images/banner_text.png" alt="Antonini Knives - Original Italian Blades Since 1925"></span>
+        <nav class='navTop'>
+          <span class='navTopLeft'></span>
+          <div>
+            <ul>
+              <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
+              <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a></li>
+              <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a></li>
+              <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a><!-- TODO: add cart item num --></li>
+            </ul>
+            <span class="socialBox">
+              <span class='socialIcon socialIconFacebook'><a href="http://www.facebook.com" target="_blank" title="Facebook link"></a></span><!-- TODO: get facebook name -->
+              <span class='socialIcon socialIconTwitter'><a href="http://www.twitter.com" target="_blank" title="Twitter link"></a></span><!-- TODO: get twitter name -->
+            </span>
+          </div>
+        </nav>
+        <div id="slideshowContainer" class='displayNone'>
+        <!-- <div id="slideshowNav"></div> -->
+          <ul id="wideSlideshow" class="pics slideshow">
+            <li><img src='images/home_slide_1.png'/></li>
+            <li><img src='images/home_slide_2.png'/></li>
+            <li><img src='images/home_slide_3.png'/></li>
+            <li><img src='images/home_slide_4.png'/></li>
+            <li><img src='images/home_slide_5.png'/></li>
           </ul>
-          <span class="socialBox">
-            <span class='socialIcon socialIconFacebook'><a href="http://www.facebook.com" target="_blank" title="Facebook link"></a></span><!-- TODO: get facebook name -->
-            <span class='socialIcon socialIconTwitter'><a href="http://www.twitter.com" target="_blank" title="Twitter link"></a></span><!-- TODO: get twitter name -->
-          </span>
         </div>
-      </nav>
-      <div id="slideshowContainer" class='displayNone'>
-      <!-- <div id="slideshowNav"></div> -->
-        <ul id="wideSlideshow" class="pics slideshow">
-          <li><img src='images/home_slide_1.png'/></li>
-          <li><img src='images/home_slide_2.png'/></li>
-          <li><img src='images/home_slide_3.png'/></li>
-          <li><img src='images/home_slide_4.png'/></li>
-          <li><img src='images/home_slide_5.png'/></li>
-        </ul>
+        <div class="headerInner headerInnerLeft"></div>
+        <div class="headerInner headerInnerRight"></div>
       </div>
-      <div class="headerInner headerInnerLeft"></div>
-      <div class="headerInner headerInnerRight"></div>
     </header>
     <aside class="sidebar printNo">
       <nav class="navMenu">
@@ -280,7 +284,7 @@ the homepageTemplate template is loaded into mainContentArea by default when the
     </div>
     
     <div class='homepageContent'>
-      <ul id='homeProdSearchBestSellers' class='jcarousel-skin-antoniniknives' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;'></ul>
+      <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;'></ul>
       <div class='homepageText'>
         <p class='homepageDescription' data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa. 
           Sed eleifend nonummy diam. Praesent mauris ante, elementum et, bibendum at, posuere sit amet, nibh. Duis tincidunt lectus quis dui viverra vestibulum. 
@@ -344,8 +348,8 @@ don't modify the 'data-templateid' unless you are changing template names and up
     <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList productListCategory'></ul>
   </div>
 
-  <img data-bind="var: category(%page.CAT_THUMB); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
-  <img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' />
+  <!-- <img data-bind="var: category(%page.CAT_THUMB); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
+  <!-- <img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /> -->
   <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
 
   <!-- used by wholesale -->

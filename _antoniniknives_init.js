@@ -1,6 +1,8 @@
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 
+// BUG: anythingSlider continues to run after departing
+
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
 app.rq.push(['extension',0,'store_checkout','extensions/store_checkout.js']);
@@ -17,8 +19,6 @@ app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','
 //app.rq.push(['extension',1,'bonding_buysafe','extensions/bonding_buysafe.js','startExtension']);
 //app.rq.push(['extension',1,'powerReviews','extensions/reviews_powerreviews.js','startExtension']);
 //app.rq.push(['extension',0,'magicToolBox','extensions/imaging_magictoolbox.js','startExtension']); // (not working yet - ticket in to MTB)
-
-
 
 // add tabs to product data.
 // tabs are handled this way because jquery UI tabs REALLY wants an id and this ensures unique id's between product
@@ -49,6 +49,7 @@ app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
 
 //cycle used for slideshow
 app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
+app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.min.js']);
 
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 // app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
@@ -262,6 +263,24 @@ function startSlideShow() {
   }
 }
 
+// function startSlideShow() {
+//   var $target = $('#wideSlideshow');
+//   var len = $target.children().length;
+//   var startIndex = Math.floor((Math.random()*len)+1); // random start
+//   // app.u.dump(startIndex);
+//   $(slideshow).removeClass('displayNone');
+//   if(len > 1) {
+//     $('#wideSlideshow').cycle({
+//       fx:'fade',
+//       speed:'slow',
+//       timeout: 5000,
+//       pager:'#slideshowNav',
+//       slideExpr: 'li',
+//       startingSlide: startIndex
+//     });
+//   }
+// }
+
 function defaultPage() {
   resetBanner();
   resetAllMenuProducts();
@@ -274,54 +293,121 @@ function defaultPage() {
 
 // jCarousel http://sorgalla.com/projects/jcarousel/
 
-function mycarousel_initCallback(carousel) {
-  // Disable autoscrolling if the user clicks the prev or next button.
-  carousel.buttonNext.bind('click', function() {
-      carousel.startAuto(0);
-  });
+// function mycarousel_initCallback(carousel) {
+//   // Disable autoscrolling if the user clicks the prev or next button.
+//   carousel.buttonNext.bind('click', function() {
+//       carousel.startAuto(0);
+//   });
 
-  carousel.buttonPrev.bind('click', function() {
-      carousel.startAuto(0);
-  });
+//   carousel.buttonPrev.bind('click', function() {
+//       carousel.startAuto(0);
+//   });
 
-  // Pause autoscrolling if the user moves with the cursor over the clip.
-  carousel.clip.hover(function() {
-      carousel.stopAuto();
-  }, function() {
-      carousel.startAuto();
-  });
-}
+//   // Pause autoscrolling if the user moves with the cursor over the clip.
+//   carousel.clip.hover(function() {
+//       carousel.stopAuto();
+//   }, function() {
+//       carousel.startAuto();
+//   });
+// }
 
-function startCarouselHome() {
-  var $target = $('#homeProdSearchBestSellers');
-
-  if ($target.children().length > 1) {
-    $target.jcarousel({
-      auto: 3, // Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.
-      scroll: 1,
-      // visible: 1,
-      wrap: 'both', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
-      itemFallbackDimension: 300, // has to be image size - If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
-      initCallback: mycarousel_initCallback
+function startAnythingSlider ($target, slidesAtOnce) {
+  slidesAtOnce = slidesAtOnce || false;
+  
+  if ($target.children().length > 0) {
+    $target.anythingSlider({
+      // Appearance
+      theme               : "default", // Theme name
+      mode                : "horiz",   // Set mode to "horizontal", "vertical" or "fade" (only first letter needed); replaces vertical option
+      // expand              : false,     // If true, the entire slider will expand to fit the parent element
+      // resizeContents      : true,      // If true, solitary images/objects in the panel will expand to fit the viewport
+      showMultiple        : slidesAtOnce,     // Set this value to a number and it will show that many slides at once
+      easing              : "liner",   // Anything other than "linear" or "swing" requires the easing plugin or jQuery UI
+     
+      buildArrows         : true,      // If true, builds the forwards and backwards buttons
+      buildNavigation     : true,      // If true, builds a list of anchor links to link to each panel
+      buildStartStop      : true,      // If true, builds the start/stop button
+     
+      // appendForwardTo     : null,      // Append forward arrow to a HTML element (jQuery Object, selector or HTMLNode), if not null
+      // appendBackTo        : null,      // Append back arrow to a HTML element (jQuery Object, selector or HTMLNode), if not null
+      // appendControlsTo    : null,      // Append controls (navigation + start-stop) to a HTML element (jQuery Object, selector or HTMLNode), if not null
+      // appendNavigationTo  : null,      // Append navigation buttons to a HTML element (jQuery Object, selector or HTMLNode), if not null
+      // appendStartStopTo   : null,      // Append start-stop button to a HTML element (jQuery Object, selector or HTMLNode), if not null
+     
+      // toggleArrows        : false,     // If true, side navigation arrows will slide out on hovering & hide @ other times
+      // toggleControls      : false,     // if true, slide in controls (navigation + play/stop button) on hover and slide change, hide @ other times
+     
+      // startText           : "Start",   // Start button text
+      // stopText            : "Stop",    // Stop button text
+      // forwardText         : "&raquo;", // Link text used to move the slider forward (hidden by CSS, replaced with arrow image)
+      // backText            : "&laquo;", // Link text used to move the slider back (hidden by CSS, replace with arrow image)
+      // tooltipClass        : "tooltip", // Class added to navigation & start/stop button (text copied to title if it is hidden by a negative text indent)
+     
+      // Function
+      enableArrows        : true,      // if false, arrows will be visible, but not clickable.
+      enableNavigation    : true,      // if false, navigation links will still be visible, but not clickable.
+      enableStartStop     : true,      // if false, the play/stop button will still be visible, but not clickable. Previously "enablePlay"
+      enableKeyboard      : true,      // if false, keyboard arrow keys will not work for this slider.
+     
+      // Navigation
+      // startPanel          : 1,         // This sets the initial panel
+      // changeBy            : 1,         // Amount to go forward or back when changing panels.
+      // hashTags            : true,      // Should links change the hashtag in the URL?
+      // infiniteSlides      : true,      // if false, the slider will not wrap & not clone any panels
+      // navigationFormatter : null,      // Details at the top of the file on this use (advanced use)
+      // navigationSize      : false,     // Set this to the maximum number of visible navigation tabs; false to disable
+     
+      // Slideshow options
+      autoPlay            : true,     // If true, the slideshow will start running; replaces "startStopped" option
+      autoPlayLocked      : true,     // If true, user changing slides will not stop the slideshow
+      autoPlayDelayed     : true,     // If true, starting a slideshow will delay advancing slides; if false, the slider will immediately advance to the next slide when slideshow starts
+      pauseOnHover        : true,      // If true & the slideshow is active, the slideshow will pause on hover
+      // stopAtEnd           : false,     // If true & the slideshow is active, the slideshow will stop on the last page. This also stops the rewind effect when infiniteSlides is false.
+      // playRtl             : false,     // If true, the slideshow will move right-to-left
+     
+      // Times
+      delay               : 5000,      // How long between slideshow transitions in AutoPlay mode (in milliseconds)
+      resumeDelay         : 15000,     // Resume slideshow after user interaction, only if autoplayLocked is true (in milliseconds).
+      animationTime       : 600,       // How long the slideshow transition takes (in milliseconds)
+      // delayBeforeAnimate  : 0,         // How long to pause slide animation before going to the desired slide (used if you want your "out" FX to show).
+     
+      // Callbacks
+      // onBeforeInitialize  : function(e, slider) {}, // Callback before the plugin initializes
+      // onInitialized       : function(e, slider) {}, // Callback when the plugin finished initializing
+      // onShowStart         : function(e, slider) {}, // Callback on slideshow start
+      // onShowStop          : function(e, slider) {}, // Callback after slideshow stops
+      // onShowPause         : function(e, slider) {}, // Callback when slideshow pauses
+      // onShowUnpause       : function(e, slider) {}, // Callback when slideshow unpauses - may not trigger properly if user clicks on any controls
+      // onSlideInit         : function(e, slider) {}, // Callback when slide initiates, before control animation
+      // onSlideBegin        : function(e, slider) {}, // Callback before slide animates
+      // onSlideComplete     : function(slider) {},    // Callback when slide completes; this is the only callback without an event "e" variable
+     
+      // Interactivity
+      clickForwardArrow   : "click",         // Event used to activate forward arrow functionality (e.g. add jQuery mobile's "swiperight")
+      clickBackArrow      : "click",         // Event used to activate back arrow functionality (e.g. add jQuery mobile's "swipeleft")
+      clickControls       : "click focusin", // Events used to activate navigation control functionality
+      clickSlideshow      : "click",         // Event used to activate slideshow play/stop button
+      allowRapidChange    : false            // If true, allow rapid changing of the active pane, instead of ignoring activity during animation
+     
+      // Video
+      // resumeOnVideoEnd    : true,      // If true & the slideshow is active & a supported video is playing, it will pause the autoplay until the video is complete
+      // resumeOnVisible     : true,      // If true the video will resume playing (if previously paused, except for YouTube iframe - known issue); if false, the video remains paused.
+      // addWmodeToObject    : "opaque",  // If your slider has an embedded object, the script will automatically add a wmode parameter with this setting
+      // isVideoPlaying      : function(base){ return false; } // return true if video is playing or false if not - used by video extension
     });
   }
 }
 
-function startCarouselProduct(parentID) {
-  var $target = $('#' + parentID + ' .productListProductExtras');
+function stopAnythingSlider() {
+  $('.anythingSlider').data('AnythingSlider').startStop(false);
+}
 
-  if ($target.children().length > 3) {
-    $target.jcarousel({
-      auto: 3, // Specifies how many seconds to periodically autoscroll the content. If set to 0 (default) then autoscrolling is turned off.
-      scroll: 1,
-      // start: 1,
-      // offset: 1,
-      // visible: 1,
-      wrap: 'both', // Specifies whether to wrap at the first/last item (or both) and jump back to the start/end. Options are "first", "last", "both" or "circular" as string. If set to null, wrapping is turned off (default).
-      // itemFallbackDimension: 230, // If, for some reason, jCarousel can not detect the width of an item, you can set a fallback dimension (width or height, depending on the orientation) here to ensure correct calculations.
-      initCallback: mycarousel_initCallback
-    });
-  }
+function startSliderHomeBestSellers() {
+  startAnythingSlider($('#homeProdSearchBestSellers'));
+}
+
+function startSliderProductExtras(parentID) {
+  startAnythingSlider($('#' + parentID + ' .productListProductExtras'), 3);
 }
 
 function addLink(parent, tag, navcat) {
@@ -333,21 +419,22 @@ function addLink(parent, tag, navcat) {
 /// homepage \\\
 app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   defaultPage();
-  startCarouselHome();
+  startSliderHomeBestSellers();
 
   // add links to category logos
-  addLink(P.parentID, classLogoCategoryBoat, categoryBoat);
-  addLink(P.parentID, classLogoCategoryCable, categoryCable);
-  addLink(P.parentID, classLogoCategoryFarm, categoryFarm);
-  addLink(P.parentID, classLogoCategoryPocket, categoryPocket);
-  addLink(P.parentID, classLogoCategorySos, categorySos);
-  addLink(P.parentID, classLogoCategoryPromo, categoryPromo);
+  addLink(P.parentID, classLogoCategoryBoat,    categoryBoat);
+  addLink(P.parentID, classLogoCategoryCable,   categoryCable);
+  addLink(P.parentID, classLogoCategoryFarm,    categoryFarm);
+  addLink(P.parentID, classLogoCategoryPocket,  categoryPocket);
+  addLink(P.parentID, classLogoCategorySos,     categorySos);
+  addLink(P.parentID, classLogoCategoryPromo,   categoryPromo);
 
   // add hover to carousel
   $('#' + P.parentID + ' .prodThumbContainer' + ' .productAttribute').hide();
-  $('#' + P.parentID + ' .prodThumbContainer').hover(function (){
+  $('#' + P.parentID + ' .prodThumbContainer:not(.bound)').addClass('bound').hover(function (){
     $(this).toggleClass('categoryProductHover', function () {
       $(this).children('.productAttribute').slideToggle();
+      // app.u.dump('binding');
     });
   });
 
@@ -359,6 +446,8 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
 
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   $(logoCategory).removeClass("displayNone");
+  // $('#' + P.parentID + ' .prodThumbContainer').unbind();
+  // app.u.dump('unbinding');
   // $(sidebar).removeClass(sidebarHome);
   // $(wholesaleInfo).addClass("displayNone");
 }]);
@@ -476,7 +565,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   });
 
   // carousels
-  startCarouselProduct(P.parentID);
+  startSliderProductExtras(P.parentID);
 
   switch(currentCategory) {
     case categoryBoat:
@@ -513,6 +602,11 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
       defaultPage();
   }
 }]);
+
+// app.rq.push(['templateFunction', 'productTemplate', 'onDeparts', function () {
+//   app.u.dump('leaving product');
+//   stopAnythingSlider();
+// }]);
 
 ///// end custom \\\\\
 
