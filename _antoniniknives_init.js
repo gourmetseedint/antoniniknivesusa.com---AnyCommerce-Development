@@ -457,7 +457,7 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
 
   // add hover class to category logos
   $('#' + P.parentID + ' .logoCategoryHome').hover(function () {
-    $(this).toggleClass('categoryProductHover');
+    $(this).toggleClass('categoryListHover categoryLogoHover');
   });
 }]);
 
@@ -472,16 +472,33 @@ app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
 
 /// company \\\
 app.rq.push(['templateFunction','companyTemplate','onCompletes',function(P) {
+  // app.u.dump('on company');
   defaultPage();
 }]);
 
 /// customer \\\
 app.rq.push(['templateFunction','customerTemplate','onCompletes',function(P) {
+  // app.u.dump('on customer');
   defaultPage();
+}]);
+
+/// search \\\
+app.rq.push(['templateFunction','searchTemplate','onCompletes',function(P) {
+  app.u.dump($('.product').length);
+  // app.u.dump('on search');
+  defaultPage();
+
+  // add hover class to products
+  // does not work for search results
+  // $('#'+P.parentID+' '+'.product').hover(function() {
+  //   app.u.dump('hover');
+  //   $(this).toggleClass('categoryProductHover');
+  // });
 }]);
 
 ///// categories \\\\\
 app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
+  // app.u.dump('on category');
   // resets
   resetBanner();
   resetCategoryLogo();

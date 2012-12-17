@@ -3,19 +3,17 @@
 <head>
 <meta charset="utf-8">
 
-<!-- TODO: get search form to work -->
+<!-- TODO: search - add pagination -->
 <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
 <!-- BUG: bottom pagination drop down hidden, because container has overflow: hidden -->
-<!-- TODO: add optional product fields -->
+<!-- TODO: adds optional product fields -->
 <!-- TODO: 'Tell a friend' should send a email with link to product -->
-<!-- TODO: add pdf catalogs -->
 <!-- TODO: add images to promo -->
-<!-- TODO: One minor alignment issue: is it possible to have the 'wholesale' box at bottom left and the left menu box match in width? -->
 <!-- BUG: product reviews, shows apppreview and adds another set of tier1cats -->
 <!-- TODO: IE compatibility -->
 <!-- TODO: add gsi, testimonials categories to company layout -->
 <!-- TODO: change carousel arrows -->
-<!-- do not populate or add meta data or title, the SEO layer will add it -->
+<!-- TODO: add sub cat products to related products list -->
 
 <title>Antonini Knives USA</title>
 
@@ -34,7 +32,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121217112413",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121217144842",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -141,7 +139,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         <form name='headerSearchFrm' action='#' class='productSearchForm' method="get">
           <fieldset>
           <!-- <legend>Search</legend> -->
-          <input type='search' name='KEYWORDS' value='Enter Search Term' class="productSearchKeyword handleDefault" />
+          <input type='search' name='KEYWORDS' value='Find Products...' class="productSearchKeyword handleDefault" />
           </fieldset>
           <input class="search" type="submit" value="" />
         </form>
@@ -561,14 +559,15 @@ the loadingBG class is removed (must be that classname) when the template is tra
 remember to NOT put the button inside the 'onclick' container or two events will occur onclick.
 -->
 <li id='productListTemplateResults' class='loadingBG  ' >
-  <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
+  <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" onMouseOver="$(this).addClass('categoryProductHover')" onMouseLeave="$(this).removeClass('categoryProductHover')" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer product'>
     <div class='prodThumbContainer'>
-    <img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;bgcolor:ffffff;' width='120' height='120' />
+      <h5 class='productAttribute productName'><span data-bind='var: product(prod_name); format:text;'></span></h5>
+      <img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;bgcolor:ffffff;' />
+      <div class="productAttribute viewProductLink"><span>View Product</span></div>
     </div>
     
-    <h5 data-bind='var: product(prod_name); format:text;'></h5>
+    <!-- <h6 data-bind='var: product(base_price); format:elasticMoney; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6> -->
   
-    <h6 data-bind='var: product(base_price); format:elasticMoney; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6>
   </div>
 </li>
 
@@ -1259,7 +1258,7 @@ onclicks are recursive, so only add it to the parent element.
 -->
 
 <div id='mpControlSpec' class='mpControlContainer'>
-  <div class='mpControls ui-widget ui-state-default ui-corner-top'>
+  <div class='mpControls ui-widget ui-state-default ui-corner-all'>
 
 <span class="mpControlsPagination ui-state-active ui-corner-all floatRight paging pointer" data-role='next' title="next page">
   <span class="ui-icon ui-icon-circle-triangle-e"></span>

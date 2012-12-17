@@ -196,6 +196,9 @@ a:active {
       .mpControls ul li ul li {
         padding: 0.2em; }
 
+.ui-widget-content a:link, .ui-widget-content a:hover, .ui-widget-content a:visited, .ui-widget-content a:active {
+  color: inherit; }
+
 .shadowBottomOuter, .footerBoxesWrapper {
   -webkit-box-shadow: 0 3px 3px 2px #999;
   -moz-box-shadow: 0 3px 3px 2px #999;
@@ -311,7 +314,8 @@ header {
   top: 0;
   right: 50px;
   z-index: 55;
-  color: #222222; }
+  color: #222222;
+  font-weight: bold; }
   .navTop div {
     padding: 0 8px;
     height: 100%;
@@ -406,8 +410,7 @@ header {
   top: -35px;
   margin-bottom: -35px;
   margin-right: 10px;
-  margin-left: 50px;
-  background: #101010; }
+  margin-left: 50px; }
   .sidebar a:link, .sidebar a:visited {
     color: white;
     text-decoration: none; }
@@ -418,7 +421,8 @@ header {
 .navMenu {
   width: 200px;
   padding: 12px;
-  color: white; }
+  color: white;
+  background: #101010; }
   .navMenu h2 {
     margin: 1em 0 0.5em;
     padding: 0;
@@ -552,7 +556,7 @@ header {
 
 .wholesaleInfo {
   margin: 10px auto 0;
-  background: url("images/wholesale_bg.png") no-repeat;
+  background: #101010 url("images/wholesale_bg.png") no-repeat;
   background-size: cover;
   font-size: 14px;
   text-align: center;
@@ -922,13 +926,22 @@ footer {
 .content .productListCategory {
   padding-top: 10px; }
 
+.productListWrapper {
+  margin-bottom: 40px; }
+
 .categoryProductHover, .categoryListHover {
-  color: #383838;
+  color: #383838; }
+  .categoryProductHover h5, .categoryListHover h5 {
+    color: #383838; }
+  .categoryProductHover img, .categoryListHover img {
+    zoom: 1;
+    filter: alpha(opacity=80);
+    opacity: 0.8; }
+
+.categoryLogoHover {
   zoom: 1;
   filter: alpha(opacity=80);
   opacity: 0.8; }
-  .categoryProductHover h5, .categoryListHover h5 {
-    color: #383838; }
 
 .prodThumbContainer {
   position: relative;
@@ -950,7 +963,7 @@ footer {
     font-weight: bold;
     text-transform: uppercase;
     background-color: white;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.8);
     background-image: url("images/arrow_cat.png");
     background-repeat: no-repeat;
     background-size: 0.6em;
