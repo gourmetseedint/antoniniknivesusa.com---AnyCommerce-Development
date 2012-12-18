@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 
-<!-- TODO: search - add pagination -->
 <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
 <!-- BUG: bottom pagination drop down hidden, because container has overflow: hidden -->
 <!-- TODO: adds optional product fields -->
@@ -14,6 +13,8 @@
 <!-- TODO: add gsi, testimonials categories to company layout -->
 <!-- TODO: change carousel arrows -->
 <!-- TODO: add sub cat products to related products list -->
+<!-- QUE: how do products recieve IS_BESTSELLER? automatic? -->
+<!-- TODO: add images to sub categories -->
 
 <title>Antonini Knives USA</title>
 
@@ -32,7 +33,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121217194159",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121217203250",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",

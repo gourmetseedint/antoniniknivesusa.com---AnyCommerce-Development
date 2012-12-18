@@ -914,6 +914,8 @@ footer {
 .content .subCategoryList h5, .content .subCategoryList p {
   padding-bottom: 0;
   margin-bottom: 0; }
+.content .subCategoryList h5 {
+  font-weight: bold; }
 .content .subCategoryList .subCategory {
   height: 100%;
   display: block; }
