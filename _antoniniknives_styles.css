@@ -123,11 +123,11 @@ a:active {
   color: blue; }
 
 /* General */
-.clearfixScss, .container, .productSpecsContainer, .productSpecsMiddle {
+.clearfixScss, .container, .categoryDescription div, .productSpecsContainer, .productSpecsMiddle {
   clear: both;
   overflow: hidden; }
 
-.clearfixScss:after, .container:after, .productSpecsContainer:after, .productSpecsMiddle:after {
+.clearfixScss:after, .container:after, .categoryDescription div:after, .productSpecsContainer:after, .productSpecsMiddle:after {
   content: ".";
   display: block;
   height: 0;
@@ -989,6 +989,19 @@ footer {
   margin: 10px 0;
   font-size: 1.4em;
   line-height: 1.5em; }
+
+.categoryDescription p {
+  font-size: 1.6em; }
+.categoryDescription div {
+  margin-bottom: 1em; }
+
+.categoryImageEven {
+  float: left;
+  margin-right: 8px; }
+
+.categoryImageOdd {
+  float: right;
+  margin-left: 8px; }
 
 /* Product */
 .productSpecsContainer {

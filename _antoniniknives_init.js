@@ -44,7 +44,7 @@ app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making tex
 app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
 
 // json data
-app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
+// app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
 app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
 
 //cycle used for slideshow
@@ -198,13 +198,18 @@ function getPdfLinks() {
   var directory = pdfDirectory || '';
   var name;
   var value;
-  for(var key in pdfData) {
-    name = getPretty(key);
-    link  = name + ' PDF Catalog';
-    value = pdfData[key];
-    if (value) {
-      page += "<p><a title='" + link + "' href='" + directory + value + "'>" + name + "</a></p>";
+  if(typeof pdfData != 'undefined') {
+    for(var key in pdfData) {
+      name = getPretty(key);
+      link  = name + ' PDF Catalog';
+      value = pdfData[key];
+      if (value) {
+        page += "<p><a title='" + link + "' href='" + directory + value + "'>" + name + "</a></p>";
+      }
     }
+  }else {
+    app.u.dump('Warining: pdfData is missing.');
+    page = '';
   }
   return page;
 }

@@ -49,7 +49,7 @@ var antoniniknives_extension = function() {
         return value;
       },
 
-      fixHiddenPretty : function(pretty) {
+      fixHiddenPretty : function (pretty) {
         var temp = pretty;
         if (temp.charAt(0) == ('!')) {
           temp = temp.replace(/!/, '');
@@ -57,15 +57,55 @@ var antoniniknives_extension = function() {
         return temp;
       },
 
-      getPretty : function(navcat) {
+      getPretty : function (navcat) {
         if (app.data['appCategoryDetail|' + navcat] && app.data['appCategoryDetail|' + navcat]['pretty']) {
           return r.vars.catPrettyNames[navcat] || (r.vars.catPrettyNames[navcat] = r.vars.fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '');
         }else {
           app.u.dump("Warning: pretty name for " + navcat + " not found.");
           return '';
         }
+      },
+      
+      getCategoryDescription : function (navcat) {
+        var description = '';
+        var image;
+        var paragraph;
+        var imageClass = '';
+        var imageDirectory;
+        if(typeof catData != 'undefined') {
+          imageDirectory = catData.imageDirectory || '';
+
+          if (navcat && catData[navcat]) {
+            for (var i = 0; i < catData[navcat].length; i++) {
+              // iterates for array and adds image and description if they exist
+              description += "<div>";
+              image     = catData[navcat][i].image;
+              paragraph = catData[navcat][i].paragraph;
+
+              if (image) {
+                if (i % 2 === 0) {
+                  imageClass = 'categoryImageEven';
+                } else{
+                  imageClass = 'categoryImageOdd';
+                }
+                description += "<img class='categoryImage " + imageClass +"' alt='Category Image' src='" + imageDirectory + image + "'></img>";
+              }
+
+              if (paragraph) {
+                description += "<p>" + paragraph + "</p>";
+              }
+
+              description += "</div>";
+            }
+          }else {
+            app.u.dump("Warning: catData entry is missing for:" + (navcat || ''));
+          }
+        }else {
+          app.u.dump("Warning: catData is undefined");
+        }
+
+        return description;
       }
-      // forgetmeContainer : {} //used to store an object of pids (key) for items that don't show in the prodlist. value can be app specific. TS makes sense.
     },
 
     calls : {}, //calls
@@ -75,7 +115,8 @@ var antoniniknives_extension = function() {
       init : {
         onSuccess : function() {
           // app.u.dump('antoniniknives_extension callback success');
-          // app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
+          app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
+          app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_catData.js']);
           return true;  //currently, there are no config or extension dependencies, so just return true. may change later.
         },
         onError : function() {
@@ -183,6 +224,26 @@ var antoniniknives_extension = function() {
 
       hiddenPrettyFixed : function ($tag, data) {
         $tag.text(r.vars.fixHiddenPretty(data.value));
+      },
+
+      specialCategoryData : function ($tag, data) {
+        var promo = '.promo_-_customizing';
+        var aboutGsi = '.about_gsi_distributing';
+        var currentCategory = data.value; // expects category navcat id
+        var description = '';
+
+        switch(currentCategory) {
+          case promo:
+            app.u.dump('got promo');
+            description = r.vars.getCategoryDescription(promo);
+            break;
+          case aboutGsi:
+            app.u.dump('got about');
+            description = r.vars.getCategoryDescription(aboutGsi);
+            break;
+        }
+
+        $tag.html(description);
       }
     } // renderformats
   }; //r object.

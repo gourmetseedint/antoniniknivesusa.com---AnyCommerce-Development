@@ -32,7 +32,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121217144842",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121217194159",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -326,12 +326,14 @@ don't modify the 'data-templateid' unless you are changing template names and up
   <div class='breadcrumbContainer'>
     <ul class='breadcrumb' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
   </div>
+
+  <div data-bind="var:category(id); format:specialCategoryData; extension:antoniniknives_extension;" class="categoryDescription"></div>
   
-  <div data-bind='var:category(%page.description); format:showIfSet;' class='displayNone'>
-    <p data-bind='var:category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p>
+  <!-- <div data-bind='var:category(%page.description); format:showIfSet;' class='displayNone'> -->
+    <!-- <p data-bind='var:category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p> -->
     <!-- TODO: edit images for special categories -->
-    <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
-  </div>
+    <!-- <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
+  <!-- </div> -->
   
   <!-- used by category, shows list of subcats -->
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>
@@ -345,7 +347,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
   <!-- <img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /> -->
   <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
 
-  <!-- used by wholesale -->
+  <!-- used by wholesale TODO: move to static -->
   <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactForm contactFormWholesale'>
     <fieldset>
       <legend>Acquire Wholesale Information</legend>

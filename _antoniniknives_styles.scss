@@ -1714,6 +1714,26 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
 //   top: 40px;
 // }
 
+.categoryDescription {
+  p {
+    font-size: 1.6em;
+  }
+  div {
+    margin-bottom: 1em;
+    @extend .clearfixScss;
+  }
+}
+
+.categoryImageEven {
+  float: left;
+  margin-right: 8px;
+}
+
+.categoryImageOdd {
+  float: right;
+  margin-left: 8px;
+}
+
 /* Product */
 
 // product specs
