@@ -33,7 +33,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121218000214",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121218120332",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -149,10 +149,10 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         </form>
         <h2>Products</h2>
         <ul id="tier1categories"></ul><!-- BUG: tier1 not working -->
-        <a href="#category?navcat=.pdf-catalogs" class='bindByAnchor' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a>
+        <a href="#category?navcat=.pdf-catalogs" class='bindByAnchor navMenuLink' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a>
       </nav>
       <div class='wholesaleInfo'>
-        <a href="#category?navcat=.wholesale" class='bindByAnchor' title='Wholesale Info'>
+        <a href="#category?navcat=.wholesale" class='bindByAnchor navMenuLink' title='Wholesale Info'>
           <span class='wholesaleInfoTop'><strong>Retailer?</strong><br/>Wholesale Available</span>
           <span class='wholesaleInfoBottom'>for Pricing and Availability<br/><strong>Click here &gt;&gt;</strong></span>
         </a>
@@ -332,11 +332,9 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
   <div data-bind="var:category(id); format:specialCategoryData; extension:antoniniknives_extension;" class="categoryDescription"></div>
   
-  <!-- <div data-bind='var:category(%page.description); format:showIfSet;' class='displayNone'> -->
-    <!-- <p data-bind='var:category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p> -->
-    <!-- TODO: edit images for special categories -->
-    <!-- <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
-  <!-- </div> -->
+  <div data-bind='var:category(%page.description); format:showIfSet;' class='displayNone'>
+    <p data-bind='var:category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p>
+  </div>
   
   <!-- used by category, shows list of subcats -->
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>
@@ -348,7 +346,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
   <!-- <img data-bind="var: category(%page.CAT_THUMB); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
   <!-- <img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /> -->
-  <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
+  <!-- <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
 
   <!-- used by wholesale TODO: move to static -->
   <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactForm contactFormWholesale'>

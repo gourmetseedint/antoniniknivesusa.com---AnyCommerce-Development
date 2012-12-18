@@ -8,7 +8,7 @@
 $width_page: 1120px;
 $width_menu: 200px;
 $width_menu_left_margin: 50px;
-$width_menu_right_margin: 10px;
+$width_menu_right_margin: 20px;
 $width_menu_padding: 12px;
 $width_content: $width_page - ($width_menu + $width_menu_left_margin + $width_menu_right_margin + 2 * $width_menu_padding);
 
@@ -59,8 +59,8 @@ $color_navMenuSubHover_text: darken($color_menu_text, 20%);
 $color_navMenuSubHover_bg: darken($color_menu_product_bg, 20%);
 // $color_navMenuSubActive: #156F15;
 // $color_navMenuSubActive: #15676F;
-// $color_menu_a: white;
-// $color_menu_a_hover: #999;
+$color_menu_a: white;
+$color_menu_a_hover: #999;
 
 
 $color_footer_border: black;
@@ -627,6 +627,10 @@ $width_headerInner: 90px;
   margin: 0;
   .anythingControls a {
     background: $anythingSlider_border url(AnythingSlider/default.png) center -288px repeat-x;
+    &.start-stop, &.start-stop.playing {
+      // /* start-stop button, playing, default state */
+      background-color: $anythingSlider_border !important;
+    }
   }
   .anythingWindow {
     border: 1px solid $anythingSlider_border;
@@ -638,18 +642,18 @@ $width_headerInner: 90px;
   &.activeSlider {
      // Navigation current & hovered button, active state
     .anythingControls a {
-      background-color: $anythingSlider_inactive;
+      background-color: $anythingSlider_inactive !important;
       &.cur, &:hover {
         background: $anythingSlider_border;
       }
       &.start-stop {
       // /* start-stop button, stopped, active state */
-        background-color: $anythingSlider_inactive;
-        color: #068500;
+        background-color: $anythingSlider_inactive !important;
+        color: #068500 !important;
         &.playing {
           // /* start-stop button, playing, active state */
-          background-color: $anythingSlider_inactive;
-          color: #B90007;
+          background-color: $anythingSlider_inactive !important;
+          color: #B90007 !important;
         }
         &:hover, &.hover {
           //start-stop button, active slider hovered text color (when visible) */
@@ -658,13 +662,6 @@ $width_headerInner: 90px;
       }
     }
   }
-
-/* start-stop button, playing, default state */
-.anythingSlider-default .anythingControls {
-  a.start-stop, a.start-stop.playing {
-    background-color: $anythingSlider_border;
-  }
-}
 
   // .anythingSlider-default.activeSlider .anythingControls a.start-stop {
   //   background-color: #080;
@@ -949,6 +946,22 @@ $menuOffset: -35px;
   }
 }
 
+a.navMenuLink {
+  &:link {
+    color: $color_menu_a;
+    text-decoration: none;
+  }
+  &:hover {
+    color: $color_menu_a_hover;
+  }
+  &:visited {
+    color: $color_menu_a;
+  }
+  &:active {
+    color: $color_menu_a_hover;
+  }
+}
+
 // move sidebar down to not overlap home banner
 .sidebarHome {
   top: $menuOffset + 30px;
@@ -1081,18 +1094,18 @@ $pdfIconSize: 20px;
   }
   a {
     display: block;
-    &:link {
-      color: white;
-    }
-    &:hover {
-      color: gray;
-    }
-    &:visited {
-      color: white;
-    }
-    &:active {
-      color: gray;
-    }
+    // &:link {
+    //   color: white;
+    // }
+    // &:hover {
+    //   color: gray;
+    // }
+    // &:visited {
+    //   color: white;
+    // }
+    // &:active {
+    //   color: gray;
+    // }
   }
 }
 

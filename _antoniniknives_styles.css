@@ -278,27 +278,26 @@ header {
     height: 300px; }
 
 .anythingSlider-default {
-  margin: 0;
-  /* start-stop button, playing, default state */ }
+  margin: 0; }
   .anythingSlider-default .anythingControls a {
     background: #cdcdcd url(AnythingSlider/default.png) center -288px repeat-x; }
+    .anythingSlider-default .anythingControls a.start-stop, .anythingSlider-default .anythingControls a.start-stop.playing {
+      background-color: #cdcdcd !important; }
   .anythingSlider-default .anythingWindow {
     border: 1px solid #cdcdcd;
     border-width: 0; }
   .anythingSlider-default.activeSlider .anythingWindow {
     border-color: #cdcdcd; }
   .anythingSlider-default.activeSlider .anythingControls a {
-    background-color: #9a9a9a; }
+    background-color: #9a9a9a !important; }
     .anythingSlider-default.activeSlider .anythingControls a.cur, .anythingSlider-default.activeSlider .anythingControls a:hover {
       background: #cdcdcd; }
     .anythingSlider-default.activeSlider .anythingControls a.start-stop {
-      background-color: #9a9a9a;
-      color: #068500; }
+      background-color: #9a9a9a !important;
+      color: #068500 !important; }
       .anythingSlider-default.activeSlider .anythingControls a.start-stop.playing {
-        background-color: #9a9a9a;
-        color: #B90007; }
-  .anythingSlider-default .anythingSlider-default .anythingControls a.start-stop, .anythingSlider-default .anythingSlider-default .anythingControls a.start-stop.playing {
-    background-color: #cdcdcd; }
+        background-color: #9a9a9a !important;
+        color: #B90007 !important; }
   .anythingSlider-default .arrow a {
     background: url(AnythingSlider/default.png) no-repeat; }
   .anythingSlider-default .back a {
@@ -414,7 +413,7 @@ header {
   z-index: 98;
   top: -35px;
   margin-bottom: -35px;
-  margin-right: 10px;
+  margin-right: 20px;
   margin-left: 50px; }
   .sidebar a:link, .sidebar a:visited {
     text-decoration: none; }
@@ -474,6 +473,16 @@ header {
           color: inherit; }
         .navMenu ul li ul li a:active {
           color: #222222; }
+
+a.navMenuLink:link {
+  color: white;
+  text-decoration: none; }
+a.navMenuLink:hover {
+  color: #999999; }
+a.navMenuLink:visited {
+  color: white; }
+a.navMenuLink:active {
+  color: #999999; }
 
 .sidebarHome {
   top: -5px;
@@ -568,14 +577,6 @@ header {
     display: block; }
   .wholesaleInfo a {
     display: block; }
-    .wholesaleInfo a:link {
-      color: white; }
-    .wholesaleInfo a:hover {
-      color: gray; }
-    .wholesaleInfo a:visited {
-      color: white; }
-    .wholesaleInfo a:active {
-      color: gray; }
 
 .wholesaleInfoTop {
   height: 75px;
@@ -601,7 +602,7 @@ header {
 /* Content */
 .content {
   /*vertical-align: top;*/
-  width: 836px;
+  width: 826px;
   display: inline-block;
   /*padding-left: 10px;*/
   position: relative;
@@ -1175,7 +1176,7 @@ footer {
   display: inline-block;
   vertical-align: top;
   color: #454545;
-  width: 464px;
+  width: 454px;
   height: 100%; }
 
 .productDetailsList {
