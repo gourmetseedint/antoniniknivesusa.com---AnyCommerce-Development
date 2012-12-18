@@ -416,9 +416,7 @@ function stopSliderHomeBestSellers() {
 }
 
 function startSliderProductExtras(parentID) {
-  $('#' + parentID + ' .productListProductExtras').each(function () {
-    startAnythingSlider($(this), 4);
-  });
+  startAnythingSlider($('#' + parentID + ' .productListProductExtras'), 4);
 }
 
 function stopSliderProductExtras(parentID) {
@@ -611,15 +609,16 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
     $(currentSubListItem).addClass('navMenuSubActive');
   }
 
-  // add hover class to products
+  // carousels
+  startSliderProductExtras(P.parentID);
+
+  // add hover class to products - broken by slider
   $('#' + P.parentID + ' ' + '.product' + ' ' + '.productAttribute').hide();
   $('#'+P.parentID+' '+'.product').hover(function() {
     $(this).toggleClass('categoryProductHover');
     $(this).children().children('.productAttribute').slideToggle();
   });
 
-  // carousels
-  startSliderProductExtras(P.parentID);
 
   switch(currentCategory) {
     case categoryBoat:

@@ -15,6 +15,7 @@
 <!-- QUE: how do products recieve IS_BESTSELLER? automatic? -->
 <!-- TODO: add images to sub categories -->
 <!-- BUG: reviews box expands height if slider -->
+<!-- TODO: browser tab thumb -->
 
 <title>Antonini Knives USA</title>
 
@@ -33,7 +34,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121218120332",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121218155057",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -564,7 +565,7 @@ remember to NOT put the button inside the 'onclick' container or two events will
 <li id='productListTemplateResults' class='loadingBG  ' >
   <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" onMouseOver="$(this).addClass('categoryProductHover')" onMouseLeave="$(this).removeClass('categoryProductHover')" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer product'>
     <div class='prodThumbContainer'>
-      <h5 class='productAttribute productName'><span data-bind='var: product(prod_name); format:text;'></span></h5>
+      <h5 class='productAttribute productName'><span data-bind='var:product(prod_name); format:text;'></span></h5>
       <img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;bgcolor:ffffff;' />
       <div class="productAttribute viewProductLink"><span>View Product</span></div>
     </div>
@@ -576,7 +577,7 @@ remember to NOT put the button inside the 'onclick' container or two events will
 
 <li id='productListHomepageTemplateResults' class='loadingBG' >
   <div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbContainer pointer'>
-    <h5 class='productAttribute productName'><span data-bind='var: product(zoovy:prod_name); format:text;'></span></h5>
+    <h5 class='productAttribute productName'><span data-bind='var: product(prod_name); format:text;'></span></h5>
     <img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;' />
     <div class="productAttribute viewProductLink"><span>View Product</span></div>
   </div>
@@ -681,8 +682,8 @@ this will likely become more flexible in the future. ###
   </div>
 
   <div class="productExtras">
-    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h4>Accessories</h4>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
-    <div data-bind="var: product(zoovy:related_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h4>Variants</h4>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
+    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListAccessories' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h4>Accessories</h4>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
+    <ul class='productList productListProductExtras productListVariants' data-bind="var: product(user:prod_primary_cat); format:subcatProductList; extension:antoniniknives_extension; loadsTemplate:productListTemplate; before:<h4>Variants</h4>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul>
   </div>
 
   <!--

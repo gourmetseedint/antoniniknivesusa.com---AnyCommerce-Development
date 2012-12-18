@@ -7,6 +7,11 @@ var antoniniknives_extension = function() {
     vars : {
       catPrettyNames : {},
 
+      subcatProducts : {},
+
+      getSubcatProducts : function (navcat) {
+      },
+
       getPeriodCount : function(value) {
         // tells you if navcat is for a category or sub
         return (value.split(/[.]/) || '').length - 1;
@@ -58,11 +63,21 @@ var antoniniknives_extension = function() {
       },
 
       getPretty : function (navcat) {
-        if (app.data['appCategoryDetail|' + navcat] && app.data['appCategoryDetail|' + navcat]['pretty']) {
-          return r.vars.catPrettyNames[navcat] || (r.vars.catPrettyNames[navcat] = r.vars.fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '');
+        var temp;
+        if (typeof r.vars.catPrettyNames != 'undefined') {
+          temp = r.vars.catPrettyNames[navcat];
+          if (temp) {
+            // app.u.dump('using cached pretty');
+            return temp;
+          }else if (app.data['appCategoryDetail|' + navcat] && (temp = app.data['appCategoryDetail|' + navcat]['pretty'])) {
+            // app.u.dump('getting pretty');
+            return (r.vars.catPrettyNames[navcat] = r.vars.fixHiddenPretty(temp) || '');
+          }else {
+            app.u.dump("Warning: pretty name for " + navcat + " not found.");
+            return '';
+          }
         }else {
-          app.u.dump("Warning: pretty name for " + navcat + " not found.");
-          return '';
+          app.u.dump("Warning: catPrettyNames is undefined");
         }
       },
       
@@ -72,38 +87,36 @@ var antoniniknives_extension = function() {
         var paragraph;
         var imageClass = '';
         var imageDirectory;
-        if(typeof catData != 'undefined') {
-          imageDirectory = catData.imageDirectory || '';
 
-          if (navcat && catData[navcat]) {
-            for (var i = 0; i < catData[navcat].length; i++) {
-              // iterates for array and adds image and description if they exist
-              description += "<div>";
-              image     = catData[navcat][i].image;
-              paragraph = catData[navcat][i].paragraph;
-
-              if (image) {
-                if (i % 2 === 0) {
-                  imageClass = 'categoryImageEven';
-                } else{
-                  imageClass = 'categoryImageOdd';
+        if (navcat) {
+          if(typeof catData != 'undefined') {
+            imageDirectory = catData.imageDirectory || '';
+            if (catData[navcat]) {
+              for (var i = 0; i < catData[navcat].length; i++) {
+                // iterates for array and adds image and description if they exist
+                description += "<div>";
+                image     = catData[navcat][i].image;
+                paragraph = catData[navcat][i].paragraph;
+                if (image) {
+                  if (i % 2 === 0) {
+                    imageClass = 'categoryImageEven';
+                  } else{
+                    imageClass = 'categoryImageOdd';
+                  }
+                  description += "<img class='categoryImage " + imageClass +"' alt='Category Image' src='" + imageDirectory + image + "'></img>";
                 }
-                description += "<img class='categoryImage " + imageClass +"' alt='Category Image' src='" + imageDirectory + image + "'></img>";
+                if (paragraph) {
+                  description += "<p>" + paragraph + "</p>";
+                }
+                description += "</div>";
               }
-
-              if (paragraph) {
-                description += "<p>" + paragraph + "</p>";
-              }
-
-              description += "</div>";
+            }else {
+              app.u.dump("Warning: catData entry is missing for:" + (navcat || ''));
             }
           }else {
-            app.u.dump("Warning: catData entry is missing for:" + (navcat || ''));
+            app.u.dump("Warning: catData is undefined");
           }
-        }else {
-          app.u.dump("Warning: catData is undefined");
         }
-
         return description;
       }
     },
@@ -244,6 +257,23 @@ var antoniniknives_extension = function() {
         }
 
         $tag.html(description);
+      },
+
+      subcatProductList : function($tag,data) {
+        // app.u.dump("BEGIN store_prodlist.renderFormats.productList");
+        // app.u.dump(" -> data.bindData: "); app.u.dump(data.bindData);
+        var navcat = data.value;
+        var productList = r.vars.getValueFromSubcatData(navcat, 'products');
+        // app.u.dump(navcat);
+        // app.u.dump([productList]);
+
+        if(app.u.isSet(productList)) {
+          data.bindData.csv = productList;
+          app.ext.store_prodlist.u.buildProductList(data.bindData,$tag);
+          $tag.show();
+        }else {
+          $tag.parent('div').hide();
+        }
       }
     } // renderformats
   }; //r object.
