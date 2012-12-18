@@ -20,23 +20,6 @@ app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','
 //app.rq.push(['extension',1,'powerReviews','extensions/reviews_powerreviews.js','startExtension']);
 //app.rq.push(['extension',0,'magicToolBox','extensions/imaging_magictoolbox.js','startExtension']); // (not working yet - ticket in to MTB)
 
-// add tabs to product data.
-// tabs are handled this way because jquery UI tabs REALLY wants an id and this ensures unique id's between product
-app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
- var safePID = app.u.makeSafeHTMLId(P.pid); //can't use jqSelector because productTEmplate_pid still used makesafe. planned Q1-2012 update ###
- var $tabContainer = $( ".tabbedProductContent",$('#productTemplate_'+safePID));
- if($tabContainer.data("tabs")){} //tabs have already been instantiated. no need to be redundant.
- else {
-   $(".tabs li a",$tabContainer).each(function (index) {
-     $(this).attr("href", "#spec_"+safePID+"_" + index.toString());
-   });
-   $("div.tabContent",$tabContainer).each(function (index) {
-     $(this).attr("id", "spec_"+safePID+"_" + index.toString());
-   });
-   $tabContainer.tabs();
- }
-}]);
-
 app.rq.push(['script',0,(document.location.protocol == 'file:') ? app.vars.httpURL+'jquery/config.js' : app.vars.baseURL+'jquery/config.js']); //The config.js is dynamically generated.
 app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){return (typeof zoovyModel == 'function') ? true : false;}}
 app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
@@ -44,7 +27,8 @@ app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making tex
 app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
 
 // json data
-// app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
+app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
+app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_catData.js']);
 app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
 
 //cycle used for slideshow
@@ -53,6 +37,27 @@ app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.m
 
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 // app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
+
+//add tabs to product data.
+//tabs are handled this way because jquery UI tabs REALLY wants an id and this ensures unique id's between product
+app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
+  var safePID = app.u.makeSafeHTMLId(P.pid); //can't use jqSelector because productTEmplate_pid still used makesafe. planned Q1-2012 update ###
+  var $tabContainer = $( ".tabbedProductContent",$('#productTemplate_'+safePID));
+  if($tabContainer.length)  {
+    if($tabContainer.data("tabs")){} //tabs have already been instantiated. no need to be redundant.
+    else  {
+      $("div.tabContent",$tabContainer).each(function (index) {
+        $(this).attr("id", "spec_"+safePID+"_" + index.toString());
+      });
+      $(".tabs li a",$tabContainer).each(function (index) {
+        $(this).attr('id','href_'+safePID+"_" + index.toString());
+        $(this).attr("href", "app://#spec_"+safePID+"_" + index.toString());
+      });
+      $tabContainer.localtabs();
+    }
+  }
+else  {} //couldn't find the tab to tabificate.
+}]);
 
 ///// custom \\\\\
 
@@ -122,6 +127,8 @@ var wholesaleContact = '.contactFormWholesale';
 var pdfLinks         = '.pdfLinks';
 
 var headingSubsParent = '.headingSubsParent';
+var htmlSafe;
+var currentSubListItem;
 
 var subcatPrettyLong = '.subcatPrettyLong';
 var subcatDescription = '.subcatDescription';
@@ -230,14 +237,19 @@ function resetCategoryLogo() {
   $(logoCategory).removeClass();
 }
 
-function resetAllMenuProducts() {
+function resetAllMenuSubs() {
   $(menuSubLists).slideUp(500);
+  // $(menuSubLists + ' li').removeClass('navMenuSubActive');
 }
 
 
 function categoryLink (navcat, pretty) {
   var temp = pretty || '';
   return "<a href='#top' title='" + temp + "' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'>" + temp + "</a>";
+}
+
+function categoryOnClick (navcat) {
+  return "onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'";
 }
 
 function categoryLinkNoText (navcat, pretty) {
@@ -268,27 +280,9 @@ function startSlideShow() {
   }
 }
 
-// function startSlideShow() {
-//   var $target = $('#wideSlideshow');
-//   var len = $target.children().length;
-//   var startIndex = Math.floor((Math.random()*len)+1); // random start
-//   // app.u.dump(startIndex);
-//   $(slideshow).removeClass('displayNone');
-//   if(len > 1) {
-//     $('#wideSlideshow').cycle({
-//       fx:'fade',
-//       speed:'slow',
-//       timeout: 5000,
-//       pager:'#slideshowNav',
-//       slideExpr: 'li',
-//       startingSlide: startIndex
-//     });
-//   }
-// }
-
 function defaultPage() {
   resetBanner();
-  resetAllMenuProducts();
+  resetAllMenuSubs();
   $(banner).addClass(classBannerHome, function () {
     startSlideShow();
   });
@@ -318,7 +312,7 @@ function defaultPage() {
 
 function startAnythingSlider ($target, slidesAtOnce) {
   slidesAtOnce = slidesAtOnce || false;
-  
+  // app.u.dump([$target]);
   if ($target.children().length > 0) {
     $target.anythingSlider({
       // Appearance
@@ -327,7 +321,7 @@ function startAnythingSlider ($target, slidesAtOnce) {
       // expand              : false,     // If true, the entire slider will expand to fit the parent element
       // resizeContents      : true,      // If true, solitary images/objects in the panel will expand to fit the viewport
       showMultiple        : slidesAtOnce,     // Set this value to a number and it will show that many slides at once
-      easing              : "liner",   // Anything other than "linear" or "swing" requires the easing plugin or jQuery UI
+      easing              : "linear",   // Anything other than "linear" or "swing" requires the easing plugin or jQuery UI
      
       buildArrows         : true,      // If true, builds the forwards and backwards buttons
       buildNavigation     : true,      // If true, builds a list of anchor links to link to each panel
@@ -422,7 +416,9 @@ function stopSliderHomeBestSellers() {
 }
 
 function startSliderProductExtras(parentID) {
-  startAnythingSlider($('#' + parentID + ' .productListProductExtras'), 3);
+  $('#' + parentID + ' .productListProductExtras').each(function () {
+    startAnythingSlider($(this), 4);
+  });
 }
 
 function stopSliderProductExtras(parentID) {
@@ -507,21 +503,26 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // resets
   resetBanner();
   resetCategoryLogo();
-  resetAllMenuProducts();
+  resetAllMenuSubs();
 
   currentNavcat   = P.navcat;
   currentCategory = getCategory(currentNavcat);
 
-  // if (currentNavcat === currentCategory) {
-  //   // category
-  //   $(headingSubsParent).html('').hide();
-  // }else {
-  //   // sub category
-  //   $(headingSubsParent).html(categoryLink(currentCategory, getPretty(currentCategory)));
-  // }
-
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
+
+  if (currentNavcat === currentCategory) {
+    // category
+    // $(headingSubsParent).html('').hide();
+  }else {
+    // sub category
+    // $(headingSubsParent).html(categoryLink(currentCategory, getPretty(currentCategory)));
+    if (currentNavcat) {
+      htmlSafe = currentNavcat.split('.').join('_');
+      currentSubListItem = '.subcategory' + htmlSafe + ' a:link';
+      $(currentSubListItem).addClass('navMenuSubActive');
+    }
+  }
 
   // add hover class to lists
   $('#'+P.parentID+' '+'.subCategory').hover(function() {
@@ -581,12 +582,18 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   }
 }]);
 
+app.rq.push(['templateFunction','categoryTemplate','onDeparts',function(P) {
+  if (currentSubListItem) {
+    $(currentSubListItem).removeClass('navMenuSubActive');
+  }
+}]);
+
 ///// products \\\\\
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // resets
   resetBanner();
   resetCategoryLogo();
-  resetAllMenuProducts();
+  resetAllMenuSubs();
   
   // app.u.dump([P]);
   // app.u.dump($(headingProductNavcat, '#' + P.parentID).html());
@@ -597,8 +604,15 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown();
 
+  // add active class to subcategory
+  if (currentNavcat) {
+    htmlSafe = currentNavcat.split('.').join('_');
+    currentSubListItem = '.subcategory' + htmlSafe + ' a:link';
+    $(currentSubListItem).addClass('navMenuSubActive');
+  }
+
   // add hover class to products
-  $('#'+P.parentID+' '+'.product' + ' .productAttribute').hide();
+  $('#' + P.parentID + ' ' + '.product' + ' ' + '.productAttribute').hide();
   $('#'+P.parentID+' '+'.product').hover(function() {
     $(this).toggleClass('categoryProductHover');
     $(this).children().children('.productAttribute').slideToggle();
@@ -647,6 +661,9 @@ app.rq.push(['templateFunction', 'productTemplate', 'onDeparts', function (P) {
   // app.u.dump('leaving product');
   // stopSliderProductExtras(P.parentID);
   stopSliderProductExtras();
+  if(currentSubListItem) {
+    $(currentSubListItem).removeClass('navMenuSubActive');
+  }
 }]);
 
 ///// end custom \\\\\
@@ -723,8 +740,8 @@ app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
   // Add accessores & promo to menu
-  // $('#tier1categories').append("<li id='tier1categories_accessories'>" + categoryLink(categoryAccessories, getPretty(categoryAccessories)) + "</li>");
-  // $('#tier1categories').append("<li id='tier1categories_promo__customizing'>" + categoryLink(categoryPromo, getPretty(categoryPromo)) + "</li>");
+  $('#tier1categories').append("<li class='pointer' id='tier1categories_accessories'" + categoryOnClick(categoryAccessories) + ">" + getPretty(categoryAccessories) + "</li>");
+  $('#tier1categories').append("<li class='pointer' id='tier1categories_promo__customizing'" + categoryOnClick(categoryPromo) + ">" + getPretty(categoryPromo) + "</li>");
 };
 
 

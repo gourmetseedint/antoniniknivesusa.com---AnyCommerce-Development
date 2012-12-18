@@ -76,7 +76,7 @@ h2 {
   line-height: 1em;
   letter-spacing: -1px;
   /*text-align: left;*/
-  color: #8e8e8e;
+  color: #434343;
   /*display: block;*/ }
 
 h3 {
@@ -261,12 +261,18 @@ header {
   background: url("images/banner_bg_sos.png") no-repeat; }
 
 #homeProdSearchBestSellers {
-  width: 300px;
-  height: 300px;
+  width: 302px;
+  height: 302px;
   list-style: none;
   /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
   overflow-y: auto;
   overflow-x: hidden; }
+  #homeProdSearchBestSellers .prodThumbContainer {
+    width: 300px;
+    height: 300px; }
+  #homeProdSearchBestSellers li {
+    width: 300px;
+    height: 300px; }
   #homeProdSearchBestSellers img {
     width: 300px;
     height: 300px; }
@@ -277,7 +283,8 @@ header {
   .anythingSlider-default .anythingControls a {
     background: #cdcdcd url(AnythingSlider/default.png) center -288px repeat-x; }
   .anythingSlider-default .anythingWindow {
-    border: 1px solid #cdcdcd; }
+    border: 1px solid #cdcdcd;
+    border-width: 0; }
   .anythingSlider-default.activeSlider .anythingWindow {
     border-color: #cdcdcd; }
   .anythingSlider-default.activeSlider .anythingControls a {
@@ -290,8 +297,6 @@ header {
       .anythingSlider-default.activeSlider .anythingControls a.start-stop.playing {
         background-color: #9a9a9a;
         color: #B90007; }
-      .anythingSlider-default.activeSlider .anythingControls a.start-stop:hover, .anythingSlider-default.activeSlider .anythingControls a.start-stop.hover {
-        color: black; }
   .anythingSlider-default .anythingSlider-default .anythingControls a.start-stop, .anythingSlider-default .anythingSlider-default .anythingControls a.start-stop.playing {
     background-color: #cdcdcd; }
   .anythingSlider-default .arrow a {
@@ -412,10 +417,8 @@ header {
   margin-right: 10px;
   margin-left: 50px; }
   .sidebar a:link, .sidebar a:visited {
-    color: white;
     text-decoration: none; }
   .sidebar a:hover, .sidebar a:active {
-    color: gray;
     text-decoration: none; }
 
 .navMenu {
@@ -452,7 +455,7 @@ header {
       padding: 0;
       height: auto;
       display: block;
-      background: #565555;
+      background: #555555;
       font-size: 1.1em;
       text-transform: none; }
       .navMenu ul li ul li .appMessage {
@@ -467,12 +470,10 @@ header {
       .navMenu ul li ul li a {
         display: block;
         padding: 0.3em 0.5em; }
-        .navMenu ul li ul li a:link {
-          color: inherit; }
         .navMenu ul li ul li a:visited {
           color: inherit; }
         .navMenu ul li ul li a:active {
-          color: #232222; }
+          color: #222222; }
 
 .sidebarHome {
   top: -5px;
@@ -483,10 +484,10 @@ header {
 
 .navMenuSubHover, .navMenu ul li ul li a:hover {
   color: #cccccc;
-  background: #232222; }
+  background: #222222; }
 
 .navMenuSubActive, .navMenu ul li ul li a:active {
-  color: #232222;
+  color: #222222;
   background: #cccccc; }
 
 #logoCategory {
@@ -567,6 +568,14 @@ header {
     display: block; }
   .wholesaleInfo a {
     display: block; }
+    .wholesaleInfo a:link {
+      color: white; }
+    .wholesaleInfo a:hover {
+      color: gray; }
+    .wholesaleInfo a:visited {
+      color: white; }
+    .wholesaleInfo a:active {
+      color: gray; }
 
 .wholesaleInfoTop {
   height: 75px;
@@ -778,7 +787,7 @@ footer {
 
 /* Homepage */
 .homepageContainer {
-  color: #8e8e8e; }
+  color: #767676; }
   .homepageContainer .prodThumbContainer {
     width: 300px;
     height: 300px; }
@@ -788,7 +797,7 @@ footer {
   padding: 0;
   text-align: center; }
   .logosCategoryHome ul {
-    border: 1px solid #cdcccc;
+    border: 1px solid #cccccc;
     margin: 0;
     padding: 5px;
     display: inline-block; }
@@ -823,7 +832,7 @@ footer {
   padding-bottom: 8px;
   margin-bottom: 8px;
   text-align: right;
-  border-bottom: 1px solid #cdcccc; }
+  border-bottom: 1px solid #cccccc; }
   .headings div {
     display: inline-block; }
   .headings h1, .headings h2, .headings h3 {
@@ -895,13 +904,30 @@ footer {
   .content .productList h6, .content .subCategoryList h6 {
     font-size: 1.3em;
     font-weight: normal; }
-  .content .productList .prodThumbContainer, .content .subCategoryList .prodThumbContainer {
-    border: 1px solid #cdcdcd; }
 .content .productList li {
   width: 230px;
   height: 230px;
   display: inline-block;
   vertical-align: top; }
+.content .productExtras ul {
+  width: 182px;
+  height: 182px;
+  list-style: none;
+  /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: left; }
+  .content .productExtras ul .prodThumbContainer {
+    width: 180px;
+    height: 180px; }
+  .content .productExtras ul li {
+    width: 180px;
+    height: 180px; }
+  .content .productExtras ul img {
+    width: 180px;
+    height: 180px; }
+.content .productExtras h4 {
+  margin-top: 20px; }
 .content .subCategoryList li {
   margin: 0 0 10px 0;
   display: block;
@@ -948,7 +974,8 @@ footer {
 .prodThumbContainer {
   position: relative;
   width: 230px;
-  height: 230px; }
+  height: 230px;
+  border: 1px solid #cdcdcd; }
   .prodThumbContainer img {
     position: relative;
     z-index: -1; }
@@ -1009,7 +1036,7 @@ footer {
 .productSpecsContainer {
   margin: 8px 0;
   padding: 8px 0;
-  border-bottom: 1px solid #cdcccc;
+  border-bottom: 1px solid #cccccc;
   color: #313131; }
   .productSpecsContainer .breadcrumb {
     float: right; }
@@ -1172,22 +1199,6 @@ footer {
   padding: 0; }
 .productDescription li {
   font-size: 1.2em; }
-
-.productExtras ul {
-  width: 230px;
-  height: 230px;
-  list-style: none;
-  /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
-  overflow-y: auto;
-  overflow-x: hidden; }
-  .productExtras ul img {
-    width: 230px;
-    height: 230px; }
-.productExtras .productList .prodThumbContainer {
-  border-width: 0; }
-
-.prodTabs {
-  margin-top: 20px; }
 
 /* Wholesale contact form*/
 .contactForm {

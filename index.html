@@ -8,13 +8,13 @@
 <!-- TODO: adds optional product fields -->
 <!-- TODO: 'Tell a friend' should send a email with link to product -->
 <!-- TODO: add images to promo -->
-<!-- BUG: product reviews, shows apppreview and adds another set of tier1cats -->
 <!-- TODO: IE compatibility -->
 <!-- TODO: add gsi, testimonials categories to company layout -->
 <!-- TODO: change carousel arrows -->
 <!-- TODO: add sub cat products to related products list -->
 <!-- QUE: how do products recieve IS_BESTSELLER? automatic? -->
 <!-- TODO: add images to sub categories -->
+<!-- BUG: reviews box expands height if slider -->
 
 <title>Antonini Knives USA</title>
 
@@ -33,7 +33,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121217203250",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121218000214",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -64,6 +64,8 @@ css files should be included before any .js file to ensure they are downloaded i
 <!--[if lt IE 9]><script src="dist/html5shiv.js"></script><![endif]-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="jquery.ui.widget.min.js"></script> 
+<script src="customTabs.js"></script>
 <script type="text/javascript" src="loadscript.js"></script>
 <!-- <script type="text/javascript" src="jcarousel/jquery.jcarousel.min-0.2.7.js"></script> -->
 
@@ -285,7 +287,7 @@ the homepageTemplate template is loaded into mainContentArea by default when the
     <div class='homepageContent'>
       <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;'></ul>
       <div class='homepageText'>
-        <p class='homepageDescription' data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></p>
+        <div class='homepageDescription' data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></div>
         <a class='button bindByAnchor' href="#company?show=about" title='More About Antonini'>More About Antonini</a>
       </div>
     </div>
@@ -622,8 +624,8 @@ this will likely become more flexible in the future. ###
 
   <div class='productSpecsContainer'>
     <div class="productSpecsTop">
-      <h4 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h4><h1 data-bind="var:product(zoovy:prod_name); format:text;" class='productName categoryColor'></h1>
       <ul class='breadcrumb breadcrumbProduct' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
+      <h4 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h4><h1 data-bind="var:product(zoovy:prod_name); format:text;" class='productName categoryColor'></h1>
     </div>
     <div class="productSpecsMiddle">
       <ul class='productSpecsList'>
@@ -681,22 +683,28 @@ this will likely become more flexible in the future. ###
   </div>
 
   <div class="productExtras">
-    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselAccessories jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h5>Accessories</h5>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
-    <div data-bind="var: product(zoovy:related_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListCarouselRelated jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h5>Variants</h5>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
+    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h4>Accessories</h4>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
+    <div data-bind="var: product(zoovy:related_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras jcarousel-skin-antoniniknives' data-bind="var: product(zoovy:related_products);   format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h4>Variants</h4>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
   </div>
 
+  <!--
+  the tabs are built in an onComplete.  ID's are added based on sku AND index, so the index (order) of the tabs MUST match the order of the tabContent divs
+  or the tab clicked won't open the right content.
+  It's done this way because ID's hard coded into template are bad mojo (templates are recycled) and because using data-binds to add id's caused some serious issues
+  -->
   <div class='prodTabs tabbedProductContent'>
 
     <ul class='tabs'>
-      <li class='prodReviewsTab'><a>Reviews</a></li>
+      <li class='prodReviewsTab'><a href='#'>Reviews</a></li>
     </ul>
 
     <div  class='tabContent'>
       <div class='clearfix alignRight'>
-        <button class='ui-button-text ui-button ui-state-default ui-corner-all' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write Review</button>
+        <button class='ui-button-text ui-button ui-state-default ui-corner-all' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write a Review</button>
       </div>
       <ul class='listStyleNone clearfix productReviewsList' id='prodViewerReviews' data-bind="var: reviews(@reviews); format:reviewList; extension:store_product; loadsTemplate:productReviewsTemplateDetail;"></ul>
     </div>
+    
   </div>
 
   <!-- Required for category specific colors and sub menu -->
@@ -834,6 +842,8 @@ this will likely become more flexible in the future. ###
   <ul class='listStyleNone fluidList clearfix noPadOrMargin lineItemProdlist' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplateATC;hide_pagination:true;hide_summary:true; withReviews:1; withInventory:1; withVariations:1;"></ul>
     </div>
 
+
+
     
     
     
@@ -846,7 +856,54 @@ this will likely become more flexible in the future. ###
     <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h2>Similar Items</h2>; withReviews:1;"></ul>
   </div>
   -->
+  <!-- Update 12-17-12
+  <div class='prodTabs tabbedProductContent'>
 
+    <ul class='tabs'>
+      <li class='prodDescTab'><a href='#'>Description</a></li>
+      <li class='prodDetailTab displayNone' data-bind='var: product(zoovy:prod_detail); format:showIfSet;'><a href='#'>Specs</a></li>
+      <li class='prodFeaturesTab displayNone' data-bind='var: product(zoovy:prod_features); format:showIfSet;'><a href='#'>Features</a></li>
+      <li class='prodReviewsTab'><a href='#'>Reviews</a></li>
+      <li class='prodVideoTab displayNone' data-bind='var: product(youtube:videoid); format:showIfSet;'><a href='#'>Video</a></li>
+      <li class='prodAccessoriesTab displayNone' data-bind='var: product(zoovy:accessory_products); format:showIfSet;'><a href='#'>Accessories</a></li>
+    </ul>
+    
+    <div class='tabContent'>
+      <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;'></div>
+    </div>
+
+    <div class='tabContent'>
+      <div data-bind='var: product(zoovy:prod_detail); format:wiki; wikiFormats:myRIA;'></div>
+    </div>
+
+    <div class='tabContent'>
+      <div data-bind='var: product(zoovy:prod_features); format:wiki; wikiFormats:myRIA;'></div>
+    </div>
+
+
+    <div  class='tabContent'>
+
+      <div class='clearfix alignRight'>
+        <button class='ui-button-text ui-button ui-state-default ui-corner-all' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write Review</button>
+      </div>
+      
+      <ul class='listStyleNone clearfix productReviewsList' id='prodViewerReviews' data-bind="var: reviews(@reviews); format:reviewList; extension:store_product; loadsTemplate:productReviewsTemplateDetail;"></ul>
+
+    </div>
+    
+    <div class='tabContent'>
+      <div id="prodVideo" data-bind='var: product(youtube:videoid); format:youtubeVideo;'></div>
+    </div>
+
+    <div class='tabContent'>
+    <ul class='listStyleNone fluidList clearfix noPadOrMargin lineItemProdlist' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplateATC;hide_pagination:true;hide_summary:true; withReviews:1; withInventory:1; withVariations:1;"></ul>
+    </div>
+
+    
+    
+    
+  </div>
+  -->
 
 </div><!-- productTemplate -->
 

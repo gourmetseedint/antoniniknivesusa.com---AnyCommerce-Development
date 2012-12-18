@@ -115,8 +115,8 @@ var antoniniknives_extension = function() {
       init : {
         onSuccess : function() {
           // app.u.dump('antoniniknives_extension callback success');
-          app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
-          app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_catData.js']);
+          // app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
+          // app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_catData.js']);
           return true;  //currently, there are no config or extension dependencies, so just return true. may change later.
         },
         onError : function() {

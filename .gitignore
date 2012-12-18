@@ -6,6 +6,7 @@
 .project
 .metadata
 bin/
+/utilities/proxy/node_modules/
 tmp/
 *_notes/
 *.tmp
@@ -162,12 +163,3 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
-
-# Sublime Text
-*.sublime-*
-
-# Sass
-.sass-cache/*
-
-# Custom
-client_files/*

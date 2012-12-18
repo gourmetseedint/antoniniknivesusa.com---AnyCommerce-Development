@@ -41,7 +41,7 @@ var store_navcats = function() {
 					this.dispatch(root,tagObj,Q);
 					}
 				else 	{
-					app.u.handleCallback(root,tagObj)
+					app.u.handleCallback(tagObj)
 					}
 				return r;
 				},
@@ -374,9 +374,10 @@ templateID - the template id used (from app.templates)
 //assumes that you have already gotten a 'max' detail for the safecat specified data.value.
 //shows the category, plus the first three subcategories.
 			subcategory2LevelList : function($tag,data)	{
-				app.u.dump("BEGIN store_navcats.renderFormats.subcategory2LevelList");
+				// app.u.dump("BEGIN store_navcats.renderFormats.subcategory2LevelList");
 				var catSafeID; //used in the loop for a short reference.
 				var subcatDetail = data.value;
+				var htmlSafe;
 				var o = '';
 				if(!$.isEmptyObject(subcatDetail))	{
 					var L = subcatDetail.length;
@@ -387,7 +388,8 @@ templateID - the template id used (from app.templates)
 					for(var i = 0; i < size; i +=1)	{
 						if(subcatDetail[i].pretty[0] != '!')	{
 							catSafeID = subcatDetail[i].id;
-							o += "<li><a href='#' onClick=\"showContent('category',{'navcat':'"+catSafeID+"'}); return false;\">"+subcatDetail[i].pretty+ "<\/a><\/li>";
+							htmlSafe = catSafeID.split('.').join('_');
+							o += "<li class='subcategory" + htmlSafe + "'><a href='#' onClick=\"showContent('category',{'navcat':'"+catSafeID+"'}); return false;\">"+subcatDetail[i].pretty+ "<\/a><\/li>";
 							}
 						}
 					if(L > size)	{
