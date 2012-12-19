@@ -15,7 +15,7 @@ app.rq.push(['extension',0,'store_search','extensions/store_search.js']);
 app.rq.push(['extension',0,'store_product','extensions/store_product.js']);
 app.rq.push(['extension',0,'store_cart','extensions/store_cart.js']);
 app.rq.push(['extension',0,'store_crm','extensions/store_crm.js']);
-// app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
+app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
 app.rq.push(['extension',0,'myRIA','quickstart.js','startMyProgram']);
 
 app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','startExtension']);
@@ -36,7 +36,7 @@ app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
 
 //cycle used for slideshow
 app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
-app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.min.js']);
+app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.js']);
 
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 // app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);

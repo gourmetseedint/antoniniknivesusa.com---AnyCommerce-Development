@@ -860,14 +860,14 @@ $.widget( "ui.localtabs", {
 // DEPRECATED
 if ( $.uiBackCompat !== false ) {
 
-	// // helper method for a lot of the back compat extensions
-	// $.ui.tabs.prototype._ui = function( tab, panel ) {
-	// 	return {
-	// 		tab: tab,
-	// 		panel: panel,
-	// 		index: this.anchors.index( tab )
-	// 	};
-	// };
+	// helper method for a lot of the back compat extensions
+	$.ui.tabs.prototype._ui = function( tab, panel ) {
+		return {
+			tab: tab,
+			panel: panel,
+			index: this.anchors.index( tab )
+		};
+	};
 
 	// url method
 	$.widget( "ui.tabs", $.ui.tabs, {
