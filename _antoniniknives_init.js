@@ -15,7 +15,7 @@ app.rq.push(['extension',0,'store_search','extensions/store_search.js']);
 app.rq.push(['extension',0,'store_product','extensions/store_product.js']);
 app.rq.push(['extension',0,'store_cart','extensions/store_cart.js']);
 app.rq.push(['extension',0,'store_crm','extensions/store_crm.js']);
-app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
+// app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
 app.rq.push(['extension',0,'myRIA','quickstart.js','startMyProgram']);
 
 app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','startExtension']);
@@ -604,7 +604,8 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   
   // app.u.dump([P]);
   // app.u.dump($(productCategory, '#' + P.parentID).html());
-  currentNavcat   = currentNavcat || $('#' + P.parentID + ' ' + productCategory).html();
+  // IE loads this 3 times, navcat span becomes blank
+  currentNavcat = currentNavcat || $('#' + P.parentID + ' ' + productCategory).html();
   app.u.dump('currentNavcat: ' + currentNavcat);
   currentCategory = currentCategory || getCategory(currentNavcat);
   app.u.dump('currentCategory: ' + currentCategory);
@@ -674,6 +675,10 @@ app.rq.push(['templateFunction', 'productTemplate', 'onDeparts', function (P) {
   if(currentSubListItem) {
     $(currentSubListItem).removeClass(navMenuSubCurrent);
   }
+
+  // reset navcat
+  // currentNavcat = '';
+  // currentCategory = '';
 }]);
 
 ///// end custom \\\\\
