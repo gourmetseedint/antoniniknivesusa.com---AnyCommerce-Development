@@ -156,7 +156,11 @@ var subcatDescription = '.subcatDescription';
 // }
 
 function getPeriodCount(value) {
-  return (value.split('.') || '').length - 1;
+  if (value) {
+    return value.split('.').length - 1; 
+  }else {
+    return '';
+  }
 }
 
 function getCategory (navcat, subLevel) {
