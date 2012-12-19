@@ -156,7 +156,7 @@ var subcatDescription = '.subcatDescription';
 // }
 
 function getPeriodCount(value) {
-  return (value.split(/[.]/) || '').length - 1;
+  return (value.split('.') || '').length - 1;
 }
 
 function getCategory (navcat, subLevel) {
@@ -227,7 +227,7 @@ function getPdfLinks() {
 
 function getTier1ID(navcat) {
   // replace '.' with '_' and '-' with ''
-  var temp = '#tier1categories' + navcat.split(/[.]/).join('_').split(/-/).join('');
+  var temp = '#tier1categories' + navcat.split('.').join('_').split(/-/).join('');
   return temp;
 }
 
