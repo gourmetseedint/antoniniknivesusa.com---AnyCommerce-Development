@@ -159,7 +159,7 @@ function getPeriodCount(value) {
   if (value) {
     return value.split('.').length - 1; 
   }else {
-    return '';
+    return 0;
   }
 }
 
@@ -491,7 +491,7 @@ app.rq.push(['templateFunction','customerTemplate','onCompletes',function(P) {
 
 /// search \\\
 app.rq.push(['templateFunction','searchTemplate','onCompletes',function(P) {
-  app.u.dump($('.product').length);
+  // app.u.dump($('.product').length);
   // app.u.dump('on search');
   defaultPage();
 
@@ -605,7 +605,9 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // app.u.dump([P]);
   // app.u.dump($(headingProductNavcat, '#' + P.parentID).html());
   currentNavcat   = $(headingProductNavcat, '#' + P.parentID).html();
+  app.u.dump('currentNavcat: ' + currentNavcat);
   currentCategory = getCategory(currentNavcat);
+  app.u.dump('currentCategory: ' + currentCategory);
   // currentSub      = getCategory(currentNavcat, 1);
 
   // show category sub in menu
