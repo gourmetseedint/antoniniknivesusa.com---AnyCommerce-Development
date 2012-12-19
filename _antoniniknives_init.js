@@ -117,7 +117,7 @@ var classColorPocket = 'categoryPocket';
 var classColorPromo  = 'categoryPromo';
 var classColorSos    = 'categorySos';
 
-var headingProductNavcat      = '.headingProductNavcat';
+var productCategory      = '.productCurrentCategory';
 var headingProductSub         = '.headingProductSubCategory';
 // var headingProductName        = '.headingsProduct h1';
 var headingProductCategory    = '.headingsProduct h3';
@@ -603,8 +603,8 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   resetAllMenuSubs();
   
   // app.u.dump([P]);
-  // app.u.dump($(headingProductNavcat, '#' + P.parentID).html());
-  currentNavcat   = $(headingProductNavcat, '#' + P.parentID).html();
+  // app.u.dump($(productCategory, '#' + P.parentID).html());
+  currentNavcat   = $('#' + P.parentID + ' ' + productCategory).html();
   app.u.dump('currentNavcat: ' + currentNavcat);
   currentCategory = getCategory(currentNavcat);
   app.u.dump('currentCategory: ' + currentCategory);
