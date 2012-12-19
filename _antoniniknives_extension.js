@@ -1,7 +1,6 @@
 /*
 Antonini Extension
 */
-var antoniniknives_extension = {};
 var antoniniknives_extension = function() {
   var r = {
     vars : {
