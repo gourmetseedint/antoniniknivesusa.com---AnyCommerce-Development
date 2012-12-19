@@ -2,19 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-
-<!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
-<!-- TODO: add optional product fields -->
-<!-- TODO: 'Tell a friend' should send a email with link to product -->
-<!-- TODO: IE compatibility -->
-<!-- TODO: add gsi, testimonials categories to company layout -->
-<!-- TODO: change carousel arrows -->
-<!-- BUG: reviews box expands height if slider, maybe fixed -->
-<!-- TODO: browser tab thumb -->
-<!-- TODO: move wholesale formt to static -->
-
 <title>Antonini Knives USA</title>
-
 <!-- used for optional social media extensions -->
 <meta property="og:type" content="" id='ogType' />
 <meta property="og:image" content="" id='ogImage' />
@@ -23,14 +11,14 @@
 
 <base href='' /><!-- leave blank so it works for a local file -->
 
-
+<link rel="shortcut icon" href="images/favicon.ico" />
 
 <script type="text/javascript">
 var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPLOYMENT!
 var myCreole;
 
 var app = {vars:{
-  "release":"20121218165420",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121218185157",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -115,7 +103,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
               <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
               <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a></li>
               <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a></li>
-              <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a><!-- TODO: add cart item num --></li>
+              <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a></li>
             </ul>
             <span class="socialBox">
               <span class='socialIcon socialIconFacebook'><a href="http://www.facebook.com" target="_blank" title="Facebook link"></a></span><!-- TODO: get facebook name -->
@@ -177,6 +165,19 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         </ul>
         </nav>
       </div> -->
+      <!-- used by wholesale -->
+      <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactForm contactFormWholesale'>
+        <fieldset>
+          <legend>Acquire Wholesale Information</legend>
+          <div class='contactFormMessaging'></div>
+          <div><label for='contactFormSenderWholesale'>Email Address: </label><input type='email' name='sender' required='required' id='contactFormSenderWholesale' /></div>
+          <div class='displayNone'><input type='hidden' name='subject' id='contactFormSubjectWholesale' value="Wholesale Inquiry"/></div>
+          <!-- <div><label for='contactFormOID'>Order ID: </label><input type='text' name='OID' id='contactFormOID' /></div> -->
+          <div><label for='contactFormBodyWholesale'>Nature of Request: </label><textarea name='body' required='required' id='contactFormBodyWholesale'></textarea></div>
+          <div class='alignRight'><input type='submit' class='ui-button-text ui-button ui-state-default ui-corner-all' value='Send Message' />
+          </div>
+        </fieldset>
+      </form>
     </div>
   </div>
   <footer class='printNo'>
@@ -341,27 +342,13 @@ don't modify the 'data-templateid' unless you are changing template names and up
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>
 
   <!-- used by subcategory, shows a list of products -->
-  <div class="productListWrapper" data-bind="var: category(@products); format: showIfSet;">
+  <div class="productListWrapper displayNone" data-bind="var: category(@products); format: showIfSet;">
     <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList productListCategory'></ul>
   </div>
 
   <!-- <img data-bind="var: category(%page.CAT_THUMB); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
   <!-- <img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /> -->
   <!-- <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
-
-  <!-- used by wholesale TODO: move to static -->
-  <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactForm contactFormWholesale'>
-    <fieldset>
-      <legend>Acquire Wholesale Information</legend>
-      <div class='contactFormMessaging'></div>
-      <div><label for='contactFormSenderWholesale'>Email Address: </label><input type='email' name='sender' required='required' id='contactFormSenderWholesale' /></div>
-      <div class='displayNone'><input type='hidden' name='subject' id='contactFormSubjectWholesale' value="Wholesale Inquiry"/></div>
-      <!-- <div><label for='contactFormOID'>Order ID: </label><input type='text' name='OID' id='contactFormOID' /></div> -->
-      <div><label for='contactFormBodyWholesale'>Nature of Request: </label><textarea name='body' required='required' id='contactFormBodyWholesale'></textarea></div>
-      <div class='alignRight'><input type='submit' class='ui-button-text ui-button ui-state-default ui-corner-all' value='Send Message' />
-      </div>
-    </fieldset>
-  </form>
 
   <div class="pdfLinks displayNone"></div>
 
@@ -632,6 +619,10 @@ this will likely become more flexible in the future. ###
         <li class='displayNone' data-bind='var:product(user:prod_blade_length); format:showIfSet;'><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;'></span></li>
         <li class='displayNone' data-bind='var:product(user:prod_overall_length); format:showIfSet;'><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;'></span></li>
         <li class='displayNone' data-bind='var:product(user:prod_closed_length); format:showIfSet;'><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_dimen_option1_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option1_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option1_value); format:text;"></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_dimen_option2_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option2_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option2_value); format:text;"></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_dimen_option3_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option3_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option3_value); format:text;"></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_dimen_option4_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option4_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option4_value); format:text;"></span></li>
       </ul>
       <h4 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h4>
     </div>
@@ -648,8 +639,8 @@ this will likely become more flexible in the future. ###
       <div>
         <ul>
           <li><a href="javascript:void(0)" onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write a Review</a></li>
-          <li><a href='#'>Tell a Friend</a></li><!-- TODO: get link for 'tell a friend' -->
-          <li><a href='javascript:void(0)' onClick="window.print();">Printer Friendly Version</a></li><!-- TODO: setup/get link for 'printer friendly version' -->
+          <!-- <li><a href="javascript:void(0)">Tell a Friend</a></li> --><!-- TODO: get link for 'tell a friend' -->
+          <li><a href='javascript:void(0)' onClick="window.print();">Printer Friendly Version</a></li>
         </ul>
       </div>
     </div>
@@ -676,6 +667,10 @@ this will likely become more flexible in the future. ###
         <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span></li>
         <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span></li>
         <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span></li>
+        <li><span data-bind="var:product(prod_detail_option1_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option1_value); format:text;"></span></li>
+        <li><span data-bind="var:product(prod_detail_option2_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option2_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option2_value); format:text;"></span></li>
+        <li><span data-bind="var:product(prod_detail_option3_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option3_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option3_value); format:text;"></span></li>
+        <li><span data-bind="var:product(prod_detail_option4_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option4_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option4_value); format:text;"></span></li>
       </ul>
       <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
     </div>

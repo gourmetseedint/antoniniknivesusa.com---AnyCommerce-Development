@@ -275,7 +275,32 @@ var antoniniknives_extension = function() {
           $tag.parent('div').hide();
         }
       }
-    } // renderformats
+    },// renderformats
+
+    // u : {
+    //   showReviewFrmInModal : function(P)  {
+    //     if(!P.pid || !P.templateID) {
+    //       app.u.dump(" -> pid or template id left blank");
+    //       }
+    //     else  {
+    //       var $parent = $('#review-modal');
+    //   //if no review modal has been created before, create one. 
+    //   if($parent.length == 0) {
+    //     app.u.dump(" -> modal window doesn't exist. create it.");
+    //     $parent = $("<div \/>").attr({"id":"review-modal",'data-pid':P.pid}).appendTo(document.body);
+    //     }
+    //   else  {
+    //     app.u.dump(" -> use existing modal. empty it.");
+    //   //this is a new product being displayed in the viewer.
+    //     $parent.empty();
+    //     }
+    //   $parent.dialog({modal: true,width:500,height:500,autoOpen:false,"title":"Write a review for "+P.pid});
+    //   //the only data needed in the reviews form is the pid.
+    //   //the entire product record isn't passed in because it may not be available (such as in invoice or order history, or a third party site).
+    //     $parent.dialog('open').append(app.renderFunctions.transmogrify({id:'review-modal_'+P.pid},P.templateID,{'pid':P.pid}));
+    //     }
+    //   }
+    // } // utils
   }; //r object.
 
   return r;

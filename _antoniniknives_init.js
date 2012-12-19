@@ -1,6 +1,10 @@
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 
+// <!-- TODO: change carousel arrows -->
+// <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
+// <!-- TODO: IE compatibility -->
+
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
 app.rq.push(['extension',0,'store_checkout','extensions/store_checkout.js']);
