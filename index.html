@@ -4,18 +4,14 @@
 <meta charset="utf-8">
 
 <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
-<!-- BUG: bottom pagination drop down hidden, because container has overflow: hidden -->
-<!-- TODO: adds optional product fields -->
+<!-- TODO: add optional product fields -->
 <!-- TODO: 'Tell a friend' should send a email with link to product -->
-<!-- TODO: add images to promo -->
 <!-- TODO: IE compatibility -->
 <!-- TODO: add gsi, testimonials categories to company layout -->
 <!-- TODO: change carousel arrows -->
-<!-- TODO: add sub cat products to related products list -->
-<!-- QUE: how do products recieve IS_BESTSELLER? automatic? -->
-<!-- TODO: add images to sub categories -->
-<!-- BUG: reviews box expands height if slider -->
+<!-- BUG: reviews box expands height if slider, maybe fixed -->
 <!-- TODO: browser tab thumb -->
+<!-- TODO: move wholesale formt to static -->
 
 <title>Antonini Knives USA</title>
 
@@ -34,7 +30,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121218155057",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121218165420",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -70,11 +66,15 @@ css files should be included before any .js file to ensure they are downloaded i
 <script type="text/javascript" src="loadscript.js"></script>
 <!-- <script type="text/javascript" src="jcarousel/jquery.jcarousel.min-0.2.7.js"></script> -->
 
+<style>
+@media print {.printNo {display: none; visibility: hidden;}}
+</style>
 
 
 <script type="text/javascript">
 app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 </script>
+
 
 
 </head>
@@ -104,7 +104,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 <div id='appView' class='displayNone'>
   <!-- VIEW CONTENT -->
   <div class='container'>
-    <header id="header" class="">
+    <header id="header" class="printNo">
       <div class='printNo'>
         <span class="logoTop"><a href="#homepage" class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonini Knives USA" /></a></span>
         <span class="bannerText"><img src="images/banner_text.png" alt="Antonini Knives - Original Italian Blades Since 1925"></span>
@@ -149,7 +149,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         </form>
         </form>
         <h2>Products</h2>
-        <ul id="tier1categories"></ul><!-- BUG: tier1 not working -->
+        <ul id="tier1categories"></ul>
         <a href="#category?navcat=.pdf-catalogs" class='bindByAnchor navMenuLink' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a>
       </nav>
       <div class='wholesaleInfo'>
@@ -274,7 +274,7 @@ the homepageTemplate template is loaded into mainContentArea by default when the
 -->
 <div id='homepageTemplate' class='homeTemplate'>
   <div class='homepageContainer'>
-    <div class='logosCategoryHome'>
+    <div class='logosCategoryHome printNo'>
       <ul>
         <li class="logoCategoryHome logoCategoryBoat pointer"></li>
         <li class="logoCategoryHome logoCategoryCable pointer"></li>
@@ -635,7 +635,7 @@ this will likely become more flexible in the future. ###
       </ul>
       <h4 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h4>
     </div>
-    <div class="productSpecsBottom">
+    <div class="productSpecsBottom printNo">
       <!-- <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
       <!-- <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div> -->
       <form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.handleAddToCart($(this),{'action':'modal'}); return false;">
@@ -649,7 +649,7 @@ this will likely become more flexible in the future. ###
         <ul>
           <li><a href="javascript:void(0)" onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write a Review</a></li>
           <li><a href='#'>Tell a Friend</a></li><!-- TODO: get link for 'tell a friend' -->
-          <li><a href='#'>Printer Friendly Version</a></li><!-- TODO: setup/get link for 'printer friendly version' -->
+          <li><a href='javascript:void(0)' onClick="window.print();">Printer Friendly Version</a></li><!-- TODO: setup/get link for 'printer friendly version' -->
         </ul>
       </div>
     </div>
@@ -681,7 +681,7 @@ this will likely become more flexible in the future. ###
     </div>
   </div>
 
-  <div class="productExtras">
+  <div class="productExtras printNo">
     <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListAccessories' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h4>Accessories</h4>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
     <ul class='productList productListProductExtras productListVariants' data-bind="var: product(user:prod_primary_cat); format:subcatProductList; extension:antoniniknives_extension; loadsTemplate:productListTemplate; before:<h4>Variants</h4>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul>
   </div>
@@ -691,7 +691,7 @@ this will likely become more flexible in the future. ###
   or the tab clicked won't open the right content.
   It's done this way because ID's hard coded into template are bad mojo (templates are recycled) and because using data-binds to add id's caused some serious issues
   -->
-  <div class='prodTabs tabbedProductContent'>
+  <div class='prodTabs tabbedProductContent printNo'>
 
     <ul class='tabs'>
       <li class='prodReviewsTab'><a href='#'>Reviews</a></li>
@@ -1024,7 +1024,7 @@ adding classes is not likely to have any bad effects.
 <!-- loadingBG needed on this for app init (content may take a moment to load) -->
 <div id='companyTemplate' class='clearfix loadingBG'>
 
-  <div class='sideline' >
+  <div class='sideline printNo' >
     <nav id='companyNav'>
     <ul class='listStyleNone noPadOrMargin'>
       <li><a href='#company?show=about'  id='navLink_about' title='About Antonini'>About Antonini</a></li>

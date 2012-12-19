@@ -1,8 +1,18 @@
 body {
   color : #000000;
   background : #ffffff;
-  font-family : "Times New Roman", Times, serif;
-  font-size : 12pt;
+  /*font-family : "Times New Roman", Times, serif;*/
+  font-size : 8px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /*font-size: 14pt;*/
+  color: #000000;
+}
+
+p, span, li {
+  /*font-size: 12pt;*/
+  color: #000000;
 }
 
 a {
@@ -10,12 +20,32 @@ a {
   color : #0000ff;
 }
 
-.container {width:auto}
+header {
+  height: 0;
+  display: none;
+}
+
+.bannerHome {
+  height: 0;
+}
+
+.container {width:auto;}
+.content {width:100%;}
 /*#configuratorLeftColumn, #configuratorRightColumn {display:none; width:1px;}*/
 /*#configuratorMiddleColumn {left:0;}*/
 
 .printNo  {display:none;}
 .printYes  {display:block;}
+
+.categoryDefault,
+.categoryBoat,
+.categoryCable,
+.categoryFarm,
+.categoryPocket, 
+.categoryPromo,
+.categorySos {
+  color: #000000;
+}
 
 /*#slideshowContainer li {
   display: none;

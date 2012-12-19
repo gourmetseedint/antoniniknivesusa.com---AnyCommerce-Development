@@ -1,8 +1,6 @@
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 
-// BUG: anythingSlider continues to run after departing
-
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
 app.rq.push(['extension',0,'store_checkout','extensions/store_checkout.js']);
