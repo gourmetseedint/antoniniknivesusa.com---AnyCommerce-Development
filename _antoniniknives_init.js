@@ -15,7 +15,7 @@ app.rq.push(['extension',0,'store_search','extensions/store_search.js']);
 app.rq.push(['extension',0,'store_product','extensions/store_product.js']);
 app.rq.push(['extension',0,'store_cart','extensions/store_cart.js']);
 app.rq.push(['extension',0,'store_crm','extensions/store_crm.js']);
-// app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
+app.rq.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
 app.rq.push(['extension',0,'myRIA','quickstart.js','startMyProgram']);
 
 app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','startExtension']);
@@ -753,7 +753,7 @@ app.u.initMVC = function(attempts){
 //will pass in the page info object. (pageType, templateID, pid/navcat/show and more)
 app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
-  // app.ext.myRIA.u.push(['extension',0,'antoniniknives_extension','_antoniniknives_extension.js']);
+
   // Add accessores & promo to menu
   $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categoryAccessories) + ">" + getPretty(categoryAccessories) + "</div></li>");
   $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer' " + categoryOnClick(categoryPromo) + ">" + getPretty(categoryPromo) + "</div></li>");
