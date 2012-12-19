@@ -9,9 +9,6 @@ var antoniniknives_extension = function() {
 
       subcatProducts : {},
 
-      getSubcatProducts : function (navcat) {
-      },
-
       getPeriodCount : function(value) {
         // tells you if navcat is for a category or sub
         return (value.split(/[.]/) || '').length - 1;
@@ -44,6 +41,8 @@ var antoniniknives_extension = function() {
         if(typeof subcatData != 'undefined') {
           if(category && subCategory && subcatData[category] && subcatData[category][subCategory] && subcatData[category][subCategory][field]){
             value = subcatData[category][subCategory][field];
+          }else if (category && subcatData[category] && subcatData[category][field]) {
+            value = subcatData[category][field];
           }else {
             app.u.dump("Warning: subcatData entry for " + navcat + "[" + field + "]" + " is missing");
           }
@@ -99,6 +98,7 @@ var antoniniknives_extension = function() {
                 paragraph = catData[navcat][i].paragraph;
                 if (image) {
                   if (i % 2 === 0) {
+                    // toggles image class based on index - maybe do a toggle function so only toggles based on current class
                     imageClass = 'categoryImageEven';
                   } else{
                     imageClass = 'categoryImageOdd';
@@ -178,22 +178,30 @@ var antoniniknives_extension = function() {
       product_headings : function ($tag, data) {
         var navcat     = data.value;
         var category   = r.vars.getCategory(navcat);
-        var subCatLong = r.vars.getValueFromSubcatData(navcat, 'prettyLong');
+        var subCategory = r.vars.getCategory(navcat, 1);
+        var subCatLong;
+        // var subCatLong = r.vars.getValueFromSubcatData(navcat, 'prettyLong');
         var catPretty  = r.vars.getPretty(category);
         var linkHome   = "<h2><a href='#top' onClick=\"return showContent('homepage', {});\">Antonini:</a></h2>";
         var link       = linkHome;
 
-        if (!subCatLong) {
-          app.u.dump("Warning: trying " + navcat + "'s pretty name");
-          subCatLong = r.vars.getPretty(navcat);
+        if (subCategory) {
+          // on a subcategory
+          subCatLong = r.vars.getValueFromSubcatData(navcat, 'prettyLong');
+          if (!subCatLong) {
+            app.u.dump("Warning: trying " + navcat + "'s pretty name");
+            subCatLong = r.vars.getPretty(navcat);
+          }
         }
 
         if (navcat && subCatLong && category && catPretty) {
           // product resides in a sub category
+          // app.u.dump('on a sub');
           link += "<h1 class='headingProductSubCategory categoryColor'>" + r.vars.categoryLink(navcat, subCatLong) + "<h1>";
           link += "<h3 class='headingProductCategory'>" + r.vars.categoryLink(category, catPretty) + "</h3>";
         }else if(category && catPretty) {
           // product resides in top category
+          // app.u.dump('on a top');
           link += "<h1 class='headingProductSubCategory categoryColor'>" + r.vars.categoryLink(category, catPretty) + "<h1>";
         }
         $tag.html(link);
@@ -210,6 +218,7 @@ var antoniniknives_extension = function() {
 
         if(subCategory) {
           // on a sub category
+          // app.u.dump('on a sub category');
           subCatLong = r.vars.getValueFromSubcatData(navcat, 'prettyLong');
 
           if (!subCatLong) {
@@ -273,6 +282,20 @@ var antoniniknives_extension = function() {
           $tag.show();
         }else {
           $tag.parent('div').hide();
+        }
+      },
+
+      showObjectIfSet : function($tag,data) {
+        //      app.u.dump('BEGIN control.renderFormats.hideorShowTab');
+        //      app.u.dump(' -> data.value'+data.value);
+        if(data.value)  {
+          //        app.u.dump(' -> setting $tag.show()');
+          if (typeof data.value == 'object') {
+            if (data.value.length < 1) {
+              return;
+            };
+          };
+          $tag.show().css('display','block'); //IE isn't responding to the 'show', so the display:block is added as well.
         }
       }
     },// renderformats

@@ -153,5 +153,8 @@ var subcatData = {
       "description": "These are tools great for rescue use and are great for any crew's tool box.",
       "products": ["APOSAW", "LOBSTER"]
     }
+  },
+  ".accessories" : {
+    "products": ["FODERO09", "TOPBITS", "TOPNOBIT", "TOPPROBIT", "TOPSLIPPER"]
   }
 };

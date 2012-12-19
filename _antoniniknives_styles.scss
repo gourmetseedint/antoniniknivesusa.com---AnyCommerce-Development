@@ -860,7 +860,7 @@ $menuOffset: -35px;
 .navMenu {
   width: $width_menu;
   padding: $width_menu_padding;
-  color: $color_menu_text;
+  // color: $color_menu_text;
   background: $color_menu_bg;
   // position: relative;
   h2 {
@@ -880,6 +880,7 @@ $menuOffset: -35px;
   ul {
     // display: block; // breaks onCompletes
     div {
+    color: $color_menu_text;
       display: inline-block;
     }
   }
@@ -888,6 +889,7 @@ $menuOffset: -35px;
     padding: 0.3em;
     font-size: 1.2em;
     text-transform: uppercase;
+    // color: $color_menu_text;
   }
   ul li { 
     ul, li {
@@ -896,7 +898,7 @@ $menuOffset: -35px;
     ul { // submenu list
       // display: none;
       padding: 0.5em 0 0 0;
-      color: $color_menu_text;
+      // color: $color_menu_text;
       li {
         margin: 0;
         margin-bottom: 0.5em;
@@ -907,16 +909,6 @@ $menuOffset: -35px;
         background: $color_menu_product_bg;
         font-size: 1.1em;
         text-transform: none;
-        .appMessage { // hide missing products
-          display: none;
-        }
-        div { // not used
-          display: block;
-        }
-        .catName { // not used
-          margin: 0.1em 0;
-          padding: 0.2em 0.5em;
-        }
         &:last-child {
           margin-bottom: 0;
         }
@@ -934,7 +926,7 @@ $menuOffset: -35px;
           }
           &:active {
             @extend .navMenuSubActive;
-            color: $color_navMenuSubHover_bg;
+            // color: $color_navMenuSubHover_bg;
           }
         }
       }
@@ -979,6 +971,12 @@ a.navMenuLink {
   color: $color_navMenuSubHover_bg;
   // background: $color_navMenuSubHover_bg;
   background: $color_navMenuSubHover_text;
+}
+
+.navMenuCurrent {
+  &:link {
+    @extend .navMenuSubActive;
+  }
 }
 
 
@@ -1648,7 +1646,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
 }
 
 .productListWrapper {
-  // margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .categoryProductHover, .categoryListHover {
@@ -1966,8 +1964,8 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
 // }
 
 /* Wholesale contact form*/
-.contactForm {
-  float:right;
+.contactFormWholesale {
+  float:left;
   margin: 0 0 12px 12px;
   fieldset {
     border:1px solid #cccccc;

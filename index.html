@@ -166,7 +166,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         </nav>
       </div> -->
       <!-- used by wholesale -->
-      <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactForm contactFormWholesale'>
+      <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactFormWholesale'>
         <fieldset>
           <legend>Acquire Wholesale Information</legend>
           <div class='contactFormMessaging'></div>
@@ -342,7 +342,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>
 
   <!-- used by subcategory, shows a list of products -->
-  <div class="productListWrapper displayNone" data-bind="var: category(@products); format: showIfSet;">
+  <div class="productListWrapper displayNone" data-bind="var:category(@products); format:showObjectIfSet; extension:antoniniknives_extension;">
     <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList productListCategory'></ul>
   </div>
 

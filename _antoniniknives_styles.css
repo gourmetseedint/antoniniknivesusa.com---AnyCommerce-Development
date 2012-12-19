@@ -423,7 +423,6 @@ header {
 .navMenu {
   width: 200px;
   padding: 12px;
-  color: white;
   background: #101010; }
   .navMenu h2 {
     margin: 1em 0 0.5em;
@@ -437,6 +436,7 @@ header {
     margin: 0;
     padding: 0; }
   .navMenu ul div {
+    color: white;
     display: inline-block; }
   .navMenu li {
     margin-bottom: 1em;
@@ -446,8 +446,7 @@ header {
   .navMenu ul li ul, .navMenu ul li li {
     list-style: none; }
   .navMenu ul li ul {
-    padding: 0.5em 0 0 0;
-    color: white; }
+    padding: 0.5em 0 0 0; }
     .navMenu ul li ul li {
       margin: 0;
       margin-bottom: 0.5em;
@@ -457,13 +456,6 @@ header {
       background: #555555;
       font-size: 1.1em;
       text-transform: none; }
-      .navMenu ul li ul li .appMessage {
-        display: none; }
-      .navMenu ul li ul li div {
-        display: block; }
-      .navMenu ul li ul li .catName {
-        margin: 0.1em 0;
-        padding: 0.2em 0.5em; }
       .navMenu ul li ul li:last-child {
         margin-bottom: 0; }
       .navMenu ul li ul li a {
@@ -471,8 +463,6 @@ header {
         padding: 0.3em 0.5em; }
         .navMenu ul li ul li a:visited {
           color: inherit; }
-        .navMenu ul li ul li a:active {
-          color: #222222; }
 
 a.navMenuLink:link {
   color: white;
@@ -495,7 +485,7 @@ a.navMenuLink:active {
   color: #cccccc;
   background: #222222; }
 
-.navMenuSubActive, .navMenu ul li ul li a:active {
+.navMenuSubActive, .navMenu ul li ul li a:active, .navMenuCurrent:link {
   color: #222222;
   background: #cccccc; }
 
@@ -956,6 +946,9 @@ footer {
 .content .productListCategory {
   padding: 10px 0; }
 
+.productListWrapper {
+  margin-bottom: 40px; }
+
 .categoryProductHover, .categoryListHover {
   color: #383838; }
   .categoryProductHover h5, .categoryListHover h5 {
@@ -1201,21 +1194,21 @@ footer {
   font-size: 1.2em; }
 
 /* Wholesale contact form*/
-.contactForm {
-  float: right;
+.contactFormWholesale {
+  float: left;
   margin: 0 0 12px 12px; }
-  .contactForm fieldset {
+  .contactFormWholesale fieldset {
     border: 1px solid #cccccc;
     padding: 10px; }
-  .contactForm div {
+  .contactFormWholesale div {
     margin-bottom: 5px; }
-  .contactForm label {
+  .contactFormWholesale label {
     width: 105px;
     display: inline-block;
     margin-right: 6px;
     vertical-align: top;
     text-align: right; }
-  .contactForm input, .contactForm textarea {
+  .contactFormWholesale input, .contactFormWholesale textarea {
     width: 145px; }
-  .contactForm textarea {
+  .contactFormWholesale textarea {
     height: 125px; }

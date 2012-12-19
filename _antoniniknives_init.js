@@ -4,6 +4,7 @@ app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 // <!-- TODO: change carousel arrows -->
 // <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
 // <!-- TODO: IE compatibility -->
+// TODO: test login, buy, email
 
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
@@ -131,6 +132,7 @@ var pdfLinks         = '.pdfLinks';
 var headingSubsParent = '.headingSubsParent';
 var htmlSafe;
 var currentSubListItem;
+var navMenuSubCurrent = 'navMenuCurrent';
 
 var subcatPrettyLong = '.subcatPrettyLong';
 var subcatDescription = '.subcatDescription';
@@ -241,7 +243,7 @@ function resetCategoryLogo() {
 
 function resetAllMenuSubs() {
   $(menuSubLists).slideUp(500);
-  // $(menuSubLists + ' li').removeClass('navMenuSubActive');
+  // $(menuSubLists + ' li').removeClass(navMenuSubCurrent);
 }
 
 
@@ -520,7 +522,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
     if (currentNavcat) {
       htmlSafe = currentNavcat.split('.').join('_');
       currentSubListItem = '.subcategory' + htmlSafe + ' a:link';
-      $(currentSubListItem).addClass('navMenuSubActive');
+      $(currentSubListItem).addClass(navMenuSubCurrent);
     }
   }
 
@@ -584,8 +586,9 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
 
 app.rq.push(['templateFunction','categoryTemplate','onDeparts',function(P) {
   if (currentSubListItem) {
-    $(currentSubListItem).removeClass('navMenuSubActive');
+    $(currentSubListItem).removeClass(navMenuSubCurrent);
   }
+  $(wholesaleContact).hide();
 }]);
 
 ///// products \\\\\
@@ -608,7 +611,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   if (currentNavcat) {
     htmlSafe = currentNavcat.split('.').join('_');
     currentSubListItem = '.subcategory' + htmlSafe + ' a:link';
-    $(currentSubListItem).addClass('navMenuSubActive');
+    $(currentSubListItem).addClass(navMenuSubCurrent);
   }
 
   // carousels
@@ -663,7 +666,7 @@ app.rq.push(['templateFunction', 'productTemplate', 'onDeparts', function (P) {
   // stopSliderProductExtras(P.parentID);
   stopSliderProductExtras();
   if(currentSubListItem) {
-    $(currentSubListItem).removeClass('navMenuSubActive');
+    $(currentSubListItem).removeClass(navMenuSubCurrent);
   }
 }]);
 
@@ -741,8 +744,8 @@ app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
   // Add accessores & promo to menu
-  $('#tier1categories').append("<li class='pointer' id='tier1categories_accessories'" + categoryOnClick(categoryAccessories) + ">" + getPretty(categoryAccessories) + "</li>");
-  $('#tier1categories').append("<li class='pointer' id='tier1categories_promo__customizing'" + categoryOnClick(categoryPromo) + ">" + getPretty(categoryPromo) + "</li>");
+  $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categoryAccessories) + ">" + getPretty(categoryAccessories) + "</div></li>");
+  $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer' " + categoryOnClick(categoryPromo) + ">" + getPretty(categoryPromo) + "</div></li>");
 };
 
 
