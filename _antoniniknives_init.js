@@ -604,9 +604,9 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   
   // app.u.dump([P]);
   // app.u.dump($(productCategory, '#' + P.parentID).html());
-  currentNavcat   = $('#' + P.parentID + ' ' + productCategory).html();
+  currentNavcat   = currentNavcat || $('#' + P.parentID + ' ' + productCategory).html();
   app.u.dump('currentNavcat: ' + currentNavcat);
-  currentCategory = getCategory(currentNavcat);
+  currentCategory = currentCategory || getCategory(currentNavcat);
   app.u.dump('currentCategory: ' + currentCategory);
   // currentSub      = getCategory(currentNavcat, 1);
 
