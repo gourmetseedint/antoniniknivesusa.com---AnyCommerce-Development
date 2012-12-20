@@ -12,7 +12,7 @@ var catData = {
       "paragraph": "Promo paragraph 1"
     },
     {
-      "image": "promo_image_2.png",
+      "image": "promo_image_1.png",
       "paragraph": "Promo paragraph 2"
     },
     {
@@ -26,7 +26,7 @@ var catData = {
       "paragraph": "GSI Distributing is a d/b/a of Gourmet Seed International, LLC and is the official North American distributor for A. E. Coltellerie snl, the makers of Antonini Knives."
     },
     {
-      "image": "about_image_2.png",
+      "image": "GSIDistLogo.png",
       "paragraph": "Formed in 2005 as a merger of several family-owned companies (Good Earth Seed, Harvest Moon Farms, and Italian Seed and Tool), Gourmet Seed International, LLC is still family owned as a joint venture of the Harris and Winteregg families. Located in rural Southeast New Mexico, we bring old-fashioned, small-town values into everything we do."
     },
     {
