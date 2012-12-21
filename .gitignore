@@ -169,3 +169,5 @@ pip-log.txt
 
 # sass
 .sass-cache/*
+
+client_files/*

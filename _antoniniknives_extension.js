@@ -252,23 +252,27 @@ var antoniniknives_extension = function() {
       },
 
       specialCategoryData : function ($tag, data) {
-        var promo = '.promo_-_customizing';
-        var aboutGsi = '.about_gsi_distributing';
+        // var promo = '.promo_-_customizing';
+        // var aboutGsi = '.about_gsi_distributing';
         var currentCategory = data.value; // expects category navcat id
         var description = '';
 
-        switch(currentCategory) {
-          case promo:
-            app.u.dump('got promo');
-            description = r.vars.getCategoryDescription(promo);
-            break;
-          case aboutGsi:
-            app.u.dump('got about');
-            description = r.vars.getCategoryDescription(aboutGsi);
-            break;
-        }
+        // switch(currentCategory) {
+        //   case promo:
+        //     app.u.dump('got promo');
+        //     description = r.vars.getCategoryDescription(promo);
+        //     break;
+        //   case aboutGsi:
+        //     app.u.dump('got about');
+        //     description = r.vars.getCategoryDescription(aboutGsi);
+        //     break;
+        // }
 
-        $tag.html(description);
+        description = r.vars.getCategoryDescription(currentCategory);
+
+        if (description) {
+          $tag.html(description);
+        }
       },
 
       subcatProductList : function($tag,data) {
@@ -296,37 +300,12 @@ var antoniniknives_extension = function() {
           if (typeof data.value == 'object') {
             if (data.value.length < 1) {
               return;
-            };
-          };
+            }
+          }
           $tag.show().css('display','block'); //IE isn't responding to the 'show', so the display:block is added as well.
         }
       }
-    },// renderformats
-
-    // u : {
-    //   showReviewFrmInModal : function(P)  {
-    //     if(!P.pid || !P.templateID) {
-    //       app.u.dump(" -> pid or template id left blank");
-    //       }
-    //     else  {
-    //       var $parent = $('#review-modal');
-    //   //if no review modal has been created before, create one. 
-    //   if($parent.length == 0) {
-    //     app.u.dump(" -> modal window doesn't exist. create it.");
-    //     $parent = $("<div \/>").attr({"id":"review-modal",'data-pid':P.pid}).appendTo(document.body);
-    //     }
-    //   else  {
-    //     app.u.dump(" -> use existing modal. empty it.");
-    //   //this is a new product being displayed in the viewer.
-    //     $parent.empty();
-    //     }
-    //   $parent.dialog({modal: true,width:500,height:500,autoOpen:false,"title":"Write a review for "+P.pid});
-    //   //the only data needed in the reviews form is the pid.
-    //   //the entire product record isn't passed in because it may not be available (such as in invoice or order history, or a third party site).
-    //     $parent.dialog('open').append(app.renderFunctions.transmogrify({id:'review-modal_'+P.pid},P.templateID,{'pid':P.pid}));
-    //     }
-    //   }
-    // } // utils
+    }// renderformats
   }; //r object.
 
   return r;

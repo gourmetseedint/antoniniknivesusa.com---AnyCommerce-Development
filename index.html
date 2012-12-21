@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Antonini Knives USA</title>
+<!-- <title>Antonini Knives USA</title> -->
 <!-- used for optional social media extensions -->
 <meta property="og:type" content="" id='ogType' />
 <meta property="og:image" content="" id='ogImage' />
@@ -18,7 +18,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121218185157",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121220173817",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -101,7 +101,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
           <span class='navTopLeft'></span>
           <div>
             <ul>
-              <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
+              <li><a href="#category?navcat=.about-antonini" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
               <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a></li>
               <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a></li>
               <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a></li>
@@ -154,7 +154,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
       <!-- <div class='sideline' >
         <nav id='companyNav'>
         <ul class='listStyleNone noPadOrMargin'>
-          <li><a href='#company?show=about'  id='navLink_about' title='About Antonini'>About Antonini</a></li>
+          <li><a href='#category?navcat=.about-antonini' class='bindByAnchor'  id='navLink_about' title='About Antonini'>About Antonini</a></li>
           <li><a href="#category?navcat=.about_gsi_distributing" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a></li>
           <li><a href="#category?navcat=.testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
           <li><a href='#company?show=contact'  id='navLink_contact' title='Contact Information'>Contact Information</a></li>
@@ -187,7 +187,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         <div class="containerInner">
           <ul class="footerBox"><h3>About</h3>
             <li><a href="#homepage" class='bindByAnchor' title='Home'>Home</a></li>
-            <li><a href="#company?show=about" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
+            <li><a href="#category?navcat=.about-antonini" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
             <li><a href="#category?navcat=.testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
             <li><a href="#category?navcat=.about_gsi_distributing" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a></li>
           </ul>
@@ -291,7 +291,7 @@ the homepageTemplate template is loaded into mainContentArea by default when the
       <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;'></ul>
       <div class='homepageText'>
         <div class='homepageDescription' data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></div>
-        <a class='button bindByAnchor' href="#company?show=about" title='More About Antonini'>More About Antonini</a>
+        <a class='button bindByAnchor' href="#category?navcat=.about-antonini" title='More About Antonini'>More About Antonini</a>
       </div>
     </div>
   </div>  
@@ -1023,7 +1023,7 @@ adding classes is not likely to have any bad effects.
   <div class='sideline printNo' >
     <nav id='companyNav'>
     <ul class='listStyleNone noPadOrMargin'>
-      <li><a href='#company?show=about'  id='navLink_about' title='About Antonini'>About Antonini</a></li>
+      <li><a href='#category?navcat=.about-antonini' class='bindByAnchor' id='navLink_about' title='About Antonini'>About Antonini</a></li>
       <li><a href="#category?navcat=.about_gsi_distributing" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a></li>
       <li><a href="#category?navcat=.testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
       <li><a href='#company?show=contact'  id='navLink_contact' title='Contact Information'>Contact Information</a></li>
