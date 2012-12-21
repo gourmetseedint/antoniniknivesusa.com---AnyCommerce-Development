@@ -7,7 +7,7 @@ var subcatData = {
   ".boat_-_fishing": {
     ".antonini": {
       "prettyLong": "ANTONINI Boating Knives",
-      "description": "The ANTONINI collection is a group of basic and essential knifes for the tool box of any boat or fisherman.",
+      "description": "The ANTONINI collection is a group of basic and essential knifes perfect for the tool box of any boat or fisherman.",
       "products": ["1407N", "1507N", "9041B", "9041R"]
     },
     ".boat" : {
@@ -29,7 +29,7 @@ var subcatData = {
   ".cable_-_electrical": {
     ".ampere": {
       "prettyLong": "AMPERE Pro Electrician Knives",
-      "description": "The AMPERE line of professional electrician knifes is optimized for utility with two wire-scrapers built in to the blade.",
+      "description": "The AMPERE line of professional electrician knifes is optimized for utility with two wire insulation strippers built in to the blade.",
       "products": ["231N"]
     },
     ".export": {
@@ -76,7 +76,7 @@ var subcatData = {
     },
     ".traditional": {
       "prettyLong": "TRADITIONAL Pruning Knives",
-      "description": "The TRADITIONAL range of knives a wide range of pruning and grafting knives and saws in wide agricultural use.",
+      "description": "The TRADITIONAL range of knives is a wide range of pruning and grafting knives and saws in wide agricultural use.",
       "products": ["9480LA", "9490LA", "9500LA", "899N"]
     }
   },
