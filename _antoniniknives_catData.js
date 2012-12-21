@@ -9,15 +9,15 @@ var catData = {
   ".promo_-_customizing": [
     {
       "image": "promo_image_1.png",
-      "paragraph": "All knives with plastic or wooden handles can be customized with logos and company details.  The methods that can be used are thermal printing (for fairly simple logos or text), tampography or serigraphy with single or mulitple colors.   Proof of ownership or user authorisation must be provided for printing logos or brand names. The logo or brand name to be printed must be provided on file, preferably in digital EPS or TIFF format. Click on WHOLESALE AVAILABLE to the left for estimates and minimum batch sizes for inquiries regarding customising."
+      "paragraph": "All knives with plastic or wooden handles can be customized with logos and company details.  The methods that can be used are thermal printing (for fairly simple logos or text), tampography or serigraphy with single or mulitple colors.   Proof of ownership or user authorization must be provided for printing logos or brand names. The logo or brand name to be printed must be provided on file, preferably in digital EPS or TIFF format. Click on WHOLESALE AVAILABLE to the left for estimates and minimum batch sizes for customizing."
     },
     {
       "image": "promo_image_1.png",
-      "paragraph": "Knives with anodized aluminum are particularly well suited to laser incision customizing. Laser incision removes the anodized color layer revealing the uniform single light grey shade of the original aluminum. Laser incision can also be performed on the blade and offers an excellent sense of contrast. This type of incision is permanent, cannot be modified and adds a degree of exclusivity to a product. For the reproduction of brand names and logos, proof of ownership or authorisation must be provided and the logo or brand name needs to be provided in digital EPS or TIFF format.  Click on WHOLESALE AVAILABLE to the left for estimates and minimum batch sizes for inquiries regarding customising."
+      "paragraph": "Knives with anodized aluminum handles are particularly well suited to laser incision customizing. Laser incision removes the anodized color layer revealing the uniform single light grey shade of the original aluminum. Laser incision can also be performed on the blade and offers an excellent sense of contrast. This type of incision is permanent, cannot be modified and adds a degree of exclusivity to a product. For the reproduction of brand names and logos, proof of ownership or authorization must be provided and the logo or brand name needs to be provided in digital EPS or TIFF format.  Click on WHOLESALE AVAILABLE to the left for estimates and minimum batch sizes for customizing."
     },
     {
       "image": "promo_image_3.png",
-      "paragraph": "There are additional custom options available for many of the Antonini knives, including handle color, handle material (ex. wood, plastic, etc.), and blade type (ex. stainless or carbon).  Click on WHOLESALE AVAILABLE to the left for estimates and minimum batch sizes for inquiries regarding customising."
+      "paragraph": "There are additional custom options available for many of the Antonini knives, including handle color, handle material (ex. wood, plastic, etc.), and blade type (ex. stainless or carbon).  Click on WHOLESALE AVAILABLE to the left for estimates and minimum batch sizes for customizing."
     }
   ],
   ".about_gsi_distributing": [
