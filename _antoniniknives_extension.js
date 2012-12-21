@@ -92,20 +92,16 @@ var antoniniknives_extension = function() {
 
         if (navcat) {
           if(typeof catData != 'undefined') {
-            imageDirectory = catData.imageDirectory || '';
             if (catData[navcat]) {
+              imageDirectory = catData.imageDirectory || '';
+              imageClass     = 'categoryImageEven';
               for (var i = 0; i < catData[navcat].length; i++) {
                 // iterates for array and adds image and description if they exist
                 description += "<div>";
-                image     = catData[navcat][i].image;
-                paragraph = catData[navcat][i].paragraph;
+                image       = catData[navcat][i].image;
+                paragraph   = catData[navcat][i].paragraph;
                 if (image) {
-                  if (i % 2 === 0) {
-                    // toggles image class based on index - maybe do a toggle function so only toggles based on current class
-                    imageClass = 'categoryImageEven';
-                  } else{
-                    imageClass = 'categoryImageOdd';
-                  }
+                  imageClass = (imageClass == 'categoryImageEven') ? 'categoryImageOdd' : 'categoryImageEven';
                   description += "<img class='categoryImage " + imageClass +"' alt='Category Image' src='" + imageDirectory + image + "'></img>";
                 }
                 if (paragraph) {
