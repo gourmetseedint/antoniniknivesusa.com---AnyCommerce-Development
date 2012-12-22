@@ -28,34 +28,35 @@ var myRIA = function() {
 //if this is a custom extension and you are loading system extensions (prodlist, etc), then load ALL templates you'll need here.
     "templates" : [
 //the list of templates that are commonly edited (same order as they appear in appTemplates
-      'homepageTemplate', 'categoryTemplate',
-      'categoryListTemplate',
-      'categoryListTemplateRootCats',
-      'productListTemplate',
-      'productListTemplateATC',
-      'productListTemplateBuyerList',
-      'productListTemplateResults',
-      'productTemplate',
-      'productTemplateQuickView',
-      'pageNotFoundTemplate',
+      "homepageTemplate",
+      "categoryTemplate",
+      "categoryListTemplate",
+      "categoryListTemplateRootCats",
+      "productListTemplate",
+      "productListTemplateATC",
+      "productListTemplateBuyerList",
+      "productListTemplateResults",
+      "productTemplate",
+      "productTemplateQuickView",
+      "pageNotFoundTemplate",
 //the list of templates that, in most cases, are left alone. Also in the same order as appTemplates
-      'breadcrumbTemplate',
-      'companyTemplate',
-      'customerTemplate',
-      'searchTemplate',
-      'mpControlSpec',
-      'cartTemplate',
-      'productListTemplateCart',
-      'productListTemplateChildren',
-      'productReviewsTemplateDetail',
-      'imageViewerTemplate',
-      'reviewFrmTemplate',
-      'subscribeFormTemplate',
-      'orderLineItemTemplate',
-      'faqTopicTemplate',
-      'faqQnATemplate',
-      'billAddressTemplate',
-      'shipAddressTemplate'],
+      "breadcrumbTemplate",
+      "companyTemplate",
+      "customerTemplate",
+      "searchTemplate",
+      "mpControlSpec",
+      "cartTemplate",
+      "productListTemplateCart",
+      "productListTemplateChildren",
+      "productReviewsTemplateDetail",
+      "imageViewerTemplate",
+      "reviewFrmTemplate",
+      "subscribeFormTemplate",
+      "orderLineItemTemplate",
+      "faqTopicTemplate",
+      "faqQnATemplate",
+      "billAddressTemplate",
+      "shipAddressTemplate"],
     "sotw" : {}, //state of the world. set to most recent page info object.
     "hotw" : new Array(15), //history of the world. contains 15 most recent sotw objects.
     "session" : {
@@ -1189,6 +1190,7 @@ P.listID (buyer list id)
         P.back = 0; //skip adding a pushState on initial page load.
 //getParams wants string to start w/ ? but doesn't need/want all the domain url crap.
         P.uriParams = app.u.getParametersAsObject('?'+window.location.href.split('?')[1]);
+        // app.u.dump([P.uriParams]);
         if(P.uriParams.meta)  {
           app.calls.cartSet.init({'meta':P.uriParams.meta},{},'passive');
           }

@@ -811,8 +811,8 @@ app.u.initMVC = function(attempts){
 app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
-  // Add accessores & promo to menu
-  $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categories['accessores'].navcat) + ">" + getPretty(categories['accessores'].navcat) + "</div></li>");
+  // Add accessories & promo to menu
+  $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categories['accessories'].navcat) + ">" + getPretty(categories['accessories'].navcat) + "</div></li>");
   $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer' " + categoryOnClick(categories['promo'].navcat) + ">" + getPretty(categories['promo'].navcat) + "</div></li>");
 };
 
