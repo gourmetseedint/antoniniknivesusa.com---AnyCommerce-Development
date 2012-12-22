@@ -369,7 +369,7 @@ function startSlideShow() {
 function defaultPage() {
   resetBanner();
   resetAllMenuSubs();
-  $(banner).addClass(classBannerHome, function () {
+  $(banner).addClass(categories['home'].banner, function () {
     startSlideShow();
   });
   $(sidebar).addClass(sidebarHome);
