@@ -74,70 +74,70 @@ var categories = {
     "banner": "bannerHome",
     "logo": "",
     "menu": "",
-    "color": ""
+    "accentColor": ""
   },
   "boat": {
     "navcat": ".boat_-_fishing",
     "banner": "bannerCategoryBoat",
     "logo": "logoCategoryBoat",
     "menu": "#tier1categories_boat__fishing ul",
-    "color": ".categoryBoat"
+    "accentColor": ".categoryBoat"
   },
   "cable": {
     "navcat": ".cable_-_electrical",
     "banner": "bannerCategoryCable",
     "logo": "logoCategoryCable",
     "menu": "#tier1categories_cable__electrical ul",
-    "color": ".categoryCable"
+    "accentColor": ".categoryCable"
   },
   "farm": {
     "navcat": ".farm_-_garden",
     "banner": "bannerCategoryFarm",
     "logo": "logoCategoryFarm",
     "menu": "#tier1categories_farm__garden ul",
-    "color": ".categoryFarm"
+    "accentColor": ".categoryFarm"
   },
   "pocket": {
     "navcat": ".pocket_-_traditional",
     "banner": "bannerCategoryPocket",
     "logo": "logoCategoryPocket",
     "menu": "#tier1categories_pocket__traditional ul",
-    "color": ".categoryPocket"
+    "accentColor": ".categoryPocket"
   },
   "promo": {
     "navcat": ".promo_-_customizing",
     "banner": "bannerCategoryPromo",
     "logo": "logoCategoryPromo",
     "menu": "#tier1categories_promo__customizing ul",
-    "color": ".categoryPromo"
+    "accentColor": ".categoryPromo"
   },
   "sos": {
     "navcat": ".sos_-_rescue",
     "banner": "bannerCategorySos",
     "logo": "logoCategorySos",
     "menu": "#tier1categories_sos__rescue ul",
-    "color": ".categorySos"
+    "accentColor": ".categorySos"
   },
   "accessories": {
     "navcat": ".accessories",
     "banner": "",
     "logo": "",
     "menu": "",
-    "color": ""
+    "accentColor": ""
   },
   "wholesale": {
     "navcat": ".wholesale",
     "banner": "",
     "logo": "",
     "menu": "",
-    "color": ""
+    "accentColor": ""
   },
   "pdf": {
     "navcat": ".pdf-catalogs",
     "banner": "",
     "logo": "",
     "menu": "",
-    "color": ""
+    "accentColor": ""
   }
 };
 
@@ -555,6 +555,179 @@ app.rq.push(['templateFunction','searchTemplate','onCompletes',function(P) {
   //   $(this).toggleClass('categoryProductHover');
   // });
 }]);
+
+///// categories \\\\\
+app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
+  // app.u.dump('on category');
+  // resets
+  resetBanner();
+  resetCategoryLogo();
+  resetAllMenuSubs();
+
+  currentNavcat   = P.navcat;
+  currentCategory = getCategory(currentNavcat);
+
+  // show category sub in menu
+  $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
+
+  if (currenNavcat && currentNavcat !== currentCategory) {
+    // sub category
+    htmlSafe = currentNavcat.split('.').join('_');
+    currentSubListItem = '.subcategory' + htmlSafe + ' a:link';
+    $(currentSubListItem).addClass(navMenuSubCurrent);
+  }
+
+  // add hover class to lists
+  $('#'+P.parentID+' '+'.subCategory').hover(function() {
+    $(this).toggleClass('categoryListHover');
+  });
+
+  // add hover class to products
+  $('#'+P.parentID+' '+'.product').hover(function() {
+    $(this).toggleClass('categoryProductHover');
+  });
+
+  //add link to logo
+  $(logoCategory).html(categoryLink(currentCategory));
+
+  switch(currentCategory) {
+    case categories['boat'].navcat:
+      $(banner).addClass(categories['boat'].banner);
+      $(logoCategory).addClass(categories['boat'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['boat'].accentColor);
+      break;
+    case categories['cable'].navcat:
+      $(banner).addClass(categories['cable'].banner);
+      $(logoCategory).addClass(categories['cable'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['cable'].accentColor);
+      break;
+    case categories['farm'].navcat:
+      $(banner).addClass(categories['farm'].banner);
+      $(logoCategory).addClass(categories['farm'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['farm'].accentColor);
+      break;
+    case categories['pocket'].navcat:
+      $(banner).addClass(categories['pocket'].banner);
+      $(logoCategory).addClass(categories['pocket'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['pocket'].accentColor);
+      break;
+    case categories['promo'].navcat:
+      $(banner).addClass(categories['promo'].banner);
+      $(logoCategory).addClass(categories['promo'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['promo'].accentColor);
+      break;
+    case categories['sos'].navcat:
+      $(banner).addClass(categories['sos'].banner);
+      $(logoCategory).addClass(categories['sos'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['sos'].accentColor);
+      break;
+    case categories['wholesale'].navcat:
+      defaultPage();
+      $(wholesaleContact).show();
+      break;
+    case categories['pdf'].navcat:
+      defaultPage();
+      $(pdfLinks).html(getPdfLinks());
+      $(pdfLinks).show();
+      break;
+    default:
+      defaultPage();
+  }
+}]);
+
+app.rq.push(['templateFunction','categoryTemplate','onDeparts',function(P) {
+  if (currentSubListItem) {
+    $(currentSubListItem).removeClass(navMenuSubCurrent);
+  }
+  $(wholesaleContact).hide();
+}]);
+
+///// products \\\\\
+app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
+  // resets
+  resetBanner();
+  resetCategoryLogo();
+  resetAllMenuSubs();
+  
+  // app.u.dump([P]);
+  // app.u.dump($(productCategory, '#' + P.parentID).html());
+  // IE loads this 3 times, navcat span becomes blank
+  currentNavcat = currentNavcat || $('#' + P.parentID + ' ' + productCategory).html();
+  // app.u.dump('currentNavcat: ' + currentNavcat);
+  currentCategory = currentCategory || getCategory(currentNavcat);
+  // app.u.dump('currentCategory: ' + currentCategory);
+  // currentSub      = getCategory(currentNavcat, 1);
+
+  // show category sub in menu
+  $(getTier1ID(currentCategory) + ' > ul').slideDown();
+
+  // add active class to subcategory
+  if (currentNavcat) {
+    htmlSafe = currentNavcat.split('.').join('_');
+    currentSubListItem = '.subcategory' + htmlSafe + ' a:link';
+    $(currentSubListItem).addClass(navMenuSubCurrent);
+  }
+
+  // carousels
+  startSliderProductExtras(P.parentID);
+
+  // add hover class to products - broken by slider
+  $('#' + P.parentID + ' ' + '.product' + ' ' + '.productAttribute').hide();
+  $('#'+P.parentID+' '+'.product').hover(function() {
+    $(this).toggleClass('categoryProductHover');
+    $(this).children().children('.productAttribute').slideToggle();
+  });
+
+  switch(currentCategory) {
+    case categories['boat'].navcat:
+      $(banner).addClass(categories['boat'].banner);
+      $(logoCategory).addClass(categories['boat'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['boat'].accentColor);
+      break;
+    case categories['cable'].navcat:
+      $(banner).addClass(categories['cable'].banner);
+      $(logoCategory).addClass(categories['cable'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['cable'].accentColor);
+      break;
+    case categories['farm'].navcat:
+      $(banner).addClass(categories['farm'].banner);
+      $(logoCategory).addClass(categories['farm'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['farm'].accentColor);
+      break;
+    case categories['pocket'].navcat:
+      $(banner).addClass(categories['pocket'].banner);
+      $(logoCategory).addClass(categories['pocket'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['pocket'].accentColor);
+      break;
+    case categories['promo'].navcat:
+      $(banner).addClass(categories['promo'].banner);
+      $(logoCategory).addClass(categories['promo'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['promo'].accentColor);
+      break;
+    case categories['sos'].navcat:
+      $(banner).addClass(categories['sos'].banner);
+      $(logoCategory).addClass(categories['sos'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['sos'].accentColor);
+      break;
+    default:
+      defaultPage();
+  }
+}]);
+
+app.rq.push(['templateFunction', 'productTemplate', 'onDeparts', function (P) {
+  // app.u.dump('leaving product');
+  // stopSliderProductExtras(P.parentID);
+  stopSliderProductExtras();
+  if(currentSubListItem) {
+    $(currentSubListItem).removeClass(navMenuSubCurrent);
+  }
+
+  // reset navcat
+  // currentNavcat = '';
+  // currentCategory = '';
+}]);
+
+///// end custom \\\\\
 
 /*
 This function is overwritten once the controller is instantiated.
