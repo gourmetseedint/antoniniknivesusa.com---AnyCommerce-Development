@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121222143531",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121222144255",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -164,18 +164,18 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         </nav>
       </div> -->
       <!-- used by wholesale -->
-     <!--  <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactFormWholesale'>
+      <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactFormWholesale'>
         <fieldset>
           <legend>Acquire Wholesale Information</legend>
           <div class='contactFormMessaging'></div>
           <div><label for='contactFormSenderWholesale'>Email Address: </label><input type='email' name='sender' required='required' id='contactFormSenderWholesale' /></div>
           <div class='displayNone'><input type='hidden' name='subject' id='contactFormSubjectWholesale' value="Wholesale Inquiry"/></div>
-          >--><!-- <div><label for='contactFormOID'>Order ID: </label><input type='text' name='OID' id='contactFormOID' /></div> --><!--
+          <!-- <div><label for='contactFormOID'>Order ID: </label><input type='text' name='OID' id='contactFormOID' /></div> -->
           <div><label for='contactFormBodyWholesale'>Nature of Request: </label><textarea name='body' required='required' id='contactFormBodyWholesale'></textarea></div>
           <div class='alignRight'><input type='submit' class='ui-button-text ui-button ui-state-default ui-corner-all' value='Send Message' />
           </div>
         </fieldset>
-      </form> -->
+      </form>
     </div>
   </div>
   <!-- <footer class='printNo'>

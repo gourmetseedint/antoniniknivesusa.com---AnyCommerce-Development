@@ -861,15 +861,13 @@ $.widget( "ui.localtabs", {
 if ( $.uiBackCompat !== false ) {
 
 	// helper method for a lot of the back compat extensions
-	if ($.ui.tabs && $.ui.tabs.prototype) {
-		$.ui.tabs.prototype._ui = function( tab, panel ) {
-			return {
-				tab: tab,
-				panel: panel,
-				index: this.anchors.index( tab )
-			};
+	$.ui.tabs.prototype._ui = function( tab, panel ) {
+		return {
+			tab: tab,
+			panel: panel,
+			index: this.anchors.index( tab )
 		};
-	}
+	};
 
 	// url method
 	$.widget( "ui.tabs", $.ui.tabs, {

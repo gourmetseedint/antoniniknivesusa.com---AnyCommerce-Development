@@ -488,7 +488,9 @@ function stopAnythingSlider($target) {
   // $('.anythingSlider').eq(1).remove();
   // $target.data('AnythingSlider').startStop(false);
   // app.u.dump([$target]);
-  $target.data('AnythingSlider').startStop(false);
+  if (($slider = $target.data('AnythingSlider'))) {
+    $slider.startStop(false);
+  }
   // app.u.dump('stopped slider: ' + $target.selector);
 }
 
