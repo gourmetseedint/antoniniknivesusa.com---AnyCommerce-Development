@@ -29,6 +29,8 @@ app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':functi
 app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
 app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
 
+//group any third party files together (regardless of pass) to make troubleshooting easier.
+app.rq.push(['script',0,(document.location.protocol == 'https:' ? 'https:' : 'http:')+'//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.js']);
 app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
 app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.js']);
 
@@ -63,8 +65,6 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
 
 
-//group any third party files together (regardless of pass) to make troubleshooting easier.
-app.rq.push(['script',0,(document.location.protocol == 'https:' ? 'https:' : 'http:')+'//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.js']);
 
 
 /*
