@@ -43,7 +43,10 @@ var catData = {
   ".about-antonini": [
     {
       "image": "cutting.jpg",
-      "paragraph": "Founded in 1925, A. E. Coltellerie snl has been creating great knives under the \"Antonini\" brand for more than three generations. The heritage of their location in the Maniago area near Pordenone, in northeast Italy, an area with a history of making knives, blades, and other cutting tools since Medieval times provides centuries of experience and skill."
+      "paragraph": "Founded in 1925, A. E. Coltellerie snl has been creating great knives under the \"Antonini\" brand for more than three generations."
+    },
+    {
+      "paragraph": "The heritage of their location in the Maniago area near Pordenone, in northeast Italy provides centuries of experience and skill, as it is an area with a history of making knives, blades, and other cutting tools since Medieval times."
     },
     {
       "image": "grinding.jpg",
