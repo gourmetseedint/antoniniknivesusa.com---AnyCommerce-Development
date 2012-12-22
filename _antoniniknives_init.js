@@ -793,8 +793,8 @@ app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
   // Add accessores & promo to menu
-  $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categoryAccessories) + ">" + getPretty(categoryAccessories) + "</div></li>");
-  $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer' " + categoryOnClick(categoryPromo) + ">" + getPretty(categoryPromo) + "</div></li>");
+  $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categories['accessores'].navcat) + ">" + getPretty(categories['accessores'].navcat) + "</div></li>");
+  $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer' " + categoryOnClick(categories['promo'].navcat) + ">" + getPretty(categories['promo'].navcat) + "</div></li>");
 };
 
 
