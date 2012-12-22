@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121222151306",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121222153233",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -962,13 +962,15 @@ adding classes is not likely to have any bad effects.
   <div class='sideline' >
 <nav id='companyNav'>
 <ul class='listStyleNone noPadOrMargin'>
-  <li><a href='#company?show=about'  id='navLink_about'>About Us</a></li>
-  <li><a href='#company?show=contact'  id='navLink_contact'>Contact Information</a></li>
-  <li><a href='#company?show=faq'  id='navLink_faq'>FAQ</a></li>
-  <li><a href='#company?show=payment' id='navLink_payment'>Payment Policy</a></li>
-  <li><a href='#company?show=privacy' id='navLink_privacy'>Privacy Statement</a></li>
-  <li><a href='#company?show=return' id='navLink_return'>Return Policy</a></li>
-  <li><a href='#company?show=shipping' id='navLink_shipping'>Shipping Information</a></li>
+  <li><a href='#category?navcat=.about-antonini' class='bindByAnchor' id='navLink_about' title='About Antonini'>About Antonini</a></li>
+  <li><a href="#category?navcat=.about_gsi_distributing" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a></li>
+  <li><a href="#category?navcat=.testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
+  <li><a href='#company?show=contact'  id='navLink_contact' title='Contact Information'>Contact Information</a></li>
+  <li><a href='#company?show=faq'  id='navLink_faq' title='FAQ'>FAQ</a></li>
+  <li><a href='#company?show=payment' id='navLink_payment' title='Payment Policy'>Payment Policy</a></li>
+  <li><a href='#company?show=privacy' id='navLink_privacy' title='Privacy Statement'>Privacy Statement</a></li>
+  <li><a href='#company?show=return' id='navLink_return' title='Return Policy'>Return Policy</a></li>
+  <li><a href='#company?show=shipping' id='navLink_shipping' title='Shipping Information'>Shipping Information</a></li>
 </ul>
 </nav>
   </div>
@@ -976,13 +978,19 @@ adding classes is not likely to have any bad effects.
   <div class='mainColumn'>
 <!-- .textContentArea is used as a selector in quickstart.js because article tag type isn't ie8 friendly -->
     <div id='aboutArticle' class='textContentArea article'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>About Us</h1>
+    </div>
       <div data-bind='var: profile(zoovy:about); format:wiki; wikiFormats:myRIA;' id='aboutUsContent'></div>
     </div>
   
   
     <div id='contactArticle' class='displayNone textContentArea'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>Contact Information</h1>
+    </div>
       <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" id='contactForm' name='contactForm'>
       <fieldset>
         <legend>Contact Us</legend>
@@ -1001,20 +1009,29 @@ adding classes is not likely to have any bad effects.
     
   
     <div id='faqArticle' class='displayNone textContentArea'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>Frequently Asked Questions</h1>
+    </div>
       <div id='faqContent' class='loadingBG ui-accordion ui-widget ui-helper-reset ui-accordion-icons appAccordianesque'></div>
     </div>
   
 
   
     <div class='displayNone textContentArea' id='paymentArticle'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>Payment Policy</h1>
+    </div>
       <div data-bind='var: profile(zoovy:payment_policy); format:wiki; wikiFormats:myRIA;' id='paymentContent'></div>
     </div>
     
     
     <div class='displayNone textContentArea' id='privacyArticle'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>Privacy Statement</h1>
+    </div>
   <h4>About this Privacy Policy:</h4>
   <p>The entire site, or at least specific portions of this site are assisted by Zoovy technology. Zoovy has created this privacy policy as a template for customers who are using Zoovy technology with their websites. Zoovy in no way takes responsibility for the accuracy or enforcement of this policy. For a copy of Zoovy's privacy policy (which does not necessarily apply to the customers of its customers) visit http://www.zoovy.com/legal</p>
   
@@ -1058,14 +1075,20 @@ adding classes is not likely to have any bad effects.
     
     
     <div class='displayNone textContentArea' id='returnArticle'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>Return Policy</h1>
+    </div>
       <div data-bind='var: profile(zoovy:return_policy); format:wiki; wikiFormats:myRIA;' id='returnContent'></div>
     </div>
   
   
     
     <div class='displayNone textContentArea' id='shippingArticle'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>Shipping Information</h1>
+    </div>
       <div data-bind='var: profile(zoovy:shipping_policy); format:wiki; wikiFormats:myRIA;' id='shippingContent'></div>
     </div>
   
@@ -1095,12 +1118,18 @@ adding classes is not likely to have any bad effects.
   <div class='mainColumn'>
 <!-- .textContentArea is used as a selector because IE8 doesn't play well  with tag type article as a selector -->
     <div id='newsletterArticle' class='displayNone textContentArea'>
-      <h1>Subscribe to our Newsletter and Save!</h1>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+      <h1>Sign Up</h1>
+    </div>
       <div id='newsletterFormContainer'></div>
     </div>
   
     <div id='myaccountArticle' class='displayNone textContentArea'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>My Account</h1>
+    </div>
       <div id='logMessaging'></div>
       <div><a href="#" onClick="app.u.logBuyerOut(); showContent('homepage',{}); return false;">Log Out</a></div>
       
@@ -1125,14 +1154,20 @@ adding classes is not likely to have any bad effects.
   
   
     <div id='ordersArticle' class='displayNone textContentArea'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>Order History</h1>
+    </div>
       <div id='orderHistoryContainer' class='ui-accordion ui-widget ui-helper-reset ui-accordion-icons '></div>
     </div>
   
   
   
     <div id='changepasswordArticle' class='displayNone textContentArea'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>Change Password</h1>
+    </div>
       <div id='changepasswordContainer'>
 
 <form action='#' id='changePasswordForm' name='changePasswordForm' onSubmit="app.ext.store_crm.u.handleChangePassword('changePasswordForm',{'callback':'showMessaging','message':'Thank you, your password has been changed','targetID':'changepasswordContainer'}); return false">
@@ -1148,7 +1183,10 @@ adding classes is not likely to have any bad effects.
     </div>
   
     <div id='listsArticle' class='displayNone textContentArea'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>List Manager</h1>
+    </div>
       <div id='listsContainer' class='prodlist loadingBG'></div>
       
       <div id='listEditorContainer' class='displayNone loadingBG'></div><!-- editor for a given list gets added here -->
@@ -1156,7 +1194,10 @@ adding classes is not likely to have any bad effects.
     </div>
   
     <div id='forgetmeArticle' class='displayNone textContentArea'>
+      <div class='headings'>
+        <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
       <h1>Your 'Forget Me' list</h1>
+    </div>
       <p>Items on this list will not show up anywhere on the site. Use it for items you never want to see again. If you add an item to the list by mistake, use this page to remove it from the list and it will start re-appearing during your shopping experience.</p>
       <ul id='forgetmeContainer' class='prodlist loadingBG'>
       </ul>
