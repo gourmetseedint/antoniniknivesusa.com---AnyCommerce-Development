@@ -24,16 +24,16 @@ var zController = function(params) {
 	this.u.dump('zController has been instantiated');
 	if(typeof Prototype == 'object')	{
 		alert("Oh No! you appear to have the prototype ajax library installed. This library is not compatible. Please change to a non-prototype theme (2011 series).");
-		}
-//zglobals is not required in the UI, but is for any
+	}
+	//zglobals is not required in the UI, but is for any
 	else if(typeof zGlobals != 'object' && !app.vars.thisSessionIsAdmin)	{
-//zGlobals not required in an admin session.
+	//zGlobals not required in an admin session.
 		alert("Uh Oh! A  required include (config.js) is not present. This document is required.");
-		}
+	}
 	else	{
 		this.initialize(params);
-		}
 	}
+};
 
 
 jQuery.extend(zController.prototype, {
