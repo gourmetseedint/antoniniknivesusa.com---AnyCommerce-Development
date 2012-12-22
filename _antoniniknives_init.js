@@ -493,6 +493,43 @@ function stopSliderProductExtras(parentID) {
   });
 }
 
+/// homepage \\\
+app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
+  defaultPage();
+  startSliderHomeBestSellers();
+
+  // add links to category logos
+  addLink(P.parentID, classLogoCategoryBoat,    categoryBoat);
+  addLink(P.parentID, classLogoCategoryCable,   categoryCable);
+  addLink(P.parentID, classLogoCategoryFarm,    categoryFarm);
+  addLink(P.parentID, classLogoCategoryPocket,  categoryPocket);
+  addLink(P.parentID, classLogoCategorySos,     categorySos);
+  addLink(P.parentID, classLogoCategoryPromo,   categoryPromo);
+
+  // add hover to carousel
+  $('#' + P.parentID + ' .prodThumbContainer' + ' .productAttribute').hide();
+  $('#' + P.parentID + ' .prodThumbContainer:not(.bound)').addClass('bound').hover(function (){
+    $(this).toggleClass('categoryProductHover', function () {
+      $(this).children('.productAttribute').slideToggle();
+      // app.u.dump('binding');
+    });
+  });
+
+  // add hover class to category logos
+  $('#' + P.parentID + ' .logoCategoryHome').hover(function () {
+    $(this).toggleClass('categoryListHover categoryLogoHover');
+  });
+}]);
+
+app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
+  $(logoCategory).removeClass("displayNone");
+  stopSliderHomeBestSellers();
+  // $('#' + P.parentID + ' .prodThumbContainer').unbind();
+  // app.u.dump('unbinding');
+  // $(sidebar).removeClass(sidebarHome);
+  // $(wholesaleInfo).addClass("displayNone");
+}]);
+
 /*
 This function is overwritten once the controller is instantiated.
 Having a placeholder allows us to always reference the same messaging function, but not impede load time with a bulky error function.
