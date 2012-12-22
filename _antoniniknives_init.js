@@ -340,6 +340,35 @@ function categoryLinkNoText (navcat, pretty) {
   return "<a href='#top' title='" + temp + "' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'></a>";
 }
 
+// homepage slideshow
+function startSlideShow() {
+  var $target = $('#wideSlideshow');
+  var len = $target.children().length;
+  var startIndex = Math.floor((Math.random()*len)+1); // random start
+  // app.u.dump(startIndex);
+  $(slideshow).removeClass('displayNone');
+  if(len > 1) {
+    $('#wideSlideshow').cycle({
+      fx:'fade',
+      speed:'slow',
+      timeout: 5000,
+      pager:'#slideshowNav',
+      slideExpr: 'li',
+      startingSlide: startIndex
+    });
+  }
+}
+
+function defaultPage() {
+  resetBanner();
+  resetAllMenuSubs();
+  $(banner).addClass(classBannerHome, function () {
+    startSlideShow();
+  });
+  $(sidebar).addClass(sidebarHome);
+  $(logoCategory).addClass("displayNone");
+}
+
 /*
 This function is overwritten once the controller is instantiated.
 Having a placeholder allows us to always reference the same messaging function, but not impede load time with a bulky error function.

@@ -268,8 +268,8 @@ function categoryLinkNoText (navcat, pretty) {
 // function resetCategoryHeading() {
 //   $(headingCategory).removeClass();
 // }
-/// homepage slideshow \\\
 
+// homepage slideshow
 function startSlideShow() {
   var $target = $('#wideSlideshow');
   var len = $target.children().length;
