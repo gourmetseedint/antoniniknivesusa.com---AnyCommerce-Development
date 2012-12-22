@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121222144604",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121222145318",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -272,21 +272,38 @@ COMMONLY EDITED TEMPLATES
 the homepageTemplate template is loaded into mainContentArea by default when the application loads
 -->
 <div id='homepageTemplate' class='homeTemplate'>
+  <div class='homepageContainer'>
+    <div class='logosCategoryHome printNo'>
+      <ul>
+        <li class="logoCategoryHome logoCategoryBoat pointer"></li>
+        <li class="logoCategoryHome logoCategoryCable pointer"></li>
+        <li class="logoCategoryHome logoCategoryFarm pointer"></li>
+        <li class="logoCategoryHome logoCategoryPocket pointer"></li>
+        <li class="logoCategoryHome logoCategorySos pointer"></li>
+        <li class="logoCategoryHome logoCategoryPromo pointer"></li>
+      </ul>
+    </div>
+    
+    <div class='homepageContent'>
+      <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;'></ul>
+      <div class='homepageText'>
+        <div class='homepageDescription' data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></div>
+        <a class='button bindByAnchor' href="#category?navcat=.about-antonini" title='More About Antonini'>More About Antonini</a>
+      </div>
+    </div>
+  </div>  
 
-
+  <!-- Original
   <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul>
   
   <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; hide_summary:1; before:<h2>Featured Items</h2>; withReviews:1;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
   <p data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></p>
 
   <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"4","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListTemplateResults; before:<h2>Best Sellers</h2>;' class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
-
-<!-- a sample of how to get a 'list' src onto the page. -->
-  <ul data-bind="var: list($models.@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 25;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
-
-
+  -->
+  <!-- a sample of how to get a 'list' src onto the page. -->
+  <!-- <ul data-bind="var: list($models.@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 25;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul> -->
 </div>
-
 
 
 
@@ -302,7 +319,37 @@ each of the 'sections' are used to load another template. don't change the id.
 don't modify the 'data-templateid' unless you are changing template names and updating everywhere appropriate.
 -->
 <div id='categoryTemplate' class='loadingBG categoryTemplate'>
+  <div class='headings headingsCategory'>
+    <div data-bind="var:category(id); format:category_headings; extension:antoniniknives_extension;">
+      <!-- <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2> -->
+    </div>
+  </div>
 
+  <div class='breadcrumbContainer'>
+    <ul class='breadcrumb' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
+  </div>
+
+  <div data-bind="var:category(id); format:specialCategoryData; extension:antoniniknives_extension;" class="categoryDescription"></div>
+  
+  <div data-bind='var:category(%page.description); format:showIfSet;' class='displayNone'>
+    <p data-bind='var:category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;' class='categoryPageDescription'></p>
+  </div>
+  
+  <!-- used by category, shows list of subcats -->
+  <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail: max;" class='subCategoryList'></ul>
+
+  <!-- used by subcategory, shows a list of products -->
+  <div class="productListWrapper displayNone" data-bind="var:category(@products); format:showObjectIfSet; extension:antoniniknives_extension;">
+    <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 12;" class='listStyleNone fluidList clearfix noPadOrMargin productList productListCategory'></ul>
+  </div>
+
+  <!-- <img data-bind="var: category(%page.CAT_THUMB); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
+  <!-- <img src='blank.gif' class='catThumb' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /> -->
+  <!-- <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" /> -->
+
+  <div class="pdfLinks displayNone"></div>
+
+  <!-- Original
   <ul class='breadcrumb clearfix noPadOrMargin fluidList' data-bind='var: category(id); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
 
   <img data-bind="var: category(%page.banner1); format: banner; editor: banner; height:250; width:750; extension: myRIA;" />
@@ -311,15 +358,13 @@ don't modify the 'data-templateid' unless you are changing template names and up
   
   <p data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></p>
   
-  <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul><!-- outputs a list of subcategories -->
+  <ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul>
 
-  <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 25;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul><!-- outputs the product list -->
+  <ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 25;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
   
   <p data-bind="var: category(%page.description2); format:wiki; wikiFormats:myRIA; editor: textarea;"></p>
-
-  
+  -->
 </div>
-
 
 
 
