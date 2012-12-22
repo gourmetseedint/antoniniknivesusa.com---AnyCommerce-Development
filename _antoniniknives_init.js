@@ -81,42 +81,42 @@ var categories = {
     "banner": "bannerCategoryBoat",
     "logo": "logoCategoryBoat",
     "menu": "#tier1categories_boat__fishing ul",
-    "accentColor": ".categoryBoat"
+    "accentColor": "categoryBoat"
   },
   "cable": {
     "navcat": ".cable_-_electrical",
     "banner": "bannerCategoryCable",
     "logo": "logoCategoryCable",
     "menu": "#tier1categories_cable__electrical ul",
-    "accentColor": ".categoryCable"
+    "accentColor": "categoryCable"
   },
   "farm": {
     "navcat": ".farm_-_garden",
     "banner": "bannerCategoryFarm",
     "logo": "logoCategoryFarm",
     "menu": "#tier1categories_farm__garden ul",
-    "accentColor": ".categoryFarm"
+    "accentColor": "categoryFarm"
   },
   "pocket": {
     "navcat": ".pocket_-_traditional",
     "banner": "bannerCategoryPocket",
     "logo": "logoCategoryPocket",
     "menu": "#tier1categories_pocket__traditional ul",
-    "accentColor": ".categoryPocket"
+    "accentColor": "categoryPocket"
   },
   "promo": {
     "navcat": ".promo_-_customizing",
     "banner": "bannerCategoryPromo",
     "logo": "logoCategoryPromo",
     "menu": "#tier1categories_promo__customizing ul",
-    "accentColor": ".categoryPromo"
+    "accentColor": "categoryPromo"
   },
   "sos": {
     "navcat": ".sos_-_rescue",
     "banner": "bannerCategorySos",
     "logo": "logoCategorySos",
     "menu": "#tier1categories_sos__rescue ul",
-    "accentColor": ".categorySos"
+    "accentColor": "categorySos"
   },
   "accessories": {
     "navcat": ".accessories",
@@ -141,76 +141,36 @@ var categories = {
   }
 };
 
-// var categoryBoat        = '.boat_-_fishing';
-// var categoryCable       = '.cable_-_electrical';
-// var categoryFarm        = '.farm_-_garden';
-// var categoryPocket      = '.pocket_-_traditional';
-// var categoryPromo       = '.promo_-_customizing';
-// var categorySos         = '.sos_-_rescue';
-// var categoryAccessories = '.accessories';
-// var categoryWholesale   = '.wholesale';
-// var categoryPdf         = '.pdf-catalogs';
-
 var prettyNames = {};
 
-var banner                    = 'header';
-// var classBannerHome           = 'bannerHome';
-// var classBannerCategoryBoat   = 'bannerCategoryBoat';
-// var classBannerCategoryCable  = 'bannerCategoryCable';
-// var classBannerCategoryFarm   = 'bannerCategoryFarm';
-// var classBannerCategoryPocket = 'bannerCategoryPocket';
-// var classBannerCategoryPromo  = 'bannerCategoryPromo';
-// var classBannerCategorySos    = 'bannerCategorySos';
+var banner       = 'header';
+var sidebar      = '.sidebar';
+var sidebarHome  = 'sidebarHome';
+var slideshow    = '#slideshowContainer';
+var logoCategory = '#logoCategory';
+var menuProducts = '.menuProductList';
+var menuSubLists = '.menuSubList';
 
-var sidebar     = '.sidebar';
-var sidebarHome = 'sidebarHome';
-
-var slideshow = '#slideshowContainer';
-
-var logoCategory            = '#logoCategory';
-// var classLogoCategoryBoat   = 'logoCategoryBoat';
-// var classLogoCategoryCable  = 'logoCategoryCable';
-// var classLogoCategoryFarm   = 'logoCategoryFarm';
-// var classLogoCategoryPocket = 'logoCategoryPocket';
-// var classLogoCategoryPromo  = 'logoCategoryPromo';
-// var classLogoCategorySos    = 'logoCategorySos';
-
-var menuProducts       = '.menuProductList';
-// var menuProductsBoat   = '#tier1categories_boat__fishing ul';
-// var menuProductsCable  = '#tier1categories_cable__electrical ul';
-// var menuProductsFarm   = '#tier1categories_farm__garden ul';
-// var menuProductsPocket = '#tier1categories_pocket__traditional ul';
-// var menuProductsPromo  = '#tier1categories_promo__customizing ul';
-// var menuProductsSos    = '#tier1categories_sos__rescue ul';
-var menuSubLists       = '.menuSubList';
-
-var headingCategory  = '.headingsCategory h1';
-// var classColorBoat   = 'categoryBoat';
-// var classColorCable  = 'categoryCable';
-// var classColorFarm   = 'categoryFarm';
-// var classColorPocket = 'categoryPocket';
-// var classColorPromo  = 'categoryPromo';
-// var classColorSos    = 'categorySos';
-
-var productCategory      = '.productCurrentCategory';
+var headingCategory           = '.headingsCategory h1';
+var productCategory           = '.productCurrentCategory';
 var headingProductSub         = '.headingProductSubCategory';
-// var headingProductName        = '.headingsProduct h1';
 var headingProductCategory    = '.headingsProduct h3';
 var elementsWithCategoryColor = '.categoryColor';
-var currentCategory;
-var currentNavcat;
-var periodCount;
+
+var headingSubsParent = '.headingSubsParent';
+var navMenuSubCurrent = 'navMenuCurrent';
+var subcatPrettyLong  = '.subcatPrettyLong';
+var subcatDescription = '.subcatDescription';
 
 var wholesaleContact = '.contactFormWholesale';
 var pdfLinks         = '.pdfLinks';
 
-var headingSubsParent = '.headingSubsParent';
+var currentCategory;
+var currentNavcat;
+var periodCount;
 var htmlSafe;
 var currentSubListItem;
-var navMenuSubCurrent = 'navMenuCurrent';
 
-var subcatPrettyLong = '.subcatPrettyLong';
-var subcatDescription = '.subcatDescription';
 
 /// functions \\\
 
@@ -591,7 +551,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // show category sub in menu
   $(getTier1ID(currentCategory) + ' > ul').slideDown(500);
 
-  if (currenNavcat && currentNavcat !== currentCategory) {
+  if (currentNavcat && currentNavcat !== currentCategory) {
     // sub category
     htmlSafe = currentNavcat.split('.').join('_');
     currentSubListItem = '.subcategory' + htmlSafe + ' a:link';
