@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121222142255",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121222143039",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -45,8 +45,11 @@ css files should be included before any .js file to ensure they are downloaded i
 <link rel="stylesheet" type="text/css" href="AnythingSlider/anythingslider.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles_print.css" media="print"/>
-
-
+<!-- 
+<style type="text/css" media="print">
+@media print {.printNo {display: none; visibility: hidden;}}
+</style>
+ -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script type="text/javascript" src="jquery-1.8.3.min.js"><\/script>')</script>
 <script src="jquery.ui.widget.min.js"></script> 
@@ -60,10 +63,6 @@ css files should be included before any .js file to ensure they are downloaded i
 app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 </script>
 
-
-<style>
-@media print {.printNo {display: none; visibility: hidden;}}
-</style>
 
 </head>
 
@@ -92,7 +91,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 <div id='appView' class='displayNone'>
   <!-- VIEW CONTENT -->
   <div class='container'>
-    <!-- <header id="header" class="printNo">
+     <header id="header" class="printNo">
       <div class='printNo'>
         <span class="logoTop"><a href="#homepage" class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonini Knives USA" /></a></span>
         <span class="bannerText"><img src="images/banner_text.png" alt="Antonini Knives - Original Italian Blades Since 1925"></span>
@@ -111,8 +110,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
             </span>
           </div>
         </nav>
-        <div id="slideshowContainer" class='displayNone'>-->
-        <!-- <div id="slideshowNav"></div> --><!--
+        <div id="slideshowContainer" class='displayNone'>
           <ul id="wideSlideshow" class="pics slideshow">
             <li><img src='images/home_slide_1.png'/></li>
             <li><img src='images/home_slide_2.png'/></li>
@@ -124,7 +122,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         <div class="headerInner headerInnerLeft"></div>
         <div class="headerInner headerInnerRight"></div>
       </div>
-    </header> -->
+    </header> 
     <!-- <aside class="sidebar printNo">
       <nav class="navMenu">
         <div id='logoCategory' class='logoCategoryDefault'></div>
