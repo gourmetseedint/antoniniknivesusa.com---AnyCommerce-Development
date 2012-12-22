@@ -790,7 +790,11 @@ app.u.initMVC = function(attempts){
 //Any code that needs to be executed after the app init has occured can go here.
 //will pass in the page info object. (pageType, templateID, pid/navcat/show and more)
 app.u.appInitComplete = function(P) {
-  app.u.dump("Executing myAppIsLoaded code...");
+  // app.u.dump("Executing myAppIsLoaded code...");
+
+  // Add accessores & promo to menu
+  $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categoryAccessories) + ">" + getPretty(categoryAccessories) + "</div></li>");
+  $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer' " + categoryOnClick(categoryPromo) + ">" + getPretty(categoryPromo) + "</div></li>");
 };
 
 
@@ -799,6 +803,9 @@ app.u.appInitComplete = function(P) {
 //don't execute script till both jquery AND the dom are ready.
 $(document).ready(function(){
   app.u.handleRQ(0);
+
+  // Hid pre load images
+  $('.preload').hide();
 });
 
 
