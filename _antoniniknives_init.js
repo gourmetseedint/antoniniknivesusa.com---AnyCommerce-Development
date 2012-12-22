@@ -36,7 +36,7 @@ app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
 
 //cycle used for slideshow
 app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
-app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.js']);
+// app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.js']);
 
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 // app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
