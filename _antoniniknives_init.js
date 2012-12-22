@@ -1,8 +1,10 @@
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 
-
-
+// <!-- TODO: change carousel arrows -->
+// <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
+// <!-- TODO: IE compatibility -->
+// TODO: test login, buy, email
 
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
@@ -21,6 +23,19 @@ app.rq.push(['extension',1,'analytics_google','extensions/analytics_google.js','
 //app.rq.push(['extension',1,'powerReviews','extensions/reviews_powerreviews.js','startExtension']);
 //app.rq.push(['extension',0,'magicToolBox','extensions/imaging_magictoolbox.js','startExtension']); // (not working yet - ticket in to MTB)
 
+app.rq.push(['script',0,(document.location.protocol == 'file:') ? app.vars.httpURL+'jquery/config.js' : app.vars.baseURL+'jquery/config.js']); //The config.js is dynamically generated.
+app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){return (typeof zoovyModel == 'function') ? true : false;}}
+app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
+app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
+app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
+
+app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
+app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.js']);
+
+// json data
+app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
+app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_catData.js']);
+app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
 
 //spec_LLTRSHIRT017_0
 //add tabs to product data.
@@ -44,21 +59,12 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
 	else	{} //couldn't find the tab to tabificate.
 }]);
 
-app.rq.push(['script',0,(document.location.protocol == 'file:') ? app.vars.httpURL+'jquery/config.js' : app.vars.baseURL+'jquery/config.js']); //The config.js is dynamically generated.
-app.rq.push(['script',0,app.vars.baseURL+'model.js']); //'validator':function(){return (typeof zoovyModel == 'function') ? true : false;}}
-app.rq.push(['script',0,app.vars.baseURL+'includes.js']); //','validator':function(){return (typeof handlePogs == 'function') ? true : false;}})
-app.rq.push(['script',1,app.vars.baseURL+'jeditable.js']); //used for making text editable (customer address). non-essential. loaded late.
-app.rq.push(['script',0,app.vars.baseURL+'controller.js']);
-
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
 
 
 //group any third party files together (regardless of pass) to make troubleshooting easier.
 app.rq.push(['script',0,(document.location.protocol == 'https:' ? 'https:' : 'http:')+'//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.js']);
-
-app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
-app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.js']);
 
 
 /*
