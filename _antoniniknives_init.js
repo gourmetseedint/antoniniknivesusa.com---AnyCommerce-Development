@@ -276,11 +276,30 @@ function fixHiddenPretty(pretty) {
 }
 
 function getPretty(navcat) {
-  if (app.data['appCategoryDetail|' + navcat] && app.data['appCategoryDetail|' + navcat]['pretty']) {
-    return prettyNames[navcat] || (prettyNames[navcat] = fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '');
+  var temp;
+  if (typeof prettyNames != 'undefined') {
+    temp = prettyNames[navcat];
+    if (temp) {
+      // app.u.dump('using cached pretty');
+      return temp;
+    }else if (app.data['appCategoryDetail|' + navcat] && (temp = app.data['appCategoryDetail|' + navcat]['pretty'])) {
+      // app.u.dump('getting pretty');
+      return (prettyNames[navcat] = fixHiddenPretty(temp) || '');
+    }else {
+      app.u.dump("Warning: pretty name for " + navcat + " not found.");
+      return '';
+    }
+  }else {
+    app.u.dump("Warning: catPrettyNames is undefined");
   }
-  return '';
 }
+
+// function getPretty(navcat) {
+//   if (app.data['appCategoryDetail|' + navcat] && app.data['appCategoryDetail|' + navcat]['pretty']) {
+//     return prettyNames[navcat] || (prettyNames[navcat] = fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '');
+//   }
+//   return '';
+// }
 
 function getPdfLinks() {
   // creates content for the pdf catalogs category
@@ -793,8 +812,8 @@ app.u.appInitComplete = function(P) {
   // app.u.dump("Executing myAppIsLoaded code...");
 
   // Add accessores & promo to menu
-  // $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categories['accessores'].navcat) + ">" + getPretty(categories['accessores'].navcat) + "</div></li>");
-  // $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer' " + categoryOnClick(categories['promo'].navcat) + ">" + getPretty(categories['promo'].navcat) + "</div></li>");
+  $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categories['accessores'].navcat) + ">" + getPretty(categories['accessores'].navcat) + "</div></li>");
+  $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer' " + categoryOnClick(categories['promo'].navcat) + ">" + getPretty(categories['promo'].navcat) + "</div></li>");
 };
 
 
