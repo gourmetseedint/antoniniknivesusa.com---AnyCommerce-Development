@@ -43,49 +43,195 @@ app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
 //add tabs to product data.
 //tabs are handled this way because jquery UI tabs REALLY wants an id and this ensures unique id's between product
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
-	var safePID = app.u.makeSafeHTMLId(P.pid); //can't use jqSelector because productTEmplate_pid still used makesafe. planned Q1-2012 update ###
-	var $tabContainer = $( ".tabbedProductContent",$('#productTemplate_'+safePID));
-		if($tabContainer.length)	{
-			if($tabContainer.data("tabs")){} //tabs have already been instantiated. no need to be redundant.
-			else	{
-				$("div.tabContent",$tabContainer).each(function (index) {
-					$(this).attr("id", "spec_"+safePID+"_" + index.toString());
-					})
-				$(".tabs li a",$tabContainer).each(function (index) {
-					$(this).attr('id','href_'+safePID+"_" + index.toString());
-					$(this).attr("href", "app://#spec_"+safePID+"_" + index.toString());
-					});
-				$tabContainer.localtabs();
-			}
-		}
-	else	{} //couldn't find the tab to tabificate.
+  var safePID = app.u.makeSafeHTMLId(P.pid); //can't use jqSelector because productTEmplate_pid still used makesafe. planned Q1-2012 update ###
+  var $tabContainer = $( ".tabbedProductContent",$('#productTemplate_'+safePID));
+    if($tabContainer.length)  {
+      if($tabContainer.data("tabs")){} //tabs have already been instantiated. no need to be redundant.
+      else  {
+        $("div.tabContent",$tabContainer).each(function (index) {
+          $(this).attr("id", "spec_"+safePID+"_" + index.toString());
+        });
+        $(".tabs li a",$tabContainer).each(function (index) {
+          $(this).attr('id','href_'+safePID+"_" + index.toString());
+          $(this).attr("href", "app://#spec_"+safePID+"_" + index.toString());
+        });
+        $tabContainer.localtabs();
+      }
+    }
+  else  {} //couldn't find the tab to tabificate.
 }]);
 
 //sample of an onDeparts. executed any time a user leaves this page/template type.
-app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
+// app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
 
+///// custom \\\\\
 
+/// variables \\\
+
+var categories = {
+  "home": {
+    "navcat": "",
+    "banner": "bannerHome",
+    "logo": "",
+    "menu": "",
+    "color": ""
+  },
+  "boat": {
+    "navcat": ".boat_-_fishing",
+    "banner": "bannerCategoryBoat",
+    "logo": "logoCategoryBoat",
+    "menu": "#tier1categories_boat__fishing ul",
+    "color": ".categoryBoat"
+  },
+  "cable": {
+    "navcat": ".cable_-_electrical",
+    "banner": "bannerCategoryCable",
+    "logo": "logoCategoryCable",
+    "menu": "#tier1categories_cable__electrical ul",
+    "color": ".categoryCable"
+  },
+  "farm": {
+    "navcat": ".farm_-_garden",
+    "banner": "bannerCategoryFarm",
+    "logo": "logoCategoryFarm",
+    "menu": "#tier1categories_farm__garden ul",
+    "color": ".categoryFarm"
+  },
+  "pocket": {
+    "navcat": ".pocket_-_traditional",
+    "banner": "bannerCategoryPocket",
+    "logo": "logoCategoryPocket",
+    "menu": "#tier1categories_pocket__traditional ul",
+    "color": ".categoryPocket"
+  },
+  "promo": {
+    "navcat": ".promo_-_customizing",
+    "banner": "bannerCategoryPromo",
+    "logo": "logoCategoryPromo",
+    "menu": "#tier1categories_promo__customizing ul",
+    "color": ".categoryPromo"
+  },
+  "sos": {
+    "navcat": ".sos_-_rescue",
+    "banner": "bannerCategorySos",
+    "logo": "logoCategorySos",
+    "menu": "#tier1categories_sos__rescue ul",
+    "color": ".categorySos"
+  },
+  "accessories": {
+    "navcat": ".accessories",
+    "banner": "",
+    "logo": "",
+    "menu": "",
+    "color": ""
+  },
+  "wholesale": {
+    "navcat": ".wholesale",
+    "banner": "",
+    "logo": "",
+    "menu": "",
+    "color": ""
+  },
+  "pdf": {
+    "navcat": ".pdf-catalogs",
+    "banner": "",
+    "logo": "",
+    "menu": "",
+    "color": ""
+  }
+};
+
+// var categoryBoat        = '.boat_-_fishing';
+// var categoryCable       = '.cable_-_electrical';
+// var categoryFarm        = '.farm_-_garden';
+// var categoryPocket      = '.pocket_-_traditional';
+// var categoryPromo       = '.promo_-_customizing';
+// var categorySos         = '.sos_-_rescue';
+// var categoryAccessories = '.accessories';
+// var categoryWholesale   = '.wholesale';
+// var categoryPdf         = '.pdf-catalogs';
+
+var prettyNames = {};
+
+var banner                    = 'header';
+// var classBannerHome           = 'bannerHome';
+// var classBannerCategoryBoat   = 'bannerCategoryBoat';
+// var classBannerCategoryCable  = 'bannerCategoryCable';
+// var classBannerCategoryFarm   = 'bannerCategoryFarm';
+// var classBannerCategoryPocket = 'bannerCategoryPocket';
+// var classBannerCategoryPromo  = 'bannerCategoryPromo';
+// var classBannerCategorySos    = 'bannerCategorySos';
+
+var sidebar     = '.sidebar';
+var sidebarHome = 'sidebarHome';
+
+var slideshow = '#slideshowContainer';
+
+var logoCategory            = '#logoCategory';
+// var classLogoCategoryBoat   = 'logoCategoryBoat';
+// var classLogoCategoryCable  = 'logoCategoryCable';
+// var classLogoCategoryFarm   = 'logoCategoryFarm';
+// var classLogoCategoryPocket = 'logoCategoryPocket';
+// var classLogoCategoryPromo  = 'logoCategoryPromo';
+// var classLogoCategorySos    = 'logoCategorySos';
+
+var menuProducts       = '.menuProductList';
+// var menuProductsBoat   = '#tier1categories_boat__fishing ul';
+// var menuProductsCable  = '#tier1categories_cable__electrical ul';
+// var menuProductsFarm   = '#tier1categories_farm__garden ul';
+// var menuProductsPocket = '#tier1categories_pocket__traditional ul';
+// var menuProductsPromo  = '#tier1categories_promo__customizing ul';
+// var menuProductsSos    = '#tier1categories_sos__rescue ul';
+var menuSubLists       = '.menuSubList';
+
+var headingCategory  = '.headingsCategory h1';
+// var classColorBoat   = 'categoryBoat';
+// var classColorCable  = 'categoryCable';
+// var classColorFarm   = 'categoryFarm';
+// var classColorPocket = 'categoryPocket';
+// var classColorPromo  = 'categoryPromo';
+// var classColorSos    = 'categorySos';
+
+var productCategory      = '.productCurrentCategory';
+var headingProductSub         = '.headingProductSubCategory';
+// var headingProductName        = '.headingsProduct h1';
+var headingProductCategory    = '.headingsProduct h3';
+var elementsWithCategoryColor = '.categoryColor';
+var currentCategory;
+var currentNavcat;
+var periodCount;
+
+var wholesaleContact = '.contactFormWholesale';
+var pdfLinks         = '.pdfLinks';
+
+var headingSubsParent = '.headingSubsParent';
+var htmlSafe;
+var currentSubListItem;
+var navMenuSubCurrent = 'navMenuCurrent';
+
+var subcatPrettyLong = '.subcatPrettyLong';
+var subcatDescription = '.subcatDescription';
 
 
 /*
-This function is overwritten once the controller is instantiated. 
+This function is overwritten once the controller is instantiated.
 Having a placeholder allows us to always reference the same messaging function, but not impede load time with a bulky error function.
 */
-app.u.throwMessage = function(m)	{
-	alert(m); 
-	}
+app.u.throwMessage = function(m)  {
+  alert(m);
+};
 
-app.u.howManyPassZeroResourcesAreLoaded = function(debug)	{
-	var L = app.vars.rq.length;
-	var r = 0; //what is returned. total # of scripts that have finished loading.
-	for(var i = 0; i < L; i++)	{
-		if(app.vars.rq[i][app.vars.rq[i].length - 1] === true)	{
-			r++;
-			}
-		if(debug)	{app.u.dump(" -> "+i+": "+app.vars.rq[i][2]+": "+app.vars.rq[i][app.vars.rq[i].length -1]);}
-		}
-	return r;
-	}
+app.u.howManyPassZeroResourcesAreLoaded = function(debug) {
+  var L = app.vars.rq.length;
+  var r = 0; //what is returned. total # of scripts that have finished loading.
+  for(var i = 0; i < L; i++)  {
+    if(app.vars.rq[i][app.vars.rq[i].length - 1] === true)  {
+      r++;
+      }
+    if(debug) {app.u.dump(" -> "+i+": "+app.vars.rq[i][2]+": "+app.vars.rq[i][app.vars.rq[i].length -1]);}
+    }
+  return r;
+};
 
 
 //gets executed once controller.js is loaded.
@@ -94,53 +240,50 @@ app.u.howManyPassZeroResourcesAreLoaded = function(debug)	{
 //the 'attempts' var is incremented each time the function is executed.
 
 app.u.initMVC = function(attempts){
-//	app.u.dump("app.u.initMVC activated ["+attempts+"]");
-	var includesAreDone = true;
+//  app.u.dump("app.u.initMVC activated ["+attempts+"]");
+  var includesAreDone = true;
 
 //what percentage of completion a single include represents (if 10 includes, each is 10%).
-	var percentPerInclude = Math.round((100 / app.vars.rq.length));  
-	var resourcesLoaded = app.u.howManyPassZeroResourcesAreLoaded();
-	var percentComplete = resourcesLoaded * percentPerInclude; //used to sum how many includes have successfully loaded.
+  var percentPerInclude = Math.round((100 / app.vars.rq.length));
+  var resourcesLoaded = app.u.howManyPassZeroResourcesAreLoaded();
+  var percentComplete = resourcesLoaded * percentPerInclude; //used to sum how many includes have successfully loaded.
 
-	$('#appPreViewProgressBar').val(percentComplete);
-	$('#appPreViewProgressText').empty().append(percentComplete+"% Complete");
+  $('#appPreViewProgressBar').val(percentComplete);
+  $('#appPreViewProgressText').empty().append(percentComplete+"% Complete");
 
-	if(resourcesLoaded == app.vars.rq.length)	{
-//instantiate controller. handles all logic and communication between model and view.
-//passing in app will extend app so all previously declared functions will exist in addition to all the built in functions.
-//tmp is a throw away variable. app is what should be used as is referenced within the mvc.
-		app.vars.rq = null; //to get here, all these resources have been loaded. nuke record to keep DOM clean and avoid any duplication.
-		var tmp = new zController(app);
-//instantiate wiki parser.
-		myCreole = new Parse.Simple.Creole();
-		}
-	else if(attempts > 50)	{
-		app.u.dump("WARNING! something went wrong in init.js");
-		//this is 10 seconds of trying. something isn't going well.
-		$('#appPreView').empty().append("<h2>Uh Oh. Something seems to have gone wrong. </h2><p>Several attempts were made to load the store but some necessary files were not found or could not load. We apologize for the inconvenience. Please try 'refresh' and see if that helps.<br><b>If the error persists, please contact the site administrator</b><br> - dev: see console.</p>");
-		app.u.howManyPassZeroResourcesAreLoaded(true);
-		}
-	else	{
-		setTimeout("app.u.initMVC("+(attempts+1)+")",250);
-		}
-
-	}
+  if(resourcesLoaded == app.vars.rq.length) {
+    //instantiate controller. handles all logic and communication between model and view.
+    //passing in app will extend app so all previously declared functions will exist in addition to all the built in functions.
+    //tmp is a throw away variable. app is what should be used as is referenced within the mvc.
+    app.vars.rq = null; //to get here, all these resources have been loaded. nuke record to keep DOM clean and avoid any duplication.
+    var tmp = new zController(app);
+    //instantiate wiki parser.
+    myCreole = new Parse.Simple.Creole();
+  }else if(attempts > 50)  {
+    app.u.dump("WARNING! something went wrong in init.js");
+    //this is 10 seconds of trying. something isn't going well.
+    $('#appPreView').empty().append("<h2>Uh Oh. Something seems to have gone wrong. </h2><p>Several attempts were made to load the store but some necessary files were not found or could not load. We apologize for the inconvenience. Please try 'refresh' and see if that helps.<br><b>If the error persists, please contact the site administrator</b><br> - dev: see console.</p>");
+    app.u.howManyPassZeroResourcesAreLoaded(true);
+  }else {
+    setTimeout("app.u.initMVC("+(attempts+1)+")",250);
+  }
+};
 
 
 
 //Any code that needs to be executed after the app init has occured can go here.
 //will pass in the page info object. (pageType, templateID, pid/navcat/show and more)
-app.u.appInitComplete = function(P)	{
-	app.u.dump("Executing myAppIsLoaded code...");
-	}
+app.u.appInitComplete = function(P) {
+  app.u.dump("Executing myAppIsLoaded code...");
+};
 
 
 
 
 //don't execute script till both jquery AND the dom are ready.
 $(document).ready(function(){
-	app.u.handleRQ(0)
-	});
+  app.u.handleRQ(0);
+});
 
 
 
