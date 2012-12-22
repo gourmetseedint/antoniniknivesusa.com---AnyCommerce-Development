@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-	"release":"20121222101359",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+	"release":"20121222140619",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
 	"_clientid":"zmvc",
 	"baseURL":"",
 	"httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -42,8 +42,13 @@ css files should be included before any .js file to ensure they are downloaded i
 -->
 <link rel="stylesheet" type="text/css" href="qs_styles.css" />
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="AnythingSlider/anythingslider.css" />
+<link rel="stylesheet" type="text/css" href="_antoniniknives_styles.css" />
+<link rel="stylesheet" type="text/css" href="_antoniniknives_styles_print.css" media="print"/>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script type="text/javascript" src="jquery-1.8.3.min.js"><\/script>')</script>
 <script src="jquery.ui.widget.min.js"></script> 
 <script src="customTabs.js"></script>
 <script type="text/javascript" src="loadscript.js"></script>
@@ -55,6 +60,10 @@ css files should be included before any .js file to ensure they are downloaded i
 app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 </script>
 
+
+<style>
+@media print {.printNo {display: none; visibility: hidden;}}
+</style>
 
 </head>
 
