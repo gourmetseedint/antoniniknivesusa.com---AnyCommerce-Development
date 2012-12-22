@@ -212,6 +212,133 @@ var navMenuSubCurrent = 'navMenuCurrent';
 var subcatPrettyLong = '.subcatPrettyLong';
 var subcatDescription = '.subcatDescription';
 
+/// functions \\\
+
+// function titlize(navcatName) {
+//   var temp;
+//   temp = navcatName.split('.').join('');
+//   temp = temp.split('_').join(' ');
+//   temp = capitalizeAllWords(temp);
+//   return temp;
+// }
+
+// function capitalizeAllWords(lowercase) {
+//   var title;
+//   title = lowercase.replace(/\b[a-z]/g, function ($0) {
+//     return $0.toUpperCase();
+//   });
+//   return title;
+// }
+
+function getPeriodCount(value) {
+  if (value) {
+    return value.split('.').length - 1;
+  }else {
+    return 0;
+  }
+}
+
+function getCategory (navcat, subLevel) {
+  var periodCount = getPeriodCount(navcat);
+  var level = (subLevel || 0) + 1; // default is category
+  var value;
+
+  if (periodCount > 0) {
+    value = navcat.split('.')[level];
+    if (value) {
+      return '.' + value;
+    }
+  }
+  return '';
+}
+
+// subcat conversion
+function setValueFromSubcatData(selector, field) {
+  var value   = 'Not set';
+  var navcat = $(selector).text(); // navcat must be text in html
+  var category = getCategory(navcat);
+  var subCategory = getCategory(navcat, 1);
+
+  // set json value
+  if(category && subCategory && subcatData[category] && subcatData[category][subCategory] && subcatData[category][subCategory][field]){
+    value = subcatData[category][subCategory][field];
+  }
+  // change text json value
+  $(selector).html(value);
+}
+
+function fixHiddenPretty(pretty) {
+  var temp = pretty;
+  if (temp.charAt(0) == ('!')) {
+    temp = temp.replace(/!/, '');
+  }
+  return temp;
+}
+
+function getPretty(navcat) {
+  if (app.data['appCategoryDetail|' + navcat] && app.data['appCategoryDetail|' + navcat]['pretty']) {
+    return prettyNames[navcat] || (prettyNames[navcat] = fixHiddenPretty(app.data['appCategoryDetail|' + navcat]['pretty']) || '');
+  }
+  return '';
+}
+
+function getPdfLinks() {
+  // creates content for the pdf catalogs category
+  var page = "<h4>Click link below to download</h4>";
+  var directory = pdfDirectory || '';
+  var name;
+  var value;
+  if(typeof pdfData != 'undefined') {
+    for(var key in pdfData) {
+      name = getPretty(key) + ' (PDF)';
+      link  = name + ' PDF Catalog';
+      value = pdfData[key];
+      if (value) {
+        page += "<p><a title='" + link + "' href='" + directory + value + "'>" + name + "</a></p>";
+      }
+    }
+  }else {
+    app.u.dump('Warining: pdfData is missing.');
+    page = '';
+  }
+  return page;
+}
+
+function getTier1ID(navcat) {
+  // replace '.' with '_' and '-' with ''
+  var temp = '#tier1categories' + navcat.split('.').join('_').split(/-/).join('');
+  return temp;
+}
+
+function resetBanner() {
+  $(banner).removeClass();
+  $(sidebar).removeClass(sidebarHome);
+  $(slideshow).addClass('displayNone');
+}
+
+function resetCategoryLogo() {
+  $(logoCategory).removeClass();
+}
+
+function resetAllMenuSubs() {
+  $(menuSubLists).slideUp(500);
+  // $(menuSubLists + ' li').removeClass(navMenuSubCurrent);
+}
+
+
+function categoryLink (navcat, pretty) {
+  var temp = pretty || '';
+  return "<a href='#top' title='" + temp + "' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'>" + temp + "</a>";
+}
+
+function categoryOnClick (navcat) {
+  return "onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'";
+}
+
+function categoryLinkNoText (navcat, pretty) {
+  var temp = pretty || '';
+  return "<a href='#top' title='" + temp + "' onClick='return showContent(\"category\",{\"navcat\":\"" + navcat + "\"});'></a>";
+}
 
 /*
 This function is overwritten once the controller is instantiated.

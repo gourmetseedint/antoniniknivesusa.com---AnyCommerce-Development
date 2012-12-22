@@ -11,7 +11,7 @@ var antoniniknives_extension = function() {
       getPeriodCount : function(value) {
         // tells you if navcat is for a category or sub
         if (value) {
-          return value.split('.').length - 1; 
+          return value.split('.').length - 1;
         }else {
           return 0;
         }
