@@ -499,12 +499,12 @@ app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   startSliderHomeBestSellers();
 
   // add links to category logos
-  addLink(P.parentID, classLogoCategoryBoat,    categoryBoat);
-  addLink(P.parentID, classLogoCategoryCable,   categoryCable);
-  addLink(P.parentID, classLogoCategoryFarm,    categoryFarm);
-  addLink(P.parentID, classLogoCategoryPocket,  categoryPocket);
-  addLink(P.parentID, classLogoCategorySos,     categorySos);
-  addLink(P.parentID, classLogoCategoryPromo,   categoryPromo);
+  addLink(P.parentID, categories['boat'].logo,    categories['boat'].navcat);
+  addLink(P.parentID, categories['cable'].logo,   categories['cable'].navcat);
+  addLink(P.parentID, categories['farm'].logo,    categories['farm'].navcat);
+  addLink(P.parentID, categories['pocket'].logo,  categories['pocket'].navcat);
+  addLink(P.parentID, categories['sos'].logo,     categories['sos'].navcat);
+  addLink(P.parentID, categories['promo'].logo,   categories['promo'].navcat);
 
   // add hover to carousel
   $('#' + P.parentID + ' .prodThumbContainer' + ' .productAttribute').hide();
@@ -528,6 +528,32 @@ app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   // app.u.dump('unbinding');
   // $(sidebar).removeClass(sidebarHome);
   // $(wholesaleInfo).addClass("displayNone");
+}]);
+
+/// company \\\
+app.rq.push(['templateFunction','companyTemplate','onCompletes',function(P) {
+  // app.u.dump('on company');
+  defaultPage();
+}]);
+
+/// customer \\\
+app.rq.push(['templateFunction','customerTemplate','onCompletes',function(P) {
+  // app.u.dump('on customer');
+  defaultPage();
+}]);
+
+/// search \\\
+app.rq.push(['templateFunction','searchTemplate','onCompletes',function(P) {
+  // app.u.dump($('.product').length);
+  // app.u.dump('on search');
+  defaultPage();
+
+  // add hover class to products
+  // does not work for search results
+  // $('#'+P.parentID+' '+'.product').hover(function() {
+  //   app.u.dump('hover');
+  //   $(this).toggleClass('categoryProductHover');
+  // });
 }]);
 
 /*
