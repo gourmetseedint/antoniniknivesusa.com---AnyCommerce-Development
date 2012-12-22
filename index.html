@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-	"release":"20121222140619",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+	"release":"20121222141016",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
 	"_clientid":"zmvc",
 	"baseURL":"",
 	"httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -68,20 +68,11 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 </head>
 
 <body>
-<!-- DELETE THIS WHEN YOU GET STARTED -->
-<h1>WELCOME TO QUICKSTART</h1>
-This file is intended to go along with the 10-step tutorial at: 
-<a href="https://github.com/zoovy/AnyCommerce-Development/wiki/quickstart">https://github.com/zoovy/AnyCommerce-Development/wiki/quickstart</a>
-<!-- /DELETE THIS WHEN YOU GET STARTED -->
-
-
-
-
 <!-- what is displayed onLoad until the view is loaded -->
 <div id='appPreView'>
 <table>
 <tr>
-	<td><!-- put logo here --></td>
+	<td><img src="images/logo_cat_default.png" alt="Antonini Knives USA" /></td>
 	<td>
 	<h3>One moment please.</h3>
 	
@@ -99,20 +90,148 @@ This file is intended to go along with the 10-step tutorial at:
 
 
 <div id='appView' class='displayNone'>
-
-<!-- VIEW CONTENT -->
-<!-- leave the appView div, put your your html here ...  -->
-
-	<!-- 
-	** REMINDER : DO NOT PUT ANY GRAPHICS/CONTENT THAT SHOULD NOT APPEAR ON EVERY PAGE IN THE VIEW (HERE)
-	**				  INSTEAD PUT THEM INTO <div id="homepageTemplate"></div>
-	-->
-<div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
-<div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
-
-
-<!-- ... your html ends -->
-<!-- /VIEW CONTENT -->
+	<!-- VIEW CONTENT -->
+	<div class='container'>
+	  <header id="header" class="printNo">
+	    <div class='printNo'>
+	      <span class="logoTop"><a href="#homepage" class='bindByAnchor' title='Antonini Knives USA'><img src="images/logo.png" alt="Antonini Knives USA" /></a></span>
+	      <span class="bannerText"><img src="images/banner_text.png" alt="Antonini Knives - Original Italian Blades Since 1925"></span>
+	      <nav class='navTop'>
+	        <span class='navTopLeft'></span>
+	        <div>
+	          <ul>
+	            <li><a href="#category?navcat=.about-antonini" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
+	            <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a></li>
+	            <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a></li>
+	            <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a></li>
+	          </ul>
+	          <span class="socialBox">
+	            <span class='socialIcon socialIconFacebook'><a href="http://www.facebook.com" target="_blank" title="Facebook link"></a></span><!-- TODO: get facebook name -->
+	            <span class='socialIcon socialIconTwitter'><a href="http://www.twitter.com" target="_blank" title="Twitter link"></a></span><!-- TODO: get twitter name -->
+	          </span>
+	        </div>
+	      </nav>
+	      <div id="slideshowContainer" class='displayNone'>
+	      <!-- <div id="slideshowNav"></div> -->
+	        <ul id="wideSlideshow" class="pics slideshow">
+	          <li><img src='images/home_slide_1.png'/></li>
+	          <li><img src='images/home_slide_2.png'/></li>
+	          <li><img src='images/home_slide_3.png'/></li>
+	          <li><img src='images/home_slide_4.png'/></li>
+	          <li><img src='images/home_slide_5.png'/></li>
+	        </ul>
+	      </div>
+	      <div class="headerInner headerInnerLeft"></div>
+	      <div class="headerInner headerInnerRight"></div>
+	    </div>
+	  </header>
+	  <aside class="sidebar printNo">
+	    <nav class="navMenu">
+	      <div id='logoCategory' class='logoCategoryDefault'></div>
+	      <form name='headerSearchFrm' action='#' class='productSearchForm' method="get">
+	        <fieldset>
+	        <!-- <legend>Search</legend> -->
+	        <input type='search' name='KEYWORDS' value='Find Products...' class="productSearchKeyword handleDefault" />
+	        </fieldset>
+	        <input class="search" type="submit" value="" />
+	      </form>
+	      </form>
+	      <h2>Products</h2>
+	      <ul id="tier1categories"></ul>
+	      <a href="#category?navcat=.pdf-catalogs" class='bindByAnchor navMenuLink' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a>
+	    </nav>
+	    <div class='wholesaleInfo'>
+	      <a href="#category?navcat=.wholesale" class='bindByAnchor navMenuLink' title='Wholesale Info'>
+	        <span class='wholesaleInfoTop'><strong>Retailer?</strong><br/>Wholesale Available</span>
+	        <span class='wholesaleInfoBottom'>for Pricing and Availability<br/><strong>Click here &gt;&gt;</strong></span>
+	      </a>
+	    </div>
+	  </aside>
+	  <div class='content'>
+	    <div id='globalMessaging' class='appMessaging'></div><!-- DO NOT REMOVE - used for some high level error handling (usually appears below breadcrumb nav or top bar) -->
+	    <div id='mainContentArea'></div><!-- DO NOT REMOVE - this is where the specific page (ex: homepage, product, category) content is going to go -->
+	    <!-- <div class='sideline' >
+	      <nav id='companyNav'>
+	      <ul class='listStyleNone noPadOrMargin'>
+	        <li><a href='#category?navcat=.about-antonini' class='bindByAnchor'  id='navLink_about' title='About Antonini'>About Antonini</a></li>
+	        <li><a href="#category?navcat=.about_gsi_distributing" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a></li>
+	        <li><a href="#category?navcat=.testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
+	        <li><a href='#company?show=contact'  id='navLink_contact' title='Contact Information'>Contact Information</a></li>
+	        <li><a href='#company?show=faq'  id='navLink_faq' title='FAQ'>FAQ</a></li>
+	        <li><a href='#company?show=payment' id='navLink_payment' title='Payment Policy'>Payment Policy</a></li>
+	        <li><a href='#company?show=privacy' id='navLink_privacy' title='Privacy Statement'>Privacy Statement</a></li>
+	        <li><a href='#company?show=return' id='navLink_return' title='Return Policy'>Return Policy</a></li>
+	        <li><a href='#company?show=shipping' id='navLink_shipping' title='Shipping Information'>Shipping Information</a></li>
+	      </ul>
+	      </nav>
+	    </div> -->
+	    <!-- used by wholesale -->
+	    <form action='#' onSubmit="app.ext.store_crm.calls.appSendMessage.init($(this).serializeJSON(),{'callback':'showMessaging','parentID':'contactFormMessaging','message':'Thank you, your message has been sent'},'immutable'); app.model.dispatchThis('immutable');  return false;" class='contactForm contactFormWholesale displayNone' name='contactFormWholesale'>
+	      <fieldset>
+	        <legend>Acquire Wholesale Information</legend>
+	        <div class='contactFormMessaging'></div>
+	        <div><label for='contactFormSenderWholesale'>Email Address: </label><input type='email' name='sender' required='required' id='contactFormSenderWholesale' /></div>
+	        <div class='displayNone'><input type='hidden' name='subject' id='contactFormSubjectWholesale' value="Wholesale Inquiry"/></div>
+	        <!-- <div><label for='contactFormOID'>Order ID: </label><input type='text' name='OID' id='contactFormOID' /></div> -->
+	        <div><label for='contactFormBodyWholesale'>Nature of Request: </label><textarea name='body' required='required' id='contactFormBodyWholesale'></textarea></div>
+	        <div class='alignRight'><input type='submit' class='ui-button-text ui-button ui-state-default ui-corner-all' value='Send Message' />
+	        </div>
+	      </fieldset>
+	    </form>
+	  </div>
+	</div>
+	<footer class='printNo'>
+	  <div class="footerBoxesWrapper">
+	    <div class='container'>
+	      <div class="containerInner">
+	        <ul class="footerBox"><h3>About</h3>
+	          <li><a href="#homepage" class='bindByAnchor' title='Home'>Home</a></li>
+	          <li><a href="#category?navcat=.about-antonini" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
+	          <li><a href="#category?navcat=.testimonials" class='bindByAnchor' title='Testimonials'>Testimonials</a></li>
+	          <li><a href="#category?navcat=.about_gsi_distributing" class='bindByAnchor' title='About GSI Distributing'>About GSI Distributing</a></li>
+	        </ul>
+	        <ul class="footerBox"><h3>Customer Care</h3>
+	          <li><a href="#company?show=contact" class='bindByAnchor' title='Contact Us'>Contact Us</a></li>
+	          <li><a href="#company?show=payment" class='bindByAnchor' title='Payment Methods'>Payment Methods</a></li>
+	          <li><a href="#company?show=return" class='bindByAnchor' title='Return Policy'>Return Policy</a></li>
+	          <li><a href="#company?show=shipping" class='bindByAnchor' title='Shipping'>Shipping</a></li>
+	          <li><a href="#company?show=privacy" class='bindByAnchor' title='Privacy Policy'>Privacy Policy</a></li>
+	        </ul>
+	        <ul class="footerBox"><h3>My Account</h3>
+	          <li><a href="#customer?show=newsletter" class='bindByAnchor' title='Register'>Register</a></li>
+	          <li><a href="#customer?show=login" class='bindByAnchor' title='Login'>Login</a></li>
+	          <li><a href="#customer?show=orders" class='bindByAnchor' title='Track Order'>Track Order</a></li>
+	          <li><a href="#customer?show=myaccount" class='bindByAnchor' title='Recover Password'>Recover Password</a></li>
+	        </ul>
+	        <div class="contactInfo">
+	          <ul>
+	            <li>GSI Distributing</li>
+	            <li>North American Distributer for <a href="http://www.antoniniknives.com" target="_blank">Antonini Knives</a></li>
+	            <li>HC 12 Box 510</li>
+	            <li>Tatum, NM 88267</li>
+	            <li>USA</li>
+	            <li>PH: 575-398-6141</li>
+	            <li>FX: 575-398-6151</li>
+	            <li>EM: <a href="#company?show=contact" class='bindByAnchor' title='Contact'>CustomerService [at] AntoniniKnivesUsa.com</a></li><!-- TODO: add real email address -->
+	          </ul>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	  <div class='container'>
+	    <p class='copyright'>&copy; 2012 A.E. Coltellerie snc - all rights reserved</p>
+	  </div>
+	</footer>
+	<div class='preload printNo'>
+	  <div class="bannerHome"></div>
+	  <div class="bannerCategoryBoat"></div>
+	  <div class="bannerCategoryCable"></div>
+	  <div class="bannerCategoryFarm"></div>
+	  <div class="bannerCategoryPocket"></div>
+	  <div class="bannerCategoryPromo"></div>
+	  <div class="bannerCategorySos"></div>
+	</div>
+	<!-- /VIEW CONTENT -->
 </div>
 
 
