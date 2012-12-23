@@ -542,6 +542,12 @@ $color_button_text_hover: darken($color_button_text, 20%);
   }
 }
 
+#appPreView {
+  td {
+    display: inline-block;
+  }
+}
+
 /* Header */
 
 header {

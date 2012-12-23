@@ -200,12 +200,15 @@ a:active {
   color: inherit; }
 
 .shadowBottomOuter, .footerBoxesWrapper {
-  -webkit-box-shadow: 0 3px 3px 2px #999;
-  -moz-box-shadow: 0 3px 3px 2px #999;
-  box-shadow: 0 3px 3px 2px #999; }
+  -webkit-box-shadow: 0 3px 3px 2px #999999;
+  -moz-box-shadow: 0 3px 3px 2px #999999;
+  box-shadow: 0 3px 3px 2px #999999; }
 
 .preload div {
   height: 100px; }
+
+#appPreView td {
+  display: inline-block; }
 
 /* Header */
 header {
@@ -297,7 +300,7 @@ header {
       color: #068500 !important; }
       .anythingSlider-default.activeSlider .anythingControls a.start-stop.playing {
         background-color: #9a9a9a !important;
-        color: #B90007 !important; }
+        color: #b90007 !important; }
   .anythingSlider-default .arrow a {
     background: url(AnythingSlider/default.png) no-repeat; }
   .anythingSlider-default .back a {
@@ -939,6 +942,7 @@ footer {
   .content .subCategoryList .subCategory div {
     display: inline-block; }
 .content .subCategoryList .subCategoryText {
+  margin-top: 1em;
   width: 400px;
   vertical-align: top;
   text-align: left; }
