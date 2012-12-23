@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121222155620",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121222155948",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -56,9 +56,6 @@ css files should be included before any .js file to ensure they are downloaded i
 <script src="customTabs.js"></script>
 <script type="text/javascript" src="loadscript.js"></script>
 
-<!-- IE Shim for HTML5 -->
-<!--[if lt IE 9]><script type="text/javascript" src="dist/html5shiv.js"></script><![endif]-->
-
 
 <script type="text/javascript">
 app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
@@ -79,13 +76,15 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
   <div class='alignCenter'>
   <progress id="appPreViewProgressBar" max="100" value="0" /><br />
   </div>
-  <div id='appPreViewProgressText'>0% Complete asdf</div>
+  <div id='appPreViewProgressText'>0% Complete</div>
   
   <div class='appMessaging'></div>
   </td>
 </tr>
 <tr>
-  <h3>Welcome to Antonini Knives USA and the home of a wide range of working, collectable, and novelty pocket knives. Whether a professional or a home hobbyist, you'll find here great knives for boating & fishing, electrical, cable, telephone, and agriculture.</h3>
+  <td>
+    <h3>Welcome to Antonini Knives USA and the home of a wide range of working, collectable, and novelty pocket knives. Whether a professional or a home hobbyist, you'll find here great knives for boating & fishing, electrical, cable, telephone, and agriculture.</h3>
+  </td>
 </tr>
 </table>
 </div>
