@@ -229,7 +229,7 @@ function setValueFromSubcatData(selector, field) {
 
 function fixHiddenPretty(pretty) {
   var temp = pretty;
-  if (temp.charAt(0) == ('!')) {
+  if (temp[0] == ('!')) {
     temp = temp.replace(/!/, '');
   }
   return temp;
@@ -788,9 +788,3 @@ $(document).ready(function(){
   // Hid pre load images
   $('.preload').hide();
 });
-
-
-
-
-
-

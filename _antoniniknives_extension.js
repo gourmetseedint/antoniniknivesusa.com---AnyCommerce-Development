@@ -102,7 +102,7 @@ var antoniniknives_extension = function() {
                 paragraph   = catData[navcat][i].paragraph;
                 if (image) {
                   imageClass = (imageClass == 'categoryImageEven') ? 'categoryImageOdd' : 'categoryImageEven';
-                  description += "<img class='categoryImage " + imageClass +"' alt='Category Image' src='" + imageDirectory + image + "'></img>";
+                  description += "<div class='categoryImage " + imageClass +"'><img alt='Category Image' src='" + imageDirectory + image + "'></img></div>";
                 }
                 if (paragraph) {
                   description += "<p>" + paragraph + "</p>";
