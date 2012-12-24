@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121223173701",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121223174251",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -642,6 +642,36 @@ this will likely become more flexible in the future. ###
           <li><a href='javascript:void(0)' onClick="window.print();">Printer Friendly Version</a></li>
         </ul>
       </div>
+    </div>
+  </div>
+
+  <div class="productViewContainer">
+    <div class='productImageContainer'>
+      <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');"  class='pointer clearfix productImage productImagePrimary'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
+        <div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
+        <img src='blank.gif' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='340' height='340' />
+      </div>
+      <div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbs'>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"2"});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer productImage'><img src='blank.gif' data-bind='var: product(zoovy:prod_image2); format:imageURL;' width='100' height='100' /></div>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"3"});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer productImage'><img src='blank.gif' data-bind='var: product(zoovy:prod_image3); format:imageURL;' width='100' height='100' /></div>
+        <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"4"});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer productImage productImageLast'><img src='blank.gif' data-bind='var: product(zoovy:prod_image4); format:imageURL;' width='100' height='100' /></div>
+      </div>
+    </div>
+    <div class="productDetailsContainer">
+      <ul class='productDetailsList'>
+        <li><span data-bind='var:product(user:prod_steel);     format:text; pretext: Steel: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_finishing); format:text; pretext: Finishing: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_handle);    format:text; pretext: Handle: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_inner);     format:text; pretext: Inner: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span></li>
+        <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span></li>
+        <li><span data-bind="var:product(prod_detail_option1_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option1_value); format:text;"></span></li>
+        <li><span data-bind="var:product(prod_detail_option2_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option2_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option2_value); format:text;"></span></li>
+        <li><span data-bind="var:product(prod_detail_option3_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option3_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option3_value); format:text;"></span></li>
+        <li><span data-bind="var:product(prod_detail_option4_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option4_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option4_value); format:text;"></span></li>
+      </ul>
+      <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
     </div>
   </div>
 
