@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121223184613",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121223185632",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -666,10 +666,6 @@ this will likely become more flexible in the future. ###
         <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span></li>
         <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span></li>
         <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span></li>
-      <!--
-        <li><span data-bind="var:product(user:prod_detail_option1_value); format:showIfSet;" class="displayNone">shown</span></li>
-        <li><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option1_value); format:text;"></span></li>
-      -->
         <li><span data-bind="var:product(prod_detail_option1_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option1_value); format:text;"></span></span></li>
         <li><span data-bind="var:product(prod_detail_option2_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option2_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option2_value); format:text;"></span></span></li>
         <li><span data-bind="var:product(prod_detail_option3_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option3_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option3_value); format:text;"></span></span></li>
@@ -679,15 +675,39 @@ this will likely become more flexible in the future. ###
     </div>
   </div>
 
+  <div class="productExtras printNo">
+    <div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListAccessories' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h4>Accessories</h4>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
+    <ul class='productList productListProductExtras productListVariants' data-bind="var: product(user:prod_primary_cat); format:subcatProductList; extension:antoniniknives_extension; loadsTemplate:productListTemplate; before:<h4>Variants</h4>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul>
+  </div>
+
+  <div class='prodTabs tabbedProductContent printNo'>
+
+    <ul class='tabs'>
+      <li class='prodReviewsTab'><a href='#'>Reviews</a></li>
+    </ul>
+
+    <div  class='tabContent'>
+      <div class='clearfix alignRight'>
+        <button class='ui-button-text ui-button ui-state-default ui-corner-all' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write a Review</button>
+      </div>
+      <ul class='listStyleNone clearfix productReviewsList' id='prodViewerReviews' data-bind="var: reviews(@reviews); format:reviewList; extension:store_product; loadsTemplate:productReviewsTemplateDetail;"></ul>
+    </div>
+    
+  </div>
+
+  <!-- Required for category specific colors and sub menu -->
+  <span data-bind="var:product(user:prod_primary_cat); format:text;" class='productCurrentCategory displayNone'></span>
+
   <!-- Original -->
-  
+  <!--
   <ul class='clearfix noPadOrMargin fluidList breadcrumb' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
 
   <table class='prodViewerContainer'>
   <tr>
     <td class='imageContainer'>
+    -->
   <!--  <img src='%PROJECT_URL%/blank.gif' id='bobWasHere' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format: magicZoomPlus; extension: magicToolBox;' width='340' height='340' /> -->
-  
+  <!--
   <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' class='pointer clearfix'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
 
     <div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
@@ -727,8 +747,9 @@ this will likely become more flexible in the future. ###
     
     <ul title='please choose' id='prodlistChildren' class='listStyleNone fluidList clearfix noPadOrMargin productList smallProdlist' data-bind="var: product(zoovy:grp_children); format:productList; extension:store_prodlist; loadsTemplate:productListTemplateChildren;hide_summary:true;"></ul>
 
-  
+  -->
   <!--  <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
+  <!--
   
     <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div>
     
@@ -762,13 +783,13 @@ this will likely become more flexible in the future. ###
   </tr>
   <tr>
     <td colspan='2' class="tabbedProductContentTD">
-    
+    -->
   <!--
   the tabs are built in an onComplete.  ID's are added based on sku AND index, so the index (order) of the tabs MUST match the order of the tabContent divs
   or the tab clicked won't open the right content.
   It's done this way because ID's hard coded into template are bad mojo (templates are recycled) and because using data-binds to add id's caused some serious issues
   -->
-  
+  <!--
   <div class='prodTabs tabbedProductContent'>
 
     <ul class='tabs'>
@@ -823,7 +844,7 @@ this will likely become more flexible in the future. ###
     <ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h2>Similar Items</h2>; withReviews:1;"></ul>
   </div>
 
-  
+  -->
 </div><!-- productTemplate -->
 
 
