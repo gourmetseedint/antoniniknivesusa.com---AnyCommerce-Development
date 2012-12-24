@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121223171550",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121223172348",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -600,6 +600,14 @@ this will likely become more flexible in the future. ###
 -->
 
 <div id='productTemplate'>
+
+  <div class='headings headingsProduct'>
+    <div data-bind="var:product(user:prod_primary_cat); format:product_headings; extension:antoniniknives_extension;">
+      <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+    </div>
+  </div>
+
+  <!-- Original -->
   
   <ul class='clearfix noPadOrMargin fluidList breadcrumb' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
 
