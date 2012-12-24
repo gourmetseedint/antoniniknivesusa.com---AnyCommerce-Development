@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121223181126",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121223182027",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -666,8 +666,9 @@ this will likely become more flexible in the future. ###
         <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span></li>
         <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span></li>
         <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span></li>
-        <li><span data-bind="var:product(prod_detail_option1_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option1_value); format:text;"></span></li>
+        <li><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: </li>
       <!--
+        <li><span data-bind="var:product(prod_detail_option1_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option1_value); format:text;"></span></li>
         <li><span data-bind="var:product(prod_detail_option2_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option2_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option2_value); format:text;"></span></li>
         <li><span data-bind="var:product(prod_detail_option3_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option3_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option3_value); format:text;"></span></li>
         <li><span data-bind="var:product(prod_detail_option4_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option4_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option4_value); format:text;"></span></li>
