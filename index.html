@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121223175509",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121223180303",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -657,7 +657,6 @@ this will likely become more flexible in the future. ###
         <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"4"});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');" class='pointer productImage productImageLast'><img src='blank.gif' data-bind='var: product(zoovy:prod_image4); format:imageURL;' width='100' height='100' /></div>
       </div>
     </div>
-    <!--
     <div class="productDetailsContainer">
       <ul class='productDetailsList'>
         <li><span data-bind='var:product(user:prod_steel);     format:text; pretext: Steel: ;'></span></li>
@@ -667,13 +666,15 @@ this will likely become more flexible in the future. ###
         <li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span></li>
         <li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span></li>
         <li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span></li>
+      <!--
         <li><span data-bind="var:product(prod_detail_option1_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option1_value); format:text;"></span></li>
         <li><span data-bind="var:product(prod_detail_option2_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option2_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option2_value); format:text;"></span></li>
         <li><span data-bind="var:product(prod_detail_option3_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option3_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option3_value); format:text;"></span></li>
         <li><span data-bind="var:product(prod_detail_option4_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option4_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option4_value); format:text;"></span></li>
+      -->
       </ul>
       <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
-    </div> -->
+    </div>
   </div>
 
   <!-- Original -->
