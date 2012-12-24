@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121223174251",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121223175030",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -646,7 +646,7 @@ this will likely become more flexible in the future. ###
   </div>
 
   <div class="productViewContainer">
-    <div class='productImageContainer'>
+   <!--  <div class='productImageContainer'>
       <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' onMouseOver="$(this).addClass('categoryProductHover');" onMouseLeave="$(this).removeClass('categoryProductHover');"  class='pointer clearfix productImage productImagePrimary'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
         <div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
         <img src='blank.gif' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='340' height='340' />
@@ -672,7 +672,7 @@ this will likely become more flexible in the future. ###
         <li><span data-bind="var:product(prod_detail_option4_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option4_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option4_value); format:text;"></span></li>
       </ul>
       <div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
-    </div>
+    </div> -->
   </div>
 
   <!-- Original -->
@@ -681,7 +681,7 @@ this will likely become more flexible in the future. ###
 
   <table class='prodViewerContainer'>
   <tr>
-    <td class='imageContainer'> -->
+    <td class='imageContainer'>
   <!--  <img src='%PROJECT_URL%/blank.gif' id='bobWasHere' class='prodBigImage' data-bind='var: product(zoovy:prod_image1); format: magicZoomPlus; extension: magicToolBox;' width='340' height='340' /> -->
   
   <div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' class='pointer clearfix'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
