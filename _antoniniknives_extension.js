@@ -110,7 +110,7 @@ var antoniniknives_extension = function() {
                 description += "</div>";
               }
             }else {
-              app.u.dump("Warning: catData entry is missing for:" + (navcat || ''));
+              app.u.dump("Warning: catData description is missing for:" + (navcat || ''));
             }
           }else {
             app.u.dump("Warning: catData is undefined");

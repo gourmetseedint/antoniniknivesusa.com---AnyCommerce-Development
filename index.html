@@ -20,7 +20,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121223172348",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121223173701",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -604,6 +604,44 @@ this will likely become more flexible in the future. ###
   <div class='headings headingsProduct'>
     <div data-bind="var:product(user:prod_primary_cat); format:product_headings; extension:antoniniknives_extension;">
       <h2><a href='#top' onClick="return showContent('category',{'navcat':'.'});">Antonini:</a></h2>
+    </div>
+  </div>
+
+  <div class='productSpecsContainer'>
+    <div class="productSpecsTop">
+      <ul class='breadcrumb breadcrumbProduct' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
+      <h4 class='stid productID categoryColor' data-bind='var: product(pid); format:text;'></h4><h1 data-bind="var:product(zoovy:prod_name); format:text;" class='productName categoryColor'></h1>
+    </div>
+    <div class="productSpecsMiddle">
+      <ul class='productSpecsList'>
+        <li class='displayNone' data-bind='var:product(user:prod_weight_grams); format:showIfSet;'><span data-bind='var:product(user:prod_weight_grams); format:text; pretext: <span class="pretext">Weight: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_blade_length); format:showIfSet;'><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_dimen_option1_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option1_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option1_value); format:text;"></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_dimen_option2_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option2_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option2_value); format:text;"></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_dimen_option3_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option3_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option3_value); format:text;"></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_dimen_option4_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option4_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option4_value); format:text;"></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_overall_length); format:showIfSet;'><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;'></span></li>
+        <li class='displayNone' data-bind='var:product(user:prod_closed_length); format:showIfSet;'><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span></li>
+      </ul>
+      <h4 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h4>
+    </div>
+    <div class="productSpecsBottom printNo">
+      <!-- <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
+      <!-- <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div> -->
+      <form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.handleAddToCart($(this),{'action':'modal'}); return false;">
+      
+        <fieldset data-bind='var: product(pid); format:atcVariations; extension:store_product;' class='borderNone'></fieldset>
+        <fieldset data-bind='var: product(pid); format:atcQuantityInput; extension:store_product; pretext:Quantity: ;' class='borderNone'></fieldset>
+      
+        <input type='submit' value='Add to Cart' class='button submit displayNone' data-bind='var: product(pid); format:addToCartButton; extension:store_product;' id='addToCartBtn' />
+      </form>
+      <div>
+        <ul>
+          <li><a href="javascript:void(0)" onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write a Review</a></li>
+          <!-- <li><a href="javascript:void(0)">Tell a Friend</a></li> --><!-- TODO: get link for 'tell a friend' -->
+          <li><a href='javascript:void(0)' onClick="window.print();">Printer Friendly Version</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 
