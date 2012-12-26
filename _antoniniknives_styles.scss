@@ -547,15 +547,16 @@ $color_button_text_hover: darken($color_button_text, 20%);
     display: inline-block;
   }
   h2 {
-    letter-spacing: 1.5em;
+    line-height: 1.5em;
   }
 }
 
 /* Header */
 
-header {
+#header {
   height: $height_header;
   position: relative;
+  display: block;
 }
 
 $width_headerInner: 90px;

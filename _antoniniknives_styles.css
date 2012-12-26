@@ -209,11 +209,14 @@ a:active {
 
 #appPreView td {
   display: inline-block; }
+#appPreView h2 {
+  line-height: 1.5em; }
 
 /* Header */
-header {
+#header {
   height: 386px;
-  position: relative; }
+  position: relative;
+  display: block; }
 
 .headerInner {
   width: 90px;
