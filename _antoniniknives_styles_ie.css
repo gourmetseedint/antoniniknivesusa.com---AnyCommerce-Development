@@ -54,6 +54,12 @@
   *padding-bottom: 40px;
 }
 
+.content .productExtras li {
+  *float: none;
+  *margin: 0;
+  *padding-bottom: 0;
+}
+
 .prodThumbContainer .viewProductLink {
   *position: relative;
   bottom: -5px;
