@@ -1722,6 +1722,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
 
 .productListWrapper {
   margin-bottom: 40px;
+  @extend .clearfixScss;
 }
 
 .categoryProductHover, .categoryListHover {

@@ -123,11 +123,11 @@ a:active {
   color: blue; }
 
 /* General */
-.clearfixScss, .container, .containerFooter, .categoryDescription div, .productSpecsContainer, .productSpecsMiddle {
+.clearfixScss, .container, .containerFooter, .productListWrapper, .categoryDescription div, .productSpecsContainer, .productSpecsMiddle {
   clear: both;
   overflow: hidden; }
 
-.clearfixScss:after, .container:after, .containerFooter:after, .categoryDescription div:after, .productSpecsContainer:after, .productSpecsMiddle:after {
+.clearfixScss:after, .container:after, .containerFooter:after, .productListWrapper:after, .categoryDescription div:after, .productSpecsContainer:after, .productSpecsMiddle:after {
   content: ".";
   display: block;
   height: 0;
