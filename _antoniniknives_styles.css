@@ -499,7 +499,7 @@ a.navMenuLink:active {
   color: #cccccc !important;
   background: #222222 !important; }
 
-.navMenuSubActive, .navMenu ul li ul li a:active, .navMenu li.current {
+.navMenuSubActive, .navMenu ul li ul li a:active, .navMenu li.current, .navMenu li.current a:link {
   color: #222222 !important;
   background: #cccccc !important;
   font-weight: bold; }

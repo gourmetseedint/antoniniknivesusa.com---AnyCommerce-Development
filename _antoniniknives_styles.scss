@@ -1012,9 +1012,10 @@ a.navMenuLink {
 
 .navMenu li.current {
   // color: $color_navMenuSubHover_bg !important;
+  @extend .navMenuSubActive;
+  a:link {
     @extend .navMenuSubActive;
-  // a:link {
-  // }
+  }
 }
 
 
