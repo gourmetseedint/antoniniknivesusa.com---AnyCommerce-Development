@@ -19,11 +19,12 @@
 
 #homeProdSearchBestSellers {
   *float: left;
-  *width: 400px;
+  /**width: 400px;*/
 }
 
 .homepageText {
   *float: left;
+  *margin-top: 20px;
 }
 
 .subCategoryList .thumbContainer {
@@ -33,7 +34,6 @@
 
 .subCategoryList .subCategoryText {
   *float: left;
-  *margin-top: 20px;
 }
 
 .productSpecsBottom ul {
@@ -46,4 +46,8 @@
 
 .prodThumbs div{
   *float: left;
+}
+
+.prodThumbContainer .viewProductLink {
+  position: relative;
 }
