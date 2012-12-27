@@ -50,7 +50,7 @@
 }
 
 .content .productList {
-  *padding-bottom: 300px;
+  /**padding-bottom: 300px;*/
 }
 
 .content .productList li {
@@ -60,7 +60,7 @@
 }
 
 .content .productExtras {
-  *padding-bottom: 0;
+  /**padding-bottom: 0;*/
 }
 
 .content .productExtras li {
