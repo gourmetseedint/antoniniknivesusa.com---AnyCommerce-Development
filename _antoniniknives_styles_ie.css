@@ -40,8 +40,9 @@
   *float: right;
 }
 
-.productImageContainer {
+.prodThumbContainer {
   *float: left;
+  *overflow: hidden;
 }
 
 .prodThumbs div{
@@ -59,7 +60,7 @@
 }
 
 .content .productExtras {
-  padding: 0;
+  *padding-bottom: 0;
 }
 
 .content .productExtras li {
@@ -69,7 +70,7 @@
 }
 
 .prodThumbContainer .viewProductLink {
-  *position: relative;
+  /**position: relative;*/
   /*bottom: -5px;*/
   /**height: 30px;*/
 }
