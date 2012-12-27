@@ -229,7 +229,7 @@ var antoniniknives_extension = function() {
         if (navcat && subCategory && subCatLong) {
           // on a sub category
           // app.u.dump("On a sub category");
-          link += "<h1 class='categoryColor'>" + subCatLong + "<h1>";
+          link += "<h1 class='categoryColor'>" + subCatLong + "</h1>";
 
           if (category && catPretty) {
             link += "<h3 class='headingSubsParent'>" + r.vars.categoryLink(category, catPretty) + "</h3>";
