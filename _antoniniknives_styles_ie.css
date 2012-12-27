@@ -9,7 +9,7 @@
 .sidebar {
   /* To fix float stretching 100% */
   /* *width: 0px; */ /* IE 7- */
-  width: 224px;
+  *width: 224px;
   /*float: left;*/
 }
 
@@ -18,8 +18,8 @@
 }
 
 #homeProdSearchBestSellers {
-  float: left;
-  width: 400px;
+  *float: left;
+  *width: 400px;
 }
 
 .homepageText {
@@ -27,8 +27,8 @@
 }
 
 .subCategoryList .thumbContainer {
-    width: 200px;
-    float: left;
+    *width: 200px;
+    *float: left;
 }
 
 .subCategoryList .subCategoryText {
