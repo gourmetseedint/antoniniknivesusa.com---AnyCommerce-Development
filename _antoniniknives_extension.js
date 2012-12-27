@@ -196,12 +196,12 @@ var antoniniknives_extension = function() {
         if (navcat && subCatLong && category && catPretty) {
           // product resides in a sub category
           // app.u.dump('on a sub');
-          link += "<h1 class='headingProductSubCategory categoryColor'>" + r.vars.categoryLink(navcat, subCatLong) + "<h1>";
+          link += "<h1 class='headingProductSubCategory categoryColor'>" + r.vars.categoryLink(navcat, subCatLong) + "</h1>";
           link += "<h3 class='headingProductCategory'>" + r.vars.categoryLink(category, catPretty) + "</h3>";
         }else if(category && catPretty) {
           // product resides in top category
           // app.u.dump('on a top');
-          link += "<h1 class='headingProductSubCategory categoryColor'>" + r.vars.categoryLink(category, catPretty) + "<h1>";
+          link += "<h1 class='headingProductSubCategory categoryColor'>" + r.vars.categoryLink(category, catPretty) + "</h1>";
         }
         $tag.html(link);
       },
