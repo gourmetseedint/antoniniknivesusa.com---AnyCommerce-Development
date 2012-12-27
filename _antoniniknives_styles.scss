@@ -48,13 +48,13 @@ $color_navTop_bg_hover: lighten($color_navTop_bg, 10%);
 
 $color_menu_bg: #101010;
 $color_menu_text: white;
-$color_menu_product_bg: #555555;
+$color_menu_sub_bg: #555555;
 $color_navMenuCategoryHover_text: darken($color_menu_text, 30%);
-$color_navMenuCategoryHover_bg: darken($color_menu_bg, 20%);
+// $color_navMenuCategoryHover_bg: darken($color_menu_bg, 20%);
 $color_navMenuSubHover_text: darken($color_menu_text, 20%);
-$color_navMenuSubHover_bg: darken($color_menu_product_bg, 20%);
-// $color_navMenuSubActive: #156F15;
-// $color_navMenuSubActive: #15676F;
+$color_navMenuSubHover_bg: darken($color_menu_sub_bg, 20%);
+// $color_navMenuSubActive_text: $color_menu_bg;
+// $color_navMenuSubActive_bg: white;
 $color_menu_a: white;
 $color_menu_a_hover: #999;
 
@@ -91,7 +91,7 @@ $color_productExtras_text: #77787b;
 $color_productExtras_list_border_sides: #cbcbcb;
 $color_productExtras_list_border_top: #8f8f8f;
 
-$color_page_bg: $color_menu_product_bg;
+$color_page_bg: $color_menu_sub_bg;
 $color_page_border: #404040;
 $color_page_text: black;
 
@@ -152,7 +152,14 @@ $background_white: white url('images/bg_white.png');
       // margin: 0;
       // padding: 0;
       margin-right: 0;
-        &:after {
+      &:after {
+        content: "";
+        margin-left: 0;
+      }
+    }
+    &.lastChild {
+      margin-right: 0;
+      &:after {
         content: "";
         margin-left: 0;
       }
@@ -553,7 +560,7 @@ $color_button_text_hover: darken($color_button_text, 20%);
 
 /* Header */
 
-#header {
+header {
   height: $height_header;
   position: relative;
   display: block;
@@ -571,6 +578,9 @@ $width_headerInner: 90px;
   background: url('images/bg_gradient_left.png') repeat-y;
   background-size: $width_headerInner auto;
   left: 0;
+  // -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
+  //             src='images/bg_gradient_left.png',
+  //             sizingMethod='scale')";
 }
 
 .headerInnerRight {
@@ -745,6 +755,7 @@ $height_navTop_corner: (2 * $height_navTop_font_padding_scale * $height_navTop_f
     padding: 0 8px;
     height: 100%;
     background: $color_navTop_bg;
+    // display: inline-block;
   }
   span {
     height: 100%;
@@ -753,6 +764,7 @@ $height_navTop_corner: (2 * $height_navTop_font_padding_scale * $height_navTop_f
   ul {
     @include flat_list_with_divider(1.1em, "/");
     display: inline-block;
+    float: left;
   }
   li  {
     height: 100%;
@@ -803,7 +815,7 @@ $width_navTopLeft: 50px;
 
 .socialBox {
   margin-left: 5px;
-  // float: right;
+  float: left;
   // TODO: socialBox fix top extra space
   a { // social icons
     width: 32px;
@@ -855,6 +867,8 @@ $menuOffset: -35px;
   margin-bottom: $menuOffset;
   margin-right: $width_menu_right_margin;
   margin-left: $width_menu_left_margin;
+  // width: auto;
+  // display: inline-block;
   // background: $color_menu_bg;
   a {
     &:link, &:visited {
@@ -891,7 +905,7 @@ $menuOffset: -35px;
   ul {
     // display: block; // breaks onCompletes
     div {
-    color: $color_menu_text;
+      // color: $color_menu_text;
       display: inline-block;
     }
   }
@@ -900,6 +914,7 @@ $menuOffset: -35px;
     padding: 0.3em;
     font-size: 1.2em;
     text-transform: uppercase;
+    color: $color_menu_text;
     // color: $color_menu_text;
   }
   ul li { 
@@ -917,7 +932,7 @@ $menuOffset: -35px;
         // width: auto; // to clear qs_styles
         height: auto; // to clear qs_styles
         display: block;
-        background: $color_menu_product_bg;
+        background: $color_menu_sub_bg;
         font-size: 1.1em;
         text-transform: none;
         &:last-child {
@@ -927,7 +942,7 @@ $menuOffset: -35px;
           display: block;
           padding: 0.3em 0.5em;
           &:link {
-            // color: inherit;
+            color: $color_menu_text;
           }
           &:hover {
             @extend .navMenuSubHover;
@@ -939,6 +954,16 @@ $menuOffset: -35px;
             @extend .navMenuSubActive;
             // color: $color_navMenuSubHover_bg;
           }
+          // &.navMenuCurrent {
+          //   &:link {
+          //     // color: $color_navMenuSubActive_text;
+          //     @extend .navMenuSubActive;
+          //   }
+          //   &:hover {
+          //     color: $color_navMenuSubHover_text !important;
+          //     background: $color_navMenuSubHover_bg !important;
+          //   }
+          // }
         }
       }
     }
@@ -968,26 +993,28 @@ a.navMenuLink {
 }
 
 .navMenuCategoryHover {
-  color: $color_navMenuCategoryHover_text;
+  color: $color_navMenuCategoryHover_text !important;
   // background: $color_navMenuCategoryHover_bg;
   // background: blue;
 }
 
 .navMenuSubHover {
-  color: $color_navMenuSubHover_text;
-  background: $color_navMenuSubHover_bg;
+  color: $color_navMenuSubHover_text !important;
+  background: $color_navMenuSubHover_bg !important;
 }
 
 .navMenuSubActive {
-  color: $color_navMenuSubHover_bg;
+  color: $color_navMenuSubHover_bg !important;
   // background: $color_navMenuSubHover_bg;
-  background: $color_navMenuSubHover_text;
+  background: $color_navMenuSubHover_text !important;
+  font-weight: bold;
 }
 
-.navMenuCurrent {
-  &:link {
+.navMenu li.current {
+  // color: $color_navMenuSubHover_bg !important;
     @extend .navMenuSubActive;
-  }
+  // a:link {
+  // }
 }
 
 
@@ -1035,14 +1062,17 @@ $logoCategoryOffset: -40px;
   background: url('images/logo_cat_sos.png') no-repeat;
 }
 
-$width_search_icon: 20px;
+$width_search_icon: 30px;
 $width_search_icon_margin: $width_search_icon + 5px;
 .productSearchForm {
+  // height: 3em;
+  // line-height: 3em;
   font-size: 1.1em;
   fieldset, input {
     margin: 0;
     padding: 0;
     border-width: 0;
+    height: 100%;
   }
   fieldset {
     display: inline-block;
@@ -1050,19 +1080,30 @@ $width_search_icon_margin: $width_search_icon + 5px;
   input {
     margin: 0 auto;
     display: inline-block;
-    &[type="search"] {
-      padding: 0.4em;
-      width: $width_search_form;
+    float:left;
+    height: 2em;
+    line-height: 2em;
+    // padding: 0 5px;
+    &[type="text"], &[type="search"] {
+      // padding: 0.4em;
+      padding: 0 5px;
+      width: $width_search_form - $width_search_icon;
       color: $color_search_text;
     }
     &[type="submit"] {
-      margin-left: -$width_search_icon_margin;
+      // margin-left: -$width_search_icon_margin;
       // padding: 0.4em;
       width: $width_search_icon;
+      // height: 100%;
+      // padding: 5px;
       // vertical-align: center;
       // line-height: 1.1em;
-      background: transparent url('images/icon_search.png') no-repeat;
+      background: white url('images/icon_search.png') no-repeat;
+      background-position: 50% 50%;
       cursor: pointer;
+      &:hover {
+        background-color: $color_navMenuCategoryHover_text;
+      }
     }
   }
 }
@@ -1084,9 +1125,9 @@ $pdfIconSize: 20px;
 }
 
 .wholesaleInfo {
-  margin: 10px auto 0;
+  margin: 10px 0 0;
   background: $color_menu_bg url('images/wholesale_bg.png') no-repeat;
-  background-size: cover;
+  background-size: cover; // dnw ie8-
   font-size: 14px;
   // line-height: 1.2em;
   text-align: center;
@@ -1117,7 +1158,7 @@ $pdfIconSize: 20px;
 $wholesalePadtop: 10px;
 
 .wholesaleInfoTop {
-  height: 85px - $wholesalePadtop;
+  height: 90px - $wholesalePadtop;
   padding-top: $wholesalePadtop;
   font-size: 18px;
   font-weight: bold;
@@ -1127,7 +1168,7 @@ $wholesalePadtop: 10px;
 }
 
 .wholesaleInfoBottom {
-  position: absolute;
+  // position: relative;
   bottom: 3px;
   width: 100%;
 }
@@ -1172,13 +1213,14 @@ footer {
 .footerBox {
   margin: 0 1.2em;
   padding: 0 1.2em;
-  width: 12em;
-  height: 12em; /*TODO: footer box - maybe add something more fluid;*/
+  width: 13em;
+  height: 13em; /*TODO: footer box - maybe add something more fluid;*/
   vertical-align: top;
-  display: inline-block;
+  // display: inline-block;
   background: $color_footerBox_bg;
   color: $color_footerBox_text;
   border-radius: 0.4em;
+  float: left;
   /*text-align: center;*/
   h3, h4 {
     margin: 0.2em 0 0.5em;
@@ -1229,11 +1271,11 @@ footer {
   }
   a {
     &:link {
-      color: inherit;
+      color: $color_contactInfo_text;
       text-decoration: underline;
     }
     &:visited {
-      color: inherit;
+      color: $color_contactInfo_text;
     }
     &:hover {
       color: $color_contactInfo_hover;

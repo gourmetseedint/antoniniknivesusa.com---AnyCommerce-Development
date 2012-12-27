@@ -21,7 +21,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPL
 var myCreole;
 
 var app = {vars:{
-  "release":"20121226130410",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+  "release":"20121226170354",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
   "_clientid":"zmvc",
   "baseURL":"",
   "httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -111,7 +111,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
               <li><a href="#category?navcat=.about-antonini" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
               <li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a></li>
               <li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a></li>
-              <li><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a></li>
+              <li class="lastChild"><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a></li>
             </ul>
             <span class="socialBox">
               <span class='socialIcon socialIconFacebook'><a href="http://www.facebook.com" target="_blank" title="Facebook link"></a></span>
@@ -137,10 +137,10 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
         <div id='logoCategory' class='logoCategoryDefault'></div>
         <form name='headerSearchFrm' action='#' class='productSearchForm' method="get">
           <fieldset>
-          <!-- <legend>Search</legend> -->
-          <input type='search' name='KEYWORDS' value='Find Products...' class="productSearchKeyword handleDefault" />
+            <!-- <legend>Search</legend> -->
+            <input type='search' name='KEYWORDS' value='Find Products...' class="productSearchKeyword handleDefault" />
+            <input class="search" type="submit" value=""/>
           </fieldset>
-          <input class="search" type="submit" value=""/>
         </form>
         </form>
         <h2>Products</h2>
@@ -406,7 +406,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
 </li>
 
 
-<li id='categoryListTemplateRootCats'>
+<li id='categoryListTemplateRootCats' onMouseOver="$(this).addClass('navMenuCategoryHover');" onMouseOut="$(this).removeClass('navMenuCategoryHover');">
   <div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
     <div class='catName'><span data-bind='var: category(pretty); format:text;'></span></div>
   </div>
@@ -623,7 +623,7 @@ this will likely become more flexible in the future. ###
         <li class='displayNone' data-bind='var:product(user:prod_dimen_option3_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option3_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option3_value); format:text;"></span></li>
         <li class='displayNone' data-bind='var:product(user:prod_dimen_option4_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option4_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option4_value); format:text;"></span></li>
         <li class='displayNone' data-bind='var:product(user:prod_overall_length); format:showIfSet;'><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;'></span></li>
-        <li class='displayNone' data-bind='var:product(user:prod_closed_length); format:showIfSet;'><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span></li>
+        <li class='displayNone lastChild' data-bind='var:product(user:prod_closed_length); format:showIfSet;'><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span></li>
       </ul>
       <h4 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h4>
     </div>
@@ -641,7 +641,7 @@ this will likely become more flexible in the future. ###
         <ul>
           <li><a href="javascript:void(0)" onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write a Review</a></li>
           <!-- <li><a href="javascript:void(0)">Tell a Friend</a></li> --><!-- TODO: get link for 'tell a friend' -->
-          <li><a href='javascript:void(0)' onClick="window.print();">Printer Friendly Version</a></li>
+          <li class="lastChild"><a href='javascript:void(0)' onClick="window.print();">Printer Friendly Version</a></li>
         </ul>
       </div>
     </div>

@@ -158,7 +158,7 @@ var headingProductCategory    = '.headingsProduct h3';
 var elementsWithCategoryColor = '.categoryColor';
 
 var headingSubsParent = '.headingSubsParent';
-var navMenuSubCurrent = 'navMenuCurrent';
+var navMenuSubCurrent = 'current';
 var subcatPrettyLong  = '.subcatPrettyLong';
 var subcatDescription = '.subcatDescription';
 
@@ -554,7 +554,7 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   if (currentNavcat && currentNavcat !== currentCategory) {
     // sub category
     htmlSafe = currentNavcat.split('.').join('_');
-    currentSubListItem = '.subcategory' + htmlSafe + ' a:link';
+    currentSubListItem = '.subcategory' + htmlSafe;
     $(currentSubListItem).addClass(navMenuSubCurrent);
   }
 

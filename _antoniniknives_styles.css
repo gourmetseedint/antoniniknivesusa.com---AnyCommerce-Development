@@ -213,7 +213,7 @@ a:active {
   line-height: 1.5em; }
 
 /* Header */
-#header {
+header {
   height: 386px;
   position: relative;
   display: block; }
@@ -337,7 +337,8 @@ a:active {
     margin: 0;
     padding: 0;
     list-style: none;
-    display: inline-block; }
+    display: inline-block;
+    float: left; }
     .navTop ul li {
       list-style: none;
       margin: 0;
@@ -352,6 +353,11 @@ a:active {
       .navTop ul li:last-child {
         margin-right: 0; }
         .navTop ul li:last-child:after {
+          content: "";
+          margin-left: 0; }
+      .navTop ul li.lastChild {
+        margin-right: 0; }
+        .navTop ul li.lastChild:after {
           content: "";
           margin-left: 0; }
   .navTop li {
@@ -387,7 +393,8 @@ a:active {
   float: left; }
 
 .socialBox {
-  margin-left: 5px; }
+  margin-left: 5px;
+  float: left; }
   .socialBox a {
     width: 32px;
     height: 100%;
@@ -441,13 +448,13 @@ a:active {
     margin: 0;
     padding: 0; }
   .navMenu ul div {
-    color: white;
     display: inline-block; }
   .navMenu li {
     margin-bottom: 1em;
     padding: 0.3em;
     font-size: 1.2em;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    color: white; }
   .navMenu ul li ul, .navMenu ul li li {
     list-style: none; }
   .navMenu ul li ul {
@@ -466,6 +473,8 @@ a:active {
       .navMenu ul li ul li a {
         display: block;
         padding: 0.3em 0.5em; }
+        .navMenu ul li ul li a:link {
+          color: white; }
         .navMenu ul li ul li a:visited {
           color: inherit; }
 
@@ -484,15 +493,16 @@ a.navMenuLink:active {
   margin-bottom: -5px; }
 
 .navMenuCategoryHover {
-  color: #b3b3b3; }
+  color: #b3b3b3 !important; }
 
 .navMenuSubHover, .navMenu ul li ul li a:hover {
-  color: #cccccc;
-  background: #222222; }
+  color: #cccccc !important;
+  background: #222222 !important; }
 
-.navMenuSubActive, .navMenu ul li ul li a:active, .navMenuCurrent:link {
-  color: #222222;
-  background: #cccccc; }
+.navMenuSubActive, .navMenu ul li ul li a:active, .navMenu li.current {
+  color: #222222 !important;
+  background: #cccccc !important;
+  font-weight: bold; }
 
 #logoCategory {
   width: 123px;
@@ -532,21 +542,27 @@ a.navMenuLink:active {
   .productSearchForm fieldset, .productSearchForm input {
     margin: 0;
     padding: 0;
-    border-width: 0; }
+    border-width: 0;
+    height: 100%; }
   .productSearchForm fieldset {
     display: inline-block; }
   .productSearchForm input {
     margin: 0 auto;
-    display: inline-block; }
-    .productSearchForm input[type="search"] {
-      padding: 0.4em;
-      width: 188px;
+    display: inline-block;
+    float: left;
+    height: 2em;
+    line-height: 2em; }
+    .productSearchForm input[type="text"], .productSearchForm input[type="search"] {
+      padding: 0 5px;
+      width: 158px;
       color: #555555; }
     .productSearchForm input[type="submit"] {
-      margin-left: -25px;
-      width: 20px;
-      background: transparent url("images/icon_search.png") no-repeat;
+      width: 30px;
+      background: white url("images/icon_search.png") no-repeat;
+      background-position: 50% 50%;
       cursor: pointer; }
+      .productSearchForm input[type="submit"]:hover {
+        background-color: #b3b3b3; }
 
 .pdfLink {
   height: 20px;
@@ -560,7 +576,7 @@ a.navMenuLink:active {
   vertical-align: middle; }
 
 .wholesaleInfo {
-  margin: 10px auto 0;
+  margin: 10px 0 0;
   background: #101010 url("images/wholesale_bg.png") no-repeat;
   background-size: cover;
   font-size: 14px;
@@ -574,7 +590,7 @@ a.navMenuLink:active {
     display: block; }
 
 .wholesaleInfoTop {
-  height: 75px;
+  height: 80px;
   padding-top: 10px;
   font-size: 18px;
   font-weight: bold; }
@@ -582,7 +598,6 @@ a.navMenuLink:active {
     font-size: 24px; }
 
 .wholesaleInfoBottom {
-  position: absolute;
   bottom: 3px;
   width: 100%; }
 
@@ -618,14 +633,14 @@ footer {
 .footerBox {
   margin: 0 1.2em;
   padding: 0 1.2em;
-  width: 12em;
-  height: 12em;
+  width: 13em;
+  height: 13em;
   /*TODO: footer box - maybe add something more fluid;*/
   vertical-align: top;
-  display: inline-block;
   background: #f0f0f0;
   color: #333333;
   border-radius: 0.4em;
+  float: left;
   /*text-align: center;*/ }
   .footerBox h3, .footerBox h4 {
     margin: 0.2em 0 0.5em;
@@ -662,10 +677,10 @@ footer {
     list-style: none;
     line-height: 1.3em; }
   .contactInfo a:link {
-    color: inherit;
+    color: white;
     text-decoration: underline; }
   .contactInfo a:visited {
-    color: inherit; }
+    color: white; }
   .contactInfo a:hover {
     color: #b3b3b3;
     text-decoration: underline; }
@@ -753,6 +768,11 @@ footer {
     .breadcrumb li:last-child {
       margin-right: 0; }
       .breadcrumb li:last-child:after {
+        content: "";
+        margin-left: 0; }
+    .breadcrumb li.lastChild {
+      margin-right: 0; }
+      .breadcrumb li.lastChild:after {
         content: "";
         margin-left: 0; }
   .breadcrumb li {
@@ -1084,6 +1104,11 @@ footer {
         .productSpecsBottom ul li:last-child:after {
           content: "";
           margin-left: 0; }
+      .productSpecsBottom ul li.lastChild {
+        margin-right: 0; }
+        .productSpecsBottom ul li.lastChild:after {
+          content: "";
+          margin-left: 0; }
   .productSpecsBottom a:link {
     text-decoration: none;
     color: #313131; }
@@ -1117,6 +1142,11 @@ footer {
     .productSpecsList li:last-child {
       margin-right: 0; }
       .productSpecsList li:last-child:after {
+        content: "";
+        margin-left: 0; }
+    .productSpecsList li.lastChild {
+      margin-right: 0; }
+      .productSpecsList li.lastChild:after {
         content: "";
         margin-left: 0; }
   .productSpecsList .pretext {

@@ -1,0 +1,12 @@
+/* Project IE Syles */
+
+.wholesaleInfo {
+  width: 214px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sidebar {
+  /* To fix float stretching 100% */
+  *width: 0px; /* IE 7- */
+}
