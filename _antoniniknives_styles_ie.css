@@ -23,7 +23,7 @@
 }
 
 .homepageText {
-  float: left;
+  *float: left;
 }
 
 .subCategoryList .thumbContainer {
@@ -37,13 +37,13 @@
 }
 
 .productSpecsBottom ul {
-  float: right;
+  *float: right;
 }
 
 .productImageContainer {
-  float: left;
+  *float: left;
 }
 
 .prodThumbs div{
-  float: left;
+  *float: left;
 }
