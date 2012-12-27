@@ -123,11 +123,11 @@ a:active {
   color: blue; }
 
 /* General */
-.clearfixScss, .container, .categoryDescription div, .productSpecsContainer, .productSpecsMiddle {
+.clearfixScss, .container, .containerFooter, .categoryDescription div, .productSpecsContainer, .productSpecsMiddle {
   clear: both;
   overflow: hidden; }
 
-.clearfixScss:after, .container:after, .categoryDescription div:after, .productSpecsContainer:after, .productSpecsMiddle:after {
+.clearfixScss:after, .container:after, .containerFooter:after, .categoryDescription div:after, .productSpecsContainer:after, .productSpecsMiddle:after {
   content: ".";
   display: block;
   height: 0;
@@ -141,8 +141,10 @@ a:active {
   .container table {
     margin: 0 auto; }
 
-.containerInner {
-  width: 100%; }
+.containerFooter {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto; }
 
 .button {
   margin: 0;
@@ -631,7 +633,7 @@ footer {
   border: 1px solid black; }
 
 .footerBox {
-  margin: 0 1.2em;
+  margin: 0.5em 1.2em;
   padding: 0 1.2em;
   width: 13em;
   height: 13em;
@@ -670,6 +672,8 @@ footer {
 .contactInfo {
   float: right;
   text-align: right;
+  position: relative;
+  right: 30px;
   color: white;
   list-style: none;
   margin-right: 20px; }

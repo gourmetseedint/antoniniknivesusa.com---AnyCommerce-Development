@@ -445,9 +445,18 @@ a {
   @extend .clearfixScss;
 }
 
-.containerInner {
+.containerFooter {
   width: 100%;
+  max-width: $width_page;
+  margin: 0 auto;
+  @extend .clearfixScss;
 }
+
+// .containerInner {
+//   // width: auto;
+//   // max-width: 100%;
+//   width: 100%;
+// }
 
 $color_button_text: white;
 $color_button_text_hover: darken($color_button_text, 20%);
@@ -1212,7 +1221,7 @@ footer {
 }
 
 .footerBox {
-  margin: 0 1.2em;
+  margin: 0.5em 1.2em;
   padding: 0 1.2em;
   width: 13em;
   height: 13em; /*TODO: footer box - maybe add something more fluid;*/
@@ -1263,6 +1272,8 @@ footer {
   // display: inline-block;
   float: right;
   text-align: right;
+  position: relative;
+  right: 30px;
   color: $color_contactInfo_text;
   list-style: none;
   margin-right: 20px;
