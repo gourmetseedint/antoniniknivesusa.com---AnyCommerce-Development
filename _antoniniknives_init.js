@@ -645,7 +645,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
   // add active class to subcategory
   if (currentNavcat) {
     htmlSafe = currentNavcat.split('.').join('_');
-    currentSubListItem = '.subcategory' + htmlSafe + ' a:link';
+    currentSubListItem = '.subcategory' + htmlSafe;
     $(currentSubListItem).addClass(navMenuSubCurrent);
   }
 
