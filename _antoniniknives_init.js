@@ -455,7 +455,7 @@ function stopAnythingSlider($target) {
 }
 
 function startSliderHomeBestSellers() {
-  startAnythingSlider($('#homeProdSearchBestSellers'));
+  // startAnythingSlider($('#homeProdSearchBestSellers'));
   // app.u.dump([($('#homeProdSearchBestSellers').data('AnythingSlider').startStop(false))]);
 }
 
