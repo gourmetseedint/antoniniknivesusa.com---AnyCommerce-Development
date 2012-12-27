@@ -868,8 +868,9 @@ $width_navTopLeft: 50px;
 $menuOffset: -35px;
 
 .sidebar {
-  // display: inline-block
+  // display: inline-block;
   float: left;
+  // float: left;
   position: relative;
   z-index: 98;
   top: $menuOffset;
@@ -1196,10 +1197,11 @@ $wholesalePadtop: 10px;
 /* Content */
 
 .content {
-  /*vertical-align: top;*/
+  // vertical-align: top;
   // width: 800px;
   width: $width_content;
-  display: inline-block;
+  // display: inline-block;
+  float: right;
   /*padding-left: 10px;*/
   position: relative;
   z-index: 99;
@@ -1216,6 +1218,8 @@ footer {
 .footerBoxesWrapper {
   padding: 1.2em 0;
   background: $background_footer;
+  background-size: auto 100%;
+  // background:blue;
   border: 1px solid $color_footer_border;
   @extend .shadowBottomOuter;
 }

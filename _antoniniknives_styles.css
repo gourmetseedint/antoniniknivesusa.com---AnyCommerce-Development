@@ -613,9 +613,8 @@ a.navMenuLink:active {
 
 /* Content */
 .content {
-  /*vertical-align: top;*/
   width: 826px;
-  display: inline-block;
+  float: right;
   /*padding-left: 10px;*/
   position: relative;
   z-index: 99; }
@@ -630,6 +629,7 @@ footer {
 .footerBoxesWrapper {
   padding: 1.2em 0;
   background: black url("images/footer_bg.png") repeat-x;
+  background-size: auto 100%;
   border: 1px solid black; }
 
 .footerBox {
