@@ -12,3 +12,24 @@
   width: 224px;
   /*float: left;*/
 }
+
+.logosCategoryHome li {
+  *float: left;
+}
+
+#homeProdSearchBestSellers {
+  float: left;
+}
+
+.homepageText {
+  float: right;
+}
+
+.subCategoryList .thumbContainer {
+    width: 200px;
+    float: left;
+}
+
+.subCategoryList .subCategoryText {
+  float: left;
+}

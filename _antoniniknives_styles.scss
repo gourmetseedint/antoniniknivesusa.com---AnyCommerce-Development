@@ -1219,7 +1219,6 @@ footer {
   padding: 1.2em 0;
   background: $background_footer;
   background-size: auto 100%;
-  // background:blue;
   border: 1px solid $color_footer_border;
   @extend .shadowBottomOuter;
 }
@@ -1457,6 +1456,9 @@ $breadcrumb_margin: 0.2em;
   margin: 0 0 20px;
   padding: 0;
   text-align: center;
+  ul, li {
+    list-style: none;
+  }
   ul {
     border: 1px solid $color_border;
     margin: 0;
