@@ -32,5 +32,18 @@
 }
 
 .subCategoryList .subCategoryText {
+  *float: left;
+  *margin-top: 20px;
+}
+
+.productSpecsBottom ul {
+  float: right;
+}
+
+.productImageContainer {
+  float: left;
+}
+
+.prodThumbs div{
   float: left;
 }
