@@ -912,6 +912,8 @@ footer {
 .categorySos {
   color: #e3001b; }
 
+.content .productList, .content .productList li {
+  list-style: none; }
 .content .productList, .content .subCategoryList {
   color: #6b6b6b;
   text-align: center; }

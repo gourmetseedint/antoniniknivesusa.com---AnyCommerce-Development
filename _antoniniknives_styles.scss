@@ -1615,6 +1615,9 @@ $width_viewProduct_icon: 1.5em;
 $height_productList_h5_padding_top: 0.3em;
 $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_productList_bg/2 - 0.1em;
 .content {
+  .productList, .productList li {
+    list-style: none;
+  }
   .productList, .subCategoryList {
     color: $color_productList_text;
     // padding-top: 10px;

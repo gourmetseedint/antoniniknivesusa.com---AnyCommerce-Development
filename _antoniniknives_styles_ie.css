@@ -28,8 +28,8 @@
 }
 
 .subCategoryList .thumbContainer {
-    *width: 200px;
-    *float: left;
+  *width: 200px;
+  *float: left;
 }
 
 .subCategoryList .subCategoryText {
@@ -48,6 +48,12 @@
   *float: left;
 }
 
+.content .productList li {
+  *float: left;
+  *margin: 10px;
+}
+
 .prodThumbContainer .viewProductLink {
-  position: relative;
+  *position: relative;
+  *height: 25px;
 }
