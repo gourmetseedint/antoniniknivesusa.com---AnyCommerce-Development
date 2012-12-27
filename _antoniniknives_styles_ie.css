@@ -51,9 +51,10 @@
 .content .productList li {
   *float: left;
   *margin: 10px;
+  *padding-bottom: 40px;
 }
 
 .prodThumbContainer .viewProductLink {
   *position: relative;
-  *height: 25px;
+  /**height: 30px;*/
 }
