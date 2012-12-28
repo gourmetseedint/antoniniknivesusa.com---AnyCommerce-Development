@@ -874,7 +874,7 @@ for legacy browsers. That means old browsers will use the anchor to retain 'back
             else  {
               $('#mainContentArea').empty().addClass('loadingBG').html("<h1>Transferring to Secure Login...</h1>");
               SSLlocation = app.vars.secureURL+"?sessionId="+app.sessionId;
-              SSLlocation += "#customer?show="+infoObj.show();
+              SSLlocation += "#customer?show="+infoObj.show;
               _gaq.push(['_link', SSLlocation]); //for cross domain tracking.
               document.location = SSLlocation;
               }
