@@ -5,6 +5,7 @@
 
 <!-- TODO: add info to SEO layer - do not populate or add meta data or title, the SEO layer will add it -->
 <!-- TODO: change menu to hard coded -->
+<!-- BUG: my account - stop anything slider -->
 
 <!-- used for optional social media extensions -->
 <meta property="og:type" content="" id='ogType' />
@@ -23,7 +24,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. TODO: REPLACE BEFOR
 var myCreole;
 
 var app = {vars:{
-	"release":"20121228135650",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+	"release":"20121228152039",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
 	"_clientid":"zmvc",
 	"baseURL":"",
 	"httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -113,7 +114,7 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 							<li><a href="#category?navcat=.about-antonini" class='bindByAnchor' title='About Antonini'>About Antonini</a></li>
 							<li><a href="#company?show=contact" class='bindByAnchor' title='Contact us'>Contact us</a></li>
 							<li><a href="#customer?show=myaccount" class='bindByAnchor' title='My Account'>My Account</a></li>
-							<li class="lastChild"><a href="#customer?cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a></li>
+							<li class="lastChild"><a href="#cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a></li>
 						</ul>
 						<span class="socialBox">
 							<span class='socialIcon socialIconFacebook'><a href="http://www.facebook.com" target="_blank" title="Facebook link"></a></span>
