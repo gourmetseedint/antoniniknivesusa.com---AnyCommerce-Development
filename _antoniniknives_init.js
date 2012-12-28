@@ -5,6 +5,9 @@ app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 // <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
 // <!-- TODO: IE compatibility -->
 // TODO: test login, buy, email
+// TODO: style cart product list
+// QUE: should there be a wishlist
+// BUG: logout doesn't work
 
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
