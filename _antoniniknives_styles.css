@@ -1004,8 +1004,7 @@ footer {
   height: 230px;
   border: 1px solid #cdcdcd; }
   .prodThumbContainer img {
-    position: relative;
-    z-index: -1; }
+    position: relative; }
   .prodThumbContainer .productAttribute {
     margin: 0;
     position: absolute;
@@ -1273,3 +1272,15 @@ footer {
   display: inline-block;
   padding-right: 12px;
   text-align: right; }
+
+.checkoutSuccess div {
+  font: 1.2em;
+  margin: 1em 0; }
+
+#cartStuffList .prodThumbContainer {
+  width: 55px;
+  height: 55px;
+  border-width: 0; }
+
+.orderContentsProdlistContainer {
+  width: auto; }

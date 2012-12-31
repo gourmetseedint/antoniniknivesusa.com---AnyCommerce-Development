@@ -1756,7 +1756,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
   border: 1px solid $color_productList_border;
   img {
     position: relative;
-    z-index: -1;
+    // z-index: -1;
   }
   .productAttribute {
     margin: 0;
@@ -2097,4 +2097,22 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
     padding-right: 12px;
     text-align: right;
   }
+}
+
+.checkoutSuccess {
+  div {
+    font: 1.2em;
+    margin: 1em 0;
+  }
+}
+
+#cartStuffList .prodThumbContainer {
+  width: 55px;
+  height: 55px;
+  border-width: 0;
+
+}
+
+.orderContentsProdlistContainer {
+  width: auto;
 }
