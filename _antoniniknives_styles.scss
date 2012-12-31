@@ -471,6 +471,7 @@ $color_button_text_hover: darken($color_button_text, 20%);
   background: $color_button_bg;
   border-radius: 0.3em;
   color: $color_button_text;
+  cursor: pointer;
   &:link {
     text-decoration: none;
     color: $color_button_text;
@@ -1610,6 +1611,17 @@ $width_carouselHomepage_image: 300px;
   color: $color_cat_sos;
 }
 
+// bump up qs_styles
+.productList, .categoryList {
+  li, h4, h5, h6 {
+    font-size: 1.2em;
+  }
+}
+
+.cartSummaryTotalsContainer {
+  font-size: 1.2em;
+}
+
 $width_productList_bg: 0.6em;
 $width_viewProduct_icon: 1.5em;
 $height_productList_h5_padding_top: 0.3em;
@@ -1626,20 +1638,16 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
       float: none;
       text-align: left;
     }
-    img {
-      width: 230px;
-      height: 230px;
-    }
+    // img {
+    //   width: 230px;
+    //   height: 230px;
+    // }
     p { // description
       font-size: 1.4em;
     }
     // h5, p {
     //   padding: $height_productList_h5_padding_top 0.3em 0.3em $width_productList_bg * 2.2;
     // }
-    h6 { // price (not used)
-      font-size: 1.3em;
-      font-weight: normal;
-    }
     // .prodThumbContainer {
     //   border: 1px solid $color_productList_border;
     // }
@@ -1760,7 +1768,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
   .productName {
     top: 0;
     // padding: $height_productList_h5_padding_top 0.3em 0.3em $width_productList_bg * 2.2;
-    font-size: 1.7em;
+    // font-size: 1.4em;
     line-height: 1.2em;
     font-weight: bold;
     text-transform: uppercase;
@@ -1779,7 +1787,7 @@ $height_productSpecsList_bg: $height_productList_h5_padding_top + $width_product
   .viewProductLink {
     bottom: 0;
     padding: 0.6em 0;
-    font-size: 1.6em;
+    // font-size: 1.3em;
     @include transparent_background_color($color_productList_border_red, $color_productList_border_blue, $color_productList_border_green, 0.8);
     // background: $color_productList_border url('images/icon_search.png') no-repeat;
     background-image: url('images/icon_search.png');
@@ -2066,5 +2074,22 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
   }
   textarea {
     height:125px;
+  }
+}
+
+.ui-widget {
+  font-size: 1.2em;
+}
+
+.ui-widget-content {
+  color: white;
+  h1, h2, h3, h4, h5, h6, p, .productList {
+    color: white;
+  }
+}
+
+.cartSummary, .preflightInputContainer {
+  div {
+    margin-bottom: 5px;
   }
 }

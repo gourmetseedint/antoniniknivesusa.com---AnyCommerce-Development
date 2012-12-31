@@ -8,6 +8,8 @@ app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 // TODO: style cart product list
 // QUE: should there be a wishlist
 // BUG: logout doesn't work
+// BUG: cart product extended not calculated correctly
+// BUG: USPS Priority Mail (USA) shows incorrect value, but seems to calculate right
 
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);

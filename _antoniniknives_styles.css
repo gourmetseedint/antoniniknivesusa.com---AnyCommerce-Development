@@ -154,7 +154,8 @@ a:active {
   font-weight: bold;
   background: #b8b8b8;
   border-radius: 0.3em;
-  color: white; }
+  color: white;
+  cursor: pointer; }
   .button:link {
     text-decoration: none;
     color: white; }
@@ -202,9 +203,9 @@ a:active {
   color: inherit; }
 
 .shadowBottomOuter, .footerBoxesWrapper {
-  -webkit-box-shadow: 0 3px 3px 2px #999999;
-  -moz-box-shadow: 0 3px 3px 2px #999999;
-  box-shadow: 0 3px 3px 2px #999999; }
+  -webkit-box-shadow: 0 3px 3px 2px #999;
+  -moz-box-shadow: 0 3px 3px 2px #999;
+  box-shadow: 0 3px 3px 2px #999; }
 
 .preload div {
   height: 100px; }
@@ -305,7 +306,7 @@ header {
       color: #068500 !important; }
       .anythingSlider-default.activeSlider .anythingControls a.start-stop.playing {
         background-color: #9a9a9a !important;
-        color: #b90007 !important; }
+        color: #B90007 !important; }
   .anythingSlider-default .arrow a {
     background: url(AnythingSlider/default.png) no-repeat; }
   .anythingSlider-default .back a {
@@ -912,6 +913,12 @@ footer {
 .categorySos {
   color: #e3001b; }
 
+.productList li, .productList h4, .productList h5, .productList h6, .categoryList li, .categoryList h4, .categoryList h5, .categoryList h6 {
+  font-size: 1.2em; }
+
+.cartSummaryTotalsContainer {
+  font-size: 1.2em; }
+
 .content .productList, .content .productList li {
   list-style: none; }
 .content .productList, .content .subCategoryList {
@@ -920,14 +927,8 @@ footer {
   .content .productList li, .content .subCategoryList li {
     float: none;
     text-align: left; }
-  .content .productList img, .content .subCategoryList img {
-    width: 230px;
-    height: 230px; }
   .content .productList p, .content .subCategoryList p {
     font-size: 1.4em; }
-  .content .productList h6, .content .subCategoryList h6 {
-    font-size: 1.3em;
-    font-weight: normal; }
 .content .productList li {
   width: 230px;
   height: 230px;
@@ -1013,7 +1014,6 @@ footer {
     z-index: 10; }
   .prodThumbContainer .productName {
     top: 0;
-    font-size: 1.7em;
     line-height: 1.2em;
     font-weight: bold;
     text-transform: uppercase;
@@ -1029,7 +1029,6 @@ footer {
   .prodThumbContainer .viewProductLink {
     bottom: 0;
     padding: 0.6em 0;
-    font-size: 1.6em;
     background-color: #cdcdcd;
     background-color: rgba(205, 205, 205, 0.8);
     background-image: url("images/icon_search.png");
@@ -1259,3 +1258,14 @@ footer {
     width: 145px; }
   .contactFormWholesale textarea {
     height: 125px; }
+
+.ui-widget {
+  font-size: 1.2em; }
+
+.ui-widget-content {
+  color: white; }
+  .ui-widget-content h1, .ui-widget-content h2, .ui-widget-content h3, .ui-widget-content h4, .ui-widget-content h5, .ui-widget-content h6, .ui-widget-content p, .ui-widget-content .productList {
+    color: white; }
+
+.cartSummary div, .preflightInputContainer div {
+  margin-bottom: 5px; }
