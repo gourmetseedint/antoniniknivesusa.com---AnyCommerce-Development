@@ -769,7 +769,7 @@ else{
 				if(isValid === true)	{
 					tagObj = $.isEmptyObject(tagObj) ? {} : tagObj;
 					tagObj.callback = tagObj.callback ? tagObj.callback : 'showMessaging';
-					tagObj.message = tagObj.message ? tagObj.message : 'Thank you, you have been added to our newsletter.';
+					tagObj.message = tagObj.message ? tagObj.message : 'Thank you, you have been subscribed.';
 					tagObj.parentID = tagObj.parentID ? tagObj.parentID : formID; //don't look for parent, because it may not have an id.
 
 					app.ext.store_crm.calls.setNewsletters.init(frmObj,tagObj);

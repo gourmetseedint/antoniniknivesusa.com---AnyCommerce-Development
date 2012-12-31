@@ -2092,4 +2092,9 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
   div {
     margin-bottom: 5px;
   }
+  label {
+    display: inline-block;
+    padding-right: 12px;
+    text-align: right;
+  }
 }

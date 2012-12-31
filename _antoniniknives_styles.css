@@ -1269,3 +1269,7 @@ footer {
 
 .cartSummary div, .preflightInputContainer div {
   margin-bottom: 5px; }
+.cartSummary label, .preflightInputContainer label {
+  display: inline-block;
+  padding-right: 12px;
+  text-align: right; }
