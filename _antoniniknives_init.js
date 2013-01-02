@@ -4,10 +4,7 @@ app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 // <!-- TODO: change carousel arrows -->
 // <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
 // <!-- TODO: IE compatibility -->
-// TODO: test login, buy, email
-// TODO: style cart product list
 // QUE: should there be a wishlist
-// BUG: logout doesn't work
 // BUG: cart product extended not calculated correctly
 // BUG: USPS Priority Mail (USA) shows incorrect value, but seems to calculate right
 

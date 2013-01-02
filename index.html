@@ -4,13 +4,14 @@
 <meta charset="utf-8">
 
 <!-- TODO: add info to SEO layer - do not populate or add meta data or title, the SEO layer will add it -->
-<!-- TODO: change menu to hard coded -->
 <!-- BUG: my account - stop anything slider -->
 <!-- BUG: top nav cuts off at top -->
 <!-- BUG: email is from gourmet seed, link goes there -->
-<!-- BUG: state and zip not saved in previous address -->
+<!-- BUG: state and zip not saved in previous address, "Shipping rates to be determined... (try entering a zip code)" even though address saved -->
 <!-- BUG: shipping / billing addresses empty -->
 <!-- BUG: order history, prod_name empty, should be product(prod_name) not product(zoovy:prod_name) -->
+<!-- BUG: cart not transerfing from regular to ssl -->
+<!-- TODO: add wish list to products -->
 
 <!-- used for optional social media extensions -->
 <meta property="og:type" content="" id='ogType' />
@@ -29,7 +30,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. TODO: REPLACE BEFOR
 var myCreole;
 
 var app = {vars:{
-	"release":"20121231005616",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+	"release":"20130101183321",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
 	"_clientid":"zmvc",
 	"baseURL":"",
 	"httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -469,6 +470,18 @@ remember to NOT put the button inside the 'onclick' container or two events will
 	<!-- </div> -->
 </li>
 
+<li id='productListExtrasTemplate' class='loadingBG' >
+	
+	<div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer product'>
+
+		<div class='prodThumbContainer' data-bind='var:product(pid); format:addPicSlider; extension:myRIA;'>
+			<h5 class='productAttribute productName'><span data-bind='var: product(zoovy:prod_name); format:text;'></span></h5>
+			<img src='blank.gif' class='prodThumb' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='180' height='180' />
+			<div class="productAttribute viewProductLink"><span>View Product</span></div>
+		</div>
+	</div>
+</li>
+
 
 <!--
 for product lists with addToCart feature (accessories, for example)
@@ -575,8 +588,9 @@ remember to NOT put the button inside the 'onclick' container or two events will
 
 <li id='productListHomepageTemplateResults' class='loadingBG' >
 	<div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbContainer pointer'>
+		<span></span>
 		<h5 class='productAttribute productName'><span data-bind='var: product(prod_name); format:text;'></span></h5>
-		<img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;' />
+		<img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;' width='300' height='300'/>
 		<div class="productAttribute viewProductLink"><span>View Product</span></div>
 	</div>
 </li>
@@ -687,8 +701,8 @@ this will likely become more flexible in the future. ###
 	</div>
 
 	<div class="productExtras printNo">
-		<div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListAccessories' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListTemplate; before:<h4>Accessories</h4>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
-		<ul class='productList productListProductExtras productListVariants' data-bind="var: product(user:prod_primary_cat); format:subcatProductList; extension:antoniniknives_extension; loadsTemplate:productListTemplate; before:<h4>Variants</h4>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul>
+		<div data-bind="var: product(zoovy:accessory_products); format:showIfSet;" class='displayNone'><ul class='productList productListProductExtras productListAccessories' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist; loadsTemplate:productListExtrasTemplate; before:<h4>Accessories</h4>; withReviews:0; items_per_page: 20; hide_summary:true;"></ul></div>
+		<ul class='productList productListProductExtras productListVariants' data-bind="var: product(user:prod_primary_cat); format:subcatProductList; extension:antoniniknives_extension; loadsTemplate:productListExtrasTemplate; before:<h4>Variants</h4>;    withReviews:0; items_per_page: 20; hide_summary:true;"></ul>
 	</div>
 
 	<div class='prodTabs tabbedProductContent printNo'>

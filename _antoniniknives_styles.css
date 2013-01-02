@@ -1,4 +1,23 @@
 /* Project Styles */
+.wraptocenter {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle; }
+
+.wraptocenter * {
+  vertical-align: middle; }
+
+/*\*/
+/*/
+.wraptocenter {
+    display: block;
+}
+.wraptocenter span {
+    display: inline-block;
+    height: 100%;
+    width: 1px;
+}
+/**/
 /* universal */
 aside,
 details,
@@ -203,9 +222,9 @@ a:active {
   color: inherit; }
 
 .shadowBottomOuter, .footerBoxesWrapper {
-  -webkit-box-shadow: 0 3px 3px 2px #999;
-  -moz-box-shadow: 0 3px 3px 2px #999;
-  box-shadow: 0 3px 3px 2px #999; }
+  -webkit-box-shadow: 0 3px 3px 2px #999999;
+  -moz-box-shadow: 0 3px 3px 2px #999999;
+  box-shadow: 0 3px 3px 2px #999999; }
 
 .preload div {
   height: 100px; }
@@ -273,16 +292,12 @@ header {
   width: 302px;
   height: 302px;
   list-style: none;
-  /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
   overflow-y: auto;
   overflow-x: hidden; }
   #homeProdSearchBestSellers .prodThumbContainer {
     width: 300px;
     height: 300px; }
   #homeProdSearchBestSellers li {
-    width: 300px;
-    height: 300px; }
-  #homeProdSearchBestSellers img {
     width: 300px;
     height: 300px; }
 
@@ -306,7 +321,7 @@ header {
       color: #068500 !important; }
       .anythingSlider-default.activeSlider .anythingControls a.start-stop.playing {
         background-color: #9a9a9a !important;
-        color: #B90007 !important; }
+        color: #b90007 !important; }
   .anythingSlider-default .arrow a {
     background: url(AnythingSlider/default.png) no-repeat; }
   .anythingSlider-default .back a {
@@ -940,16 +955,12 @@ footer {
     width: 182px;
     height: 182px;
     list-style: none;
-    /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
     overflow-y: auto;
     overflow-x: hidden; }
     .content .productExtras .productListProductExtras .prodThumbContainer {
       width: 180px;
       height: 180px; }
     .content .productExtras .productListProductExtras li {
-      width: 180px;
-      height: 180px; }
-    .content .productExtras .productListProductExtras img {
       width: 180px;
       height: 180px; }
   .content .productExtras .anythingSlider {

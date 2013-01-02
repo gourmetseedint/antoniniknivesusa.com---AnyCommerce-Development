@@ -196,12 +196,13 @@ $background_white: white url('images/bg_white.png');
   width: $width + 2px;
   height: $height + 2px;
   list-style: none;
-  /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
+  // /* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
   overflow-y: auto;
   overflow-x: hidden;
   .prodThumbContainer {
     width: $width;
     height: $height;
+    // @extend .wraptocenter;
   }
   li {
     width: $width;
@@ -212,10 +213,34 @@ $background_white: white url('images/bg_white.png');
     // }
   }
   img {
-    width: $width;
-    height: $height;
+    // width: $width;
+    // height: $height;
+    // height: auto;
+    // line-height: $height;
+    // vertical-align: middle;
   }
 }
+
+.wraptocenter {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    // width: $width;
+    // height: $height;
+}
+.wraptocenter * {
+    vertical-align: middle;
+}
+/*\*//*/
+.wraptocenter {
+    display: block;
+}
+.wraptocenter span {
+    display: inline-block;
+    height: 100%;
+    width: 1px;
+}
+/**/
 
 // @mixin jcarousel_horizontal($image_width:100px, $image_height:100px, $count:1, $margin_right:10px) {
 //   $container_width: $count * ($image_width + $margin_right);
