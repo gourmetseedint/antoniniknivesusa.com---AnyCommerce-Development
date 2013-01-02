@@ -1,23 +1,4 @@
 /* Project Styles */
-.wraptocenter {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle; }
-
-.wraptocenter * {
-  vertical-align: middle; }
-
-/*\*/
-/*/
-.wraptocenter {
-    display: block;
-}
-.wraptocenter span {
-    display: inline-block;
-    height: 100%;
-    width: 1px;
-}
-/**/
 /* universal */
 aside,
 details,
@@ -928,7 +909,7 @@ footer {
 .categorySos {
   color: #e3001b; }
 
-.productList li, .productList h4, .productList h5, .productList h6, .categoryList li, .categoryList h4, .categoryList h5, .categoryList h6 {
+.productList li, .productList h4, .productList h5, .productList h6, .categoryList li, .categoryList h4, .categoryList h5, .categoryList h6, #homeProdSearchBestSellers li, #homeProdSearchBestSellers h4, #homeProdSearchBestSellers h5, #homeProdSearchBestSellers h6 {
   font-size: 1.2em; }
 
 .cartSummaryTotalsContainer {

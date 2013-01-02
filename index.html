@@ -30,7 +30,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. TODO: REPLACE BEFOR
 var myCreole;
 
 var app = {vars:{
-	"release":"20130101183321",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+	"release":"20130101183705",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
 	"_clientid":"zmvc",
 	"baseURL":"",
 	"httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -50,9 +50,9 @@ if(document.location.protocol != 'file:') {
 all css includes need to be after the js that changes the base url. 
 css files should be included before any .js file to ensure they are downloaded in parallel
 -->
-<link rel="stylesheet" type="text/css" href="qs_styles.css" />
-<link rel="stylesheet" type="text/css" href="AnythingSlider/anythingslider.css" />
 <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="AnythingSlider/anythingslider.css" />
+<link rel="stylesheet" type="text/css" href="qs_styles.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles.css" />
 <link rel="stylesheet" type="text/css" href="_antoniniknives_styles_print.css" media="print"/>
 
@@ -588,7 +588,6 @@ remember to NOT put the button inside the 'onclick' container or two events will
 
 <li id='productListHomepageTemplateResults' class='loadingBG' >
 	<div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbContainer pointer'>
-		<span></span>
 		<h5 class='productAttribute productName'><span data-bind='var: product(prod_name); format:text;'></span></h5>
 		<img src='blank.gif' class='prodThumb' data-bind='var: product(images); format:elasticImage1URL;' width='300' height='300'/>
 		<div class="productAttribute viewProductLink"><span>View Product</span></div>

@@ -202,7 +202,6 @@ $background_white: white url('images/bg_white.png');
   .prodThumbContainer {
     width: $width;
     height: $height;
-    // @extend .wraptocenter;
   }
   li {
     width: $width;
@@ -212,35 +211,35 @@ $background_white: white url('images/bg_white.png');
     //   margin-right: 10px;
     // }
   }
-  img {
+  // img {
     // width: $width;
     // height: $height;
     // height: auto;
     // line-height: $height;
     // vertical-align: middle;
-  }
+  // }
 }
 
-.wraptocenter {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    // width: $width;
-    // height: $height;
-}
-.wraptocenter * {
-    vertical-align: middle;
-}
-/*\*//*/
-.wraptocenter {
-    display: block;
-}
-.wraptocenter span {
-    display: inline-block;
-    height: 100%;
-    width: 1px;
-}
-/**/
+// .wraptocenter {
+//     display: table-cell;
+//     text-align: center;
+//     vertical-align: middle;
+//     // width: $width;
+//     // height: $height;
+// }
+// .wraptocenter * {
+//     vertical-align: middle;
+// }
+// /*\*//*/
+// .wraptocenter {
+//     display: block;
+// }
+// .wraptocenter span {
+//     display: inline-block;
+//     height: 100%;
+//     width: 1px;
+// }
+// /**/
 
 // @mixin jcarousel_horizontal($image_width:100px, $image_height:100px, $count:1, $margin_right:10px) {
 //   $container_width: $count * ($image_width + $margin_right);
@@ -1637,7 +1636,7 @@ $width_carouselHomepage_image: 300px;
 }
 
 // bump up qs_styles
-.productList, .categoryList {
+.productList, .categoryList, #homeProdSearchBestSellers {
   li, h4, h5, h6 {
     font-size: 1.2em;
   }
