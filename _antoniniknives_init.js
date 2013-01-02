@@ -7,6 +7,7 @@ app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 // QUE: should there be a wishlist
 // BUG: cart product extended not calculated correctly
 // BUG: USPS Priority Mail (USA) shows incorrect value, but seems to calculate right
+// TODO: add rating to prod temp
 
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
@@ -778,10 +779,10 @@ app.u.appInitComplete = function(P) {
 
   // Add accessories & promo to menu
   setTimeout(function () {
-    $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer' " + categoryOnClick(categories['accessories'].navcat) + ">" + getPretty(categories['accessories'].navcat) + "</div></li>");
+    $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer'" + categoryOnClick(categories['accessories'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['accessories'].navcat) + "</div></li>");
   }, 1000);
   setTimeout(function () {
-    $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer' " + categoryOnClick(categories['promo'].navcat) + ">" + getPretty(categories['promo'].navcat) + "</div></li>");
+    $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer'" + categoryOnClick(categories['promo'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['promo'].navcat) + "</div></li>");
   }, 1000);
 };
 

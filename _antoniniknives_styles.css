@@ -330,8 +330,7 @@ header {
     height: 100%;
     background: #cdcccc; }
   .navTop span {
-    height: 100%;
-    display: inline-block; }
+    height: 100%; }
   .navTop ul {
     margin: 0;
     padding: 0;
@@ -398,24 +397,21 @@ header {
     width: 32px;
     height: 100%;
     display: inline-block; }
+    .socialBox a:hover .socialIcon {
+      background-position: center -29px; }
 
-.socialIcon a {
-  background-position: 50%;
-  background-repeat: no-repeat; }
-  .socialIcon a:hover {
-    background-color: #e6e6e6;
-    background-position: 50%;
-    background-repeat: no-repeat; }
+.socialIcon {
+  background-position: center 13px;
+  background-repeat: no-repeat;
+  width: 28px;
+  height: 32px;
+  display: block; }
 
-.socialIconFacebook a {
-  background-image: url("images/icon_facebook_noshadow.png"); }
-  .socialIconFacebook a:hover {
-    background-image: url("images/icon_facebook.png"); }
+.socialIconTwitter {
+  background-image: url("images/sprite_twitter.png"); }
 
-.socialIconTwitter a {
-  background-image: url("images/icon_twitter_noshadow.png"); }
-  .socialIconTwitter a:hover {
-    background-image: url("images/icon_twitter.png"); }
+.socialIconFacebook {
+  background-image: url("images/sprite_facebook.png"); }
 
 /* Menu navigation */
 .sidebar {
@@ -477,14 +473,14 @@ header {
         .navMenu ul li ul li a:visited {
           color: inherit; }
 
-a.navMenuLink:link {
+a.navMenuLink:link, .sidebarBanner a:link {
   color: white;
   text-decoration: none; }
-a.navMenuLink:hover {
+a.navMenuLink:hover, .sidebarBanner a:hover {
   color: #999999; }
-a.navMenuLink:visited {
+a.navMenuLink:visited, .sidebarBanner a:visited {
   color: white; }
-a.navMenuLink:active {
+a.navMenuLink:active, .sidebarBanner a:active {
   color: #999999; }
 
 .sidebarHome {
@@ -574,19 +570,32 @@ a.navMenuLink:active {
   line-height: 20px;
   vertical-align: middle; }
 
-.wholesaleInfo {
+.sidebarBanner {
   margin: 10px 0 0;
-  background: #101010 url("images/wholesale_bg.png") no-repeat;
+  background-color: #101010;
+  width: 100%;
+  text-align: center; }
+  .sidebarBanner span {
+    display: block; }
+  .sidebarBanner a {
+    display: block; }
+
+.promotion {
+  padding: 8px 0; }
+  .promotion a {
+    font-size: 1.4em; }
+
+.promotionTop {
+  font-size: 1.8em;
+  font-weight: bold; }
+
+.wholesaleInfo {
+  background-image: url("images/wholesale_bg.png");
+  background-repeat: no-repeat;
   background-size: cover;
   font-size: 14px;
-  text-align: center;
-  width: 100%;
   height: 125px;
   position: relative; }
-  .wholesaleInfo span {
-    display: block; }
-  .wholesaleInfo a {
-    display: block; }
 
 .wholesaleInfoTop {
   height: 80px;

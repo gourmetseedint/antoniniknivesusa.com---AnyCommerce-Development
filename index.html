@@ -30,7 +30,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. TODO: REPLACE BEFOR
 var myCreole;
 
 var app = {vars:{
-	"release":"20130101183705",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+	"release":"20130101214336",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
 	"_clientid":"zmvc",
 	"baseURL":"",
 	"httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -124,8 +124,8 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 							<li class="lastChild"><a href="#cart" class='bindByAnchor' title='View Cart'>View Cart (<span class="cartItemCount">0</span>)</a></li>
 						</ul>
 						<span class="socialBox">
-							<span class='socialIcon socialIconFacebook'><a href="http://www.facebook.com" target="_blank" title="Facebook link"></a></span>
-							<span class='socialIcon socialIconTwitter'><a href="http://www.twitter.com" target="_blank" title="Twitter link"></a></span>
+							<a href="http://www.facebook.com" target="_blank" title="Facebook link"><span class='socialIcon socialIconFacebook'></span></a>
+							<a href="http://www.twitter.com" target="_blank" title="Twitter link"><span class='socialIcon socialIconTwitter'></span></a>
 						</span>
 					</div>
 				</nav>
@@ -152,13 +152,18 @@ app.u.loadScript(app.vars.baseURL+"_antoniniknives_init.js");
 						<input class="search" type="submit" value=""/>
 					</fieldset>
 				</form>
-				</form>
 				<h2>Products</h2>
 				<ul id="tier1categories"></ul>
 				<a href="#category?navcat=.pdf-catalogs" class='bindByAnchor navMenuLink' title='PDF Catalogs'><span class="pdfLink">PDF Catalogs</span></a>
 			</nav>
-			<div class='wholesaleInfo'>
-				<a href="#category?navcat=.wholesale" class='bindByAnchor navMenuLink' title='Wholesale Info'>
+			<div class='sidebarBanner promotion'>
+				<a href="javascript:void(0)" onClick="$('#promotionDescriptionFreeShipping').dialog({width:500,height:200,autoOpen:false}); $('#promotionDescriptionFreeShipping').dialog('open');">
+					<span class='promotionTop'>Free Shipping</span>
+					<span>click for details</span>
+				</a>
+			</div>
+			<div class='sidebarBanner wholesaleInfo'>
+				<a href="#top" title='Wholesale Info' onClick="return showContent('category',{'navcat':'.wholesale'});">
 					<span class='wholesaleInfoTop'><strong>Retailer?</strong><br/>Wholesale Available</span>
 					<span class='wholesaleInfoBottom'>for Pricing and Availability<br/><strong>Click here &gt;&gt;</strong></span>
 				</a>
@@ -285,7 +290,10 @@ COMMONLY EDITED TEMPLATES
 
 -->
 
-
+<div id='promotionDescriptionFreeShipping' class='displayNone promotionDialog' title="Free Shipping Details">
+	<h3>Free shipping on orders over $50*</h3>
+	<p>*standard ground shipping within USA only</p>
+</div>
 
 <!--
 the homepageTemplate template is loaded into mainContentArea by default when the application loads
