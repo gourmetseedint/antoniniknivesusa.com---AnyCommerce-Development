@@ -30,7 +30,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. TODO: REPLACE BEFOR
 var myCreole;
 
 var app = {vars:{
-	"release":"20130107124239",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+	"release":"20130107151213",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
 	"_clientid":"zmvc",
 	"baseURL":"",
 	"httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -315,7 +315,7 @@ the homepageTemplate template is loaded into mainContentArea by default when the
 			<ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;'></ul>
 			<div class='homepageText'>
 				<div class='homepageDescription' data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></div>
-				<a class='button bindByAnchor' href="#category?navcat=.about-antonini" title='More About Antonini'>More About Antonini</a>
+				<a class='button' onClick="return showContent('category',{'navcat':'.about-antonini'})" title='More About Antonini'>More About Antonini</a>
 			</div>
 		</div>
 	</div>  
