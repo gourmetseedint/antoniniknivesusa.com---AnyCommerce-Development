@@ -1285,3 +1285,12 @@ footer {
 
 .orderContentsProdlistContainer {
   width: auto; }
+
+.orderContentsProdlistContainer .infoContainer {
+  display: block; }
+  .orderContentsProdlistContainer .infoContainer h5 {
+    font-size: 1.3em;
+    line-height: 1.1em;
+    margin: 0 0 0.3em; }
+  .orderContentsProdlistContainer .infoContainer button {
+    margin-top: 8px; }
