@@ -275,10 +275,10 @@ function getPdfLinks() {
   if(typeof pdfData != 'undefined') {
     for(var key in pdfData) {
       name = getPretty(key) + ' (PDF)';
-      link  = name + ' PDF Catalog';
+      link  = name + ' Catalog';
       value = pdfData[key];
       if (value) {
-        page += "<p><a title='" + link + "' href='" + directory + value + "'>" + name + "</a></p>";
+        page += "<p><a title='" + link + "' href='" + directory + value + "' target='_blank'>" + name + "</a></p>";
       }
     }
   }else {
