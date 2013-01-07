@@ -302,6 +302,40 @@ note - the order object is available at app.data['order|'+P.orderID]
 		checkoutCompletes : [],
 
 
+//Pass in an object (typically based on $form.serializeJSON) and 
+//this will make sure that specific fields are populated based on tender type.
+//rather than returning specific error messages (which may need to change based on where this is used, an array of which fields are missing is returned
+//plus, this allows for the attribute/fields to be modified w/ css, whereas returning messages wouldn't allow for that.
+		validate : {
+			
+			CREDIT : function(vars)	{
+				var errors = new Array(); // what is returned. an array of the payment fields that are not correct. 
+				if(vars.CC && app.u.isValidCC(vars.CC))	{} else	{errors.push("CC");}
+				if(vars.MM && app.u.isValidMonth(vars.MM))	{} else {errors.push("MM");}
+				if(vars.YY && app.u.isValidCCYear(vars.YY))	{} else {errors.push("YY");}
+				if(vars.CV && vars.CV.length > 2){} else {errors.push("CV")}
+				return (errors.length) ? errors : false;
+				},
+			
+			ECHECK : function(vars) {
+				var errors = new Array(), // what is returned. an array of the payment fields that are not correct. 
+				echeckFields = new Array("EA","ER","EN","EB","ES","EI"),
+				L = echeckFields.length;
+				for(var i = 0; i < L; i += 1)	{
+					if(vars[echeckFields[i]])	{} else {errors.push(echeckFields[i]);}
+					}
+				return (errors.length) ? errors : false;
+				},
+			
+			PO : function(vars)	{
+				var errors = new Array(); // what is returned. an array of the payment fields that are not correct. 
+				if(vars.PO){} else	{errors.push("PO")}
+				return (errors.length) ? errors : false;
+				}
+			
+			}, //validate
+
+
 ////////////////////////////////////   						util [u]			    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
@@ -410,9 +444,9 @@ for(var i = 0; i < L; i += 1)	{
 	if(a[TYPE+'_address2'])	{r +=a[TYPE+'_address2']+"<br \/>"}
 	r += a[TYPE+'_city'];
 //state, zip and country may not be populated. check so 'undef' isn't written to screen.
-	if(a[TYPE+'_state']) {r += " "+a[TYPE+'_state']+", "}
-	if(a[TYPE+'_zip'])	{r +=a[TYPE+'_zip']}
-	if(app.u.isSet(a[TYPE+'_country']))	{r += "<br \/>"+a[TYPE+'_country']}
+	if(a[TYPE+'_region']) {r += " "+a[TYPE+'_region']+", "}
+	if(a[TYPE+'_postal'])	{r +=a[TYPE+'_postal']}
+	if(app.u.isSet(a[TYPE+'_countrycode']))	{r += "<br \/>"+a[TYPE+'_countrycode']}
 	r += "<\/address>";
 	}
 var parentID = (TYPE == 'ship') ? 'chkoutShipAddressFieldset' : 'chkoutBillAddressFieldset';
