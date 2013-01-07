@@ -5,5 +5,5 @@ var pdfData = {
   ".cable_-_electrical": "AE - Antonini CABLE - Italian-English.pdf",
   ".farm_-_garden": "AE - Antonini FARM - French - English.pdf",
   ".pocket_-_traditional": "",
-  ".sos_-_rescue": "AE - Antonini SOS ed.2009 -Italian-English.pdf"
+  ".sos_-_rescue": "AE - Antonini SOS ed.2013 - Catalogo Lame Soccorso.pdf"
 };
