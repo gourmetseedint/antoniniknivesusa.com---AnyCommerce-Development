@@ -2163,12 +2163,27 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
 }
 
 #cartStuffList .prodThumbContainer {
-  width: 55px;
+  width: 60px;
   height: 55px;
   border-width: 0;
 
 }
 
 .orderContentsProdlistContainer {
-  width: auto;
+  width: 300px;
+  padding-left: 20px;
+  .prodThumbContainer {
+    height: 100%;
+  }
+  .infoContainer {
+    display: inline-block;
+    width: 230px;
+  }
+  .productName {
+    line-height: 1.2em;
+    margin-bottom: 0.4em;
+  }
+  .ui-button {
+    margin-top: 8px;
+  }
 }

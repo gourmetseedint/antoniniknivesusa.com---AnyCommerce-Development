@@ -203,9 +203,9 @@ a:active {
   color: inherit; }
 
 .shadowBottomOuter, .footerBoxesWrapper {
-  -webkit-box-shadow: 0 3px 3px 2px #999999;
-  -moz-box-shadow: 0 3px 3px 2px #999999;
-  box-shadow: 0 3px 3px 2px #999999; }
+  -webkit-box-shadow: 0 3px 3px 2px #999;
+  -moz-box-shadow: 0 3px 3px 2px #999;
+  box-shadow: 0 3px 3px 2px #999; }
 
 .preload div {
   height: 100px; }
@@ -302,7 +302,7 @@ header {
       color: #068500 !important; }
       .anythingSlider-default.activeSlider .anythingControls a.start-stop.playing {
         background-color: #9a9a9a !important;
-        color: #b90007 !important; }
+        color: #B90007 !important; }
   .anythingSlider-default .arrow a {
     background: url(AnythingSlider/default.png) no-repeat; }
   .anythingSlider-default .back a {
@@ -1279,9 +1279,20 @@ footer {
   margin: 1em 0; }
 
 #cartStuffList .prodThumbContainer {
-  width: 55px;
+  width: 60px;
   height: 55px;
   border-width: 0; }
 
 .orderContentsProdlistContainer {
-  width: auto; }
+  width: 300px;
+  padding-left: 20px; }
+  .orderContentsProdlistContainer .prodThumbContainer {
+    height: 100%; }
+  .orderContentsProdlistContainer .infoContainer {
+    display: inline-block;
+    width: 230px; }
+  .orderContentsProdlistContainer .productName {
+    line-height: 1.2em;
+    margin-bottom: 0.4em; }
+  .orderContentsProdlistContainer .ui-button {
+    margin-top: 8px; }
