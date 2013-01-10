@@ -1285,14 +1285,16 @@ footer {
 
 .orderContentsProdlistContainer {
   width: 300px;
+  width: auto;
   padding-left: 20px; }
   .orderContentsProdlistContainer .prodThumbContainer {
     height: 100%; }
   .orderContentsProdlistContainer .infoContainer {
     display: inline-block;
     width: 230px; }
-  .orderContentsProdlistContainer .productName {
-    line-height: 1.2em;
-    margin-bottom: 0.4em; }
-  .orderContentsProdlistContainer .ui-button {
-    margin-top: 8px; }
+    .orderContentsProdlistContainer .infoContainer h5 {
+      font-size: 1.3em;
+      line-height: 1.1em;
+      margin: 0 0 0.3em; }
+    .orderContentsProdlistContainer .infoContainer button {
+      margin-top: 8px; }

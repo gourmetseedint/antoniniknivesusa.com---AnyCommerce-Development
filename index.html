@@ -7,10 +7,6 @@
 <!-- BUG: my account - stop anything slider -->
 <!-- BUG: top nav cuts off at top -->
 <!-- BUG: email is from gourmet seed, link goes there -->
-<!-- BUG: state and zip not saved in previous address, "Shipping rates to be determined... (try entering a zip code)" even though address saved -->
-<!-- BUG: shipping / billing addresses empty -->
-<!-- BUG: order history, prod_name empty, should be product(prod_name) not product(zoovy:prod_name) -->
-<!-- BUG: cart not transerfing from regular to ssl -->
 <!-- TODO: add wish list to products -->
 
 <!-- used for optional social media extensions -->
@@ -30,7 +26,7 @@ var _gaq = _gaq || {'push':function(){}} //here for testing. TODO: REPLACE BEFOR
 var myCreole;
 
 var app = {vars:{
-	"release":"20130101214336",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+	"release":"20130107192736",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
 	"_clientid":"zmvc",
 	"baseURL":"",
 	"httpsURL":"https://ssl.zoovy.com/s=www.antoniniknivesusa.com/",
@@ -315,7 +311,7 @@ the homepageTemplate template is loaded into mainContentArea by default when the
 			<ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;'></ul>
 			<div class='homepageText'>
 				<div class='homepageDescription' data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></div>
-				<a class='button bindByAnchor' href="#category?navcat=.about-antonini" title='More About Antonini'>More About Antonini</a>
+				<a class='button' onClick="return showContent('category',{'navcat':'.about-antonini'})" title='More About Antonini'>More About Antonini</a>
 			</div>
 		</div>
 	</div>  
@@ -648,16 +644,20 @@ this will likely become more flexible in the future. ###
 			<ul class='productSpecsList'>
 				<li class='displayNone' data-bind='var:product(user:prod_weight_grams); format:showIfSet;'><span data-bind='var:product(user:prod_weight_grams); format:text; pretext: <span class="pretext">Weight: </span>;'></span></li>
 				<li class='displayNone' data-bind='var:product(user:prod_blade_length); format:showIfSet;'><span data-bind='var:product(user:prod_blade_length); format:text; pretext: <span class="pretext">Blade: </span>;'></span></li>
-				<li class='displayNone' data-bind='var:product(user:prod_dimen_option1_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option1_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option1_value); format:text;"></span></li>
-				<li class='displayNone' data-bind='var:product(user:prod_dimen_option2_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option2_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option2_value); format:text;"></span></li>
-				<li class='displayNone' data-bind='var:product(user:prod_dimen_option3_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option3_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option3_value); format:text;"></span></li>
-				<li class='displayNone' data-bind='var:product(user:prod_dimen_option4_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option4_title); format:text;'></span>: </span><span data-bind="var:product(prod_dimen_option4_value); format:text;"></span></li>
+				<li class='displayNone' data-bind='var:product(user:prod_dimen_option1_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option1_title); format:text;'></span>: </span><span data-bind="var:product(user:prod_dimen_option1_value); format:text;"></span></li>
+				<li class='displayNone' data-bind='var:product(user:prod_dimen_option2_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option2_title); format:text;'></span>: </span><span data-bind="var:product(user:prod_dimen_option2_value); format:text;"></span></li>
+				<li class='displayNone' data-bind='var:product(user:prod_dimen_option3_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option3_title); format:text;'></span>: </span><span data-bind="var:product(user:prod_dimen_option3_value); format:text;"></span></li>
+				<li class='displayNone' data-bind='var:product(user:prod_dimen_option4_value); format:showIfSet;'><span class="pretext"><span data-bind='var:product(user:prod_dimen_option4_title); format:text;'></span>: </span><span data-bind="var:product(user:prod_dimen_option4_value); format:text;"></span></li>
 				<li class='displayNone' data-bind='var:product(user:prod_overall_length); format:showIfSet;'><span data-bind='var:product(user:prod_overall_length); format:text; pretext: <span class="pretext">Overall: </span>;'></span></li>
 				<li class='displayNone lastChild' data-bind='var:product(user:prod_closed_length); format:showIfSet;'><span data-bind='var:product(user:prod_closed_length); format:text; pretext: <span class="pretext">Closed: </span>;'></span></li>
 			</ul>
 			<h4 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true;' class='categoryColor productPrice'></h4>
 		</div>
 		<div class="productSpecsBottom printNo">
+			<section class='marginBottom'>
+				<span data-bind='var: product(reviews.average); format:addClass; className:review_;' class='reviewSprite'></span>
+				<span data-bind='var: product(reviews.total); format:text; posttext: reviews; className:numReviews;'></span>
+			</section>
 			<!-- <div data-bind='var: product(@inventory.inv); format:simpleInvDisplay; extension:store_product;' class='inventory'></div> -->
 			<!-- <div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency'></div> -->
 			<form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.handleAddToCart($(this),{'action':'modal'}); return false;">
@@ -698,10 +698,10 @@ this will likely become more flexible in the future. ###
 				<li><span data-bind='var:product(user:prod_locking);   format:text; pretext: Locking: ;'></span></li>
 				<li><span data-bind='var:product(user:prod_clip);      format:text; pretext: Clip: ;'></span></li>
 				<li><span data-bind='var:product(user:prod_fasteners); format:text; pretext: Fasteners: ;'></span></li>
-				<li><span data-bind="var:product(prod_detail_option1_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option1_value); format:text;"></span></span></li>
-				<li><span data-bind="var:product(prod_detail_option2_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option2_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option2_value); format:text;"></span></span></li>
-				<li><span data-bind="var:product(prod_detail_option3_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option3_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option3_value); format:text;"></span></span></li>
-				<li><span data-bind="var:product(prod_detail_option4_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option4_title); format:text;"></span>: <span data-bind="var:product(prod_detail_option4_value); format:text;"></span></span></li>
+				<li><span data-bind="var:product(user:prod_detail_option1_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option1_title); format:text;"></span>: <span data-bind="var:product(user:prod_detail_option1_value); format:text;"></span></span></li>
+				<li><span data-bind="var:product(user:prod_detail_option2_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option2_title); format:text;"></span>: <span data-bind="var:product(user:prod_detail_option2_value); format:text;"></span></span></li>
+				<li><span data-bind="var:product(user:prod_detail_option3_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option3_title); format:text;"></span>: <span data-bind="var:product(user:prod_detail_option3_value); format:text;"></span></span></li>
+				<li><span data-bind="var:product(user:prod_detail_option4_value); format:showIfSet;" class="displayNone"><span data-bind="var:product(user:prod_detail_option4_title); format:text;"></span>: <span data-bind="var:product(user:prod_detail_option4_value); format:text;"></span></span></li>
 			</ul>
 			<div data-bind='var: product(zoovy:prod_desc); format:wiki; wikiFormats:myRIA;' class='productDescription'></div>
 		</div>
@@ -1670,9 +1670,9 @@ The 'data-action' attribute is used to assign an onclick.
 		<div data-bind="var: address(bill_address2);format:text;" class='editable' title='address 2'></div>
 		
 		<span data-bind="var: address(bill_city);format:text;" class='editable' title='city'></span>, 
-		<span data-bind="var: address(bill_state);format:text;" class='editable' title='state'></span>. 
-		<span data-bind="var: address(bill_zip);format:text;" class='editable' title='zip'></span>
-		<div data-bind="var: address(bill_country);format:text;" title='country'></div>
+		<span data-bind="var: address(bill_region);format:text;" class='editable' title='state'></span>. 
+		<span data-bind="var: address(bill_postal);format:text;" class='editable' title='zip'></span>
+		<div data-bind="var: address(bill_countrycode);format:text;" title='country'></div>
 
 	</div>
 
@@ -1697,9 +1697,9 @@ The 'data-action' attribute is used to assign an onclick.
 		<div data-bind="var: address(ship_address2);format:text;" class='editable' title='address 2'></div>
 		
 		<span data-bind="var: address(ship_city);format:text;" class='editable' title='city'></span>, 
-		<span data-bind="var: address(ship_state);format:text;" class='editable' title='state'></span>. 
-		<span data-bind="var: address(ship_zip);format:text;" class='editable' title='zip'></span>
-		<div data-bind="var: address(ship_country);format:text;" title='country'></div>
+		<span data-bind="var: address(ship_region);format:text;" class='editable' title='state'></span>. 
+		<span data-bind="var: address(ship_postal);format:text;" class='editable' title='zip'></span>
+		<div data-bind="var: address(ship_countrycode);format:text;" title='country'></div>
 
 	</div>
 </address>

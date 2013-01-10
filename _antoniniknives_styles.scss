@@ -2171,19 +2171,22 @@ $width_product_details: $width_content - $width_product_image - $width_productIm
 
 .orderContentsProdlistContainer {
   width: 300px;
+  width: auto;
   padding-left: 20px;
   .prodThumbContainer {
     height: 100%;
   }
-  .infoContainer {
+  .infoContainer { // order history
+    // display: block;
     display: inline-block;
     width: 230px;
-  }
-  .productName {
-    line-height: 1.2em;
-    margin-bottom: 0.4em;
-  }
-  .ui-button {
-    margin-top: 8px;
+    h5 { // name
+      font-size: 1.3em;
+      line-height: 1.1em;
+      margin: 0 0 0.3em;
+    }
+    button {
+      margin-top: 8px;
+    }
   }
 }

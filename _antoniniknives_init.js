@@ -145,6 +145,8 @@ var categories = {
 };
 
 var prettyNames = {};
+// prettyNames[categories['accessories'].navcat] = "Accessories";
+// prettyNames[categories['promo'].navcat]       = "Promo - Customizing";
 
 var banner       = 'header';
 var sidebar      = '.sidebar';
@@ -273,10 +275,10 @@ function getPdfLinks() {
   if(typeof pdfData != 'undefined') {
     for(var key in pdfData) {
       name = getPretty(key) + ' (PDF)';
-      link  = name + ' PDF Catalog';
+      link  = name + ' Catalog';
       value = pdfData[key];
       if (value) {
-        page += "<p><a title='" + link + "' href='" + directory + value + "'>" + name + "</a></p>";
+        page += "<p><a title='" + link + "' href='" + directory + value + "' target='_blank'>" + name + "</a></p>";
       }
     }
   }else {
@@ -775,15 +777,15 @@ app.u.initMVC = function(attempts){
 //Any code that needs to be executed after the app init has occured can go here.
 //will pass in the page info object. (pageType, templateID, pid/navcat/show and more)
 app.u.appInitComplete = function(P) {
-  // app.u.dump("Executing myAppIsLoaded code...");
+  app.u.dump("Executing myAppIsLoaded code...");
 
   // Add accessories & promo to menu
   setTimeout(function () {
     $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer'" + categoryOnClick(categories['accessories'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['accessories'].navcat) + "</div></li>");
-  }, 1000);
+  }, 1500);
   setTimeout(function () {
     $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer'" + categoryOnClick(categories['promo'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['promo'].navcat) + "</div></li>");
-  }, 1000);
+  }, 1500);
 };
 
 
