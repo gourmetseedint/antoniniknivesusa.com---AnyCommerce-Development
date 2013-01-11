@@ -335,7 +335,6 @@ header {
     margin: 0;
     padding: 0;
     list-style: none;
-    display: inline-block;
     float: left; }
     .navTop ul li {
       list-style: none;
@@ -359,7 +358,7 @@ header {
           content: "";
           margin-left: 0; }
   .navTop li {
-    height: 100%; }
+    height: 50px; }
     .navTop li a {
       height: 100%;
       display: inline-block;
@@ -643,7 +642,6 @@ footer {
   padding: 0 1.2em;
   width: 13em;
   height: 13em;
-  /*TODO: footer box - maybe add something more fluid;*/
   vertical-align: top;
   background: #f0f0f0;
   color: #333333;
@@ -975,7 +973,7 @@ footer {
   .content .subCategoryList .subCategory div {
     display: inline-block; }
 .content .subCategoryList .subCategoryText {
-  margin-top: 1em;
+  margin-top: 3em;
   width: 400px;
   vertical-align: top;
   text-align: left; }

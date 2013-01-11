@@ -1,13 +1,13 @@
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 
-// <!-- TODO: change carousel arrows -->
-// <!-- BUG: production - reload on boat/farm category causes 500 error, maybe because missing products in these categories-->
-// <!-- TODO: IE compatibility -->
-// QUE: should there be a wishlist
-// BUG: cart product extended not calculated correctly
-// BUG: USPS Priority Mail (USA) shows incorrect value, but seems to calculate right
-// TODO: add rating to prod temp
+// TODO: change carousel arrows
+// TODO: ADD  wishlist
+// TODO: add info to SEO layer - do not populate or add meta data or title, the SEO layer will add it
+// BUG: top nav cuts off at top after clicking "Place Order"
+// BUG: email is from gourmet seed, link goes there
+// TODO: add wish list to products
+// TODO: add counter to cart pop up - for 50 free shipping
 
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
 app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
@@ -714,6 +714,15 @@ app.rq.push(['templateFunction', 'productTemplate', 'onDeparts', function (P) {
   // currentCategory = '';
 }]);
 
+// app.ext.myRIA.template.checkoutTemplate.onInits.push(function(P) {
+//   app.u.dump('checkot');
+// });
+// app.ext.myRIA.template.checkoutTemplate.onCompletes
+app.rq.push(['templateFunction', 'checkoutTemplate', 'onCompletes', function(P) {
+  // app.u.dump('<-----> checkout');
+  resetAllMenuSubs();
+}]);
+
 ///// end custom \\\\\
 
 /*
@@ -779,13 +788,15 @@ app.u.initMVC = function(attempts){
 app.u.appInitComplete = function(P) {
   app.u.dump("Executing myAppIsLoaded code...");
 
-  // Add accessories & promo to menu
   setTimeout(function () {
+    // Add accessories & promo to menu
     $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer'" + categoryOnClick(categories['accessories'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['accessories'].navcat) + "</div></li>");
-  }, 1500);
-  setTimeout(function () {
     $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer'" + categoryOnClick(categories['promo'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['promo'].navcat) + "</div></li>");
+    // add email to footer
+    $('#footerEmail').html("EM: <a href='#top' onClick='return showContent(\'company\',{\'show\':\'contact\'});' title='Contact'>CustomerSupport@AntoniniKnivesUSA.com</a>");
   }, 1500);
+
+
 };
 
 
