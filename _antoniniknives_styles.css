@@ -1298,6 +1298,19 @@ footer {
       margin-top: 8px; }
 
 	  
+	  
+	  
+	  
+/************************************************
+
+STYLES ADDED BY MICHAEL C
+
+************************************************/
 .shipCountdown {
 	color: red;
+}
+
+.promotionMiddle {
+	font-size: 1.1em;
+	letter-spacing: 1px;
 }

@@ -793,7 +793,7 @@ app.u.appInitComplete = function(P) {
     $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer'" + categoryOnClick(categories['accessories'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['accessories'].navcat) + "</div></li>");
     $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer'" + categoryOnClick(categories['promo'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['promo'].navcat) + "</div></li>");
     // add email to footer
-    $('#footerEmail').html("EM: <a href='#top' onClick='return showContent(\'company\',{\'show\':\'contact\'});' title='Contact'>CustomerSupport@AntoniniKnivesUSA.com</a>");
+    $('#footerEmail').html("EM: <a href='#' onClick='return showContent(\"company\",{\"show\":\"contact\"});' title='Contact'>CustomerSupport@AntoniniKnivesUSA.com</a>");
   }, 1500);
 
 	app.renderFormats.shipCountdown = function($tag, data){
