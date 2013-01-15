@@ -1369,6 +1369,7 @@ So the cart template should contain these two elements and the extension should 
 	<div data-bind='var: cart(sum/tax_total); format:money; className:orderTax; hideZero:true;currencySign: $; pretext:Tax: ; '></div>
 
 	<div data-bind='var: cart(want/shipping_id); format:shipInfoById; className:orderShipping; hideZero:false; extension:store_cart;'></div>
+	<div data-bind='var: cart(sum/items_total); format:shipCountdown; className:shipCountdown; hideZero:false; currencySign: $;'></div>
 	
 	<div data-bind='var: cart(sum/order_total); format:money; className:orderTotal; hideZero:false; currencySign: $; pretext:Order Total: ; '></div>
 	

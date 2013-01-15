@@ -1296,3 +1296,8 @@ footer {
       margin: 0 0 0.3em; }
     .orderContentsProdlistContainer .infoContainer button {
       margin-top: 8px; }
+
+	  
+.shipCountdown {
+	color: red;
+}

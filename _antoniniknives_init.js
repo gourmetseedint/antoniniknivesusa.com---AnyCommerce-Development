@@ -796,7 +796,17 @@ app.u.appInitComplete = function(P) {
     $('#footerEmail').html("EM: <a href='#top' onClick='return showContent(\'company\',{\'show\':\'contact\'});' title='Contact'>CustomerSupport@AntoniniKnivesUSA.com</a>");
   }, 1500);
 
-
+	app.renderFormats.shipCountdown = function($tag, data){
+		var amount = 50.00 - data.value;
+		app.u.dump(amount);
+		if(amount > 0){
+			amount = app.u.formatMoney(amount,data.bindData.currencySign,'',data.bindData.hideZero);
+			var r = 'Only '+amount+' till free shipping!'
+			$tag.text(r);
+		} else {
+			//do not render
+		}
+	}
 };
 
 
