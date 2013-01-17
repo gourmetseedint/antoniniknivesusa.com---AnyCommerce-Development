@@ -1327,10 +1327,14 @@ STYLES ADDED BY MICHAEL C
 	margin-top: 20px;
 }
 
-div.addthis_toolbox {
-	display: inline-block;
-	margin: 0px;
-	height: 28px;
+#productSpecsBottom {
+	position: relative;
+}
+
+#productSpecsBottom .bottomLeft {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
 }
 
 #legalContainer a {
