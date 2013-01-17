@@ -1325,6 +1325,11 @@ STYLES ADDED BY MICHAEL C
 	margin-top: 20px;
 }
 
+div.addthis_toolbox {
+	display: inline-block;
+	margin: 0px;
+}
+
 #legalContainer a {
 	text-decoration: underline;
 	color: inherit;
