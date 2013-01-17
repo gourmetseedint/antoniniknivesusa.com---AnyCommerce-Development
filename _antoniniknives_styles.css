@@ -1330,6 +1330,7 @@ STYLES ADDED BY MICHAEL C
 div.addthis_toolbox {
 	display: inline-block;
 	margin: 0px;
+	height: 28px;
 }
 
 #legalContainer a {
