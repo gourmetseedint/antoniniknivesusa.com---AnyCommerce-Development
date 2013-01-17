@@ -1098,7 +1098,9 @@ footer {
       margin: 0;
       margin-right: 0.8em;
       padding: 0;
-      float: left; }
+      float: left;
+		height: 28px;
+		line-height: 28px;}
       .productSpecsBottom ul li:after {
         margin: 0;
         padding: 0;
