@@ -807,6 +807,13 @@ app.u.appInitComplete = function(P) {
 			//do not render
 		}
 	}
+	
+	app.u.showLegalModal = function(){
+		$('#legalTerms').dialog({
+			title : "Terms and Conditions",
+			width : 600
+		});
+	}
 };
 
 

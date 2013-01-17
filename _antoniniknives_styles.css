@@ -1318,3 +1318,18 @@ STYLES ADDED BY MICHAEL C
 .addThisContainer {
 	margin-top: 10px;
 }
+
+#legalTerms ul {
+	padding: 30px;
+}
+
+#legalContainer {
+	clear: both;
+	float: right;
+	margin-top: 20px;
+}
+
+#legalContainer a {
+	text-decoration: underline;
+	color: inherit;
+}
