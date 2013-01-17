@@ -1327,11 +1327,11 @@ STYLES ADDED BY MICHAEL C
 	margin-top: 20px;
 }
 
-#productSpecsBottom {
+.productSpecsBottom {
 	position: relative;
 }
 
-#productSpecsBottom .bottomLeft {
+.productSpecsBottom .bottomLeft {
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
