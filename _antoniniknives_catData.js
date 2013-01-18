@@ -43,7 +43,7 @@ var catData = {
   ".about-antonini": [
     {
       "image": "cutting.jpg",
-      "paragraph": "Founded in 1925, A. E. Coltellerie snl has been creating great knives under the \"Antonini\" brand for more than three generations. The heritage of their location in the Maniago area near Pordenone in northeast Italy provides centuries of experience and skill, as it is an area with a history of making knives, blades, and other cutting tools since Medieval times."
+      "paragraph": "Founded in 1925, A. E. Coltellerie snc has been creating great knives under the \"Antonini\" brand for more than three generations. The heritage of their location in the Maniago area near Pordenone in northeast Italy provides centuries of experience and skill, as it is an area with a history of making knives, blades, and other cutting tools since Medieval times."
     },
     {
       "image": "grinding.jpg",
@@ -55,7 +55,7 @@ var catData = {
     },
     {
       "image": "finishing-department.jpg",
-      "paragraph": "You can be assured that the legendary \"Antonini\" label is one of quality associated with a family-owned company that still makes tools at their factory in Maniago, Italy. A. E. Coltellerie snl combines centuries of tradition and experience in metallurgy and knife-making with cutting edge technology and design, and they guarantee the quality of the materials and workmanship that goes into every knife they make."
+      "paragraph": "You can be assured that the legendary \"Antonini\" label is one of quality associated with a family-owned company that still makes tools at their factory in Maniago, Italy. A. E. Coltellerie snc combines centuries of tradition and experience in metallurgy and knife-making with cutting edge technology and design, and they guarantee the quality of the materials and workmanship that goes into every knife they make."
     }
   ]
 };
