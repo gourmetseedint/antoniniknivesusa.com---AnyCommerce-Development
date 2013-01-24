@@ -109,7 +109,7 @@ var categories = {
   },
   "promo": {
     "navcat": ".promo_-_customizing",
-    "banner": "bannerCategoryPromo",
+    "banner": "bannerHome",
     "logo": "logoCategoryPromo",
     "menu": "#tier1categories_promo__customizing ul",
     "accentColor": "categoryPromo"
@@ -123,7 +123,7 @@ var categories = {
   },
   "accessories": {
     "navcat": ".accessories",
-    "banner": "",
+    "banner": "bannerHome",
     "logo": "",
     "menu": "",
     "accentColor": ""
@@ -479,7 +479,7 @@ function stopSliderProductExtras(parentID) {
   });
 }
 
-/// homepage \\\
+// homepage 
 app.rq.push(['templateFunction','homepageTemplate','onCompletes',function(P) {
   defaultPage();
   startSliderHomeBestSellers();
@@ -517,19 +517,19 @@ app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {
   // $(wholesaleInfo).addClass("displayNone");
 }]);
 
-/// company \\\
+/// company 
 app.rq.push(['templateFunction','companyTemplate','onCompletes',function(P) {
   // app.u.dump('on company');
   defaultPage();
 }]);
 
-/// customer \\\
+/// customer 
 app.rq.push(['templateFunction','customerTemplate','onCompletes',function(P) {
   // app.u.dump('on customer');
   defaultPage();
 }]);
 
-/// search \\\
+/// search
 app.rq.push(['templateFunction','searchTemplate','onCompletes',function(P) {
   // app.u.dump($('.product').length);
   // app.u.dump('on search');
@@ -543,7 +543,7 @@ app.rq.push(['templateFunction','searchTemplate','onCompletes',function(P) {
   // });
 }]);
 
-///// categories \\\\\
+///// categories
 app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
   // app.u.dump('on category');
   // resets
@@ -602,6 +602,12 @@ app.rq.push(['templateFunction','categoryTemplate','onCompletes',function(P) {
       $(banner).addClass(categories['promo'].banner);
       $(logoCategory).addClass(categories['promo'].logo);
       $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['promo'].accentColor);
+      break;
+	case categories['accessories'].navcat:
+      $(banner).addClass(categories['accessories'].banner);
+      $(logoCategory).addClass(categories['accessories'].logo);
+      $(elementsWithCategoryColor, '#' + P.parentID).addClass(categories['accessories'].accentColor);
+	  app.u.dump("accessories");
       break;
     case categories['sos'].navcat:
       $(banner).addClass(categories['sos'].banner);
