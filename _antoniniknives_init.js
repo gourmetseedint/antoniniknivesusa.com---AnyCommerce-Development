@@ -796,8 +796,8 @@ app.u.appInitComplete = function(P) {
 	app.u.injectTier1 = function(){
 		if($('#tier1categories').children().length !== 0){
 			app.u.dump("Injecting Tier1 cats");
-			$('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer'" + categoryOnClick(categories['accessories'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['accessories'].navcat) + "</div></li>");
-			$('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer'" + categoryOnClick(categories['promo'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['promo'].navcat) + "</div></li>");
+			$('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer'" + categoryOnClick(categories['accessories'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>ACCESSORIES</div></li>");
+			$('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer'" + categoryOnClick(categories['promo'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>PROMO-CUSTOMIZING</div></li>");
 		} else {
 			app.u.dump("Tier1 injection failed, retrying in 3... 2...");
 			setTimeout(app.u.injectTier1, 250);
