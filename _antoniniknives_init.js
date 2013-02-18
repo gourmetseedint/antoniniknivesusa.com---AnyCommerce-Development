@@ -793,14 +793,20 @@ app.u.initMVC = function(attempts){
 //will pass in the page info object. (pageType, templateID, pid/navcat/show and more)
 app.u.appInitComplete = function(P) {
   app.u.dump("Executing myAppIsLoaded code...");
+	app.u.injectTier1 = function(){
+		if($('#tier1categories').children().length !== 0){
+			app.u.dump("Injecting Tier1 cats");
+			$('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer'" + categoryOnClick(categories['accessories'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['accessories'].navcat) + "</div></li>");
+			$('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer'" + categoryOnClick(categories['promo'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['promo'].navcat) + "</div></li>");
+		} else {
+			app.u.dump("Tier1 injection failed, retrying in 3... 2...");
+			setTimeout(app.u.injectTier1, 250);
+		}
+	}
 
-  setTimeout(function () {
-    // Add accessories & promo to menu
-    $('#tier1categories').append("<li id='tier1categories_accessories'><div class='pointer'" + categoryOnClick(categories['accessories'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['accessories'].navcat) + "</div></li>");
-    $('#tier1categories').append("<li id='tier1categories_promo__customizing'><div class='pointer'" + categoryOnClick(categories['promo'].navcat) + " onMouseOver='$(this).addClass(\"navMenuCategoryHover\");' onMouseOut='$(this).removeClass(\"navMenuCategoryHover\");'>" + getPretty(categories['promo'].navcat) + "</div></li>");
-    // add email to footer
+	app.u.injectTier1();
     $('#footerEmail').html("EM: <a href='#' onClick='return showContent(\"company\",{\"show\":\"contact\"});' title='Contact'>CustomerService@AntoniniKnivesUSA.com</a>");
-  }, 1500);
+  
 
 	app.renderFormats.shipCountdown = function($tag, data){
 		var amount = 50.00 - data.value;
@@ -820,7 +826,9 @@ app.u.appInitComplete = function(P) {
 			width : 600
 		});
 	}
+	
 };
+
 
 
 
