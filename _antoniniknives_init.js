@@ -806,7 +806,8 @@ app.u.appInitComplete = function(P) {
 
 	app.u.injectTier1();
     $('#footerEmail').html("EM: <a href='#' onClick='return showContent(\"company\",{\"show\":\"contact\"});' title='Contact'>CustomerService@AntoniniKnivesUSA.com</a>");
-  
+	defaultPage();
+ 
 
 	app.renderFormats.shipCountdown = function($tag, data){
 		var amount = 50.00 - data.value;
