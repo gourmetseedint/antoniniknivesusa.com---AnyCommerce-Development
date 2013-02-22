@@ -91,6 +91,11 @@ var subcatData = {
       "description": "This is the original CARTRIDGE pocket knife that started it all. Carefully crafted in Italy by A. E. Coltellerie (Antonini) since 1982.  Still the best of its type available with quality materials, setting them far above the rest!",
       "products": ["1301B", "1301G", "1301N", "1301R", "1301V"]
     },
+    ".25caltagirone": {
+      "prettyLong": "Traditional Pocket Knives of Caltagirone",
+      "description": "Found in southern Sicily, Caltagirone is most famous for its pottery and terra cotta.  These knives attest to the beautiful design and practical strength of the area.",
+      "products": ["91716","91720","91723"]
+    }
     ".30maniaghese": {
       "prettyLong": "Traditional Pocket Knives of Maniago",
       "description": "Antonini's home is Maniago in Northeast Italy, and they are proud to offer these beautiful and elegantly shaped knives made with their legendary care and quality.",
