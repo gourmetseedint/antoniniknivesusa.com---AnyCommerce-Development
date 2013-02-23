@@ -123,6 +123,11 @@ var subcatData = {
       "description": "The ARA XL knives represent the top-of-the-range for the SOS line of Antonini, fully-featured for use in a wide range of emergency and rescue needs.",
       "products": ["ARAXLARS", "ARAXLMIS", "ARAXLNS"]
     },
+    ".15friend": {
+      "prettyLong": "FRIEND Diving Pro-Rescue Knives",
+      "description": "Although originally designed with kayak and diving rescuers in mind, the FRIEND knives have proven popular as a general use pocket knife.",
+      "products": ["FRIENDRQE"]
+    },
     ".20nauta": {
       "prettyLong": "NAUTA Boating Pro-Rescue Knives",
       "description": "With features great for any rescue or emergency need, the NAUTA line includes a marlin-spike typical of boating knives and nautical tools.",
