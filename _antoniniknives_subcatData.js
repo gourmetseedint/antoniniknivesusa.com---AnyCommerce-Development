@@ -13,7 +13,7 @@ var subcatData = {
     ".boat" : {
       "prettyLong":"BOAT Multipurpose Yachting Knives",
       "description" : "The BOAT range of knives feature multiple tools/blades in stainless steel, and will be a welcome addition to the tools of any boat or fisherman.",
-      "products": ["7231LA", "7291L", "72715I   "]
+      "products": ["7231LA", "7291L", "72715I"]
     },
     ".classic" : {
       "prettyLong":"CLASSIC Fisherman Knives",
