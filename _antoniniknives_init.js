@@ -10,7 +10,7 @@ app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 // TODO: add counter to cart pop up - for 50 free shipping
 
 // app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_passive/extension.js']);
-app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_nice/extension.js']);
+app.rq.push(['extension',0,'convertSessionToOrder','extensions/checkout_active/extension.js']);
 app.rq.push(['extension',0,'store_checkout','extensions/store_checkout.js']);
 app.rq.push(['extension',0,'store_prodlist','extensions/store_prodlist.js']);
 app.rq.push(['extension',0,'store_navcats','extensions/store_navcats.js']);
@@ -37,6 +37,9 @@ app.rq.push(['script',0,(document.location.protocol == 'https:' ? 'https:' : 'ht
 app.rq.push(['script',0,app.vars.baseURL+'cycle.js']);
 app.rq.push(['script',0,app.vars.baseURL+'AnythingSlider/jquery.anythingslider.js']);
 
+app.rq.push(['script',0,app.vars.baseURL+'anyplugins.js']); //in zero pass in case product page is first page.
+
+
 // json data
 app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_subcatData.js']);
 app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_catData.js']);
@@ -46,23 +49,16 @@ app.rq.push(['script',0,app.vars.baseURL+'_antoniniknives_pdfData.js']);
 //add tabs to product data.
 //tabs are handled this way because jquery UI tabs REALLY wants an id and this ensures unique id's between product
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
-  var safePID = app.u.makeSafeHTMLId(P.pid); //can't use jqSelector because productTEmplate_pid still used makesafe. planned Q1-2012 update ###
-  var $tabContainer = $( ".tabbedProductContent",$('#productTemplate_'+safePID));
-    if($tabContainer.length)  {
-      if($tabContainer.data("tabs")){} //tabs have already been instantiated. no need to be redundant.
-      else  {
-        $("div.tabContent",$tabContainer).each(function (index) {
-          $(this).attr("id", "spec_"+safePID+"_" + index.toString());
-        });
-        $(".tabs li a",$tabContainer).each(function (index) {
-          $(this).attr('id','href_'+safePID+"_" + index.toString());
-          $(this).attr("href", "app://#spec_"+safePID+"_" + index.toString());
-        });
-        $tabContainer.localtabs();
-      }
-    }
-  else  {} //couldn't find the tab to tabificate.
-}]);
+	var safePID = app.u.makeSafeHTMLId(P.pid); //can't use jqSelector because productTEmplate_pid still used makesafe. planned Q1-2013 update ###
+	var $tabContainer = $( ".tabbedProductContent",$('#productTemplate_'+safePID));
+		if($tabContainer.length)	{
+			if($tabContainer.data("widget") == 'anytabs'){} //tabs have already been instantiated. no need to be redundant.
+			else	{
+				$tabContainer.anytabs();
+				}
+			}
+		else	{} //couldn't find the tab to tabificate.
+	}]);
 
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 // app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);

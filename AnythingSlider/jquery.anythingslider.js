@@ -729,10 +729,11 @@
 		};
 
 		base.setHash = function(n){
+			//alert(n);
 			var s = 'panel' + base.runTimes + '-',
 				h = base.win.location.hash;
 			if ( typeof h !== 'undefined' ) {
-				base.win.location.hash = (h.indexOf(s) > 0) ? h.replace(base.regex, s + n) : h + "&" + s + n;
+				base.win.location.hash = (h.indexOf(s) > 0) ? h.replace(base.regex, s + n) : h + "&" + s + n + "=1";
 			}
 		};
 
