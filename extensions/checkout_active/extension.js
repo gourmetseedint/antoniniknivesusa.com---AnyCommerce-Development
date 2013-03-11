@@ -687,7 +687,7 @@ else	{
 				$('#chkoutPlaceOrderBtn').removeAttr('disabled').removeClass('ui-state-disabled '); //make place order button appear and be clickable.
 				responseData['_rtag'] = $.isEmptyObject(responseData['_rtag']) ? {} : responseData['_rtag'];
 				responseData['_rtag'].targetID = 'chkoutSummaryErrors';
-				app.u.throwMessage(responseData,uuid);
+				app.ext.store_checkout.u.showServerErrors(responseData,uuid);
 
 _gaq.push(['_trackEvent','Checkout','App Event','Order NOT created. error occured. ('+d['_msg_1_id']+')']);
 
@@ -1101,7 +1101,7 @@ payment options, pricing, etc
 					if(authState == 'authenticated')	{
 //						app.u.dump(" -> Already Authenticated");
 						o = "<ul id='preflightAuthenticatedInputs' class='noPadOrMargin listStyleNone'>";
-						o += "<li><label class='prompt'>Username<\/label><span class='value'>"+username+"<\/span><\/li>";
+						o += "<li><label class='prompt'>Username: <\/label><span class='value'>"+username+"<\/span><\/li>";
 						o += "<input type='hidden'   name='bill/email' id='data-bill_email' value='"+email+"' /><\/ul>";
 						}
 					else	{
@@ -1164,7 +1164,7 @@ payment options, pricing, etc
 			accountInfo : function()	{
 //				app.u.dump('BEGIN app.ext.convertSessionToOrder.panelContent.accountInfo.  ');
 				var authState = app.u.determineAuthentication();
-				var createCustomer = app.data.cartDetail['want/create_customer'] ? app.data.cartDetail['want/create_customer'] : 0;
+				var createCustomer = (app.data.cartDetail && app.data.cartDetail['want/create_customer']) ? app.data.cartDetail['want/create_customer'] : 0;
 				
 //				app.u.dump(' -> createCustomer = '+createCustomer);
 
@@ -1295,7 +1295,7 @@ $('.ui-state-active',$panelFieldset).first().trigger('click');
 
 //must appear after panel is loaded because otherwise the divs don't exist.
 //per brian, use shipping methods in cart, not in shipping call.
-				if(app.data.cartDetail['@SHIPMETHODS'].length == 0)	{
+				if(app.data.cartDetail && app.data.cartDetail['@SHIPMETHODS'].length == 0)	{
 					$('#noShipMethodsAvailable').toggle(true);
 					}
 				else if(!$('#data-bill_zip').val() && !$('ship_zip').val()) {
@@ -1311,13 +1311,13 @@ Of course, this should only happen IF a method was selected previously.
 				var foundMatchingShipMethodId = false; 
 				var L = app.data.cartShippingMethods['@methods'].length;
 				for(var i = 0; i < L; i += 1)	{
-					if(app.data.cartShippingMethods['@methods'][i].id == app.data.cartDetail['want/shipping_id'])	{
+					if(app.data.cartDetail && app.data.cartShippingMethods['@methods'][i].id == app.data.cartDetail['want/shipping_id'])	{
 						foundMatchingShipMethodId = true;
 						break; //once a match is found, no need to continue the loop.
 						}
 					}
 
-				if(foundMatchingShipMethodId == false && app.data.cartDetail['want/shipping_id'])	{
+				if(foundMatchingShipMethodId == false && app.data.cartDetail && app.data.cartDetail['want/shipping_id'])	{
 					app.u.dump(' -> previously selected ship method is no longer available. update session with null value.');
 					app.calls.cartSet.init({"want/shipping_id":null});  //the set will update the method, session and local storage.
 					app.calls.refreshCart.init({"callback":"updateCheckoutOrderContents","extension":"convertSessionToOrder"},'immutable');
