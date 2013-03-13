@@ -724,7 +724,8 @@ _gaq.push(['_trackEvent','Checkout','App Event','Order NOT created. error occure
 				sum += this.chkoutBillAddressFieldset(); //app.u.dump('bill address done. sum = '+sum);
 				sum += this.chkoutShipAddressFieldset(); //app.u.dump('ship address done. sum = '+sum);
 				sum += this.chkoutAccountInfoFieldset(); //app.u.dump('chkoutAccountInfo address done. sum = '+sum);
-				sum += this.chkoutLegalTerms(); 
+				sum += this.chkoutLegalTerms(); //app.u.dump('chkoutLegalTerms done. sum = '+sum);
+				
 				
 //				app.u.dump('END app.ext.convertSessionToOrder.validate.isValid. sum = '+sum);
 				if(sum != 7)	{
@@ -738,16 +739,15 @@ _gaq.push(['_trackEvent','Checkout','App Event','Order NOT created. error occure
 			chkoutLegalTerms : function(){
 				var valid = 1;
 				
-				var $legalCheckbox = $("legalTermsCheckbox");
-				if($legalCheckbox.attr("checked") !== "checked"){
+				var $legalCheckbox = $("#legalTermsCheckbox");
+				if($legalCheckbox.is(":checked")){
+					$legalCheckbox.removeClass('mandatory');
+					$legalCheckbox.parent().removeClass('mandatory');
+				} else {
 					$legalCheckbox.parent().addClass('mandatory');
 					$legalCheckbox.addClass('mandatory');
 					valid=0;
-				} else {
-					$legalCheckbox.removeClass('mandatory');
-					$legalCheckbox.parent().removeClass('mandatory');
 				}
-				
 				return valid;
 			},
 			chkoutPreflightFieldset : function()	{
