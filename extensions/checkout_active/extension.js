@@ -201,6 +201,7 @@ if server validation passes, the callback handles what to do next (callback is m
 				delete serializedCheckout['giftcard'];
 				delete serializedCheckout['want/bill_to_ship_cb'];
 				delete serializedCheckout['coupon'];				
+				delete serializedCheckout['legalTermsCheckbox'];				
 				
 				app.calls.cartSet.init(serializedCheckout);
 
@@ -723,9 +724,10 @@ _gaq.push(['_trackEvent','Checkout','App Event','Order NOT created. error occure
 				sum += this.chkoutBillAddressFieldset(); //app.u.dump('bill address done. sum = '+sum);
 				sum += this.chkoutShipAddressFieldset(); //app.u.dump('ship address done. sum = '+sum);
 				sum += this.chkoutAccountInfoFieldset(); //app.u.dump('chkoutAccountInfo address done. sum = '+sum);
-
+				sum += this.chkoutLegalTerms(); 
+				
 //				app.u.dump('END app.ext.convertSessionToOrder.validate.isValid. sum = '+sum);
-				if(sum != 6)	{
+				if(sum != 7)	{
 					r = false;
 					$globalErrors.append(app.u.formatMessage({"message":"Some required fields were left blank or contained errors. (please scroll up)","uiClass":"error","uiIcon":"alert"})).toggle(true);
 					}
@@ -733,7 +735,21 @@ _gaq.push(['_trackEvent','Checkout','App Event','Order NOT created. error occure
 				return r;
 				}, //isValid
 //validation function should be named the same as the id of the fieldset. 
-
+			chkoutLegalTerms : function(){
+				var valid = 1;
+				
+				var $legalCheckbox = $("legalTermsCheckbox");
+				if($legalCheckbox.attr("checked") !== "checked"){
+					$legalCheckbox.parent().addClass('mandatory');
+					$legalCheckbox.addClass('mandatory');
+					valid=0;
+				} else {
+					$legalCheckbox.removeClass('mandatory');
+					$legalCheckbox.parent().removeClass('mandatory');
+				}
+				
+				return valid;
+			}
 			chkoutPreflightFieldset : function()	{
 //				app.u.dump('BEGIN app.ext.convertSessionToOrder.validation.chkoutPreflightFieldset');
 				var valid = 1; //used to return validation state. 0 = false, 1 = true. integers used to sum up panel validation.
