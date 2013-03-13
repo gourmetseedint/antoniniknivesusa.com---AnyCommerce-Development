@@ -749,7 +749,7 @@ _gaq.push(['_trackEvent','Checkout','App Event','Order NOT created. error occure
 				}
 				
 				return valid;
-			}
+			},
 			chkoutPreflightFieldset : function()	{
 //				app.u.dump('BEGIN app.ext.convertSessionToOrder.validation.chkoutPreflightFieldset');
 				var valid = 1; //used to return validation state. 0 = false, 1 = true. integers used to sum up panel validation.
