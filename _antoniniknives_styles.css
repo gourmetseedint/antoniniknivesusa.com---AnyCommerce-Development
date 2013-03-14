@@ -1366,3 +1366,23 @@ STYLES ADDED BY MICHAEL C
 
 .ccDecals { margin-top: 5px;}
 .ccDecals img {margin-left: 10px;}
+
+.checkoutBtnContainer {
+	display: block;
+	line-height: 46px;
+	clear: both;
+	margin-bottom: 16px;
+}
+
+.checkoutBtnSeparator{margin-bottom:16px;}
+
+.checkoutBtnContainer span.extraMarginLeft{margin-left: 16px;}
+.checkoutBtnContainer span img{position:relative;top:-4px;}
+.checkoutBtnContainer span{
+	vertical-align: middle;
+	margin-left: 3px;
+}
+
+.checkoutButton{padding: 4px 6px;}
+
+.clear{clear:both;}
