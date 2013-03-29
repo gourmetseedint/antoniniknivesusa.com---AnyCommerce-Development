@@ -334,8 +334,8 @@ function startSlideShow() {
   var startIndex = Math.floor((Math.random()*len)+1); // random start
   // app.u.dump(startIndex);
   $(slideshow).removeClass('displayNone');
-  if(len > 1) {
-    $('#wideSlideshow').cycle({
+  if(len > 1 && (!$('#wideSlideshow').data('slideshow') || $('#wideSlideshow').data('slideshow') !== 'true')) {
+    $('#wideSlideshow').data('slideshow', "true").cycle({
       fx:'fade',
       speed:'slow',
       timeout: 5000,
