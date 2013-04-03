@@ -13,7 +13,7 @@ var subcatData = {
     ".boat" : {
       "prettyLong":"BOAT Multipurpose Yachting Knives",
       "description" : "The BOAT range of knives feature multiple tools/blades in stainless steel, and will be a welcome addition to the tools of any boat or fisherman.",
-      "products": ["7231LA", "7291L", "72715I"]
+      "products": ["7231LA", "7291L", "72715I", "7251IA"]
     },
     ".classic" : {
       "prettyLong":"CLASSIC Fisherman Knives",
@@ -121,7 +121,7 @@ var subcatData = {
     ".10ara-xl": {
       "prettyLong": "ARA XL Pro-Rescue Knives",
       "description": "The ARA XL knives represent the top-of-the-range for the SOS line of Antonini, fully-featured for use in a wide range of emergency and rescue needs.",
-      "products": ["ARAXLARS", "ARAXLMIS", "ARAXLNS"]
+      "products": ["ARAXLARS", "ARAXLMIS", "ARAXLNS", "ARATACTNS"]
     },
     ".15friend": {
       "prettyLong": "FRIEND Diving Pro-Rescue Knives",
