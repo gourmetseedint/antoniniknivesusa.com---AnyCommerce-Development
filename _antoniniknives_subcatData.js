@@ -124,7 +124,7 @@ var subcatData = {
       "products": ["ARAXLARS", "ARAXLMIS", "ARAXLNS", "ARATACTNS"]
     },
     ".12armadillo": {
-      "prettyLong": "ARMADILLO Pro-Rescue Knifes",
+      "prettyLong": "ARMADILLO Pro-Rescue Knives",
       "description": "Designed as the basic yet essential rescue knife, complete with a shaped ergonomic handle for a safe and secure grip, Armadillo is also a great general-purpose knife.",
       "products": ["ARMADILLO"]
     },
