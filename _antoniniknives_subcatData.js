@@ -127,7 +127,7 @@ var subcatData = {
       "prettyLong": "ARMADILLO Pro-Rescue Knifes",
       "description": "Designed as the basic yet essential rescue knife, complete with a shaped ergonomic handle for a safe and secure grip, Armadillo is also a great general-purpose knife.",
       "products": ["ARMADILLO"]
-    }
+    },
     ".15friend": {
       "prettyLong": "FRIEND Diving Pro-Rescue Knives",
       "description": "Although originally designed with kayak and diving rescuers in mind, the FRIEND knives have proven popular as a general use pocket knife.",
