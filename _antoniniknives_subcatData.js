@@ -123,6 +123,11 @@ var subcatData = {
       "description": "The ARA XL knives represent the top-of-the-range for the SOS line of Antonini, fully-featured for use in a wide range of emergency and rescue needs.",
       "products": ["ARAXLARS", "ARAXLMIS", "ARAXLNS", "ARATACTNS"]
     },
+    ".12armadillo": {
+      "prettyLong": "ARMADILLO Pro-Rescue Knifes",
+      "description": "Designed as the basic yet essential rescue knife, complete with a shaped ergonomic handle for a safe and secure grip, Armadillo is also a great general-purpose knife.",
+      "products": ["ARMADILLO"]
+    }
     ".15friend": {
       "prettyLong": "FRIEND Diving Pro-Rescue Knives",
       "description": "Although originally designed with kayak and diving rescuers in mind, the FRIEND knives have proven popular as a general use pocket knife.",
