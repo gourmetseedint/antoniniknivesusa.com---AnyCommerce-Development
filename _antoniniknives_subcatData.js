@@ -170,6 +170,6 @@ var subcatData = {
     }
   },
   ".accessories" : {
-    "products": ["FODERO09", "TOPBITS", "TOPNOBIT", "TOPPROBIT", "TOPSLIPPER", "AFFPIETRANAT", "AFFAL203"]
+    "products": ["FODERO09", "TOPBITS", "TOPNOBIT", "TOPPROBIT", "TOPSLIPPER", "AFFPIETRANAT", "AFFAL203", "AFFSIC"]
   }
 };
