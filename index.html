@@ -341,7 +341,26 @@ the homepageTemplate template is loaded into mainContentArea by default when the
 		<div class='homepageContent'>
 			<ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size": "10","mode": "elastic-native","filter": {"and" : [{"term": {"tags": "IS_BESTSELLER"}},{"term": {"site_ownership_antonini" : 1}}]}}); format: productSearch; extension: myRIA; loadsTemplate: productListHomepageTemplateResults; before:<h2>Our Top Blades</h2>;'></ul>
 			<div class='homepageText'>
-				<div class='homepageDescription' data-bind="var: category(%page.description); format:wiki; wikiFormats:myRIA; editor: textarea;"></div>
+				<!-- HOMEPAGE DESCRIPTION -->
+				<div class='homepageDescription'>
+					<p>
+						Welcome to Antonini Knives USA and the home of a wide range of working,
+						collectable, and novelty pocket knives.  Whether a professional or a home
+						hobbyist, you'll find here great knives for boating & fishing, electrical,
+						cable, telephone, and agriculture.  
+					</p>
+					<p>
+						Antonini hails from the knife making region of Maniago, Italy, and brings
+						centuries of tradition and skill to every knife they make, and they include in
+						their products some of the beautiful traditional knives of Italy.
+					</p>
+					<p>
+						Antonini is also a great innovator, as their line of SOS knives for rescue use
+						and Bullet and Cartridge knives attest.  Enjoy some of the finest knives
+						available at very competitive prices, and be sure to let us know if you have
+						any questions or feedback!
+					</p>
+				</div>
 				<a class='button' onClick="return showContent('category',{'navcat':'.about-antonini'})" title='More About Antonini'>More About Antonini</a>
 			</div>
 		</div>
