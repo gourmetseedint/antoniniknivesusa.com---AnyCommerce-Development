@@ -114,7 +114,7 @@ var subcatData = {
     ".60other-pocket": {
       "prettyLong": "Other Pocket Knives",
       "description": "This is a group of various pocket knives particularly suited for specific uses and gifts.",
-      "products": ["2470LA", "81NK"]
+      "products": ["2460L", "81NK"]
     }
   },
   ".sos_-_rescue": {
