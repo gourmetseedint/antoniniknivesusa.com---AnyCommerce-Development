@@ -77,7 +77,7 @@ var subcatData = {
     ".traditional": {
       "prettyLong": "TRADITIONAL Pruning Knives",
       "description": "The TRADITIONAL range of knives is a wide range of pruning and grafting knives and saws in wide agricultural use.",
-      "products": ["9480LA", "9490LA", "9500LA", "899N"]
+      "products": ["9480LA", "9490LA", "9500LA", "899N", "242N", "C101R"]
     }
   },
   ".pocket_-_traditional": {
