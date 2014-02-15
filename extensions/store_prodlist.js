@@ -195,17 +195,18 @@ A special translate template for product so that reviews can be merged into the 
 					tmp['reviews'] = app.ext.store_prodlist.u.summarizeReviews(pid); //generates a summary object (total, average)
 					tmp['reviews']['@reviews'] = app.data['appReviewsList|'+pid]['@reviews']
 					}
-				app.renderFunctions.translateTemplate(app.data[tagObj.datapointer],tagObj.parentID);
+				(tagObj.jqObj instanceof jQuery) ? tagObj.jqObj.anycontent({'datapointer':tagObj.datapointer}) : $(app.u.jqSelector('#',tagObj.parentID)).anycontent({'datapointer':tagObj.datapointer})
+//				app.renderFunctions.translateTemplate(app.data[tagObj.datapointer],tagObj.parentID);
 				},
 //error needs to clear parent or we end up with orphans (especially in UI finder).
 			onError : function(responseData,uuid)	{
-				responseData.persistant = true; //throwMessage will NOT hide error. better for these to be pervasive to keep merchant fixing broken things.
+				responseData.persistent = true; //throwMessage will NOT hide error. better for these to be pervasive to keep merchant fixing broken things.
 				var $parent = $('#'+responseData['_rtag'].parentID)
 				$parent.empty().removeClass('loadingBG');
 				app.u.throwMessage(responseData,uuid);
 //for UI prod finder. if admin session, adds a 'remove' button so merchant can easily take missing items from list.
 // ### !!! NOTE - upgrade this to proper admin verify (function)
-				if(app.sessionId && app.sessionId.indexOf('**') === 0)	{
+				if(app.vars.cartID && app.vars.cartID.indexOf('**') === 0)	{
 					$('.ui-state-error',$parent).append("<button class='ui-state-default ui-corner-all'  onClick='app.ext.admin.u.removePidFromFinder($(this).closest(\"[data-pid]\"));'>Remove "+responseData.pid+"<\/button>");
 					}
 				}
@@ -357,7 +358,7 @@ the object created here is passed as 'data' into the mulitpage template. that's 
 				var hideMultipageControls = false; //if set to true, will hide just the dropdown/page controls.
 				
 //can't build a prodlist without product.				
-				if(obj.csv && typeof obj.csv == 'object' && obj.csv.length > 0 && obj.loadsTemplate)	{
+				if(obj && obj.csv && typeof obj.csv == 'object' && obj.csv.length > 0 && obj.loadsTemplate)	{
 
 					var L = obj.csv.length;
 
@@ -390,7 +391,7 @@ the object created here is passed as 'data' into the mulitpage template. that's 
 
 					}
 				else{
-					app.u.dump(" -> Missing some required fields for setProdlistVars"); app.u.dump(obj);
+					app.u.dump(" -> Missing some required fields for setProdlistVars. requires csv and loadstemplate."); app.u.dump(obj);
 					r = false;
 					}
 				return r;
@@ -453,12 +454,12 @@ if no parentID is set, then this function gets the data into memory for later us
 
 */
 			getProductDataForList : function(plObj,$tag,Q)	{
-//				app.u.dump("BEGIN store_prodlist.u.getProductDataForList ["+plObj.parentID+"]");
+				app.u.dump("BEGIN store_prodlist.u.getProductDataForList ["+plObj.parentID+"]");
 
 				Q = Q || 'mutable';
 				var numRequests = 0; //# of requests that will b made. what is returned.
 				if(plObj && plObj.csv)	{
-//					app.u.dump(" -> csv defined. length: "+plObj.csv.length);
+					app.u.dump(" -> csv defined. length: "+plObj.csv.length);
 					var pageCSV = this.getSkusForThisPage(plObj);
 					var L = pageCSV.length;
 					var call = 'appProductGet';  //this call is used unless variations or inventory are needed. this call is 'light' and just gets basic info.
@@ -467,16 +468,24 @@ if no parentID is set, then this function gets the data into memory for later us
 						}
 
 					for(var i = 0; i < L; i += 1)	{
-//						app.u.dump("rendering");
+						app.u.dump("Queueing data fetch for "+pageCSV[i]);
+						var _tag = {};
+						if(plObj.isWizard)	{
+							_tag = {'callback':'translateTemplate','extension':'store_prodlist','jqObj':magic.inspect('#'+this.getSkuSafeIdForList(plObj.parentID,pageCSV[i]))}
+							}
+						else if(plObj.parentID)	{
+							_tag = {'callback':'translateTemplate','extension':'store_prodlist','parentID':this.getSkuSafeIdForList(plObj.parentID,pageCSV[i])}
+							}
+						else	{}
 						numRequests += app.ext.store_prodlist.calls[call].init({
 							"pid":pageCSV[i],
 							"withVariations":plObj.withVariations,
 							"withReviews":plObj.withReviews,
 							"withInventory":plObj.withInventory
-							}, plObj.parentID ? {'callback':'translateTemplate','extension':'store_prodlist','parentID':this.getSkuSafeIdForList(plObj.parentID,pageCSV[i])} : {});  //tagObj not passed if parentID not set. 
+							},_tag, Q);  //tagObj not passed if parentID not set. 
 						}
 					}
-				if(numRequests > 0)	{app.model.dispatchThis()}
+				if(numRequests > 0)	{app.model.dispatchThis(Q)}
 				return numRequests;
 				}, //getProductDataForList
 
@@ -506,24 +515,60 @@ params that are missing will be auto-generated.
 				if(($tag || (obj && obj.parentID)) && obj.csv)	{
 //					app.u.dump(" -> required parameters exist. Proceed...");
 					obj.csv = app.ext.store_prodlist.u.cleanUpProductList(obj.csv); //strip blanks and make sure this is an array. prod attributes are not, by default.
-					
-					var plObj = this.setProdlistVars(obj); //full prodlist object now.
+
 
 //					app.u.dump(" -> plObj: "); app.u.dump(plObj);
+//					app.u.dump(" -> obj: "); app.u.dump(obj);
+					if(obj.useChildAsTemplate)	{
+						app.u.dump(" -> obj.useChildAsTemplate is true.");
+						obj.loadsTemplate = "_"+$tag.attr('id')+"ListItemTemplate";
+						if(app.templates[obj.loadsTemplate])	{
+							app.u.dump(" -> template already exists");
+							//child has already been made into a template. 
+							}
+						else	{
+							app.u.dump(" -> template does not exist. create it");
+							if($tag.children().length)	{
+								app.u.dump(" -> tag has a child. create template: "+obj.loadsTemplate);
+								app.model.makeTemplate($("li:first",$tag),obj.loadsTemplate);
+								$('li:first',$tag).empty().remove(); //removes the product list 'template' which is part of the UL.
+								}
+							else	{
+								//The tag has no children. can't make a template. can't proceed. how do we handle this error? !!!
+								$('#globalMessaging').anymessage({"message":"In store_prodlist.u.buildProductList, the parent declared 'useChildAsTemplate', but has no children. No template could be created. The product list will not render.","gMessage":true});
+								}
+							}
+
+						}
+
+					var plObj = this.setProdlistVars(obj); //full prodlist object now.
 
 //need a jquery obj. to work with.
 					if($tag)	{$tag.attr('id',plObj.parentID);}
 					else	{$tag = $('#'+plObj.parentID);}
 //a wrapper around all the prodlist content is created just one. Used in multipage to clear old multipage content. This allows for multiple multi-page prodlists on one page. Hey. it could happen.
-					if($('#'+plObj.parentID+'_container').length == 0)	{$tag.wrap("<div id='"+plObj.parentID+"_container' />")}
+					if($('#'+plObj.parentID+'_container').length == 0)	{
+						if($tag.is('tbody'))	{
+							$tag.closest('table').wrap("<div id='"+plObj.parentID+"_container' />");
+							}
+						else	{
+							$tag.wrap("<div id='"+plObj.parentID+"_container' />");
+							}
+						}
 //adds all the placeholders. must happen before getProductDataForList so individual product translation can occur.
 //can't just transmogrify beccause sequence is important and if some data is local and some isn't, order will get messed up.
 					$tag.append(this.getProdlistPlaceholders(plObj)).removeClass('loadingBG');
 					$tag.data('prodlist',plObj); //sets data object on parent
 
 					if(!obj.hide_summary)	{
-						$tag.before(this.showProdlistSummary(plObj,'header')); //multipage Header
-						$tag.after(this.showProdlistSummary(plObj,'footer')); //multipage Footer
+						if($tag.is('tbody'))	{
+							$tag.closest('table').before(this.showProdlistSummary(plObj,'header')); //multipage Header
+							$tag.closest('table').after(this.showProdlistSummary(plObj,'footer')); //multipage Footer
+							}
+						else	{
+							$tag.before(this.showProdlistSummary(plObj,'header')); //multipage Header
+							$tag.after(this.showProdlistSummary(plObj,'footer')); //multipage Footer
+							}
 						}
 //The timeout was here because of an issue where the placeholders were getting nuked. That issue was caused by translateTemplate doing a replace.
 //that code was changed in 201239 (as was this function) so the timeout was commented out. This comment is here in case the change to translateFunction is changed back.
@@ -598,11 +643,12 @@ $pageTag is the jquery object of whatever was clicked. the data to be used is st
 			showProdlistSummary : function(plObj,location){
 				
 				location = location ? location : 'header';
-				var $output = app.renderFunctions.transmogrify({'id':'mpControl_'+plObj.parentID+'_'+location,'targetList':plObj.parentID},'mpControlSpec',plObj);
+//* 201330 -> $output was being generated w/ transmogrify even if hide_pagination was set.  That's extra, unneccesary work.
+				var $output = false;
 				if(plObj.hide_pagination === true)	{
-					$output.find('.mpControlsPagination').addClass('displayNone');
 					}
 				else	{
+					$output = app.renderFunctions.transmogrify({'id':'mpControl_'+plObj.parentID+'_'+location,'targetList':plObj.parentID},'mpControlSpec',plObj);
 					$output.find('.mpControlJumpToPage, .paging').click(function(){
 						app.ext.store_prodlist.u.mpJumpToPage($(this))
 						app.u.jumpToAnchor('mpControl_'+plObj.parentID+'_header');

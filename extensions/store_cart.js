@@ -180,7 +180,7 @@ formerly showCart
 				app.model.addDispatchToQ({
 "_cmd":"cartAmazonPaymentURL",
 "shipping":1,
-"CancelUrl":zGlobals.appSettings.https_app_url+"cart.cgis?sessionid="+app.sessionId,
+"CancelUrl":zGlobals.appSettings.https_app_url+"cart.cgis?cartID="+app.vars.cartID,
 "ReturnUrl":zGlobals.appSettings.https_app_url,
 "YourAccountUrl": zGlobals.appSettings.https_app_url+"customer/orders/",
 '_tag':tagObj},'immutable');
@@ -311,9 +311,13 @@ $tag.one('click',function(event){
 						var pretty = app.u.isSet(app.data.cartDetail['@SHIPMETHODS'][i]['pretty']) ? app.data.cartDetail['@SHIPMETHODS'][i]['pretty'] : app.data.cartDetail['@SHIPMETHODS'][i]['name'];  //sometimes pretty isn't set. also, ie didn't like .pretty, but worked fine once ['pretty'] was used.
 						o = "<span class='orderShipMethod'>"+pretty+": <\/span>";
 //only show amount if not blank.
-						if(app.data.cartDetail['@SHIPMETHODS'][i].amount)	{
-							o += "<span class='orderShipAmount'>"+app.u.formatMoney(app.data.cartDetail['@SHIPMETHODS'][i].amount,' $',2,false)+"<\/span>";
+// * 201324 -> bug fix: amount not showing up if zero. feature: support for zeroText for zero amounts (ex: zeroText: Free!;)
+						if(Number(app.data.cartDetail['@SHIPMETHODS'][i].amount) >= 0)	{
+							o += "<span class='orderShipAmount'>";
+							o += (data.bindData.zeroText) ? data.bindData.zeroText : app.u.formatMoney(app.data.cartDetail['@SHIPMETHODS'][i].amount,' $',2,false);
+							o += "<\/span>"
 							}
+						else	{} //amount is undefined.
 						break; //once we hit a match, no need to continue. at this time, only one ship method/price is available.
 						}
 					}
@@ -322,7 +326,7 @@ $tag.one('click',function(event){
 
 
 			shipMethodsAsRadioButtons : function($tag,data)	{
-				app.u.dump('BEGIN store_cart.renderFormat.shipMethodsAsRadioButtons');
+//				app.u.dump('BEGIN store_cart.renderFormat.shipMethodsAsRadioButtons');
 				var o = '';
 				var shipName,id,isSelectedMethod,safeid;  // id is actual ship id. safeid is id without any special characters or spaces. isSelectedMethod is set to true if id matches cart shipping id selected.;
 				var L = data.value.length;
@@ -330,7 +334,7 @@ $tag.one('click',function(event){
 					id = data.value[i].id; //shortcut of this shipping methods ID.
 					isSelectedMethod = (id == app.data.cartDetail['want'].shipping_id) ? true : false; //is this iteration for the method selected.
 					safeid = app.u.makeSafeHTMLId(data.value[i].id);
-					app.u.dump(" -> id: "+id+" and isSelected: "+isSelectedMethod);
+//					app.u.dump(" -> id: "+id+" and isSelected: "+isSelectedMethod);
 
 //app.u.dump(' -> id = '+id+' and want/shipping_id = '+app.data.cartDetail['want/shipping_id']);
 					
@@ -372,7 +376,7 @@ either templateID needs to be set OR showloading must be true. TemplateID will t
  can't think of a reason not to use the default parentID, but just in case, it can be set.
 */
 			showCartInModal : function(P)	{
-//				app.u.dump("BEGIN store_cart.u.showCartInModal");
+//				app.u.dump("BEGIN store_cart.u.showCartInModal"); app.u.dump(P);
 				if(typeof P == 'object' && (P.templateID || P.showLoading === true)){
 					var $modal = $('#modalCart');
 //the modal opens as quick as possible so users know something is happening.
@@ -481,6 +485,25 @@ Parameters expected are:
 					}
 				return r;
 				},
+			
+			
+			getSkuByUUID : function(uuid){
+				var r; //what is returned. either false or a uuid.
+				if(app.data.cartDetail && app.data.cartDetail['@ITEMS'])	{
+					var L = app.data.cartDetail['@ITEMS'].length;
+					for(var i = 0; i < L; i += 1)	{
+						if(app.data.cartDetail['@ITEMS'].uuid == uuid)	{
+							r = app.data.cartDetail['@ITEMS'].stid || app.data.cartDetail['@ITEMS'].sku;
+							break; //once we have a match, no need to continue.
+							}
+						}
+					}
+				else	{
+					r = false;
+					}
+				return r;
+				},
+			
 /*
 executing when quantities are adjusted for a given cart item.
 call is made to update quantities.
