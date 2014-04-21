@@ -28,7 +28,7 @@ var catData = {
       "paragraph": "Our offices and warehouse are located at: PO Box 856, Tatum, NM 88267 USA"
     },
     {
-      "paragraph": "Thank you for you interest in Antonini Knives.  Dealer inquiries are welcome!"
+      "paragraph": "Thank you for your interest in Antonini Knives.  Dealer inquiries are welcome!"
     },
   ],
   ".about-antonini": [
