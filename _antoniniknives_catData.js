@@ -22,23 +22,14 @@ var catData = {
   ],
   ".about_gsi_distributing": [
     {
-      "image": "GSIDistLogo.jpg",
-      "paragraph": "GSI Distributing is a d/b/a of Gourmet Seed International, LLC and is the official North American distributor for A. E. Coltellerie snl, the makers of Antonini Knives."
+      "paragraph": "Antonini Knives USA is the official North American agent for A. E. Coltellerie snl, the makers of Antonini Knives."
     },
     {
-      "image": "GSIdisplaylogo.jpg",
-      "paragraph": "Formed in 2005 as a merger of several family-owned companies (Good Earth Seed, Harvest Moon Farms, and Italian Seed and Tool), Gourmet Seed International, LLC is still family owned as a joint venture of the Harris and Winteregg families. Located in rural Southeast New Mexico, we bring old-fashioned, small-town values into everything we do."
+      "paragraph": "Our offices and warehouse are located at: PO Box 856, Tatum, NM 88267 USA"
     },
     {
-      "image":"ISATlogo.jpg",
-      "paragraph": "GSI Distributing is focused on bringing fine and unusual products to the North American market. Using the efficiencies of e-commerce, we are proud to bring these wonderful products to you with great service and at prices that represent a good value."
+      "paragraph": "Thank you for you interest in Antonini Knives.  Dealer inquiries are welcome!"
     },
-    {
-      "paragraph": "Thank you for shopping with us!"
-    },
-    {
-      "paragraph": "Phil Winteregg, General Manager"
-    }
   ],
   ".about-antonini": [
     {
