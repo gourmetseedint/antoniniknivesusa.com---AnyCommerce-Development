@@ -35,7 +35,7 @@ var subcatData = {
     ".export": {
       "prettyLong": "EXPORT Pro Electrician Knives",
       "description": "The Export line adds additional utility to the basic electrician's knife and tool box.  Most have multiple tools.",
-      "products": ["233L", "244S"]
+      "products": ["233L", "244S", "241LR", "232L"]
     },
     ".ohm": {
       "prettyLong": "OHM Pro Insulated Electrician Knives",
@@ -151,7 +151,7 @@ var subcatData = {
     ".50si-plus": {
       "prettyLong": "SI PLUS Pro-Rescue Knives",
       "description": "The SI PLUS knives were the first in the Antonini SOS series to include the innovative frame lock and many features great for any rescue crew.",
-      "products": ["NARMADATACT"]
+      "products": ["SIPLUSG10S", "SIPLUSRS"]
     },
     ".60uri-xl": {
       "prettyLong": "URI XL Pro-Rescue Knives",
