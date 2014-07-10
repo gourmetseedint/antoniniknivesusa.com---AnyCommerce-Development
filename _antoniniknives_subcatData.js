@@ -18,7 +18,7 @@ var subcatData = {
     ".classic" : {
       "prettyLong":"CLASSIC Fisherman Knives",
       "description" : "The CLASSIC line of knives are great basic Fisherman's Knives covering a range of tasks. The blades are in 2 sizes (190 & 160 mm) made of quality stainless steel. Plastic handles.",
-      "products": ["851N", "853G", "859B", "863G", "869B"]
+      "products": ["851N", "853G", "859B", "861N", "863G", "869B"]
     },
     ".fontanin" : {
       "prettyLong":"FONTANIN Fisherman Knives",
